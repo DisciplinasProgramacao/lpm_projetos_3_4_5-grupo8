@@ -4,13 +4,14 @@ public class Cliente {
     private Lista<Serie> listaParaVer;
     private Lista<Serie> listaJaVistas;
     private Serie[] series;
+
    
     public void adicionarNaLista(Serie serie){
-        serie.Lista.add();
+        serie.Lista.add(serie);
     }
 
     public void retirarDaLista(String nomeSerie){
-        nomeSerie
+        nomeSerie.Lista.remove();
     }
 
     public Lista<Serie> filtrarPorGenero(String genero){

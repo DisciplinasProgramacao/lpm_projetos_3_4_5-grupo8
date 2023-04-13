@@ -35,6 +35,10 @@ public class Lista<Serie> {
         this.data = new LinkedList<>();
     }
 
+    public int getSerie() {
+		return this.ID;
+	}
+
     /**
      * Adiciona um elemento no final da lista. Retorna TRUE se foi possível adicionar. 
      * @param newElement Elemento a ser adicionado.
