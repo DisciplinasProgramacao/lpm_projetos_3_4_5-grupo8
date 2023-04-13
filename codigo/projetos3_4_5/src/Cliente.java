@@ -5,11 +5,11 @@ public class Cliente {
     private LinkedList<Serie> listaJaVistas;
    
     public void adicionarNaLista(Serie serie){
-
+        serie.Lista.add();
     }
 
     public void retirarDaLista(String nomeSerie){
-        
+        nomeSerie
     }
 
     public LinkedList<Serie> filtrarPorGenero(String genero){
