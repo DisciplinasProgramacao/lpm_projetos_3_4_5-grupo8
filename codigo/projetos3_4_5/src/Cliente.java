@@ -1,8 +1,9 @@
 public class Cliente {
     private String nomeDeUsuario;
     private String senha;
-    private LinkedList<Serie> listaParaVer;
-    private LinkedList<Serie> listaJaVistas;
+    private Lista<Serie> listaParaVer;
+    private Lista<Serie> listaJaVistas;
+    private Serie[] series;
    
     public void adicionarNaLista(Serie serie){
         serie.Lista.add();
@@ -12,11 +13,11 @@ public class Cliente {
         nomeSerie
     }
 
-    public LinkedList<Serie> filtrarPorGenero(String genero){
-
+    public Lista<Serie> filtrarPorGenero(String genero){
+        series = new Serie[listaParaVer.size()];
     }
 
-    public LinkedList<Serie> filtrarPorIdioma(String idioma){
+    public Lista<Serie> filtrarPorIdioma(String idioma){
         
     }
 
