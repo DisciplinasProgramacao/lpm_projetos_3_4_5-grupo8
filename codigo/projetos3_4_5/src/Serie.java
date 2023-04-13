@@ -12,11 +12,11 @@ public class Serie {
         this.nome = nome;
         this.genero = genero;
         this.idioma = idioma;
-        this.quantidadeEpisodios = validarQuantidadeEpisodios();;
+        this.quantidadeEpisodios = validarQuantidadeEpisodios(quantidadeEpisodios);;
         this.audiencia = 0;
     }
 
-    public int validarQuantidadeEpisodios(){
+    public int validarQuantidadeEpisodios(int quantidadeEpisodios2){
 
         if(this.quantidadeEpisodios < 3){
             System.out.println("Quantidade inválida de episódios");
@@ -27,7 +27,7 @@ public class Serie {
 
     public void registrarAudiencia(){
         
-        this.audiencia = audiencia++;
+        this.audiencia += 1;
 
     }
 
