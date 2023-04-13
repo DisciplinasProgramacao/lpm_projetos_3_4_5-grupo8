@@ -22,4 +22,7 @@ public class Serie {
 
     }
 
+    public int getAudiencia(){
+        return this.audiencia;
+    }
 }
