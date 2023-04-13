@@ -34,4 +34,16 @@ public class Serie {
     public int getAudiencia(){
         return this.audiencia;
     }
+
+    public String getGenero() {
+        return this.genero;
+    }
+
+    public String getIdioma() {
+        return this.idioma;
+    }
+
+    public int getEpisodios() {
+        return this.quantidadeEpisodios;
+    }
 }
