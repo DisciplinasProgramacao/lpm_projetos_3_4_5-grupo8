@@ -3,6 +3,7 @@ public class Cliente {
     private String senha;
     private Lista<Serie> listaParaVer;
     private Lista<Serie> listaJaVistas;
+    private Serie[] series;
 
    
     public void adicionarNaLista(Serie serie){
@@ -14,7 +15,7 @@ public class Cliente {
     }
 
     public Lista<Serie> filtrarPorGenero(String genero){
-
+        series = new Serie[listaParaVer.size()];
     }
 
     public Lista<Serie> filtrarPorIdioma(String idioma){
