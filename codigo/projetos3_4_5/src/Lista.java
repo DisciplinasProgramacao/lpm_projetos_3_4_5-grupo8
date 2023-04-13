@@ -24,10 +24,9 @@ import java.util.LinkedList;
  */
 
  /** Classe para encapsular uma lista duplamente encadeada */
-public class Lista<Serie> {
+public class Lista<T> {
 
-    private LinkedList<Serie> data;
-    private Serie serie;
+    private LinkedList<T> data;
 
     /**
      * Construtor: lista vazia
@@ -36,15 +35,12 @@ public class Lista<Serie> {
         this.data = new LinkedList<>();
     }
 
-    public Serie getSerie(){
-        return this.serie;
-    }
     /**
      * Adiciona um elemento no final da lista. Retorna TRUE se foi possível adicionar. 
      * @param newElement Elemento a ser adicionado.
      * @return TRUE se pôde ser adicionado, FALSE caso contrário
      */
-    public boolean add(Serie newElement) {
+    public boolean add(T newElement) {
         return this.data.add(newElement);
     }
 
@@ -54,18 +50,9 @@ public class Lista<Serie> {
      * @param array Vetor/array para abrigar os elementos da lista. Deve ser previamente criado.
      * @return Outro vetor/array com os elementos da lista.
      */
-    public Serie[] allElements(Serie[] array) {
-        Serie[] allData = this.data.toArray(array);
+    public T[] allElements(T[] array) {
+        T[] allData = this.data.toArray(array);
         return allData;
-    }
-
-     /**
-     * Retorna o objeto procurado, ou null se não existir
-     * @param key Chave de procura do objeto
-     * @return O objeto com a chave, ou null se não existir
-     */
-    public Serie find(int key){
-        return this.data.get(key);
     }
 
     /**
@@ -74,8 +61,8 @@ public class Lista<Serie> {
      * @param index Chave do elemento a ser removido.
      * @return O elemento removido, ou null se ele não existir na lista
      */
-    public Serie remove(int index){
-        Serie retElement = null;
+    public T remove(int index){
+        T retElement = null;
         if(index>=0 && index<this.data.size())
             retElement = this.data.remove(index);
         return retElement;
