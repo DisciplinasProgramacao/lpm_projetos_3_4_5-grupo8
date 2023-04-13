@@ -1,5 +1,3 @@
-import java.util.LinkedList;
-
 public class Cliente {
     private String nomeDeUsuario;
     private String senha;
