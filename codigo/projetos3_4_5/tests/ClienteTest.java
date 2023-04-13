@@ -9,7 +9,7 @@ public class ClienteTest {
 
     @BeforeEach
     public void prepare(){
-        cliente = new Cliente("");
+        cliente = new Cliente("Nome Cliente", "Senha");
         tresSeries = new Lista<>();
 
         serie1 = new Serie("The Blacklist", "Suspense", "EN", 200);
@@ -56,6 +56,11 @@ public class ClienteTest {
         cliente.retirarDaLista("Não Existo");
 
         assertEquals(3, cliente.getListaParaVer().size());
+    }
+
+    @Test
+    public void deveFiltrarSeriePorGeneroDeAcordoComParametroPassado(){
+
     }
 
 }
