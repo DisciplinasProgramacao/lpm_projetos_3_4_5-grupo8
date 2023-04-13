@@ -59,6 +59,15 @@ public class Lista<Serie> {
         return allData;
     }
 
+     /**
+     * Retorna o objeto procurado, ou null se não existir
+     * @param key Chave de procura do objeto
+     * @return O objeto com a chave, ou null se não existir
+     */
+    public Serie find(int key){
+        return this.data.get(key);
+    }
+
     /**
      * Remove e retorna o elemento da lista na posição indicada. Os elementos subsequentes são "deslocados para a esquerda",
      * isto é, todos têm seu índice diminuído em 1. Retorna nulo caso a posição não exista na lista.
