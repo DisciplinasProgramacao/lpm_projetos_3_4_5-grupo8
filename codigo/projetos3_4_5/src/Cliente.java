@@ -7,11 +7,9 @@ public class Cliente {
     private Serie serie;
 
      //Construtor
-     public Cliente(String nomeDeUsuario, String senha, Lista<Serie> listaParaVer, Lista<Serie> listaJaVistas){
+     public Cliente(String nomeDeUsuario, String senha){
         this.nomeDeUsuario = nomeDeUsuario;
         this.senha = senha;
-        this.listaParaVer = listaParaVer;
-        this.listaJaVistas = listaJaVistas;
     }
 
     public Serie getSerie(){
@@ -19,11 +17,12 @@ public class Cliente {
     }
 
     public void adicionarNaLista(Serie serie){
-        serie.Lista.add(serie);
+        listaParaVer.add(serie);
     }
 
     public void retirarDaLista(String nomeSerie){
-        nomeSerie.Lista.remove();
+        
+        listaParaVer.remove();
     }
 
     public Lista<Serie> filtrarPorGenero(String genero){

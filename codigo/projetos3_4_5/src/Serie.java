@@ -19,7 +19,8 @@ public class Serie {
     public int validarQuantidadeEpisodios(int quantidadeEpisodios2){
 
         if(this.quantidadeEpisodios < 3){
-            System.out.println("Quantidade inválida de episódios");
+           // System.out.println("Quantidade inválida de episódios");
+            return 3;
         }
         return this.quantidadeEpisodios;
 
