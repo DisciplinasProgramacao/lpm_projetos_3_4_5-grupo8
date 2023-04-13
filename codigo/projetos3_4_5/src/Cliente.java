@@ -1,10 +1,11 @@
+import java.util.LinkedList;
+
 public class Cliente {
     private String nomeDeUsuario;
     private String senha;
-    private Lista<Serie> listaParaVer;
-    private Lista<Serie> listaJaVistas;
-
-
+    private LinkedList<Serie> listaParaVer;
+    private LinkedList<Serie> listaJaVistas;
+   
     public void adicionarNaLista(Serie serie){
 
     }
@@ -13,16 +14,20 @@ public class Cliente {
         
     }
 
-    public Lista<Serie> filtrarPorGenero(String genero){
+    public LinkedList<Serie> filtrarPorGenero(String genero){
 
     }
 
-    public Lista<Serie> filtrarPorIdioma(String idioma){
+    public LinkedList<Serie> filtrarPorIdioma(String idioma){
         
     }
 
-    public Lista<Serie> filtrarPorQtdEpisodios(String genero){
+    public Lista<Serie> filtrarPorQtdEpisodios(int qtdEpisodios){
         
+    }
+
+    public void registrarAudiencia(Serie serie){
+
     }
 
 
