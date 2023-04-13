@@ -27,6 +27,7 @@ import java.util.LinkedList;
 public class Lista<Serie> {
 
     private LinkedList<Serie> data;
+    private Serie serie;
 
     /**
      * Construtor: lista vazia
@@ -35,10 +36,9 @@ public class Lista<Serie> {
         this.data = new LinkedList<>();
     }
 
-    public int getSerie() {
-		return this.ID;
-	}
-
+    public Serie getSerie(){
+        return this.serie;
+    }
     /**
      * Adiciona um elemento no final da lista. Retorna TRUE se foi possível adicionar. 
      * @param newElement Elemento a ser adicionado.
