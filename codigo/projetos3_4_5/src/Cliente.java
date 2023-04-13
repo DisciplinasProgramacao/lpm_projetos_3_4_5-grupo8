@@ -4,8 +4,20 @@ public class Cliente {
     private Lista<Serie> listaParaVer;
     private Lista<Serie> listaJaVistas;
     private Serie[] series;
+    private Serie serie;
 
-   
+     //Construtor
+     public Cliente(String nomeDeUsuario, String senha, Lista<Serie> listaParaVer, Lista<Serie> listaJaVistas){
+        this.nomeDeUsuario = nomeDeUsuario;
+        this.senha = senha;
+        this.listaParaVer = listaParaVer;
+        this.listaJaVistas = listaJaVistas;
+    }
+
+    public Serie getSerie(){
+        return this.serie;
+    }
+
     public void adicionarNaLista(Serie serie){
         serie.Lista.add(serie);
     }

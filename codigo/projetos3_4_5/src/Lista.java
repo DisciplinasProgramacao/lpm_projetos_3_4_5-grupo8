@@ -27,6 +27,7 @@ import java.util.LinkedList;
 public class Lista<Serie> {
 
     private LinkedList<Serie> data;
+    private Serie serie;
 
     /**
      * Construtor: lista vazia
@@ -35,10 +36,9 @@ public class Lista<Serie> {
         this.data = new LinkedList<>();
     }
 
-    public int getSerie() {
-		return this.ID;
-	}
-
+    public Serie getSerie(){
+        return this.serie;
+    }
     /**
      * Adiciona um elemento no final da lista. Retorna TRUE se foi possível adicionar. 
      * @param newElement Elemento a ser adicionado.
@@ -57,6 +57,15 @@ public class Lista<Serie> {
     public Serie[] allElements(Serie[] array) {
         Serie[] allData = this.data.toArray(array);
         return allData;
+    }
+
+     /**
+     * Retorna o objeto procurado, ou null se não existir
+     * @param key Chave de procura do objeto
+     * @return O objeto com a chave, ou null se não existir
+     */
+    public Serie find(int key){
+        return this.data.get(key);
     }
 
     /**
