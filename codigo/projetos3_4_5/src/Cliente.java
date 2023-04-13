@@ -1,22 +1,23 @@
 public class Cliente {
     private String nomeDeUsuario;
     private String senha;
-    private LinkedList<Serie> listaParaVer;
-    private LinkedList<Serie> listaJaVistas;
+    private Lista<Serie> listaParaVer;
+    private Lista<Serie> listaJaVistas;
+
    
     public void adicionarNaLista(Serie serie){
-        serie.Lista.add();
+        serie.Lista.add(serie);
     }
 
     public void retirarDaLista(String nomeSerie){
-        nomeSerie
+        nomeSerie.Lista.remove();
     }
 
-    public LinkedList<Serie> filtrarPorGenero(String genero){
+    public Lista<Serie> filtrarPorGenero(String genero){
 
     }
 
-    public LinkedList<Serie> filtrarPorIdioma(String idioma){
+    public Lista<Serie> filtrarPorIdioma(String idioma){
         
     }
 
