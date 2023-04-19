@@ -10,13 +10,13 @@ public class PlataformaStreaming {
         this.nome = nome;
         this.series = new HashMap<String, Serie>();
         this.clientes = new HashMap<String, Cliente>();
-        this.clienteAtual = new Cliente(null, null);
+        this.clienteAtual = new Cliente(null, null, null);
     }
 
-    public Cliente login(String nomeUsuario, String senha) {
-        Cliente cliente = new Cliente(null, null);
+    public Cliente login(String login, String senha) {
+        Cliente cliente = new Cliente(null, null, null);
         try {
-            cliente = clientes.get(nomeUsuario);
+            cliente = clientes.get(login);
             if (cliente.getSenha() == senha) {
                 this.clienteAtual = cliente;
                 return cliente;
@@ -32,10 +32,14 @@ public class PlataformaStreaming {
     public String getClientes() {
         StringBuilder str = new StringBuilder();
         for (String key : clientes.keySet()) {
-            str.append(clientes.get(key).getNomeUsuario());
+            str.append(clientes.get(key).getLogin());
             str.append(", ");
         }
         return str.toString().substring(0, str.length() - 2);
+    }
+
+    public Cliente getClienteAtual() {
+        return this.clienteAtual;
     }
 
     // metodo para testes
@@ -50,14 +54,14 @@ public class PlataformaStreaming {
 
     public void adicionarSerie(Serie serie) {
         try {
-            series.put(serie.getNome(), serie);
+            series.put(serie.getId(), serie);
         } catch (Exception e) {
         }
     }
 
     public void adicionarCliente(Cliente cliente) {
         try {
-            clientes.put(cliente.getNomeUsuario(), cliente);
+            clientes.put(cliente.getLogin(), cliente);
         } catch (Exception e) {
         }
     }
@@ -134,10 +138,13 @@ public class PlataformaStreaming {
     }
 
     public Serie buscarSerie(String nomeSerie) {
-        Serie serieAux = new Serie(null, null, null, 0);
         try {
-            serieAux = series.get(nomeSerie);
-            return serieAux;
+            for (String key : series.keySet()) {
+                if (series.get(key).getNome() == nomeSerie) {
+                    return series.get(key);
+                }
+            }
+            return null;
         } catch (Exception e) {
             return null;
         }

@@ -5,14 +5,16 @@ public class Cliente {
     // Atributos
     private String nomeDeUsuario;
     private String senha;
+    private String login;
     private LinkedList<Serie> listaParaVer;
     private LinkedList<Serie> listaJaVistas;
     private Serie serie;
 
     // Construtor
-    public Cliente(String nomeDeUsuario, String senha) {
+    public Cliente(String nomeDeUsuario, String login, String senha) {
         this.nomeDeUsuario = nomeDeUsuario;
         this.senha = senha;
+        this.login = login;
         this.listaParaVer = new LinkedList<Serie>();
         this.listaJaVistas = new LinkedList<Serie>();
     }
@@ -32,6 +34,10 @@ public class Cliente {
 
     public LinkedList<Serie> getListaParaVer() {
         return this.listaParaVer;
+    }
+
+    public String getLogin() {
+        return this.login;
     }
 
     /*
@@ -57,10 +63,12 @@ public class Cliente {
     }
 
     /**
-     * Retorna, em um vetor/array, todos os elementos da lista. O vetor passado como parâmetro deve ser criado previamente. 
+     * Retorna, em um vetor/array, todos os elementos da lista. O vetor passado como
+     * parâmetro deve ser criado previamente.
      * O retorno contém os elementos da lista.
      * 
-     * @param array Vetor/array para abrigar os elementos da lista. Deve ser previamente criado.
+     * @param array Vetor/array para abrigar os elementos da lista. Deve ser
+     *              previamente criado.
      * @return Outro vetor/array com os elementos da lista.
      */
     public Serie[] allElements(Serie[] array) {
@@ -130,4 +138,8 @@ public class Cliente {
         listaParaVer.remove(serie);
     }
 
+    @Override
+    public String toString() {
+        return this.nomeDeUsuario + ";" + this.login + ";" + this.senha;
+    }
 }
