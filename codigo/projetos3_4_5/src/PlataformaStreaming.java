@@ -10,10 +10,11 @@ public class PlataformaStreaming {
         this.nome = nome;
         this.series = new HashMap<String, Serie>();
         this.clientes = new HashMap<String, Cliente>();
+        this.clienteAtual = new Cliente(null, null);
     }
 
     public Cliente login(String nomeUsuario, String senha) {
-        Cliente cliente;
+        Cliente cliente = new Cliente(null, null);
         try {
             cliente = clientes.get(nomeUsuario);
             if (cliente.getSenha() == senha) {
@@ -25,6 +26,26 @@ public class PlataformaStreaming {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    // metodo para testes
+    public String getClientes() {
+        StringBuilder str = new StringBuilder();
+        for (String key : clientes.keySet()) {
+            str.append(clientes.get(key).getNomeUsuario());
+            str.append(", ");
+        }
+        return str.toString().substring(0, str.length() - 2);
+    }
+
+    // metodo para testes
+    public String getSeries() {
+        StringBuilder str = new StringBuilder();
+        for (String key : series.keySet()) {
+            str.append(series.get(key).getNome());
+            str.append(", ");
+        }
+        return str.toString().substring(0, str.length() - 2);
     }
 
     public void adicionarSerie(Serie serie) {
