@@ -11,8 +11,8 @@ public class ClienteTest {
     LinkedList<Serie> listaComTresSeries;
 
     @BeforeEach
-    public void prepare(){
-        cliente = new Cliente("Nome Cliente", "Senha");
+    public void prepare() {
+        cliente = new Cliente("Nome Cliente", "login", "Senha");
         listaComTresSeries = new LinkedList<>();
 
         serie1 = new Serie("The Blacklist", "Suspense", "EN", 10);
@@ -25,7 +25,7 @@ public class ClienteTest {
     }
 
     @Test
-    public void deveAdicionarSeriesNaListaDeSeriesParaVer(){
+    public void deveAdicionarSeriesNaListaDeSeriesParaVer() {
         for (Serie serie : listaComTresSeries) {
             cliente.adicionarNaLista(serie);
         }
@@ -34,7 +34,7 @@ public class ClienteTest {
     }
 
     @Test
-    public void deveRetirarSerieDaListaParaVer(){
+    public void deveRetirarSerieDaListaParaVer() {
         for (Serie serie : listaComTresSeries) {
             cliente.adicionarNaLista(serie);
         }
@@ -45,7 +45,7 @@ public class ClienteTest {
     }
 
     @Test
-    public void naoDeveRetirarSerieDaListaCasoSeriePassadaComoParametroNaoExista(){
+    public void naoDeveRetirarSerieDaListaCasoSeriePassadaComoParametroNaoExista() {
         for (Serie serie : listaComTresSeries) {
             cliente.adicionarNaLista(serie);
         }
@@ -56,7 +56,7 @@ public class ClienteTest {
     }
 
     @Test
-    public void deveFiltrarSeriePorGeneroDeAcordoComParametroPassado(){
+    public void deveFiltrarSeriePorGeneroDeAcordoComParametroPassado() {
         for (Serie serie : listaComTresSeries) {
             cliente.adicionarNaLista(serie);
         }
