@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class PlataformaStreaming {
+public class PlataformaStreaming{
     private String nome;
     private HashMap<String, Serie> series;
     private HashMap<String, Cliente> clientes;
@@ -62,61 +62,92 @@ public class PlataformaStreaming {
         }
     }
 
-    public LinkedList<Serie> filtrarPorGenero(String genero) {
-        /*
-         * LinkedList<Serie> filtro = new LinkedList<Serie>();
-         * Serie serie = new Serie(null, null, null, 0);
-         * try {
-         * for (String key : series.keySet()) {
-         * serie = series.get(key);
-         * if (serie.getGenero().equals(genero)) {
-         * filtro.add(serie);
-         * }
-         * }
-         * return filtro;
-         * } catch (Exception e) {
-         * return null;
-         * }
-         */
-        return this.clienteAtual.filtrarPorGenero(genero);
+    public String filtrarPorGenero(String genero) {
+        
+        LinkedList<Serie> filtro = new LinkedList<Serie>();
+        Serie serie; //= new Serie(null, null, null, 0);
+        try {
+          for (String key : series.keySet()) {
+                serie = series.get(key);
+            if (serie.getGenero().equals(genero)) {
+                filtro.add(serie);
+            }
+        }
+        String seriesFiltradas = "";
+        for (int i = 0; i < filtro.size(); i++) {
+            seriesFiltradas = filtro.get(i).getNome() + seriesFiltradas;
+        } 
+            return seriesFiltradas;
+        }
+
+        catch (Exception e) {
+          return null;
+        }
     }
 
-    public LinkedList<Serie> filtrarPorIdioma(String idioma) {
-        /*
-         * LinkedList<Serie> filtro = new LinkedList<Serie>();
-         * Serie serie = new Serie(null, null, null, 0);
-         * try {
-         * for (String key : series.keySet()) {
-         * serie = series.get(key);
-         * if (serie.getIdioma().equals(idioma)) {
-         * filtro.add(serie);
-         * }
-         * }
-         * return filtro;
-         * } catch (Exception e) {
-         * return null;
-         * }
-         */
-        return this.clienteAtual.filtrarPorIdioma(idioma);
+    public String filtrarPorIdioma(String idioma) {
+         
+        LinkedList<Serie> filtro = new LinkedList<Serie>();
+        Serie serie;
+        try {
+          for (String key : series.keySet()) {
+                serie = series.get(key);
+            if (serie.getIdioma().equals(idioma)) {
+                filtro.add(serie);
+            }
+        }
+        String seriesFiltradas = "";
+        for (int i = 0; i < filtro.size(); i++) {
+            seriesFiltradas = filtro.get(i).getNome() + seriesFiltradas;
+        } 
+            return seriesFiltradas;
+        }
+
+        catch (Exception e) {
+          return null;
+        }
     }
 
-    public LinkedList<Serie> filtrarPorQtdEpisodios(int quantEpisodios) {
-        /*
-         * LinkedList<Serie> filtro = new LinkedList<Serie>();
-         * Serie serie = new Serie(null, null, null, 0);
-         * try {
-         * for (String key : series.keySet()) {
-         * serie = series.get(key);
-         * if (serie.getEpisodios() == quantEpisodios) {
-         * filtro.add(serie);
-         * }
-         * }
-         * return filtro;
-         * } catch (Exception e) {
-         * return null;
-         * }
-         */
-        return clienteAtual.filtrarPorQtdEpisodios(quantEpisodios);
+    /* Ainda em desenvolvimento
+
+    public String filtroGeral(T criterio) {
+        LinkedList<Serie> filtro = new LinkedList<Serie>();
+        Serie serie;
+        try {
+            for (String key : series.keySet()) {
+                serie = series.get(key);
+                if (serie.getGenero().equals(criterio)) {
+                    filtro.add(serie);
+                }
+            }
+            String seriesFiltradas = "";
+            for (int i = 0; i < filtro.size(); i++) {
+                seriesFiltradas = filtro.get(i).getNome() + seriesFiltradas;
+            }
+            return seriesFiltradas;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    */
+    public String filtrarPorQtdEpisodios(int quantEpisodios) {
+        LinkedList<Serie> filtro = new LinkedList<Serie>();
+        Serie serie;
+        try {
+            for (String key : series.keySet()) {
+                serie = series.get(key);
+                if (serie.getEpisodios() == quantEpisodios) {
+                    filtro.add(serie);
+                }
+            }
+            String seriesFiltradas = "";
+            for (int i = 0; i < filtro.size(); i++) {
+                seriesFiltradas = filtro.get(i).getNome() + seriesFiltradas;
+            }
+            return seriesFiltradas;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public void registrarAudiencia(Serie serie) {
