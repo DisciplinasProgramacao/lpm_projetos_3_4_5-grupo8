@@ -1,31 +1,32 @@
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.LinkedList;
 
 public class ClienteTest {
     Cliente cliente;
     Serie serie1, serie2, serie3;
-    Lista<Serie> tresSeries;
+    LinkedList<Serie> listaComTresSeries;
 
     @BeforeEach
     public void prepare(){
         cliente = new Cliente("Nome Cliente", "Senha");
-        tresSeries = new Lista<>();
+        listaComTresSeries = new LinkedList<>();
 
-        serie1 = new Serie("The Blacklist", "Suspense", "EN", 200);
-        serie2 = new Serie("Friends", "Comédia", "EN", 100);
-        serie3 = new Serie("Suits", "Drama", "EN", 200);
+        serie1 = new Serie("The Blacklist", "Suspense", "EN", 10);
+        serie2 = new Serie("Friends", "Comedia", "EN", 9);
+        serie3 = new Serie("Suits", "Drama", "EN", 5);
 
-        tresSeries.add(serie1);
-        tresSeries.add(serie2);
-        tresSeries.add(serie3);
+        listaComTresSeries.add(serie1);
+        listaComTresSeries.add(serie2);
+        listaComTresSeries.add(serie3);
     }
 
     @Test
     public void deveAdicionarSeriesNaListaDeSeriesParaVer(){
-        Serie arraySeries[] = new Serie[tresSeries.size()];
-
-        for (Serie serie : arraySeries) {
+        for (Serie serie : listaComTresSeries) {
             cliente.adicionarNaLista(serie);
         }
 
@@ -34,9 +35,7 @@ public class ClienteTest {
 
     @Test
     public void deveRetirarSerieDaListaParaVer(){
-        Serie arraySeries[] = new Serie[tresSeries.size()];
-
-        for (Serie serie : arraySeries) {
+        for (Serie serie : listaComTresSeries) {
             cliente.adicionarNaLista(serie);
         }
 
@@ -47,9 +46,7 @@ public class ClienteTest {
 
     @Test
     public void naoDeveRetirarSerieDaListaCasoSeriePassadaComoParametroNaoExista(){
-        Serie arraySeries[] = new Serie[tresSeries.size()];
-
-        for (Serie serie : arraySeries) {
+        for (Serie serie : listaComTresSeries) {
             cliente.adicionarNaLista(serie);
         }
 
@@ -60,7 +57,12 @@ public class ClienteTest {
 
     @Test
     public void deveFiltrarSeriePorGeneroDeAcordoComParametroPassado(){
+        for (Serie serie : listaComTresSeries) {
+            cliente.adicionarNaLista(serie);
+        }
 
+        LinkedList<Serie> listaFiltrada = cliente.filtrarPorGenero("Comedia");
+
+        assertEquals(1, listaFiltrada.size());
     }
-
 }

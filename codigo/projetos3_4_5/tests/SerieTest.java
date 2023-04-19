@@ -1,8 +1,6 @@
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 
@@ -16,13 +14,11 @@ public class SerieTest {
     }
 
     @Test
-    public void AdicionandoMaisUmRegistroAudiencia(){
+    public void deveAdicionarRegistroNaAudiencia(){
         serie.registrarAudiencia();
-        assertEquals(1,serie.getAudiencia());
+        serie.registrarAudiencia();
+        serie.registrarAudiencia();
+        
+        assertEquals(3,serie.getAudiencia());
     }
-    @Test
-    public void validarQuantidadeEpisodiosMenor3(){
-        assertNotEquals("Quantidade de episódios inválida", serie.validarQuantidadeEpisodios(200));
-    }
-
 }

@@ -12,15 +12,14 @@ public class Serie {
         this.nome = nome;
         this.genero = genero;
         this.idioma = idioma;
-        this.quantidadeEpisodios = validarQuantidadeEpisodios(quantidadeEpisodios);;
+        this.quantidadeEpisodios = quantidadeEpisodios < 0 ? 0 : quantidadeEpisodios;
         this.audiencia = 0;
     }
 
-    public int validarQuantidadeEpisodios(int quantidadeEpisodios2){
+    private int validarQuantidadeEpisodios(int quantidadeEpisodios2){
 
         if(this.quantidadeEpisodios < 3){
-           // System.out.println("Quantidade inválida de episódios");
-            return 3;
+            return 0; //caso quantidade de episódios seja inválida retorna 0 e não preenche o atributo quantidade de episódios
         }
         return this.quantidadeEpisodios;
 
