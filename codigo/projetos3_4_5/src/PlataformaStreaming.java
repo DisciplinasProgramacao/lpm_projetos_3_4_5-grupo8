@@ -6,7 +6,8 @@ public class PlataformaStreaming {
     private HashMap<String, Cliente> clientes;
     private Cliente clienteAtual;
 
-    PlataformaStreaming() {
+    PlataformaStreaming(String nome) {
+        this.nome = nome;
         this.series = new HashMap<String, Serie>();
         this.clientes = new HashMap<String, Cliente>();
     }
