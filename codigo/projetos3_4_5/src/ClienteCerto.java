@@ -120,18 +120,5 @@ public class ClienteCerto {
         listaParaVer.remove(serie);
     }
 
-    /* public void registrarAudiencia(Serie serie){
-        series = new Serie[listaParaVer.size()];
-        series = listaParaVer.allElements(series);
-
-        for(int i = 0; i < series.length; i++){
-            if(!(serie == series[i])){
-                serie.registrarAudiencia();
-                listaJaVistas.add(serie);
-            }
-        }
-    }*/
-
-
 
 }
