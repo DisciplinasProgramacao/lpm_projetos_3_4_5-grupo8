@@ -30,7 +30,7 @@ public class Cliente {
         return this.nomeDeUsuario;
     }
 
-    public LinkedList getListaParaVer() {
+    public LinkedList<Serie> getListaParaVer() {
         return this.listaParaVer;
     }
 
@@ -57,12 +57,10 @@ public class Cliente {
     }
 
     /**
-     * Retorna, em um vetor/array, todos os elementos da lista. O vetor passado
-     * como parâmetro deve ser criado previamente. O retorno contém os elementos da
-     * lista.
+     * Retorna, em um vetor/array, todos os elementos da lista. O vetor passado como parâmetro deve ser criado previamente. 
+     * O retorno contém os elementos da lista.
      * 
-     * @param array Vetor/array para abrigar os elementos da lista. Deve ser
-     *              previamente criado.
+     * @param array Vetor/array para abrigar os elementos da lista. Deve ser previamente criado.
      * @return Outro vetor/array com os elementos da lista.
      */
     public Serie[] allElements(Serie[] array) {
