@@ -1,6 +1,6 @@
 public class Serie {
     
-    static final String [] generos = new String[8];
+    private static final String [] GENEROS = new String[8];
     private String nome;
     private String genero;
     private String idioma;
@@ -26,10 +26,11 @@ public class Serie {
 
     }
 
-    public void registrarAudiencia(){
-        
+    /**
+     * Metodo que registra a quantidade de pessoas que assistiram a série
+     */
+    public void registrarAudiencia(){        
         this.audiencia += 1;
-
     }
 
     public int getAudiencia(){
@@ -46,5 +47,9 @@ public class Serie {
 
     public int getEpisodios() {
         return this.quantidadeEpisodios;
+    }
+
+    public String getNome() {
+        return this.nome;
     }
 }
