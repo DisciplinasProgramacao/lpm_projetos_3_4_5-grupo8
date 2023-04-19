@@ -6,13 +6,13 @@ import static org.junit.Assert.assertEquals;
 import java.util.LinkedList;
 
 public class ClienteCertoTest {
-    ClienteCerto cliente;
+    Cliente cliente;
     Serie serie1, serie2, serie3;
     LinkedList<Serie> ListaComTresSeries;
 
     @BeforeEach
-    public void prepare(){
-        cliente = new ClienteCerto("Laura Melo", "1234");
+    public void prepare() {
+        cliente = new Cliente("Laura Melo", "1234");
         ListaComTresSeries = new LinkedList<>();
 
         serie1 = new Serie("The Blacklist", "Suspense", "EN", 10);
@@ -24,22 +24,22 @@ public class ClienteCertoTest {
         ListaComTresSeries.add(serie3);
     }
 
-    /* 
+    /*
+     * @Test
+     * public void deveAdicionarSeriesNaListaDeSeriesParaVer(){
+     * Serie listaDeSerie = new LinkedList<Serie>();
+     * 
+     * for (Serie serie : arraySeries) {
+     * cliente.adicionarNaLista(serie);
+     * }
+     * 
+     * assertArrayEquals(arraySeries, cliente.getListaParaVer().toArray());
+     * 
+     * }
+     */
+
     @Test
-    public void deveAdicionarSeriesNaListaDeSeriesParaVer(){
-        Serie listaDeSerie = new LinkedList<Serie>();
-
-        for (Serie serie : arraySeries) {
-            cliente.adicionarNaLista(serie);
-        }
-
-        assertArrayEquals(arraySeries, cliente.getListaParaVer().toArray());
-       
-    }*/
-
-
-    @Test
-    public void deveFiltrarPorGenero(){
+    public void deveFiltrarPorGenero() {
         Serie arraySeries[] = new Serie[ListaComTresSeries.size()];
 
         for (Serie serie : arraySeries) {
