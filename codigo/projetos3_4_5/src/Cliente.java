@@ -55,13 +55,13 @@ public class Cliente {
      * 
      * @param nomeSerie
      */
-    public void removerDaLista(String nomeSerie) {
+    public boolean removerDaLista(String nomeSerie) {
         for (Catalogo serie : listaParaVer) {
             if (serie.getNome().equals(nomeSerie)) {
-                listaParaVer.remove(serie);
-                break;
+                return listaParaVer.remove(serie);
             }
         }
+        return false;
     }
 
     /**
