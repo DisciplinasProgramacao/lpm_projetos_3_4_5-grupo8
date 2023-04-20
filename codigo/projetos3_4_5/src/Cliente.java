@@ -139,6 +139,10 @@ public class Cliente {
     }
 
     @Override
+    public int hashCode(){
+        return this.nomeDeUsuario.hashCode();
+    }
+    @Override
     public String toString() {
         return this.nomeDeUsuario + ";" + this.login + ";" + this.senha;
     }

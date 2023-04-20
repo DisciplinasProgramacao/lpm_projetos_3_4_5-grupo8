@@ -13,19 +13,17 @@ public class PlataformaStreaming{
         this.clienteAtual = new Cliente(null, null, null);
     }
 
-    public Cliente login(String login, String senha) {
-        Cliente cliente = new Cliente(null, null, null);
-        try {
-            cliente = clientes.get(login);
-            if (cliente.getSenha() == senha) {
-                this.clienteAtual = cliente;
-                return cliente;
+    public Cliente login(String nomeUsuario, String senha) {
+        Cliente cliente = clientes.get(nomeUsuario);
+
+         if(cliente==null || cliente.getSenha() != senha){
+                this.clienteAtual = null;
             } else {
-                return null;
+                this.clienteAtual = cliente; 
             }
-        } catch (Exception e) {
-            return null;
-        }
+
+            return this.clienteAtual;
+        
     }
 
     // metodo para testes
