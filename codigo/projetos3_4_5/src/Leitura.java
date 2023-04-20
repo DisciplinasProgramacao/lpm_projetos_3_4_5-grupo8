@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Leitura {
     public static <T> void gravar(String nomeArq, LinkedList<T> list) throws IOException {
-        FileWriter arq = new FileWriter("./codigo/projeto3_4_5/arquivos/" + nomeArq + ".csv");
+        FileWriter arq = new FileWriter("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
         PrintWriter gravarArq = new PrintWriter(arq);
         StringBuilder saida = new StringBuilder();
         for (T key : list) {
@@ -23,17 +23,16 @@ public class Leitura {
 
     private static <T> LinkedList<T> ler(String nomeArq) throws FileNotFoundException {
         LinkedList<T> list = new LinkedList<>();
-        File file = new File("./codigo/projeto3_4_5/arquivos/" + nomeArq + ".csv");
+        File file = new File("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
         Scanner entrada = new Scanner(file, "UTF-8");
         String linha;
         String linhaAux[];
         while (entrada.hasNext()) {
             linha = entrada.nextLine();
             linhaAux = linha.split(";");
-            /*
-             * T x = new T(linhaAux[0], linhaAux[1], linhaAux[2]);
-             * list.add(x);
-             */
+            T x = new T(linhaAux[0], linhaAux[1], linhaAux[2]);
+            list.add(x);
+
         }
         return list;
 
