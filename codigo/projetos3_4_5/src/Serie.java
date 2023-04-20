@@ -2,7 +2,7 @@ public class Serie {
 
     private static final String[] GENEROS = new String[8];
     private String nome;
-    private String idSerie;
+    private int idSerie;
     private String genero;
     private String idioma;
     private int quantidadeEpisodios;
@@ -14,24 +14,14 @@ public class Serie {
         this.nome = nome;
         this.genero = genero;
         this.idioma = idioma;
-        this.quantidadeEpisodios = quantidadeEpisodios < 0 ? 0 : quantidadeEpisodios;
+        this.quantidadeEpisodios = quantidadeEpisodios < 2 ? 0 : quantidadeEpisodios;
         this.audiencia = 0;
     }
 
-    public Serie(String idSerie, String nome, String dataLancamento) {
+    public Serie(int idSerie, String nome, String dataLancamento) {
         this.idSerie = idSerie;
         this.nome = nome;
         this.dataLancamento = dataLancamento;
-    }
-
-    private int validarQuantidadeEpisodios(int quantidadeEpisodios2) {
-
-        if (this.quantidadeEpisodios < 3) {
-            return 0; // caso quantidade de episódios seja inválida retorna 0 e não preenche o
-                      // atributo quantidade de episódios
-        }
-        return this.quantidadeEpisodios;
-
     }
 
     /**
@@ -61,7 +51,7 @@ public class Serie {
         return this.nome;
     }
 
-    public String getId() {
+    public int getId() {
         return this.idSerie;
     }
 
