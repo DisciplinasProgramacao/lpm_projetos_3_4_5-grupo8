@@ -2,21 +2,21 @@ import java.util.*;
 
 public class PlataformaStreaming{
     private String nome;
-    private HashMap<String, Serie> series;
+    private HashMap<Integer,Serie> series;
     private HashMap<String, Cliente> clientes;
     private Cliente clienteAtual;
 
     PlataformaStreaming(String nome) {
         this.nome = nome;
-        this.series = new HashMap<String, Serie>();
+        this.series = new HashMap<Integer, Serie>();
         this.clientes = new HashMap<String, Cliente>();
         this.clienteAtual = new Cliente(null, null, null);
     }
-
+    
     public Cliente login(String nomeUsuario, String senha) {
         Cliente cliente = clientes.get(nomeUsuario);
 
-         if(cliente==null || cliente.getSenha() != senha){
+         if(cliente == null || cliente.getSenha() != senha){
                 this.clienteAtual = null;
             } else {
                 this.clienteAtual = cliente; 
@@ -43,7 +43,7 @@ public class PlataformaStreaming{
     // metodo para testes
     public String getSeries() {
         StringBuilder str = new StringBuilder();
-        for (String key : series.keySet()) {
+        for (int key : series.keySet()) {
             str.append(series.get(key).getNome());
             str.append(", ");
         }
@@ -69,7 +69,7 @@ public class PlataformaStreaming{
         LinkedList<Serie> filtro = new LinkedList<Serie>();
         Serie serie; 
         try {
-          for (String key : series.keySet()) {
+          for (int key : series.keySet()) {
                 serie = series.get(key);
             if (serie.getGenero().equals(genero)) {
                 filtro.add(serie);
@@ -87,7 +87,7 @@ public class PlataformaStreaming{
         LinkedList<Serie> filtro = new LinkedList<Serie>();
         Serie serie;
         try {
-          for (String key : series.keySet()) {
+          for (int key : series.keySet()) {
                 serie = series.get(key);
             if (serie.getIdioma().equals(filtrar)) {
                 filtro.add(serie);
@@ -98,12 +98,12 @@ public class PlataformaStreaming{
           return null;
         }
     }
-    
+
     public LinkedList<Serie> filtrarPorQtdEpisodios(int quantEpisodios) {
         LinkedList<Serie> filtro = new LinkedList<Serie>();
         Serie serie;
         try {
-            for (String key : series.keySet()) {
+            for (int key : series.keySet()) {
                 serie = series.get(key);
                 if (serie.getEpisodios() == quantEpisodios) {
                     filtro.add(serie);
@@ -131,7 +131,7 @@ public class PlataformaStreaming{
 
     public Serie buscarSerie(String nomeSerie) {
         try {
-            for (String key : series.keySet()) {
+            for (int key : series.keySet()) {
                 if (series.get(key).getNome() == nomeSerie) {
                     return series.get(key);
                 }

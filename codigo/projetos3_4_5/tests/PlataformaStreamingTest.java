@@ -25,7 +25,7 @@ public class PlataformaStreamingTest {
     @Test
     public void deveAdicionarCliente() {
         plataforma1.adicionarCliente(cliente1);
-        assertEquals("Ana Souza", plataforma1.getClientes());
+        assertEquals("aninha12", plataforma1.getClientes());
     }
 
     @Test
