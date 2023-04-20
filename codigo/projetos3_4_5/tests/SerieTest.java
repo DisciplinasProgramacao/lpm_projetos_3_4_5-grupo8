@@ -10,7 +10,7 @@ public class SerieTest {
 
     @BeforeEach
     public void setUp() {
-        serie = new Serie("The Walking Dead", "Ação", "ingles", 2010);
+        serie = new Serie(0, "The Blacklist", "02/02/2017", "Suspense", "EN", 10);
     }
 
     @Test
