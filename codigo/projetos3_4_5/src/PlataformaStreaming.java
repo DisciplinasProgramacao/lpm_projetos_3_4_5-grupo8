@@ -68,51 +68,50 @@ public class PlataformaStreaming{
         
         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Catalogo serie; 
-        try {
-          for (int key : series.keySet()) {
-                serie = series.get(key);
-            if (serie.getGenero().equals(genero)) {
-                filtro.add(serie);
-            }
+        for (int key : series.keySet()) {
+            serie = series.get(key);
+        if (serie.getGenero().equals(genero)) {
+            filtro.add(serie);
         }
-            return filtro;
         }
-        catch (Exception e) {
-          return null;
-        }
+        return filtro;
     }
 
     public LinkedList<Catalogo> filtrarPorIdioma(String filtrar) {
          
         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Catalogo serie;
-        try {
-          for (int key : series.keySet()) {
+        for (int key : series.keySet()) {
                 serie = series.get(key);
             if (serie.getIdioma().equals(filtrar)) {
                 filtro.add(serie);
             }
         }
-            return filtro;
-        }catch (Exception e) {
-          return null;
-        }
+        return filtro;
     }
 
     public LinkedList<Serie> filtrarPorQtdEpisodios(int quantEpisodios) {
         LinkedList<Serie> filtro = new LinkedList<Serie>();
         Serie serie;
-        try {
-            for (int key : series.keySet()) {
-                serie = (Serie) series.get(key);
-                if (serie.getEpisodios() == quantEpisodios) {
-                    filtro.add(serie);
+        for (int key : series.keySet()) {
+            serie = (Serie) series.get(key);
+            if (serie.getEpisodios() == quantEpisodios) {
+                filtro.add(serie);
+            }
+        }
+        return filtro;
+    }
+    
+    public LinkedList<Filme> filtrarPorDuracao(int duracao) {
+        LinkedList<Filme> filtro = new LinkedList<Filme>();
+        Filme filme;
+        for (int key : series.keySet()) {
+            filme = (Filme) series.get(key);
+                if (filme.getDuracao() == duracao) {
+                    filtro.add(filme);
                 }
             }
-            return filtro;
-        } catch (Exception e) {
-            return null;
-        }
+        return filtro;
     }
 
     public void registrarAudiencia(Catalogo serie) {
