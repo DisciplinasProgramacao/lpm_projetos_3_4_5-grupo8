@@ -12,6 +12,9 @@ public class Filme extends Catalogo{
         this.duracao = duracao;
     }
 
+    public int getDuracao() {
+        return this.duracao;
+    }
     /**
      * Metodo que registra a quantidade de pessoas que assistiram a série
      */
