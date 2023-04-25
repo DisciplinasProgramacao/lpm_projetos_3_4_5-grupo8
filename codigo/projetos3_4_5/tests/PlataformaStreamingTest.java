@@ -67,15 +67,13 @@ public class PlataformaStreamingTest {
         assertEquals(2, plataforma1.filtrarPorQtdEpisodios(10).size());
     }
 
-     /* 
     @Test
     public void deveRegistrarAudiencia(){
         plataforma1.adicionarCatalogo(serie1);
         plataforma1.registrarAudiencia(serie1);
-        assertEquals(1, plataforma1.getAudiencia().size());
-    }*/
+        assertEquals(1, serie1.getAudiencia());
+    }
 
-   
     @Test
     public void deveBuscarSeriesPorNomeComToString() {
         plataforma1.adicionarCatalogo(serie1);

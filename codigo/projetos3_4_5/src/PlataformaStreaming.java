@@ -115,13 +115,7 @@ public class PlataformaStreaming{
     }
 
     public void registrarAudiencia(Catalogo serie) {
-        Catalogo serieAux;
-        try {
-            serieAux = series.get(serie.getNome());
-            serieAux.registrarAudiencia();
-            clienteAtual.registrarAudiencia(serieAux);
-        } catch (Exception e) {
-        }
+        serie.registrarAudiencia();
     }
 
     public void logoff() {
