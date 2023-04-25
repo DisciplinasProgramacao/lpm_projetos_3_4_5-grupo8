@@ -71,6 +71,8 @@ public class Cliente {
      *              previamente criado.
      * @return Outro vetor/array com os elementos da lista.
      */
+  
+     
     public Serie[] allElements(Serie[] array) {
         Serie[] allData = this.listaParaVer.toArray(array);
         return allData;
