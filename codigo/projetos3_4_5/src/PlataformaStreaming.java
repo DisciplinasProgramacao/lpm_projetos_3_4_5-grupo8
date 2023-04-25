@@ -114,8 +114,8 @@ public class PlataformaStreaming{
         return filtro;
     }
 
-    public void registrarAudiencia(Catalogo serie) {
-        serie.registrarAudiencia();
+    public void registrarAudiencia(Catalogo midia) {
+        midia.registrarAudiencia();
     }
 
     public void logoff() {
