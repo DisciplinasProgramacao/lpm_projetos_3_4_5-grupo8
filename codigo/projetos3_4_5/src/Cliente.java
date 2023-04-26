@@ -55,11 +55,14 @@ public class Cliente {
      * @param nomeSerie
      */
     public void retirarDaLista(String nomeSerie) {
+        Serie serieAhSerRemovida = null;
         for (Serie serie : listaParaVer) {
             if (serie.getNome().equals(nomeSerie)) {
-                listaParaVer.remove(serie);
+                serieAhSerRemovida = serie;
+                break; //olhar melhor forma de fazer isso sem precisar do break
             }
         }
+        listaParaVer.remove(serieAhSerRemovida);
     }
 
     /**

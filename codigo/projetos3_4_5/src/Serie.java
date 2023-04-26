@@ -59,4 +59,10 @@ public class Serie {
     public String toString() {
         return this.idSerie + ";" + this.nome + ";" + this.dataLancamento;
     }
+
+    @Override
+    public boolean equals(Object o){
+        Serie outraSerie = (Serie)o;
+        return this.nome.equals(outraSerie.nome);
+    }
 }
