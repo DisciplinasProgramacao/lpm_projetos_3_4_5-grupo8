@@ -1,8 +1,8 @@
 import java.util.*;
 
-public class PlataformaStreaming{
+public class PlataformaStreaming {
     private String nome;
-    private HashMap<Integer,Serie> series;
+    private HashMap<Integer, Serie> series;
     private HashMap<String, Cliente> clientes;
     private Cliente clienteAtual;
 
@@ -12,18 +12,18 @@ public class PlataformaStreaming{
         this.clientes = new HashMap<String, Cliente>();
         this.clienteAtual = new Cliente(null, null, null);
     }
-    
+
     public Cliente login(String nomeUsuario, String senha) {
         Cliente cliente = clientes.get(nomeUsuario);
 
-         if(cliente == null || cliente.getSenha() != senha){
-                this.clienteAtual = null;
-            } else {
-                this.clienteAtual = cliente; 
-            }
+        if (cliente == null || cliente.getSenha() != senha) {
+            this.clienteAtual = null;
+        } else {
+            this.clienteAtual = cliente;
+        }
 
-            return this.clienteAtual;
-        
+        return this.clienteAtual;
+
     }
 
     // metodo para testes
@@ -65,37 +65,36 @@ public class PlataformaStreaming{
     }
 
     public LinkedList<Serie> filtrarPorGenero(String genero) {
-        
+
         LinkedList<Serie> filtro = new LinkedList<Serie>();
-        Serie serie; 
+        Serie serie;
         try {
-          for (int key : series.keySet()) {
+            for (int key : series.keySet()) {
                 serie = series.get(key);
-            if (serie.getGenero().equals(genero)) {
-                filtro.add(serie);
+                if (serie.getGenero().equals(genero)) {
+                    filtro.add(serie);
+                }
             }
-        }
             return filtro;
-        }
-        catch (Exception e) {
-          return null;
+        } catch (Exception e) {
+            return null;
         }
     }
 
     public LinkedList<Serie> filtrarPorIdioma(String filtrar) {
-         
+
         LinkedList<Serie> filtro = new LinkedList<Serie>();
         Serie serie;
         try {
-          for (int key : series.keySet()) {
+            for (int key : series.keySet()) {
                 serie = series.get(key);
-            if (serie.getIdioma().equals(filtrar)) {
-                filtro.add(serie);
+                if (serie.getIdioma().equals(filtrar)) {
+                    filtro.add(serie);
+                }
             }
-        }
             return filtro;
-        }catch (Exception e) {
-          return null;
+        } catch (Exception e) {
+            return null;
         }
     }
 

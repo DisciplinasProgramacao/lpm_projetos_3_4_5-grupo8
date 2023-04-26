@@ -5,11 +5,7 @@ public class App {
     static Scanner teclado = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
-        // LinkedList<Serie> a = new LinkedList<>();
-        // Serie serie = new Serie(12, "mulher maravilha", "12-2-2022");
-        // a.add(serie);
-        // Leitura.gravar("testeSave", a);
-        
+        LinkedList<Serie> series = new LinkedList<>();
         int opcao = -1;
 
         do {
@@ -17,13 +13,19 @@ public class App {
             limparTela();
             switch (opcao) {
                 case 1:
-                System.out.println("Carregando arquivo de Séries....");
-                break;
+                    System.out.println("Carregando arquivo de Séries....");
+                    series = Armazenagem.lerSerie("POO_Series");
+                    break;
                 case 2:
-                System.out.println("Carregando arquivo de Filmes....");
-                break;
+                    System.out.println("Carregando arquivo de Filmes....");
+                    break;
+                case 3:
+                    System.out.println(series.toString());
+                    // Armazenagem.gravar("testeSave2", series);
+                    pausa();
+                    break;
             }
-         } while(opcao != 0);
+        } while (opcao != 0);
         System.out.println("Saindo...");
 
     }

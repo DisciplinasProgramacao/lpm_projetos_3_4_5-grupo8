@@ -28,54 +28,56 @@ public class PlataformaStreamingTest {
         plataforma1.adicionarCliente(cliente1);
         assertEquals("aninha12", plataforma1.getClientes());
     }
-/* 
-    @Test
-    public void deveFiltrarSeriePorGenero() {
-        plataforma1.adicionarSerie(serie1);
-        plataforma1.adicionarSerie(serie2);
-        assertEquals(2, plataforma1.filtrarPorGenero("Suspense").size());
-    }
+    /*
+     * @Test
+     * public void deveFiltrarSeriePorGenero() {
+     * plataforma1.adicionarSerie(serie1);
+     * plataforma1.adicionarSerie(serie2);
+     * assertEquals(2, plataforma1.filtrarPorGenero("Suspense").size());
+     * }
+     * 
+     * @Test
+     * public void deveFiltrarSeriePorIdioma(){
+     * plataforma1.adicionarSerie(serie1);
+     * assertNotNull(plataforma1.filtrarPorIdioma("EN").contains(serie1));
+     * }
+     * 
+     * @Test
+     * public void deveFiltrarSeriePorQtdEpisodio(){
+     * plataforma1.adicionarSerie(serie1);
+     * assertEquals(1, plataforma1.filtrarPorQtdEpisodios(10).size());
+     * }
+     * 
+     * 
+     * @Test
+     * public void deveRegistrarAudiencia(){
+     * plataforma1.adicionarSerie(serie1);
+     * plataforma1.registrarAudiencia(serie1);
+     * assertEquals(1, plataforma1.getAudiencia().size());
+     * }
+     * 
+     * 
+     * @Test
+     * public void deveRealizarLogin() {
+     * plataforma1.adicionarCliente(cliente1);
+     * plataforma1.login("aninha12", "123");
+     * assertEquals(cliente1, plataforma1.getClienteAtual());
+     * }
+     * 
+     * @Test
+     * public void deveRealizarLogoff() {
+     * plataforma1.adicionarCliente(cliente1);
+     * plataforma1.login("aninha12", "123");
+     * plataforma1.logoff();
+     * assertNull(plataforma1.getClienteAtual());
+     * }
+     * 
+     * @Test
+     * public void deveBuscarSeriesPorNome() {
+     * plataforma1.adicionarSerie(serie1);
+     * assertEquals("The Blacklist",
+     * plataforma1.buscarSerie("The Blacklist").getNome());
+     * }
+     */
 
-    @Test
-    public void deveFiltrarSeriePorIdioma(){
-        plataforma1.adicionarSerie(serie1);
-        assertNotNull(plataforma1.filtrarPorIdioma("EN").contains(serie1));
-    }
-
-    @Test
-    public void deveFiltrarSeriePorQtdEpisodio(){
-        plataforma1.adicionarSerie(serie1);
-        assertEquals(1, plataforma1.filtrarPorQtdEpisodios(10).size());
-    }
-    
-
-    @Test
-    public void deveRegistrarAudiencia(){
-        plataforma1.adicionarSerie(serie1);
-        plataforma1.registrarAudiencia(serie1);
-        assertEquals(1, plataforma1.getAudiencia().size());
-    }
-    
-
-    @Test
-    public void deveRealizarLogin() {
-        plataforma1.adicionarCliente(cliente1);
-        plataforma1.login("aninha12", "123");
-        assertEquals(cliente1, plataforma1.getClienteAtual());
-    }
-
-    @Test
-    public void deveRealizarLogoff() {
-        plataforma1.adicionarCliente(cliente1);
-        plataforma1.login("aninha12", "123");
-        plataforma1.logoff();
-        assertNull(plataforma1.getClienteAtual());
-    }
-    
-    @Test
-    public void deveBuscarSeriesPorNome() {
-        plataforma1.adicionarSerie(serie1);
-        assertEquals("The Blacklist", plataforma1.buscarSerie("The Blacklist").getNome());
-    }*/
-    
 }
