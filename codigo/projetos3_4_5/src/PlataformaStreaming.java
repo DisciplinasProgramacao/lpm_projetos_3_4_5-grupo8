@@ -57,10 +57,22 @@ public class PlataformaStreaming {
         }
     }
 
+    public void adicionarSerie(LinkedList<Serie> series) {
+        for (Serie x : series) {
+            adicionarSerie(x);
+        }
+    }
+
     public void adicionarCliente(Cliente cliente) {
         try {
             clientes.put(cliente.getLogin(), cliente);
         } catch (Exception e) {
+        }
+    }
+
+    public void adicionarCliente(LinkedList<Cliente> clientes) {
+        for (Cliente x : clientes) {
+            adicionarCliente(x);
         }
     }
 

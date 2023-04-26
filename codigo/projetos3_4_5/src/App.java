@@ -5,7 +5,7 @@ public class App {
     static Scanner teclado = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
-        LinkedList<Serie> series = new LinkedList<>();
+        PlataformaStreaming plataforma = new PlataformaStreaming("JoaoCaramflix");
         int opcao = -1;
 
         do {
@@ -13,15 +13,18 @@ public class App {
             limparTela();
             switch (opcao) {
                 case 1:
-                    System.out.println("Carregando arquivo de Séries....");
-                    series = Armazenagem.lerSerie("POO_Series");
+                    System.out.println("Carregando arquivo de Séries...");
+                    plataforma.adicionarSerie(Armazenagem.lerSerie("POO_Series"));
                     break;
                 case 2:
-                    System.out.println("Carregando arquivo de Filmes....");
+                    System.out.println("Carregando arquivo de Filmes...");
                     break;
                 case 3:
-                    System.out.println(series.toString());
-                    // Armazenagem.gravar("testeSave2", series);
+                    System.out.println("Carregando arquivo de Usuarios...");
+
+                    break;
+                case 4:
+                    System.out.println(plataforma.getSeries());
                     pausa();
                     break;
             }

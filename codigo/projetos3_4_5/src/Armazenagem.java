@@ -27,10 +27,18 @@ public class Armazenagem {
         Scanner entrada = new Scanner(file, "UTF-8");
         String linha;
         String linhaAux[];
+        Boolean flag = true;
+        String aux;
         while (entrada.hasNext()) {
             linha = entrada.nextLine();
             linhaAux = linha.split(";");
-            Serie x = new Serie(Integer.parseInt(linhaAux[0]), linhaAux[1], linhaAux[2]);
+            if (flag == true) {
+                aux = linhaAux[0].substring(1, linhaAux[0].length());
+                flag = false;
+            } else {
+                aux = linhaAux[0];
+            }
+            Serie x = new Serie(Integer.parseInt(aux), linhaAux[1], linhaAux[2]);
             list.add(x);
         }
         entrada.close();
