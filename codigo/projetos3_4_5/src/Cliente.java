@@ -6,23 +6,24 @@ public class Cliente {
     private String nomeDeUsuario;
     private String senha;
     private String login;
-    private LinkedList<Serie> listaParaVer;
-    private LinkedList<Serie> listaJaVistas;
-    private Serie serie;
+    private LinkedList<Catalogo> listaParaVer;
+    private LinkedList<Catalogo> listaJaVistas;
+    private Catalogo serie;
 
     // Construtor
     public Cliente(String nomeDeUsuario, String login, String senha) {
         this.nomeDeUsuario = nomeDeUsuario;
         this.senha = senha;
         this.login = login;
-        this.listaParaVer = new LinkedList<Serie>();
-        this.listaJaVistas = new LinkedList<Serie>();
+        this.listaParaVer = new LinkedList<Catalogo>();
+        this.listaJaVistas = new LinkedList<Catalogo>();
     }
 
-    // Metodos
-    public Serie getSerie() {
-        return this.serie;
-    }
+    // Metodos 
+    //QUE MÉTODO É ESSE?
+    // public Serie getSerie() {
+    //     return this.serie;
+    // }
 
     public String getSenha() {
         return this.senha;
@@ -32,7 +33,7 @@ public class Cliente {
         return this.nomeDeUsuario;
     }
 
-    public LinkedList<Serie> getListaParaVer() {
+    public LinkedList<Catalogo> getListaParaVer() {
         return this.listaParaVer;
     }
 
@@ -45,7 +46,7 @@ public class Cliente {
      * 
      * @param serie
      */
-    public void adicionarNaLista(Serie serie) {
+    public void adicionarNaLista(Catalogo serie) {
         listaParaVer.add(serie);
     }
 
@@ -54,15 +55,15 @@ public class Cliente {
      * 
      * @param nomeSerie
      */
-    public void retirarDaLista(String nomeSerie) {
-        Serie serieAhSerRemovida = null;
-        for (Serie serie : listaParaVer) {
-            if (serie.getNome().equals(nomeSerie)) {
-                serieAhSerRemovida = serie;
+    public void retirarDaLista(String nomeMidia) {
+        Catalogo midiaAhSerRemovida = null;
+        for (Catalogo catalogo : listaParaVer) {
+            if (catalogo.getNome().equals(nomeMidia)) {
+                midiaAhSerRemovida = serie;
                 break; //olhar melhor forma de fazer isso sem precisar do break
             }
         }
-        listaParaVer.remove(serieAhSerRemovida);
+        listaParaVer.remove(midiaAhSerRemovida);
     }
 
     /**
@@ -87,10 +88,10 @@ public class Cliente {
      * @param genero
      * @return lista de serie pelo genero requisitado
      */
-    public LinkedList<Serie> filtrarPorGenero(String genero) {
-        LinkedList<Serie> listaGenero = new LinkedList<Serie>();
+    public LinkedList<Catalogo> filtrarPorGenero(String genero) {
+        LinkedList<Catalogo> listaGenero = new LinkedList<Catalogo>();
 
-        for (Serie serie : listaParaVer) {
+        for (Catalogo serie : listaParaVer) {
             if (serie.getGenero().equals(genero)) {
                 listaGenero.add(serie);
             }
@@ -105,10 +106,10 @@ public class Cliente {
      * @param idioma
      * @return lista de serie pelo idioma requisitado
      */
-    public LinkedList<Serie> filtrarPorIdioma(String idioma) {
-        LinkedList<Serie> listaIdioma = new LinkedList<Serie>();
+    public LinkedList<Catalogo> filtrarPorIdioma(String idioma) {
+        LinkedList<Catalogo> listaIdioma = new LinkedList<Catalogo>();
 
-        for (Serie serie : listaParaVer) {
+        for (Catalogo serie : listaParaVer) {
             if (serie.getIdioma().equals(idioma)) {
                 listaIdioma.add(serie);
             }
@@ -123,22 +124,22 @@ public class Cliente {
      * @param qtdEpisodios
      * @return lista de de serie pela quantidade de episodios requisitada
      */
-    public LinkedList<Serie> filtrarPorQtdEpisodios(int qtdEpisodios) {
-        LinkedList<Serie> listaqtdEpisodios = new LinkedList<Serie>();
+    // public LinkedList<Serie> filtrarPorQtdEpisodios(int qtdEpisodios) {
+    //     LinkedList<Serie> listaqtdEpisodios = new LinkedList<Serie>();
 
-        for (Serie serie : listaParaVer) {
-            if (serie.getEpisodios() == qtdEpisodios) {
-                listaqtdEpisodios.add(serie);
-            }
-        }
+    //     for (Serie serie : listaParaVer) {
+    //         if (serie.getEpisodios() == qtdEpisodios) {
+    //             listaqtdEpisodios.add(serie);
+    //         }
+    //     }
 
-        return listaqtdEpisodios;
-    }
+    //     return listaqtdEpisodios;
+    // }
 
     /*
      * Registra a audiencia de uma serie e a adiciona na lista de ja vistas
      */
-    public void registrarAudiencia(Serie serie) {
+    public void registrarAudiencia(Catalogo serie) {
         listaJaVistas.add(serie);
         listaParaVer.remove(serie);
     }

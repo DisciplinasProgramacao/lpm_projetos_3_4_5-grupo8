@@ -15,9 +15,9 @@ public class ClienteTest {
         cliente = new Cliente("Nome Cliente", "login", "Senha");
         listaComTresSeries = new LinkedList<>();
 
-        serie1 = new Serie("The Blacklist", "Suspense", "EN", 10);
-        serie2 = new Serie("Friends", "Comedia", "EN", 9);
-        serie3 = new Serie("Suits", "Drama", "EN", 5);
+        serie1 = new Serie(0, "The Blacklist", "02/02/2017", "Suspense", "EN", 10);
+        serie2 = new Serie(1, "Friends", "05/08/1999", "Comedia", "EN", 9);
+        serie3 = new Serie(2, "Suits", "20/10/2015", "Drama", "EN", 5);
 
         listaComTresSeries.add(serie1);
         listaComTresSeries.add(serie2);
@@ -35,7 +35,7 @@ public class ClienteTest {
 
     @Test
     public void deveRetirarSerieDaListaParaVer() {
-        for (Serie serie : listaComTresSeries) {
+        for (Catalogo serie : listaComTresSeries) {
             cliente.adicionarNaLista(serie);
         }
 
@@ -57,11 +57,11 @@ public class ClienteTest {
 
     @Test
     public void deveFiltrarSeriePorGeneroDeAcordoComParametroPassado() {
-        for (Serie serie : listaComTresSeries) {
+        for (Catalogo serie : listaComTresSeries) {
             cliente.adicionarNaLista(serie);
         }
 
-        LinkedList<Serie> listaFiltrada = cliente.filtrarPorGenero("Comedia");
+        LinkedList<Catalogo> listaFiltrada = cliente.filtrarPorGenero("Comedia");
 
         assertEquals(1, listaFiltrada.size());
     }

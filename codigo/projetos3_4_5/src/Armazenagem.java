@@ -21,8 +21,8 @@ public class Armazenagem {
         arq.close();
     }
 
-    public static LinkedList<Serie> lerSerie(String nomeArq) throws FileNotFoundException {
-        LinkedList<Serie> list = new LinkedList<>();
+    public static LinkedList<Catalogo> lerSerie(String nomeArq) throws FileNotFoundException {
+        LinkedList<Catalogo> list = new LinkedList<>();
         File file = new File("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
         Scanner entrada = new Scanner(file, "UTF-8");
         String linha;

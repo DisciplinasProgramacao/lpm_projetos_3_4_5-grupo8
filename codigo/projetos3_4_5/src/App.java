@@ -1,4 +1,3 @@
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class App {
@@ -14,13 +13,14 @@ public class App {
             switch (opcao) {
                 case 1:
                     System.out.println("Carregando arquivo de Séries...");
-                    plataforma.adicionarSerie(Armazenagem.lerSerie("POO_Series"));
+                    plataforma.adicionarCatalogos(Armazenagem.lerSerie("POO_Series"));
                     break;
                 case 2:
                     System.out.println("Carregando arquivo de Filmes...");
                     break;
                 case 3:
                     System.out.println("Carregando arquivo de Usuarios...");
+                    
                     plataforma.adicionarSerie(Armazenagem.lerCliente("POO_Series"));
                     break;
                 case 4:
