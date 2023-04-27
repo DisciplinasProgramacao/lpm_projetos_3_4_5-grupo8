@@ -20,6 +20,12 @@ public class App {
                     break;
                 case 3:
                     System.out.println("Carregando arquivo de Usuarios...");
+                    
+                    plataforma.adicionarSerie(Armazenagem.lerCliente("POO_Series"));
+                    break;
+                case 4:
+                    System.out.println(plataforma.getSeries());
+                    pausa();
                     break;
             }
         } while (opcao != 0);
