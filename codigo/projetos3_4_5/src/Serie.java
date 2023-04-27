@@ -24,6 +24,12 @@ public class Serie extends Catalogo {
 
     @Override
     public String toString() {
-        return super.toString() + ", " + this.quantidadeEpisodios + " episódios";
+        return super.toString() + ";" + this.quantidadeEpisodios + " episódios";
     }
+
+    // @Override
+    // public boolean equals(Object o){
+    //     Serie outraSerie = (Serie)o;
+    //     return this.nome.equals(outraSerie.nome);
+    // }
 }

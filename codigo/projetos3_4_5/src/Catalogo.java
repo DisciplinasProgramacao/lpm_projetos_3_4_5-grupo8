@@ -46,9 +46,10 @@ public abstract class Catalogo {
     public int getId() {
         return this.id;
     }
+
     @Override
     public String toString() {
-        return this.nome + ", " + this.dataLancamento + ", " + this.idioma + ", " + this.genero;
+        return this.nome + ";" + this.dataLancamento + ";" + this.idioma + ";" + this.genero;
     }
 
 }

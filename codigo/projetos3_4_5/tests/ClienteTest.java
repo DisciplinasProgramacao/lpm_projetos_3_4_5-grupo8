@@ -39,7 +39,7 @@ public class ClienteTest {
             cliente.adicionarNaLista(serie);
         }
 
-        cliente.removerDaLista("The Blacklist");
+        cliente.retirarDaLista("The Blacklist");
 
         assertEquals(2, cliente.getListaParaVer().size());
     }
@@ -50,7 +50,7 @@ public class ClienteTest {
             cliente.adicionarNaLista(serie);
         }
 
-        cliente.removerDaLista("Não Existo");
+        cliente.retirarDaLista("Não Existo");
 
         assertEquals(3, cliente.getListaParaVer().size());
     }

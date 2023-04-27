@@ -55,13 +55,15 @@ public class Cliente {
      * 
      * @param nomeSerie
      */
-    public boolean removerDaLista(String nomeSerie) {
-        for (Catalogo serie : listaParaVer) {
-            if (serie.getNome().equals(nomeSerie)) {
-                return listaParaVer.remove(serie);
+    public void retirarDaLista(String nomeMidia) {
+        Catalogo midiaAhSerRemovida = null;
+        for (Catalogo catalogo : listaParaVer) {
+            if (catalogo.getNome().equals(nomeMidia)) {
+                midiaAhSerRemovida = serie;
+                break; //olhar melhor forma de fazer isso sem precisar do break
             }
         }
-        return false;
+        listaParaVer.remove(midiaAhSerRemovida);
     }
 
     /**
@@ -73,6 +75,8 @@ public class Cliente {
      *              previamente criado.
      * @return Outro vetor/array com os elementos da lista.
      */
+  
+     
     public Serie[] allElements(Serie[] array) {
         Serie[] allData = this.listaParaVer.toArray(array);
         return allData;

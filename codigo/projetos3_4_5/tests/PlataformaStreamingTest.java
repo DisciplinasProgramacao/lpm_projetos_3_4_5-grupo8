@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 public class PlataformaStreamingTest {
     private PlataformaStreaming plataforma1;
     private Cliente cliente1;
-    private Serie serie1, serie2;
+    private Serie serie1, serie2, serie3;
     private Filme filme1, filme2, filme3;
 
     @BeforeEach
