@@ -24,6 +24,7 @@ public class App {
                     plataforma.adicionarCliente(Armazenagem.lerCliente("POO_Series"));
                     break;
                 case 4:
+                    System.out.println("Exibindo catálogo.");
                     System.out.println(plataforma.getCatalogo());
                     pausa();
                     break;
@@ -39,6 +40,8 @@ public class App {
         System.out.println("==========================");
         System.out.println("1 - Carregar Séries");
         System.out.println("2 - Carregar Filmes");
+        System.out.println("3 - Carregar Usuarios");
+        System.out.println("4 - Exibe catalagos");
         System.out.print("\nDigite sua opção: ");
         int opcao = Integer.parseInt(teclado.nextLine());
 
