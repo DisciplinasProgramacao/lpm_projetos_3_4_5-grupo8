@@ -17,14 +17,14 @@ public class App {
                     break;
                 case 2:
                     System.out.println("Carregando arquivo de Filmes...");
+                    plataforma.adicionarCatalogos(Armazenagem.lerSerie("POO_Series"));
                     break;
                 case 3:
                     System.out.println("Carregando arquivo de Usuarios...");
-                    
-                    plataforma.adicionarSerie(Armazenagem.lerCliente("POO_Series"));
+                    plataforma.adicionarCliente(Armazenagem.lerCliente("POO_Series"));
                     break;
                 case 4:
-                    System.out.println(plataforma.getSeries());
+                    System.out.println(plataforma.getCatalogo());
                     pausa();
                     break;
             }
