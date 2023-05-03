@@ -17,14 +17,15 @@ public class App {
                     break;
                 case 2:
                     System.out.println("Carregando arquivo de Filmes...");
+                    plataforma.adicionarCatalogos(Armazenagem.lerSerie("POO_Series"));
                     break;
                 case 3:
                     System.out.println("Carregando arquivo de Usuarios...");
-                    
-                    plataforma.adicionarSerie(Armazenagem.lerCliente("POO_Series"));
+                    plataforma.adicionarCliente(Armazenagem.lerCliente("POO_Series"));
                     break;
                 case 4:
-                    System.out.println(plataforma.getSeries());
+                    System.out.println("Exibindo catálogo.");
+                    System.out.println(plataforma.getCatalogo());
                     pausa();
                     break;
             }
@@ -39,6 +40,8 @@ public class App {
         System.out.println("==========================");
         System.out.println("1 - Carregar Séries");
         System.out.println("2 - Carregar Filmes");
+        System.out.println("3 - Carregar Usuarios");
+        System.out.println("4 - Exibe catalagos");
         System.out.print("\nDigite sua opção: ");
         int opcao = Integer.parseInt(teclado.nextLine());
 
