@@ -63,17 +63,27 @@ public class PlataformaStreaming {
         }
     }
 
-    public void adicionarCliente(Cliente cliente) {
-        try {
+    public boolean adicionarCliente(Cliente cliente) {
+        if(validarLoginCliente(cliente)){
             clientes.put(cliente.getLogin(), cliente);
-        } catch (Exception e) {
-        }
+            return true;
+        }  
+        return false;
     }
 
     public void adicionarCliente(LinkedList<Cliente> clientes) {
         for (Cliente x : clientes) {
             adicionarCliente(x);
         }
+    }
+
+    private boolean validarLoginCliente(Cliente cliente){
+        for (String key : clientes.keySet()) {
+            if(cliente.getLogin().equals(clientes.get(key).getLogin()))
+                return false;
+        }
+
+        return true;
     }
 
     public LinkedList<Catalogo> filtrarPorGenero(String genero) {
