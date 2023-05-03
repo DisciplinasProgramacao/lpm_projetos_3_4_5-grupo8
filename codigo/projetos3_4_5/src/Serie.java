@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.util.LinkedList;
+
 public class Serie extends Catalogo {
 
     private int quantidadeEpisodios;
@@ -27,9 +30,18 @@ public class Serie extends Catalogo {
         return super.toString() + ";" + this.quantidadeEpisodios + " episódios";
     }
 
+    public static void salvar(String nomeArquivo, LinkedList<Catalogo> listaDeNovasSeries) {
+        try {
+            Armazenagem.gravar(nomeArquivo, listaDeNovasSeries);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
     // @Override
     // public boolean equals(Object o){
     //     Serie outraSerie = (Serie)o;
-    //     return this.nome.equals(outraSerie.nome);
+    //     return this.nome.equals(outraSerie.nome
     // }
 }
