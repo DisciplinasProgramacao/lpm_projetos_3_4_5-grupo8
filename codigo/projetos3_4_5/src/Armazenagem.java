@@ -74,6 +74,22 @@ public class Armazenagem {
         return list;
     }
 
+    public static LinkedList<Filme> lerFilme(String nomeArq) throws FileNotFoundException {
+        LinkedList<Filme> list = new LinkedList<>();
+        File file = new File("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
+        Scanner entrada = new Scanner(file, "UTF-8");
+        String linha;
+        String linhaAux[];
+        while (entrada.hasNext()) {
+            linha = entrada.nextLine();
+            linhaAux = linha.split(";");
+            Filme x = new Filme(Integer.parseInt(linhaAux[0]), linhaAux[1], linhaAux[2], Integer.parseInt(linhaAux[3]));
+            list.add(x);
+        }
+        entrada.close();
+        return list;
+    }
+
     public static LinkedList<Cliente> lerAudiencia(String nomeArq, LinkedList<Cliente> list, LinkedList<Serie> series)
             throws FileNotFoundException {
         File file = new File("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");

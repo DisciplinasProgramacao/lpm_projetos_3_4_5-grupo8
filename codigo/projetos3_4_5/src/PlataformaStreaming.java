@@ -2,7 +2,7 @@ import java.util.*;
 
 public class PlataformaStreaming {
     private String nome;
-    private HashMap<Integer,Catalogo> catalogos;
+    private HashMap<Integer, Catalogo> catalogos;
     private HashMap<String, Cliente> clientes;
     private Cliente clienteAtual;
 
@@ -13,8 +13,8 @@ public class PlataformaStreaming {
         this.clienteAtual = new Cliente(null, null, null);
     }
 
-    public Cliente login(String nomeUsuario, String senha) {
-        Cliente cliente = clientes.get(nomeUsuario);
+    public Cliente login(String login, String senha) {
+        Cliente cliente = clientes.get(login);
 
         if (cliente == null || cliente.getSenha() != senha) {
             this.clienteAtual = null;
@@ -49,7 +49,7 @@ public class PlataformaStreaming {
         }
         return str.toString().substring(0, str.length() - 2);
     }
-    
+
     public void adicionarCatalogo(Catalogo catalogo) {
         try {
             catalogos.put(catalogo.getId(), catalogo);
@@ -78,7 +78,7 @@ public class PlataformaStreaming {
 
     public LinkedList<Catalogo> filtrarPorGenero(String genero) {
         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
-        Catalogo serie; 
+        Catalogo serie;
         for (int key : catalogos.keySet()) {
             serie = catalogos.get(key);
             if (serie.getGenero().equals(genero)) {
@@ -90,11 +90,11 @@ public class PlataformaStreaming {
     }
 
     public LinkedList<Catalogo> filtrarPorIdioma(String filtrar) {
-         
+
         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Catalogo serie;
         for (int key : catalogos.keySet()) {
-                serie = catalogos.get(key);
+            serie = catalogos.get(key);
             if (serie.getIdioma().equals(filtrar)) {
                 filtro.add(serie);
             }
@@ -113,16 +113,16 @@ public class PlataformaStreaming {
         }
         return filtro;
     }
-    
+
     public LinkedList<Filme> filtrarPorDuracao(int duracao) {
         LinkedList<Filme> filtro = new LinkedList<Filme>();
         Filme filme;
         for (int key : catalogos.keySet()) {
             filme = (Filme) catalogos.get(key);
-                if (filme.getDuracao() == duracao) {
-                    filtro.add(filme);
-                }
+            if (filme.getDuracao() == duracao) {
+                filtro.add(filme);
             }
+        }
         return filtro;
     }
 
@@ -146,6 +146,5 @@ public class PlataformaStreaming {
             return null;
         }
     }
-
 
 }
