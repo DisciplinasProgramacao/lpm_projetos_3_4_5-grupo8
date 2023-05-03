@@ -12,12 +12,10 @@ public class Armazenagem {
         PrintWriter gravarArq = new PrintWriter(arq);
         StringBuilder saida = new StringBuilder();
         for (T key : list) {
-            saida.append(key.toString());
             saida.append("\n");
+            saida.append(key.toString());
         }
-        String saidaAux = saida.toString();
-        saidaAux = saidaAux.substring(0, saidaAux.length() - 1);
-        gravarArq.write(saidaAux);
+        gravarArq.write(saida.toString());
         arq.close();
     }
 
