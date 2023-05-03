@@ -50,6 +50,12 @@ public class App {
                     System.out.println("Serie salva com sucesso!");
                     pausa();
                     break;
+                case 10:
+                    cadastrarCliente(plataforma);
+                    pausa();
+                    break;
+                default:
+                    break;
             }
         } while (opcao != 0);
         System.out.println("Saindo...");
@@ -77,10 +83,12 @@ public class App {
         System.out.println("1 - Carregar Séries");
         System.out.println("2 - Carregar Filmes");
         System.out.println("3 - Carregar Usuarios");
-        System.out.println("4 - Exibe catalagos");
+        System.out.println("4 - Exibir Catalagos");
         System.out.println("7 - Criar Série");
         System.out.println("8 - Exibir séries novas");
         System.out.println("9 - Salvar Série");
+        System.out.println("10 - Cadastrar Cliente");
+        System.out.println("==========================");
         System.out.print("\nDigite sua opção: ");
         int opcao = Integer.parseInt(teclado.nextLine());
 
@@ -95,5 +103,26 @@ public class App {
     static void pausa() {
         System.out.println("Enter para continuar.");
         teclado.nextLine();
+    }
+
+    public static void cadastrarCliente(PlataformaStreaming plataformaStreaming){
+        String nome, nomeUsuario, senha;
+        System.out.println("==========================");
+        System.out.println("Cadastro de Cliente");
+
+        System.out.println("Nome: ");
+        nome = teclado.nextLine();
+        System.out.println("Nome de Usuário: ");
+        nomeUsuario = teclado.nextLine();
+        System.out.println("Senha: ");
+        senha = teclado.nextLine();
+
+        Cliente novoCliente = new Cliente(nome, nomeUsuario, senha);
+        
+        if(plataformaStreaming.adicionarCliente(novoCliente)){
+            System.out.println("Cliente adicionado com sucesso!");
+        }else{
+            System.out.println("Login inválido, já existe cliente cadastrado com esse login");
+        };
     }
 }
