@@ -21,6 +21,24 @@ public class Armazenagem {
         arq.close();
     }
 
+    public static LinkedList<String> ler(String nomeArq) throws FileNotFoundException {
+        LinkedList<String> list = new LinkedList<>();
+        File file = new File("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
+        Scanner entrada = new Scanner(file, "UTF-8");
+        String linha;
+        Boolean flag = true;
+        while (entrada.hasNext()) {
+            linha = entrada.nextLine();
+            if (flag) {
+                linha = linha.substring(1, linha.length());
+                flag = false;
+            }
+            list.add(linha);
+        }
+        entrada.close();
+        return list;
+    }
+
     public static LinkedList<Catalogo> lerSerie(String nomeArq) throws FileNotFoundException {
         LinkedList<Catalogo> list = new LinkedList<>();
         File file = new File("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
@@ -61,25 +79,28 @@ public class Armazenagem {
     public static LinkedList<Cliente> lerAudiencia(String nomeArq, LinkedList<Cliente> list, LinkedList<Serie> series)
             throws FileNotFoundException {
         File file = new File("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
-        Scanner entrada = new Scanner(file, "UTF-8");
-        String linha;
-        String linhaAux[];
-        while (entrada.hasNext()) {
-            linha = entrada.nextLine();
-            linhaAux = linha.split(";");
-            for (Cliente x : list) {
-                if (x.getLogin().equals(linhaAux[0])) {
-                    if (linhaAux[1].equals("F")) {
-                        for (Serie z : series) {
-                            if (z.getId() == Integer.parseInt(linhaAux[2])) {
-                                x.adicionarNaLista(z);
+        try (Scanner entrada = new Scanner(file, "UTF-8")) {
+            String linha;
+            String linhaAux[];
+            while (entrada.hasNext()) {
+                linha = entrada.nextLine();
+                linhaAux = linha.split(";");
+                for (Cliente x : list) {
+                    if (x.getLogin().equals(linhaAux[0])) {
+                        if (linhaAux[1].equals("F")) {
+                            for (Serie z : series) {
+                                if (z.getId() == Integer.parseInt(linhaAux[2])) {
+                                    x.adicionarNaLista(z);
+                                }
                             }
+                        } else {
+                            x.retirarDaLista(linhaAux[2]);
                         }
-                    } else {
-                        x.retirarDaLista(linhaAux[2]);
                     }
                 }
             }
+        } catch (NumberFormatException e) {
+
         }
         return list;
     }
