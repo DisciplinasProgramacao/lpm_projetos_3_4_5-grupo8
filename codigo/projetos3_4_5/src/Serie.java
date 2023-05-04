@@ -39,7 +39,6 @@ public class Serie extends Catalogo {
         try {
             Armazenagem.gravar(nomeArquivo, listaDeNovasSeries);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

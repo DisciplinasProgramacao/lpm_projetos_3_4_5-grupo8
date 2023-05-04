@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class App {
     static Scanner teclado = new Scanner(System.in);
     static LinkedList<Catalogo> listaDeNovasSeries = new LinkedList<Catalogo>();
+    static LinkedList<Cliente> listaDeClientes = new LinkedList<Cliente>();
     static Cliente ClienteTeste = new Cliente("Arthur", "arthur", "1234");
 
     public static void main(String[] args) throws Exception {
@@ -56,6 +57,14 @@ public class App {
                     pausa();
                     break;
                 case 11:
+                    if(listaDeClientes.size() > 0){
+                        plataforma.salvarClientes(listaDeClientes);
+                    }else{
+                        System.out.println("Não existem clientes a serem salvos no arquivo");
+                    }
+                    pausa();
+                    break;
+                case 12:
                     avaliarCatalogo(ClienteTeste);
                     pausa();
                     break;
@@ -104,7 +113,8 @@ public class App {
         System.out.println("8 - Exibir séries novas");
         System.out.println("9 - Salvar Série");
         System.out.println("10 - Cadastrar Cliente");
-        System.out.println("11 - Avaliar Series e Filmes Vistos");
+        System.out.println("11 - Salvar Clientes");
+        System.out.println("12 - Avaliar Series e Filmes Vistos");
         System.out.println("==========================");
         System.out.print("\nDigite sua opção: ");
         int opcao = Integer.parseInt(teclado.nextLine());
@@ -137,7 +147,8 @@ public class App {
         Cliente novoCliente = new Cliente(nome, nomeUsuario, senha);
 
         if (plataformaStreaming.adicionarCliente(novoCliente)) {
-            System.out.println("Cliente adicionado com sucesso!");
+            listaDeClientes.add(novoCliente);
+            System.out.println("Cliente adicionado com sucesso!");            
         } else {
             System.out.println("Login inválido, já existe cliente cadastrado com esse login");
         }

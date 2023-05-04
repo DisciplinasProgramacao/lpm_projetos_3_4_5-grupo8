@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.*;
 
 public class PlataformaStreaming {
@@ -116,6 +117,18 @@ public class PlataformaStreaming {
     public void adicionarCliente(LinkedList<Cliente> clientes) {
         for (Cliente x : clientes) {
             adicionarCliente(x);
+        }
+    }
+
+    /**
+     * Salva os clientes em um arquivo
+     * @param clientes Lista de clientes a serem salvos no arquivo
+     */
+    public void salvarClientes(LinkedList<Cliente> clientes) {
+        try {
+            Armazenagem.gravar("Clientes", clientes);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

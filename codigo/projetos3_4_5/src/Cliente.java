@@ -19,12 +19,6 @@ public class Cliente {
         this.listaJaVistas = new LinkedList<Catalogo>();
     }
 
-    // Metodos
-    // QUE MÉTODO É ESSE?
-    // public Serie getSerie() {
-    // return this.serie;
-    // }
-
     /**
      * @return senha do usuario
      */
