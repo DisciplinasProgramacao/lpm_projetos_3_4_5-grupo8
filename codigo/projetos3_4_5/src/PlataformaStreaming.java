@@ -13,6 +13,15 @@ public class PlataformaStreaming {
         this.clienteAtual = new Cliente(null, null, null);
     }
 
+    /**
+     * Logar na plataforma
+     * 
+     * @param login login do usuario
+     * @param senha senha do usuario
+     * 
+     * 
+     * @return cliente se sucesso, cliente nulo caso erro
+     */
     public Cliente login(String login, String senha) {
         Cliente cliente = clientes.get(login);
 
@@ -27,6 +36,9 @@ public class PlataformaStreaming {
     }
 
     // metodo para testes
+    /**
+     * @return String de clientes
+     */
     public String getClientes() {
         StringBuilder str = new StringBuilder();
         for (String key : clientes.keySet()) {
@@ -36,11 +48,17 @@ public class PlataformaStreaming {
         return str.toString().substring(0, str.length() - 2);
     }
 
+    /**
+     * @return Cliente atual
+     */
     public Cliente getClienteAtual() {
         return this.clienteAtual;
     }
 
     // metodo para testes
+    /**
+     * @return String de catalogos
+     */
     public String getCatalogo() {
         StringBuilder str = new StringBuilder();
         for (int key : catalogos.keySet()) {
@@ -50,6 +68,12 @@ public class PlataformaStreaming {
         return str.toString().substring(0, str.length() - 2);
     }
 
+    /**
+     * adicionar catalogo na plataforma
+     * 
+     * @param catalogo catalogo a ser adicionado
+     * 
+     */
     public void adicionarCatalogo(Catalogo catalogo) {
         try {
             catalogos.put(catalogo.getId(), catalogo);
@@ -57,35 +81,65 @@ public class PlataformaStreaming {
         }
     }
 
+    /**
+     * adicionar catalogo na plataforma
+     * 
+     * @param catalogos linkedlist de catalogo a ser adicionado
+     * 
+     */
     public void adicionarCatalogos(LinkedList<Catalogo> catalogos) {
         for (Catalogo catalogo : catalogos) {
             adicionarCatalogo(catalogo);
         }
     }
 
+    /**
+     * adicionar cliente na plataforma
+     * 
+     * @param cliente cliente a ser adicionado
+     * 
+     */
     public boolean adicionarCliente(Cliente cliente) {
-        if(validarLoginCliente(cliente)){
+        if (validarLoginCliente(cliente)) {
             clientes.put(cliente.getLogin(), cliente);
             return true;
-        }  
+        }
         return false;
     }
 
+    /**
+     * adicionar cliente na plataforma
+     * 
+     * @param clientes linkedlist de cliente a ser adicionado
+     * 
+     */
     public void adicionarCliente(LinkedList<Cliente> clientes) {
         for (Cliente x : clientes) {
             adicionarCliente(x);
         }
     }
 
-    private boolean validarLoginCliente(Cliente cliente){
+    /**
+     * valida se o login do cliente existe
+     * 
+     * @param cliente cliente a ser validado
+     * 
+     */
+    private boolean validarLoginCliente(Cliente cliente) {
         for (String key : clientes.keySet()) {
-            if(cliente.getLogin().equals(clientes.get(key).getLogin()))
+            if (cliente.getLogin().equals(clientes.get(key).getLogin()))
                 return false;
         }
 
         return true;
     }
 
+    /**
+     * filtra catalogo por genero
+     * 
+     * @param genero genero a ser filtrado
+     * 
+     */
     public LinkedList<Catalogo> filtrarPorGenero(String genero) {
         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Catalogo serie;
@@ -99,19 +153,31 @@ public class PlataformaStreaming {
         return filtro;
     }
 
-    public LinkedList<Catalogo> filtrarPorIdioma(String filtrar) {
+    /**
+     * filtra catalogo por idioma
+     * 
+     * @param idioma idioma a ser filtrado
+     * 
+     */
+    public LinkedList<Catalogo> filtrarPorIdioma(String idioma) {
 
         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Catalogo serie;
         for (int key : catalogos.keySet()) {
             serie = catalogos.get(key);
-            if (serie.getIdioma().equals(filtrar)) {
+            if (serie.getIdioma().equals(idioma)) {
                 filtro.add(serie);
             }
         }
         return filtro;
     }
 
+    /**
+     * filtra catalogo por quantidade de episodios
+     * 
+     * @param quantEpisodios quantEpisodios a ser filtrado
+     * 
+     */
     public LinkedList<Serie> filtrarPorQtdEpisodios(int quantEpisodios) {
         LinkedList<Serie> filtro = new LinkedList<Serie>();
         Serie serie;
@@ -124,6 +190,12 @@ public class PlataformaStreaming {
         return filtro;
     }
 
+    /**
+     * filtra catalogo por duracao em minutos
+     * 
+     * @param duracao duracao de midia a ser filtrado
+     * 
+     */
     public LinkedList<Filme> filtrarPorDuracao(int duracao) {
         LinkedList<Filme> filtro = new LinkedList<Filme>();
         Filme filme;
@@ -136,18 +208,34 @@ public class PlataformaStreaming {
         return filtro;
     }
 
+    /**
+     * Registrar audiencia da midia
+     * 
+     * @param midia midia ser registrada
+     * 
+     */
     public void registrarAudiencia(Catalogo midia) {
         midia.registrarAudiencia();
     }
 
+    /**
+     * logoff do cliente na plataforma
+     * 
+     */
     public void logoff() {
         this.clienteAtual = null;
     }
 
-    public Catalogo buscarCatalogo(String nomeSerie) {
+    /**
+     * Buscar catalogo por nome
+     * 
+     * @param midia nome da midia a ser procurada
+     * 
+     */
+    public Catalogo buscarCatalogo(String midia) {
         try {
             for (int key : catalogos.keySet()) {
-                if (catalogos.get(key).getNome() == nomeSerie) {
+                if (catalogos.get(key).getNome() == midia) {
                     return catalogos.get(key);
                 }
             }
