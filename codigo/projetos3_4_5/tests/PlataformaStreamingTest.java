@@ -66,7 +66,13 @@ public class PlataformaStreamingTest {
         plataforma1.adicionarCatalogo(serie2);
         assertEquals(2, plataforma1.filtrarPorQtdEpisodios(10).size());
     }
-
+    @Test
+    public void deveFiltrarporDuracao(){
+        plataforma1.adicionarCatalogo(filme1);
+        plataforma1.adicionarCatalogo(filme2);
+        plataforma1.adicionarCatalogo(filme3);
+        assertEquals(2, plataforma1.filtrarPorDuracao(120).size());
+    }
     @Test
     public void deveRegistrarAudiencia(){
         plataforma1.adicionarCatalogo(serie1);
@@ -84,16 +90,16 @@ public class PlataformaStreamingTest {
     public void deveBuscarSeriesPorNomeComToString() {
         plataforma1.adicionarCatalogo(serie1);
         plataforma1.adicionarCatalogo(filme2);
-        assertEquals("The Blacklist, 02/02/2017, EN, Suspense, 10 episódios", plataforma1.buscarCatalogo("The Blacklist").toString());
-        assertEquals("O Poderoso Chefão 2, 01/01/1974, EN, Drama, 120 min", plataforma1.buscarCatalogo("O Poderoso Chefão 2").toString());
+        assertEquals("The Blacklist;02/02/2017;EN;Suspense;10 episódios", plataforma1.buscarCatalogo("The Blacklist").toString());
+        assertEquals("O Poderoso Chefão 2;01/01/1974;EN;Drama;120 min", plataforma1.buscarCatalogo("O Poderoso Chefão 2").toString());
     }   
     
     @Test
     public void deveBuscarFilmesPorNomeComToString(){
         plataforma1.adicionarCatalogo(filme1);
         plataforma1.adicionarCatalogo(filme2);
-        assertEquals("O Poderoso Chefão, 01/01/1972, EN, Drama, 120 min", plataforma1.buscarCatalogo("O Poderoso Chefão").toString());
-        assertEquals("O Poderoso Chefão 2, 01/01/1974, EN, Drama, 120 min", plataforma1.buscarCatalogo("O Poderoso Chefão 2").toString());
+        assertEquals("O Poderoso Chefão;01/01/1972;EN;Drama;120 min", plataforma1.buscarCatalogo("O Poderoso Chefão").toString());
+        assertEquals("O Poderoso Chefão 2;01/01/1974;EN;Drama;120 min", plataforma1.buscarCatalogo("O Poderoso Chefão 2").toString());
     }
 
     @Test
