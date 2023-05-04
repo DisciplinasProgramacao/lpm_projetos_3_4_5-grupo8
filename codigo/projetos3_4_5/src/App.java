@@ -20,7 +20,7 @@ public class App {
                     break;
                 case 2:
                     System.out.println("Carregando arquivo de Filmes...");
-                    plataforma.adicionarCatalogos(Armazenagem.lerSerie("POO_Filmes"));
+                    plataforma.adicionarCatalogos(Armazenagem.lerFilme("POO_Filmes"));
                     break;
                 case 3:
                     System.out.println("Carregando arquivo de Usuarios...");
@@ -40,7 +40,7 @@ public class App {
                     break;
                 case 8:
                     System.out.println("Exibindo séries novas...");
-                    for(Catalogo catalogo : listaDeNovasSeries){
+                    for (Catalogo catalogo : listaDeNovasSeries) {
                         System.out.println("#================================#");
                         System.out.println(catalogo.toString());
                     }
@@ -73,7 +73,7 @@ public class App {
         System.out.println("Digite o numero de qual voce quer avaliar: ");
         numero = Integer.parseInt(teclado.nextLine());
         Catalogo catalogo = cliente.EscolherCatalogo(numero);
-        System.out.println("Qual sua nota de 0 a 10 para sua "+catalogo.getNome()+": ");
+        System.out.println("Qual sua nota de 0 a 10 para sua " + catalogo.getNome() + ": ");
         numero = Integer.parseInt(teclado.nextLine());
         catalogo.avaliar(numero);
     }
@@ -89,7 +89,7 @@ public class App {
         String idioma = teclado.nextLine();
         System.out.print("Digite a quantidade de episodios: ");
         int quantidadeEpisodios = Integer.parseInt(teclado.nextLine());
-        return new Serie(0, nome, dataLancamento, genero, idioma, quantidadeEpisodios); 
+        return new Serie(0, nome, dataLancamento, genero, idioma, quantidadeEpisodios);
     }
 
     public static int menuSites() {
@@ -100,9 +100,9 @@ public class App {
         System.out.println("2 - Carregar Filmes");
         System.out.println("3 - Carregar Usuarios");
         System.out.println("4 - Exibir Catalagos");
-        System.out.println("7 - Criar Série"); 
-        System.out.println("8 - Exibir séries novas"); 
-        System.out.println("9 - Salvar Série"); 
+        System.out.println("7 - Criar Série");
+        System.out.println("8 - Exibir séries novas");
+        System.out.println("9 - Salvar Série");
         System.out.println("10 - Cadastrar Cliente");
         System.out.println("11 - Avaliar Series e Filmes Vistos");
         System.out.println("==========================");
@@ -122,7 +122,7 @@ public class App {
         teclado.nextLine();
     }
 
-    public static void cadastrarCliente(PlataformaStreaming plataformaStreaming){
+    public static void cadastrarCliente(PlataformaStreaming plataformaStreaming) {
         String nome, nomeUsuario, senha;
         System.out.println("==========================");
         System.out.println("Cadastro de Cliente");
@@ -135,11 +135,12 @@ public class App {
         senha = teclado.nextLine();
 
         Cliente novoCliente = new Cliente(nome, nomeUsuario, senha);
-        
-        if(plataformaStreaming.adicionarCliente(novoCliente)){
+
+        if (plataformaStreaming.adicionarCliente(novoCliente)) {
             System.out.println("Cliente adicionado com sucesso!");
-        }else{
+        } else {
             System.out.println("Login inválido, já existe cliente cadastrado com esse login");
-        };
+        }
+        ;
     }
 }

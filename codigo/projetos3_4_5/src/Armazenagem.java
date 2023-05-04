@@ -110,8 +110,8 @@ public class Armazenagem {
      * 
      * @return LinkedList de objetos Filme
      */
-    public static LinkedList<Filme> lerFilme(String nomeArq) throws FileNotFoundException {
-        LinkedList<Filme> list = new LinkedList<>();
+    public static LinkedList<Catalogo> lerFilme(String nomeArq) throws FileNotFoundException {
+        LinkedList<Catalogo> list = new LinkedList<>();
         File file = new File("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
         Scanner entrada = new Scanner(file, "UTF-8");
         String linha;
