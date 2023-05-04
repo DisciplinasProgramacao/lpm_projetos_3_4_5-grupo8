@@ -20,11 +20,11 @@ public class App {
                     break;
                 case 2:
                     System.out.println("Carregando arquivo de Filmes...");
-                    plataforma.adicionarCatalogos(Armazenagem.lerSerie("POO_Series"));
+                    plataforma.adicionarCatalogos(Armazenagem.lerSerie("POO_Filmes"));
                     break;
                 case 3:
                     System.out.println("Carregando arquivo de Usuarios...");
-                    plataforma.adicionarCliente(Armazenagem.lerCliente("POO_Series"));
+                    plataforma.adicionarCliente(Armazenagem.lerCliente("POO_Clientes"));
                     break;
                 case 4:
                     System.out.println("Exibindo catálogo.");
