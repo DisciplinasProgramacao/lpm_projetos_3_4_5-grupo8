@@ -89,7 +89,7 @@ public class App {
         String idioma = teclado.nextLine();
         System.out.print("Digite a quantidade de episodios: ");
         int quantidadeEpisodios = Integer.parseInt(teclado.nextLine());
-        return new Serie(0, nome, dataLancamento, genero, idioma, quantidadeEpisodios);
+        return new Serie(0, nome, dataLancamento, genero, idioma, quantidadeEpisodios); 
     }
 
     public static int menuSites() {
@@ -100,9 +100,9 @@ public class App {
         System.out.println("2 - Carregar Filmes");
         System.out.println("3 - Carregar Usuarios");
         System.out.println("4 - Exibir Catalagos");
-        System.out.println("7 - Criar Série");
-        System.out.println("8 - Exibir séries novas");
-        System.out.println("9 - Salvar Série");
+        System.out.println("7 - Criar Série"); 
+        System.out.println("8 - Exibir séries novas"); 
+        System.out.println("9 - Salvar Série"); 
         System.out.println("10 - Cadastrar Cliente");
         System.out.println("11 - Avaliar Series e Filmes Vistos");
         System.out.println("==========================");
