@@ -124,8 +124,8 @@ public class PlataformaStreaming{
         return filtro;
     }
     
-    public LinkedList<Filme> filtrarPorDuracao(int duracao) {
-        LinkedList<Filme> filtro = new LinkedList<Filme>();
+    public LinkedList<Catalogo> filtrarPorDuracao(int duracao) {
+        LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Filme filme;
         for (int key : catalogos.keySet()) {
             filme = (Filme) catalogos.get(key);
