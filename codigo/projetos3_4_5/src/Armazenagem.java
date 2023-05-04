@@ -137,7 +137,7 @@ public class Armazenagem {
      */
     public static LinkedList<Cliente> lerAudiencia(String nomeArq, LinkedList<Cliente> list, LinkedList<Serie> series)
             throws FileNotFoundException {
-        File file = new File("C:/Users/hgcsc/OneDrive/Área de Trabalho/PUC/PM/Streaming/lpm_projetos_3_4_5-grupo8/codigo/projetos3_4_5/arquivos" + nomeArq + ".csv");
+        File file = new File("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
         try (Scanner entrada = new Scanner(file, "UTF-8")) {
             String linha;
             String linhaAux[];
