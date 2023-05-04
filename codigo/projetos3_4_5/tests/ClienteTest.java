@@ -78,5 +78,47 @@ public class ClienteTest {
         cliente.registrarAudiencia(filme1);
         assertEquals(1, cliente.getListaJaVistas().size());
     }
-    
+    @Test
+    public void deveFiltrardasDuasListasPorGenero(){
+        cliente.adicionarNaLista(filme1);
+        cliente.adicionarNaLista(filme2);
+        cliente.adicionarNaLista(filme3);
+        cliente.adicionarNaLista(serie1);
+        cliente.adicionarNaLista(serie2);
+        cliente.adicionarNaLista(serie3);
+        cliente.registrarAudiencia(filme1);
+        cliente.registrarAudiencia(filme2);
+        cliente.registrarAudiencia(serie1);
+        assertEquals(3, cliente.filtrarPorGenero("Drama").size());
+        assertEquals(2, cliente.filtrarPorGenero("Comedia").size());
+        assertEquals(1, cliente.filtrarPorGenero("Suspense").size());
+    }
+    @Test
+    public void deveFiltrarDasDuasListasPorIdioma(){
+        cliente.adicionarNaLista(filme1);
+        cliente.adicionarNaLista(filme2);
+        cliente.adicionarNaLista(filme3);
+        cliente.adicionarNaLista(serie1);
+        cliente.adicionarNaLista(serie2);
+        cliente.adicionarNaLista(serie3);
+        cliente.registrarAudiencia(filme1);
+        cliente.registrarAudiencia(filme2);
+        cliente.registrarAudiencia(serie1);
+        assertEquals(6, cliente.filtrarPorIdioma("EN").size());
+    }
+    @Test
+    public void deveFiltrarDasDuasListasPorQuantidadeDeEpisodios(){
+        cliente.adicionarNaLista(filme1);
+        cliente.adicionarNaLista(filme2);
+        cliente.adicionarNaLista(filme3);
+        cliente.adicionarNaLista(serie1);
+        cliente.adicionarNaLista(serie2);
+        cliente.adicionarNaLista(serie3);
+        cliente.registrarAudiencia(filme1);
+        cliente.registrarAudiencia(filme2);
+        cliente.registrarAudiencia(serie1);
+        assertEquals(1, cliente.filtrarPorQtdEpisodios(10).size());
+        assertEquals(1, cliente.filtrarPorQtdEpisodios(9).size());
+        assertEquals(1, cliente.filtrarPorQtdEpisodios(5).size());
+    }
 }

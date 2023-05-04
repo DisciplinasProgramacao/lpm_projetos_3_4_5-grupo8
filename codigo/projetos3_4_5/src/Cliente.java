@@ -112,17 +112,21 @@ public class Cliente {
      * @param genero
      * @return lista de serie pelo genero requisitado
      */
-    public LinkedList<Catalogo> filtrarPorGenero(String genero) {
-        LinkedList<Catalogo> listaGenero = new LinkedList<Catalogo>();
-
-        for (Catalogo catalogo : listaParaVer) {
-            if (serie.getGenero().equals(genero)) {
-                listaGenero.add(catalogo);
-            }
+public LinkedList<Catalogo> filtrarPorGenero(String genero) {
+    LinkedList<Catalogo> listaGenero = new LinkedList<Catalogo>();
+   
+    for (Catalogo catalogo : listaParaVer) {
+        if (catalogo.getGenero().equals(genero)) {
+            listaGenero.add(catalogo);
         }
-
-        return listaGenero;
     }
+    for (Catalogo catalogo : listaJaVistas) {
+        if (catalogo.getGenero().equals(genero)) {
+            listaGenero.add(catalogo);
+        }
+    }
+    return listaGenero;
+}
     
     /**
      * Filtra as series da lista Para ver de acordo com o idioma
@@ -134,11 +138,15 @@ public class Cliente {
         LinkedList<Catalogo> listaIdioma = new LinkedList<Catalogo>();
 
         for (Catalogo catalogo : listaParaVer) {
-            if (serie.getIdioma().equals(idioma)) {
+            if (catalogo.getIdioma().equals(idioma)) {
                 listaIdioma.add(catalogo);
             }
         }
-
+        for (Catalogo catalogo : listaJaVistas) {
+            if (catalogo.getIdioma().equals(idioma)) {
+                listaIdioma.add(catalogo);
+            }
+        }
         return listaIdioma;
     }
 
@@ -149,17 +157,25 @@ public class Cliente {
      * 
      * @return lista de de serie pela quantidade de episodios requisitada
      */
-    // public LinkedList<Serie> filtrarPorQtdEpisodios(int qtdEpisodios) {
-    //     LinkedList<Serie> listaqtdEpisodios = new LinkedList<Serie>();
-
-    //     for (Serie serie : listaParaVer) {
-    //         if (serie.getEpisodios() == qtdEpisodios) {
-    //             listaqtdEpisodios.add(serie);
-    //         }
-    //     }
-
-    //     return listaqtdEpisodios;
-    // }
+    public LinkedList<Catalogo> filtrarPorQtdEpisodios(int qtdEpisodios) {
+        LinkedList<Catalogo> listaqtdEpisodios = new LinkedList<Catalogo>();
+        Serie filtrada = null;
+        for (Catalogo serie : listaParaVer) {
+            if (serie instanceof Serie)
+                filtrada = (Serie) serie;
+            if (filtrada.getEpisodios() == qtdEpisodios) {
+                listaqtdEpisodios.add(serie);
+            }
+        }
+        for (Catalogo serie : listaJaVistas) {
+            if (serie instanceof Serie)
+                filtrada = (Serie) serie;
+            if (filtrada.getEpisodios() == qtdEpisodios) {
+                listaqtdEpisodios.add(serie);
+            }
+        }
+        return listaqtdEpisodios;
+    }
 
     /**
      * Registra a audiencia de uma serie e a adiciona na lista de ja vistas
