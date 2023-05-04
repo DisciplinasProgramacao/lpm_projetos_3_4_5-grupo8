@@ -19,12 +19,15 @@ public class Cliente {
         this.listaJaVistas = new LinkedList<Catalogo>();
     }
 
-    // Metodos 
-    //QUE MÉTODO É ESSE?
+    // Metodos
+    // QUE MÉTODO É ESSE?
     // public Serie getSerie() {
-    //     return this.serie;
+    // return this.serie;
     // }
 
+    /**
+     * @return senha do usuario
+     */
     public String getSenha() {
         return this.senha;
     }
@@ -39,38 +42,47 @@ public class Cliente {
         return this.listaParaVer.get(posicao);
     }
 
+    /**
+     * @return nome do usuario
+     */
     public String getNomeUsuario() {
         return this.nomeDeUsuario;
     }
 
+    /**
+     * @return lista para ver
+     */
     public LinkedList<Catalogo> getListaParaVer() {
         return this.listaParaVer;
     }
 
+    /**
+     * @return login do usuario
+     */
     public String getLogin() {
         return this.login;
     }
 
-    /*
+    /**
      * Adiciona uma serie para ser assistida na lista Para ver
      * 
-     * @param serie
+     * @param midia para adicionar na lista
      */
-    public void adicionarNaLista(Catalogo serie) {
-        listaParaVer.add(serie);
+    public void adicionarNaLista(Catalogo midia) {
+        listaParaVer.add(midia);
     }
 
-    /*
+    /**
      * Remove uma serie da lista Para ver
      * 
-     * @param nomeSerie
+     * @param nomeMidia nome da midia para retirar
      */
     public void retirarDaLista(String nomeMidia) {
         Catalogo midiaAhSerRemovida = null;
         for (Catalogo catalogo : listaParaVer) {
             if (catalogo.getNome().equals(nomeMidia)) {
                 midiaAhSerRemovida = serie;
-                break; //olhar melhor forma de fazer isso sem precisar do break
+                break; // olhar melhor forma de fazer isso sem precisar do break
             }
         }
         listaParaVer.remove(midiaAhSerRemovida);
@@ -85,8 +97,7 @@ public class Cliente {
      *              previamente criado.
      * @return Outro vetor/array com os elementos da lista.
      */
-  
-     
+
     public Serie[] allElements(Serie[] array) {
         Serie[] allData = this.listaParaVer.toArray(array);
         return allData;
@@ -128,36 +139,40 @@ public class Cliente {
         return listaIdioma;
     }
 
-    /**
+    /*
      * Filtra as series da lista Para ver de acordo com a quantidade de episodios
      * 
      * @param qtdEpisodios
+     * 
      * @return lista de de serie pela quantidade de episodios requisitada
      */
     // public LinkedList<Serie> filtrarPorQtdEpisodios(int qtdEpisodios) {
-    //     LinkedList<Serie> listaqtdEpisodios = new LinkedList<Serie>();
+    // LinkedList<Serie> listaqtdEpisodios = new LinkedList<Serie>();
 
-    //     for (Serie serie : listaParaVer) {
-    //         if (serie.getEpisodios() == qtdEpisodios) {
-    //             listaqtdEpisodios.add(serie);
-    //         }
-    //     }
-
-    //     return listaqtdEpisodios;
+    // for (Serie serie : listaParaVer) {
+    // if (serie.getEpisodios() == qtdEpisodios) {
+    // listaqtdEpisodios.add(serie);
+    // }
     // }
 
-    /*
+    // return listaqtdEpisodios;
+    // }
+
+    /**
      * Registra a audiencia de uma serie e a adiciona na lista de ja vistas
+     * 
+     * @param midia midia a ser registrada audiencia
      */
-    public void registrarAudiencia(Catalogo serie) {
-        listaJaVistas.add(serie);
-        listaParaVer.remove(serie);
+    public void registrarAudiencia(Catalogo midia) {
+        listaJaVistas.add(midia);
+        listaParaVer.remove(midia);
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return this.nomeDeUsuario.hashCode();
     }
+
     @Override
     public String toString() {
         return this.nomeDeUsuario + ";" + this.login + ";" + this.senha;

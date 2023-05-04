@@ -6,7 +6,7 @@ public class Serie extends Catalogo {
     private int quantidadeEpisodios;
 
     // Construtor
-    public Serie(int id, String nome, String dataLancamento,String genero, String idioma, int quantidadeEpisodios) {
+    public Serie(int id, String nome, String dataLancamento, String genero, String idioma, int quantidadeEpisodios) {
         super(id, nome, dataLancamento, genero, idioma);
         this.quantidadeEpisodios = quantidadeEpisodios < 2 ? 0 : quantidadeEpisodios;
     }
@@ -21,6 +21,10 @@ public class Serie extends Catalogo {
     public void registrarAudiencia() {
         super.registrarAudiencia();
     }
+
+    /**
+     * @return quantidade de episodios da serie
+     */
     public int getEpisodios() {
         return this.quantidadeEpisodios;
     }
@@ -30,6 +34,7 @@ public class Serie extends Catalogo {
         return super.toString() + ";" + this.quantidadeEpisodios + " episódios";
     }
 
+    /// ahn????
     public static void salvar(String nomeArquivo, LinkedList<Catalogo> listaDeNovasSeries) {
         try {
             Armazenagem.gravar(nomeArquivo, listaDeNovasSeries);
@@ -41,7 +46,7 @@ public class Serie extends Catalogo {
 
     // @Override
     // public boolean equals(Object o){
-    //     Serie outraSerie = (Serie)o;
-    //     return this.nome.equals(outraSerie.nome
+    // Serie outraSerie = (Serie)o;
+    // return this.nome.equals(outraSerie.nome
     // }
 }

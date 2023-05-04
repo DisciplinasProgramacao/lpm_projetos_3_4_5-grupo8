@@ -1,4 +1,4 @@
-public class Filme extends Catalogo{
+public class Filme extends Catalogo {
 
     private int duracao;
 
@@ -7,14 +7,18 @@ public class Filme extends Catalogo{
         this.duracao = duracao;
     }
 
-    public Filme (int id, String nome, String dataLancamento,String genero, String idioma, int duracao){
+    public Filme(int id, String nome, String dataLancamento, String genero, String idioma, int duracao) {
         super(id, nome, dataLancamento, genero, idioma);
         this.duracao = duracao;
     }
 
+    /**
+     * @return duracao do filme
+     */
     public int getDuracao() {
         return this.duracao;
     }
+
     /**
      * Metodo que registra a quantidade de pessoas que assistiram a série
      */
@@ -22,9 +26,9 @@ public class Filme extends Catalogo{
         super.registrarAudiencia();
     }
 
-    @Override   
+    @Override
     public String toString() {
         return super.toString() + ";" + this.duracao + " min";
     }
-    
+
 }

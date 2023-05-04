@@ -7,6 +7,12 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Armazenagem {
+    /**
+     * Metodo que grava LinkedList de qualquer objeto no arquivo .csv
+     * 
+     * @param nomeArq nome do arquivo .csv
+     * @param list    lista de objetos
+     */
     public static <T> void gravar(String nomeArq, LinkedList<T> list) throws IOException {
         FileWriter arq = new FileWriter("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
         PrintWriter gravarArq = new PrintWriter(arq);
@@ -19,6 +25,12 @@ public class Armazenagem {
         arq.close();
     }
 
+    /**
+     * Metodo que le um arquivo e retorna seu conteudo em uma lista de string, no
+     * qual cada item da lista representa uma linha
+     * 
+     * @param nomeArq nome do arquivo .csv
+     */
     public static LinkedList<String> ler(String nomeArq) throws FileNotFoundException {
         LinkedList<String> list = new LinkedList<>();
         File file = new File("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
@@ -37,6 +49,14 @@ public class Armazenagem {
         return list;
     }
 
+    /**
+     * Metodo que le um arquivo e retorna seu conteudo em uma lista de serie, no
+     * qual cada item da lista representa um objeto serie
+     * 
+     * @param nomeArq nome do arquivo .csv
+     * 
+     * @return LinkedList de objetos Serie
+     */
     public static LinkedList<Catalogo> lerSerie(String nomeArq) throws FileNotFoundException {
         LinkedList<Catalogo> list = new LinkedList<>();
         File file = new File("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
@@ -58,6 +78,14 @@ public class Armazenagem {
         return list;
     }
 
+    /**
+     * Metodo que le um arquivo e retorna seu conteudo em uma lista de Cliente, no
+     * qual cada item da lista representa um objeto Cliente
+     * 
+     * @param nomeArq nome do arquivo .csv
+     * 
+     * @return LinkedList de objetos Cliente
+     */
     public static LinkedList<Cliente> lerCliente(String nomeArq) throws FileNotFoundException {
         LinkedList<Cliente> list = new LinkedList<>();
         File file = new File("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
@@ -74,6 +102,14 @@ public class Armazenagem {
         return list;
     }
 
+    /**
+     * Metodo que le um arquivo e retorna seu conteudo em uma lista de Filme, no
+     * qual cada item da lista representa um objeto Filme
+     * 
+     * @param nomeArq nome do arquivo .csv
+     * 
+     * @return LinkedList de objetos Filme
+     */
     public static LinkedList<Filme> lerFilme(String nomeArq) throws FileNotFoundException {
         LinkedList<Filme> list = new LinkedList<>();
         File file = new File("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
@@ -90,6 +126,15 @@ public class Armazenagem {
         return list;
     }
 
+    /**
+     * Metodo que le um arquivo e retorna seu conteudo em uma lista de Cliente, no
+     * qual cada item da lista representa um objeto Cliente atualizado com sua
+     * audiencia
+     * 
+     * @param nomeArq nome do arquivo .csv
+     * 
+     * @return LinkedList de objetos Cliente atualizados
+     */
     public static LinkedList<Cliente> lerAudiencia(String nomeArq, LinkedList<Cliente> list, LinkedList<Serie> series)
             throws FileNotFoundException {
         File file = new File("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");

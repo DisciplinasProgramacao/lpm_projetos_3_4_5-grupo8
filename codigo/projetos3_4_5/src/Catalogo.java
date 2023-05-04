@@ -10,7 +10,7 @@ public abstract class Catalogo {
     private int num_avaliacoes = 0;
     private String dataLancamento;
 
-    public Catalogo(int id, String nome,String dataLancamento) {
+    public Catalogo(int id, String nome, String dataLancamento) {
         this.nome = nome;
         this.audiencia = 0;
         this.avaliacao = 0;
@@ -18,19 +18,26 @@ public abstract class Catalogo {
         this.id = id;
     }
 
-    public Catalogo( int id, String nome,String dataLancamento, String genero, String idioma) {
+    public Catalogo(int id, String nome, String dataLancamento, String genero, String idioma) {
         this.nome = nome;
-        this.genero = genero; //Ainda não será implementado
-        this.idioma = idioma; //Ainda não será implementado
+        this.genero = genero; // Ainda não será implementado
+        this.idioma = idioma; // Ainda não será implementado
         this.audiencia = 0;
         this.avaliacao = 0;
         this.dataLancamento = dataLancamento;
         this.id = id;
     }
 
+    /**
+     * Registra audiencia daquele conteudo audiovisual
+     */
     public void registrarAudiencia() {
         this.audiencia += 1;
     }
+
+    /**
+     * @return audiencia do conteudo
+     */
     public int getAudiencia() {
         return this.audiencia;
     }
@@ -40,18 +47,30 @@ public abstract class Catalogo {
         this.avaliacao = ((avaliacao + this.avaliacao)/this.num_avaliacoes);
     }
 
+    /**
+     * @return genero do conteudo
+     */
     public String getGenero() {
         return this.genero;
     }
 
+    /**
+     * @return idioma do conteudo
+     */
     public String getIdioma() {
         return this.idioma;
     }
 
+    /**
+     * @return nome do conteudo
+     */
     public String getNome() {
         return this.nome;
     }
 
+    /**
+     * @return id do conteudo
+     */
     public int getId() {
         return this.id;
     }
