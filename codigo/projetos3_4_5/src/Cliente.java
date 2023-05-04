@@ -63,7 +63,10 @@ public class Cliente {
         return this.login;
     }
 
-    /**
+    public LinkedList<Catalogo> getListaJaVistas() {
+        return this.listaJaVistas;
+    }
+    /*
      * Adiciona uma serie para ser assistida na lista Para ver
      * 
      * @param midia para adicionar na lista
@@ -81,8 +84,8 @@ public class Cliente {
         Catalogo midiaAhSerRemovida = null;
         for (Catalogo catalogo : listaParaVer) {
             if (catalogo.getNome().equals(nomeMidia)) {
-                midiaAhSerRemovida = serie;
-                break; // olhar melhor forma de fazer isso sem precisar do break
+                midiaAhSerRemovida = catalogo;
+                break; //olhar melhor forma de fazer isso sem precisar do break
             }
         }
         listaParaVer.remove(midiaAhSerRemovida);
@@ -112,15 +115,15 @@ public class Cliente {
     public LinkedList<Catalogo> filtrarPorGenero(String genero) {
         LinkedList<Catalogo> listaGenero = new LinkedList<Catalogo>();
 
-        for (Catalogo serie : listaParaVer) {
+        for (Catalogo catalogo : listaParaVer) {
             if (serie.getGenero().equals(genero)) {
-                listaGenero.add(serie);
+                listaGenero.add(catalogo);
             }
         }
 
         return listaGenero;
     }
-
+    
     /**
      * Filtra as series da lista Para ver de acordo com o idioma
      * 
@@ -130,9 +133,9 @@ public class Cliente {
     public LinkedList<Catalogo> filtrarPorIdioma(String idioma) {
         LinkedList<Catalogo> listaIdioma = new LinkedList<Catalogo>();
 
-        for (Catalogo serie : listaParaVer) {
+        for (Catalogo catalogo : listaParaVer) {
             if (serie.getIdioma().equals(idioma)) {
-                listaIdioma.add(serie);
+                listaIdioma.add(catalogo);
             }
         }
 
@@ -147,15 +150,15 @@ public class Cliente {
      * @return lista de de serie pela quantidade de episodios requisitada
      */
     // public LinkedList<Serie> filtrarPorQtdEpisodios(int qtdEpisodios) {
-    // LinkedList<Serie> listaqtdEpisodios = new LinkedList<Serie>();
+    //     LinkedList<Serie> listaqtdEpisodios = new LinkedList<Serie>();
 
-    // for (Serie serie : listaParaVer) {
-    // if (serie.getEpisodios() == qtdEpisodios) {
-    // listaqtdEpisodios.add(serie);
-    // }
-    // }
+    //     for (Serie serie : listaParaVer) {
+    //         if (serie.getEpisodios() == qtdEpisodios) {
+    //             listaqtdEpisodios.add(serie);
+    //         }
+    //     }
 
-    // return listaqtdEpisodios;
+    //     return listaqtdEpisodios;
     // }
 
     /**
