@@ -29,6 +29,16 @@ public class Cliente {
         return this.senha;
     }
 
+    public void CatalogoJaVisto(){
+        for (Catalogo catalogo : this.listaJaVistas){
+            catalogo.toString();
+        }
+    }
+
+    public Catalogo EscolherCatalogo(int posicao){
+        return this.listaParaVer.get(posicao);
+    }
+
     public String getNomeUsuario() {
         return this.nomeDeUsuario;
     }

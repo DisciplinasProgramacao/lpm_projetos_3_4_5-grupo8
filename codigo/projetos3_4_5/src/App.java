@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class App {
     static Scanner teclado = new Scanner(System.in);
     static LinkedList<Catalogo> listaDeNovasSeries = new LinkedList<Catalogo>();
+    static Cliente ClienteTeste = new Cliente("Arthur", "arthur", "1234");
 
     public static void main(String[] args) throws Exception {
         PlataformaStreaming plataforma = new PlataformaStreaming("JoaoCaramflix");
@@ -54,12 +55,27 @@ public class App {
                     cadastrarCliente(plataforma);
                     pausa();
                     break;
+                case 11:
+                    avaliarCatalogo(ClienteTeste);
+                    pausa();
+                    break;
                 default:
                     break;
             }
         } while (opcao != 0);
         System.out.println("Saindo...");
 
+    }
+
+    private static void avaliarCatalogo(Cliente cliente) {
+        cliente.CatalogoJaVisto();
+        int numero = 0;
+        System.out.println("Digite o numero de qual voce quer avaliar: ");
+        numero = Integer.parseInt(teclado.nextLine());
+        Catalogo catalogo = cliente.EscolherCatalogo(numero);
+        System.out.println("Qual sua nota de 0 a 10 para sua "+catalogo.getNome()+": ");
+        numero = Integer.parseInt(teclado.nextLine());
+        catalogo.avaliar(numero);
     }
 
     private static Serie criarSerie() {
@@ -88,6 +104,7 @@ public class App {
         System.out.println("8 - Exibir séries novas");
         System.out.println("9 - Salvar Série");
         System.out.println("10 - Cadastrar Cliente");
+        System.out.println("11 - Avaliar Series e Filmes Vistos");
         System.out.println("==========================");
         System.out.print("\nDigite sua opção: ");
         int opcao = Integer.parseInt(teclado.nextLine());

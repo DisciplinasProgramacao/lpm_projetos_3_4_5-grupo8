@@ -6,11 +6,14 @@ public abstract class Catalogo {
     private String genero;
     private String idioma;
     private int audiencia;
+    private int avaliacao = 0;
+    private int num_avaliacoes = 0;
     private String dataLancamento;
 
     public Catalogo(int id, String nome,String dataLancamento) {
         this.nome = nome;
         this.audiencia = 0;
+        this.avaliacao = 0;
         this.dataLancamento = dataLancamento;
         this.id = id;
     }
@@ -20,6 +23,7 @@ public abstract class Catalogo {
         this.genero = genero; //Ainda não será implementado
         this.idioma = idioma; //Ainda não será implementado
         this.audiencia = 0;
+        this.avaliacao = 0;
         this.dataLancamento = dataLancamento;
         this.id = id;
     }
@@ -29,6 +33,11 @@ public abstract class Catalogo {
     }
     public int getAudiencia() {
         return this.audiencia;
+    }
+
+    public void avaliar(int avaliacao) {
+        this.num_avaliacoes += 1;
+        this.avaliacao = ((avaliacao + this.avaliacao)/this.num_avaliacoes);
     }
 
     public String getGenero() {
