@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class PlataformaStreaming {
+public class PlataformaStreaming{
     private String nome;
     private HashMap<Integer, Catalogo> catalogos;
     private HashMap<String, Cliente> clientes;
@@ -112,8 +112,8 @@ public class PlataformaStreaming {
         return filtro;
     }
 
-    public LinkedList<Serie> filtrarPorQtdEpisodios(int quantEpisodios) {
-        LinkedList<Serie> filtro = new LinkedList<Serie>();
+    public LinkedList<Catalogo> filtrarPorQtdEpisodios(int quantEpisodios) {
+        LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Serie serie;
         for (int key : catalogos.keySet()) {
             serie = (Serie) catalogos.get(key);
@@ -123,7 +123,7 @@ public class PlataformaStreaming {
         }
         return filtro;
     }
-
+    
     public LinkedList<Filme> filtrarPorDuracao(int duracao) {
         LinkedList<Filme> filtro = new LinkedList<Filme>();
         Filme filme;
