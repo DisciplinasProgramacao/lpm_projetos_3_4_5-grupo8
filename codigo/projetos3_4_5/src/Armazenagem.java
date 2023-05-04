@@ -14,7 +14,7 @@ public class Armazenagem {
      * @param list    lista de objetos
      */
     public static <T> void gravar(String nomeArq, LinkedList<T> list) throws IOException {
-        FileWriter arq = new FileWriter("C:/Users/hgcsc/OneDrive/Área de Trabalho/PUC/PM/Streaming/lpm_projetos_3_4_5-grupo8/codigo/projetos3_4_5/arquivos" + nomeArq + ".csv");
+        FileWriter arq = new FileWriter("./codigo/projetos3_4_5/arquivos" + nomeArq + ".csv");
         PrintWriter gravarArq = new PrintWriter(arq);
         StringBuilder saida = new StringBuilder();
         for (T key : list) {
@@ -33,7 +33,7 @@ public class Armazenagem {
      */
     public static LinkedList<String> ler(String nomeArq) throws FileNotFoundException {
         LinkedList<String> list = new LinkedList<>();
-        File file = new File(".C:/Users/hgcsc/OneDrive/Área de Trabalho/PUC/PM/Streaming/lpm_projetos_3_4_5-grupo8/codigo/projetos3_4_5/arquivos" + nomeArq + ".csv");
+        File file = new File("./codigo/projetos3_4_5/arquivos" + nomeArq + ".csv");
         Scanner entrada = new Scanner(file, "UTF-8");
         String linha;
         Boolean flag = true;
@@ -59,7 +59,7 @@ public class Armazenagem {
      */
     public static LinkedList<Catalogo> lerSerie(String nomeArq) throws FileNotFoundException {
         LinkedList<Catalogo> list = new LinkedList<>();
-        File file = new File("C:/Users/hgcsc/OneDrive/Área de Trabalho/PUC/PM/Streaming/lpm_projetos_3_4_5-grupo8/codigo/projetos3_4_5/arquivos" + nomeArq + ".csv");
+        File file = new File("./codigo/projetos3_4_5/arquivos" + nomeArq + ".csv");
         Scanner entrada = new Scanner(file, "UTF-8");
         String linha;
         String linhaAux[];
@@ -88,7 +88,7 @@ public class Armazenagem {
      */
     public static LinkedList<Cliente> lerCliente(String nomeArq) throws FileNotFoundException {
         LinkedList<Cliente> list = new LinkedList<>();
-        File file = new File("C:/Users/hgcsc/OneDrive/Área de Trabalho/PUC/PM/Streaming/lpm_projetos_3_4_5-grupo8/codigo/projetos3_4_5/arquivos" + nomeArq + ".csv");
+        File file = new File("./codigo/projetos3_4_5/arquivos" + nomeArq + ".csv");
         Scanner entrada = new Scanner(file, "UTF-8");
         String linha;
         String linhaAux[];
@@ -112,7 +112,7 @@ public class Armazenagem {
      */
     public static LinkedList<Filme> lerFilme(String nomeArq) throws FileNotFoundException {
         LinkedList<Filme> list = new LinkedList<>();
-        File file = new File("C:/Users/hgcsc/OneDrive/Área de Trabalho/PUC/PM/Streaming/lpm_projetos_3_4_5-grupo8/codigo/projetos3_4_5/arquivos" + nomeArq + ".csv");
+        File file = new File("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
         Scanner entrada = new Scanner(file, "UTF-8");
         String linha;
         String linhaAux[];
