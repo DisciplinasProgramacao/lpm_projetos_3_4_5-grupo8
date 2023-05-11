@@ -9,8 +9,8 @@ public class PlataformaStreaming {
 
     PlataformaStreaming(String nome) {
         this.nome = nome;
-        this.catalogos = new HashMap<Integer, Catalogo>();
-        this.clientes = new HashMap<String, Cliente>();
+        this.catalogos = new HashMap<Integer, Catalogo>(150);
+        this.clientes = new HashMap<String, Cliente>(150);
         this.clienteAtual = new Cliente(null, null, null);
     }
 
@@ -122,6 +122,7 @@ public class PlataformaStreaming {
 
     /**
      * Salva os clientes em um arquivo
+     * 
      * @param clientes Lista de clientes a serem salvos no arquivo
      */
     public void salvarClientes(LinkedList<Cliente> clientes) {
