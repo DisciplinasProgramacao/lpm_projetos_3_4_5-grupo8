@@ -75,7 +75,7 @@ public abstract class Catalogo {
 
     @Override
     public String toString() {
-        return this.nome + ";" + this.dataLancamento + ";" + this.idioma + ";" + this.genero;
+        return this.id + ";" + this.nome + ";" + this.dataLancamento;
     }
 
 }

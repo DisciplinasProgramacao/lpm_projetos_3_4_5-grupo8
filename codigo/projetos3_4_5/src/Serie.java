@@ -29,20 +29,6 @@ public class Serie extends Catalogo {
         return this.quantidadeEpisodios;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + ";" + this.quantidadeEpisodios + " episódios";
-    }
-
-    /// ahn????
-    public static void salvar(String nomeArquivo, LinkedList<Catalogo> listaDeNovasSeries) {
-        try {
-            Armazenagem.gravar(nomeArquivo, listaDeNovasSeries);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     // @Override
     // public boolean equals(Object o){
     // Serie outraSerie = (Serie)o;

@@ -17,30 +17,26 @@ public class App {
             limparTela();
             switch (opcao) {
                 case 1:
-                    System.out.println("Carregando arquivo de Séries...");
-                    plataforma.adicionarCatalogos(Armazenagem.lerSerie("POO_Series"));
+                    System.out.println("Carregando arquivo de Séries e filmes...");
+                    plataforma.carregarCatalogos();
                     break;
                 case 2:
-                    System.out.println("Carregando arquivo de Filmes...");
-                    plataforma.adicionarCatalogos(Armazenagem.lerFilme("POO_Filmes"));
+                    System.out.println("Carregando arquivo de Usuarios...");
+                    plataforma.carregarCliente();
                     break;
                 case 3:
-                    System.out.println("Carregando arquivo de Usuarios...");
-                    plataforma.adicionarCliente(Armazenagem.lerCliente("POO_Clientes"));
-                    break;
-                case 4:
                     System.out.println("Exibindo catálogo.");
                     System.out.println(plataforma.getCatalogo());
                     pausa();
                     break;
-                case 5:
+                case 4:
                     Catalogo filme = cadastrarFilme();
-                    plataforma.adicionarCatalogo(filme);
+                    plataforma.adicionarCatalogo(filme); // falta salvar arquivo
                     System.out.println("Filme cradastrado com sucesso!");
                     listaDeNovosFilmes.add(filme);
                     pausa();
                     break;
-                case 6:
+                case 5:
                     System.out.println("Exibindo filmes novos...");
                     for (Catalogo catalogo : listaDeNovosFilmes) {
                         System.out.println("#================================#");
@@ -48,19 +44,19 @@ public class App {
                     }
                     pausa();
                     break;
-                case 7:
-                    Serie.salvar("POO_Filmes_salvar", listaDeNovosFilmes);
+                case 6:
+                    // fazer
                     System.out.println("Filme cadastrado com sucesso!");
                     pausa();
                     break;
-                case 8:
+                case 7:
                     Catalogo serie = criarSerie();
-                    plataforma.adicionarCatalogo(serie);
+                    plataforma.adicionarCatalogo(serie); // falta salvar arquivo
                     System.out.println("Série criada com sucesso!");
                     listaDeNovasSeries.add(serie);
                     pausa();
                     break;
-                case 9:
+                case 8:
                     System.out.println("Exibindo séries novas...");
                     for (Catalogo catalogo : listaDeNovasSeries) {
                         System.out.println("#================================#");
@@ -68,24 +64,27 @@ public class App {
                     }
                     pausa();
                     break;
-                case 10:
-                    Serie.salvar("POO_Series_salvar", listaDeNovasSeries);
+                case 9:
+                    // fazer
                     System.out.println("Serie salva com sucesso!");
                     pausa();
                     break;
-                case 11:
+                case 10:
                     cadastrarCliente(plataforma);
                     pausa();
                     break;
-                case 12:
-                    if(listaDeClientes.size() > 0){
-                        plataforma.salvarClientes(listaDeClientes);
-                    }else{
-                        System.out.println("Não existem clientes a serem salvos no arquivo");
-                    }
+                case 11:
+                    // errado, fazer
+                    /*
+                     * if (listaDeClientes.size() > 0) {
+                     * plataforma.salvarClientes(listaDeClientes);
+                     * } else {
+                     * System.out.println("Não existem clientes a serem salvos no arquivo");
+                     * }
+                     */
                     pausa();
                     break;
-                case 13:
+                case 12:
                     avaliarCatalogo(ClienteTeste);
                     pausa();
                     break;
@@ -140,19 +139,18 @@ public class App {
         limparTela();
         System.out.println("Menu");
         System.out.println("==========================");
-        System.out.println("1 - Carregar Séries");
-        System.out.println("2 - Carregar Filmes");
-        System.out.println("3 - Carregar Usuarios");
-        System.out.println("4 - Exibir Catalagos");
-        System.out.println("5 - Criar Filme");
-        System.out.println("6 - Exibir filmes novos");
-        System.out.println("7 - Salvar Filme");
-        System.out.println("8 - Criar Série");
-        System.out.println("9 - Exibir séries novas");
-        System.out.println("10 - Salvar Série");
-        System.out.println("11 - Cadastrar Cliente");
-        System.out.println("12 - Salvar Clientes");
-        System.out.println("13 - Avaliar Series e Filmes Vistos");
+        System.out.println("1 - Carregar Séries e filmes");
+        System.out.println("2 - Carregar Usuarios");
+        System.out.println("3 - Exibir Catalagos");
+        System.out.println("4 - Criar Filme");
+        System.out.println("5 - Exibir filmes novos");
+        System.out.println("6 - Salvar Filme");
+        System.out.println("7 - Criar Série");
+        System.out.println("8 - Exibir séries novas");
+        System.out.println("9 - Salvar Série");
+        System.out.println("10 - Cadastrar Cliente");
+        System.out.println("11 - Salvar Clientes");
+        System.out.println("12 - Avaliar Series e Filmes Vistos");
         System.out.println("==========================");
         System.out.print("\nDigite sua opção: ");
         int opcao = Integer.parseInt(teclado.nextLine());
@@ -186,7 +184,7 @@ public class App {
 
         if (plataformaStreaming.adicionarCliente(novoCliente)) {
             listaDeClientes.add(novoCliente);
-            System.out.println("Cliente adicionado com sucesso!");            
+            System.out.println("Cliente adicionado com sucesso!");
         } else {
             System.out.println("Login inválido, já existe cliente cadastrado com esse login");
         }

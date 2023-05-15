@@ -1,5 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+import java.util.function.Function;
 
 public class PlataformaStreaming {
     private String nome;
@@ -88,10 +91,30 @@ public class PlataformaStreaming {
      * @param catalogos linkedlist de catalogo a ser adicionado
      * 
      */
-    public void adicionarCatalogos(LinkedList<Catalogo> catalogos) {
-        for (Catalogo catalogo : catalogos) {
-            adicionarCatalogo(catalogo);
+    public boolean carregarCatalogos() {
+        Function<String, Filme> contrutorFilme = (str -> new Filme(Integer.parseInt(str.split(";")[0]),
+                str.split(";")[1],
+                str.split(";")[2],
+                Integer.parseInt(str.split(";")[3])));
+        Function<String, Serie> contrutorSerie = (str -> new Serie(Integer.parseInt(str.split(";")[0]),
+                str.split(";")[1],
+                str.split(";")[2]));
+
+        LinkedList<Filme> filmes;
+        LinkedList<Serie> series;
+        try {
+            filmes = Armazenagem.ler("POO_Filmes", contrutorFilme);
+            series = Armazenagem.ler("POO_Series", contrutorSerie);
+            for (Filme x : filmes) {
+                this.catalogos.put(x.getId(), x);
+            }
+            for (Serie x : series) {
+                this.catalogos.put(x.getId(), x);
+            }
+        } catch (FileNotFoundException e) {
+            return false;
         }
+        return true;
     }
 
     /**
@@ -102,7 +125,7 @@ public class PlataformaStreaming {
      */
     public boolean adicionarCliente(Cliente cliente) {
         if (validarLoginCliente(cliente)) {
-            clientes.put(cliente.getLogin(), cliente);
+            this.clientes.put(cliente.getLogin(), cliente);
             return true;
         }
         return false;
@@ -114,10 +137,56 @@ public class PlataformaStreaming {
      * @param clientes linkedlist de cliente a ser adicionado
      * 
      */
-    public void adicionarCliente(LinkedList<Cliente> clientes) {
-        for (Cliente x : clientes) {
-            adicionarCliente(x);
+    public boolean carregarCliente() {
+        Function<String, Cliente> contrutorCliente = (str -> new Cliente(str.split(";")[0], str.split(";")[1],
+                str.split(";")[2]));
+
+        LinkedList<Cliente> clientes;
+        try {
+            clientes = Armazenagem.ler("POO_Espectadores", contrutorCliente);
+            for (Cliente x : clientes) {
+                this.clientes.put(x.getLogin(), x);
+            }
+        } catch (FileNotFoundException e) {
+            return false;
         }
+        try {
+            carregarAudiencia("POO_Audiencia");
+        } catch (FileNotFoundException e) {
+        }
+        return true;
+    }
+
+    /**
+     * Metodo que le um arquivo e retorna seu conteudo em uma lista de Cliente, no
+     * qual cada item da lista representa um objeto Cliente atualizado com sua
+     * audiencia
+     * 
+     * @param nomeArq nome do arquivo .csv
+     * 
+     */
+    public void carregarAudiencia(String nomeArq)
+            throws FileNotFoundException {
+        File file = new File("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
+        Scanner entrada = new Scanner(file, "UTF-8");
+        String linha;
+        String linhaAux[];
+        Cliente clienteAux;
+        Catalogo catalogoAux;
+        while (entrada.hasNext()) {
+            linha = entrada.nextLine();
+            linhaAux = linha.split(";");
+            clienteAux = clientes.get(linhaAux[0]);
+            if (clienteAux != null) {
+                if (linhaAux[1].equals("F")) {
+                    catalogoAux = catalogos.get(Integer.parseInt(linhaAux[2]));
+                    clienteAux.adicionarNaLista(catalogoAux);
+                } else {
+                    clienteAux.retirarDaLista(linhaAux[2]);
+                }
+            }
+        }
+        entrada.close();
     }
 
     /**

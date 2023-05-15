@@ -28,7 +28,7 @@ public class Filme extends Catalogo {
 
     @Override
     public String toString() {
-        return super.toString() + ";" + this.duracao + " min";
+        return super.toString() + ";" + this.duracao;
     }
 
 }
