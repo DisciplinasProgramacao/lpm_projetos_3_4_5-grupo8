@@ -1,3 +1,4 @@
+import java.util.Calendar;
 import java.util.LinkedList;
 
 public class Cliente {
@@ -181,6 +182,11 @@ public class Cliente {
     public void registrarAudiencia(Catalogo midia) {
         listaJaVistas.add(midia);
         listaParaVer.remove(midia);
+    }
+
+    public boolean ehEspecialista() {
+        int mesAtual = Calendar.getInstance().get(Calendar.MONTH);
+        return listaJaVistas.stream().filter(x -> x.getMesVisto() == mesAtual).toList().size() >= 5;
     }
 
     @Override

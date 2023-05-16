@@ -80,6 +80,11 @@ public abstract class Catalogo {
         return this.id;
     }
 
+    public int getMesVisto() {
+        String[] aux = dataLancamento.split("/");
+        return Integer.parseInt(aux[1]);
+    }
+
     @Override
     public String toString() {
         return this.id + ";" + this.nome + ";" + this.dataLancamento;
