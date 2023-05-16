@@ -118,7 +118,7 @@ public class App {
         String idioma = teclado.nextLine();
         System.out.print("Digite a quantidade de episodios: ");
         int quantidadeEpisodios = Integer.parseInt(teclado.nextLine());
-        return new Serie("0", nome, dataLancamento, genero, idioma, quantidadeEpisodios);
+        return new Serie(nome, dataLancamento, genero, idioma, quantidadeEpisodios);
     }
 
     private static Filme cadastrarFilme() {
@@ -132,7 +132,7 @@ public class App {
         String idioma = teclado.nextLine();
         System.out.print("Digite a duracao: ");
         int duracao = Integer.parseInt(teclado.nextLine());
-        return new Filme("0", nome, dataLancamento, genero, idioma, duracao);
+        return new Filme(nome, dataLancamento, genero, idioma, duracao);
     }
 
     public static int menuSites() {

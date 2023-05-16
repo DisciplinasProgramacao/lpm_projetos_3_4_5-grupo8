@@ -1,6 +1,7 @@
 public abstract class Catalogo {
 
     private static final String[] GENEROS = new String[8];
+    private static Integer parseId;
     private String nome;
     private String id;
     private String genero;
@@ -9,22 +10,28 @@ public abstract class Catalogo {
     private Avaliacao avaliacao;
     private String dataLancamento;
 
+    static {
+        parseId = 0;
+    }
+
     public Catalogo(String id, String nome, String dataLancamento) {
         this.nome = nome;
         this.audiencia = 0;
         this.avaliacao = new Avaliacao();
         this.dataLancamento = dataLancamento;
         this.id = id;
+        parseId = Integer.parseInt(id);
     }
 
-    public Catalogo(String id, String nome, String dataLancamento, String genero, String idioma) {
+    public Catalogo(String nome, String dataLancamento, String genero, String idioma) {
         this.nome = nome;
         this.genero = genero; // Ainda não será implementado
         this.idioma = idioma; // Ainda não será implementado
         this.audiencia = 0;
         this.avaliacao = new Avaliacao();
         this.dataLancamento = dataLancamento;
-        this.id = id;
+        parseId++;
+        this.id = parseId.toString();
     }
 
     /**

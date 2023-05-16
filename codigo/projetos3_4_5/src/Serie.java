@@ -1,13 +1,10 @@
-import java.io.IOException;
-import java.util.LinkedList;
-
 public class Serie extends Catalogo {
 
     private int quantidadeEpisodios;
 
     // Construtor
-    public Serie(String id, String nome, String dataLancamento, String genero, String idioma, int quantidadeEpisodios) {
-        super(id, nome, dataLancamento, genero, idioma);
+    public Serie(String nome, String dataLancamento, String genero, String idioma, int quantidadeEpisodios) {
+        super(nome, dataLancamento, genero, idioma);
         this.quantidadeEpisodios = quantidadeEpisodios < 2 ? 0 : quantidadeEpisodios;
     }
 

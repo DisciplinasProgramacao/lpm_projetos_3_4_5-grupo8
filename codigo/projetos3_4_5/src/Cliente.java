@@ -8,7 +8,6 @@ public class Cliente {
     private String login;
     private LinkedList<Catalogo> listaParaVer;
     private LinkedList<Catalogo> listaJaVistas;
-    private Catalogo serie;
 
     // Construtor
     public Cliente(String nomeDeUsuario, String login, String senha) {

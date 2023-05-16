@@ -7,8 +7,8 @@ public class Filme extends Catalogo {
         this.duracao = duracao;
     }
 
-    public Filme(String id, String nome, String dataLancamento, String genero, String idioma, int duracao) {
-        super(id, nome, dataLancamento, genero, idioma);
+    public Filme(String nome, String dataLancamento, String genero, String idioma, int duracao) {
+        super(nome, dataLancamento, genero, idioma);
         this.duracao = duracao;
     }
 
