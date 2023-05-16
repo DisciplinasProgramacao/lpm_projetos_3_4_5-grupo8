@@ -116,11 +116,8 @@ public class App {
         Serie serie = new Serie(nome, dataLancamento, genero, idioma, quantidadeEpisodios);
         plataformaStreaming.adicionarCatalogo(serie);
         listaDeNovasSeries.add(serie);
-
-        LinkedList<Serie> listSerie = new LinkedList<>();
-        listSerie.add(serie);
         try {
-            Armazenagem.gravar("POO_Espectadores", listSerie);
+            Armazenagem.gravar("POO_Espectadores", serie);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -141,10 +138,8 @@ public class App {
         plataformaStreaming.adicionarCatalogo(filme);
         listaDeNovasSeries.add(filme);
 
-        LinkedList<Filme> listFilme = new LinkedList<>();
-        listFilme.add(filme);
         try {
-            Armazenagem.gravar("POO_Espectadores", listFilme);
+            Armazenagem.gravar("POO_Espectadores", filme);
         } catch (IOException e) {
             e.printStackTrace();
         }

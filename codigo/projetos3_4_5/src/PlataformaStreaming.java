@@ -127,10 +127,8 @@ public class PlataformaStreaming {
     public boolean adicionarCliente(Cliente cliente) {
         if (validarLoginCliente(cliente)) {
             this.clientes.put(cliente.getLogin(), cliente);
-            LinkedList<Cliente> listCliente = new LinkedList<>();
-            listCliente.add(cliente);
             try {
-                Armazenagem.gravar("POO_Espectadores", listCliente);
+                Armazenagem.gravar("POO_Espectadores", cliente);
             } catch (IOException e) {
                 e.printStackTrace();
             }
