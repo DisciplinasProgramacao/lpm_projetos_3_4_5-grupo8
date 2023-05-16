@@ -117,7 +117,7 @@ public class App {
         plataformaStreaming.adicionarCatalogo(serie);
         listaDeNovasSeries.add(serie);
         try {
-            Armazenagem.gravar("POO_Espectadores", serie);
+            Armazenagem.gravar("POO_Series", serie);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -139,7 +139,7 @@ public class App {
         listaDeNovasSeries.add(filme);
 
         try {
-            Armazenagem.gravar("POO_Espectadores", filme);
+            Armazenagem.gravar("POO_Filmes", filme);
         } catch (IOException e) {
             e.printStackTrace();
         }
