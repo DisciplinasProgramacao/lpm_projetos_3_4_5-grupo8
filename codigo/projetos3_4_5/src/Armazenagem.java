@@ -47,7 +47,7 @@ public class Armazenagem {
      * Metodo que le um arquivo e retorna seu conteudo em uma lista de string, no
      * qual cada item da lista representa uma linha
      * 
-     * @param <T>
+     * @param metodo  contrutor da classe
      * 
      * @param nomeArq nome do arquivo .csv
      */
