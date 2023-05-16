@@ -26,13 +26,13 @@ public class Cliente {
         return this.senha;
     }
 
-    public void CatalogoJaVisto(){
-        for (Catalogo catalogo : this.listaJaVistas){
+    public void CatalogoJaVisto() {
+        for (Catalogo catalogo : this.listaJaVistas) {
             catalogo.toString();
         }
     }
 
-    public Catalogo EscolherCatalogo(int posicao){
+    public Catalogo EscolherCatalogo(int posicao) {
         return this.listaParaVer.get(posicao);
     }
 
@@ -60,6 +60,7 @@ public class Cliente {
     public LinkedList<Catalogo> getListaJaVistas() {
         return this.listaJaVistas;
     }
+
     /*
      * Adiciona uma serie para ser assistida na lista Para ver
      * 
@@ -77,9 +78,11 @@ public class Cliente {
     public void retirarDaLista(String nomeMidia) {
         Catalogo midiaAhSerRemovida = null;
         for (Catalogo catalogo : listaParaVer) {
-            if (catalogo.getNome().equals(nomeMidia)) {
+            if (catalogo == null) {
+                break;
+            } else if (catalogo.getNome().equals(nomeMidia)) {
                 midiaAhSerRemovida = catalogo;
-                break; //olhar melhor forma de fazer isso sem precisar do break
+                break; // olhar melhor forma de fazer isso sem precisar do break
             }
         }
         listaParaVer.remove(midiaAhSerRemovida);
@@ -106,22 +109,22 @@ public class Cliente {
      * @param genero
      * @return lista de serie pelo genero requisitado
      */
-public LinkedList<Catalogo> filtrarPorGenero(String genero) {
-    LinkedList<Catalogo> listaGenero = new LinkedList<Catalogo>();
-   
-    for (Catalogo catalogo : listaParaVer) {
-        if (catalogo.getGenero().equals(genero)) {
-            listaGenero.add(catalogo);
+    public LinkedList<Catalogo> filtrarPorGenero(String genero) {
+        LinkedList<Catalogo> listaGenero = new LinkedList<Catalogo>();
+
+        for (Catalogo catalogo : listaParaVer) {
+            if (catalogo.getGenero().equals(genero)) {
+                listaGenero.add(catalogo);
+            }
         }
-    }
-    for (Catalogo catalogo : listaJaVistas) {
-        if (catalogo.getGenero().equals(genero)) {
-            listaGenero.add(catalogo);
+        for (Catalogo catalogo : listaJaVistas) {
+            if (catalogo.getGenero().equals(genero)) {
+                listaGenero.add(catalogo);
+            }
         }
+        return listaGenero;
     }
-    return listaGenero;
-}
-    
+
     /**
      * Filtra as series da lista Para ver de acordo com o idioma
      * 

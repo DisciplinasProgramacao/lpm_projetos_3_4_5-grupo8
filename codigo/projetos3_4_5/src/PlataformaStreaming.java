@@ -6,14 +6,14 @@ import java.util.function.Function;
 
 public class PlataformaStreaming {
     private String nome;
-    private HashMap<Integer, Catalogo> catalogos;
+    private HashMap<String, Catalogo> catalogos;
     private HashMap<String, Cliente> clientes;
     private Cliente clienteAtual;
 
     PlataformaStreaming(String nome) {
         this.nome = nome;
-        this.catalogos = new HashMap<Integer, Catalogo>(150);
-        this.clientes = new HashMap<String, Cliente>(150);
+        this.catalogos = new HashMap<String, Catalogo>(250);
+        this.clientes = new HashMap<String, Cliente>(51900);
         this.clienteAtual = new Cliente(null, null, null);
     }
 
@@ -65,7 +65,7 @@ public class PlataformaStreaming {
      */
     public String getCatalogo() {
         StringBuilder str = new StringBuilder();
-        for (int key : catalogos.keySet()) {
+        for (String key : catalogos.keySet()) {
             str.append(catalogos.get(key).getNome());
             str.append(", ");
         }
@@ -92,11 +92,11 @@ public class PlataformaStreaming {
      * 
      */
     public boolean carregarCatalogos() {
-        Function<String, Filme> contrutorFilme = (str -> new Filme(Integer.parseInt(str.split(";")[0]),
+        Function<String, Filme> contrutorFilme = (str -> new Filme(str.split(";")[0],
                 str.split(";")[1],
                 str.split(";")[2],
                 Integer.parseInt(str.split(";")[3])));
-        Function<String, Serie> contrutorSerie = (str -> new Serie(Integer.parseInt(str.split(";")[0]),
+        Function<String, Serie> contrutorSerie = (str -> new Serie(str.split(";")[0],
                 str.split(";")[1],
                 str.split(";")[2]));
 
@@ -179,7 +179,7 @@ public class PlataformaStreaming {
             clienteAux = clientes.get(linhaAux[0]);
             if (clienteAux != null) {
                 if (linhaAux[1].equals("F")) {
-                    catalogoAux = catalogos.get(Integer.parseInt(linhaAux[2]));
+                    catalogoAux = catalogos.get(linhaAux[2]);
                     clienteAux.adicionarNaLista(catalogoAux);
                 } else {
                     clienteAux.retirarDaLista(linhaAux[2]);
@@ -226,7 +226,7 @@ public class PlataformaStreaming {
     public LinkedList<Catalogo> filtrarPorGenero(String genero) {
         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Catalogo serie;
-        for (int key : catalogos.keySet()) {
+        for (String key : catalogos.keySet()) {
             serie = catalogos.get(key);
             if (serie.getGenero().equals(genero)) {
                 filtro.add(serie);
@@ -246,7 +246,7 @@ public class PlataformaStreaming {
 
         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Catalogo serie;
-        for (int key : catalogos.keySet()) {
+        for (String key : catalogos.keySet()) {
             serie = catalogos.get(key);
             if (serie.getIdioma().equals(idioma)) {
                 filtro.add(serie);
@@ -264,7 +264,7 @@ public class PlataformaStreaming {
     public LinkedList<Catalogo> filtrarPorQtdEpisodios(int quantEpisodios) {
         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Serie serie;
-        for (int key : catalogos.keySet()) {
+        for (String key : catalogos.keySet()) {
             serie = (Serie) catalogos.get(key);
             if (serie.getEpisodios() == quantEpisodios) {
                 filtro.add(serie);
@@ -282,7 +282,7 @@ public class PlataformaStreaming {
     public LinkedList<Catalogo> filtrarPorDuracao(int duracao) {
         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Filme filme;
-        for (int key : catalogos.keySet()) {
+        for (String key : catalogos.keySet()) {
             filme = (Filme) catalogos.get(key);
             if (filme.getDuracao() == duracao) {
                 filtro.add(filme);
@@ -317,7 +317,7 @@ public class PlataformaStreaming {
      */
     public Catalogo buscarCatalogo(String midia) {
         try {
-            for (int key : catalogos.keySet()) {
+            for (String key : catalogos.keySet()) {
                 if (catalogos.get(key).getNome() == midia) {
                     return catalogos.get(key);
                 }

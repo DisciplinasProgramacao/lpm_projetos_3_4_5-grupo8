@@ -2,14 +2,14 @@ public abstract class Catalogo {
 
     private static final String[] GENEROS = new String[8];
     private String nome;
-    private int id;
+    private String id;
     private String genero;
     private String idioma;
     private int audiencia;
     private Avaliacao avaliacao;
     private String dataLancamento;
 
-    public Catalogo(int id, String nome, String dataLancamento) {
+    public Catalogo(String id, String nome, String dataLancamento) {
         this.nome = nome;
         this.audiencia = 0;
         this.avaliacao = new Avaliacao();
@@ -17,7 +17,7 @@ public abstract class Catalogo {
         this.id = id;
     }
 
-    public Catalogo(int id, String nome, String dataLancamento, String genero, String idioma) {
+    public Catalogo(String id, String nome, String dataLancamento, String genero, String idioma) {
         this.nome = nome;
         this.genero = genero; // Ainda não será implementado
         this.idioma = idioma; // Ainda não será implementado
@@ -69,7 +69,7 @@ public abstract class Catalogo {
     /**
      * @return id do conteudo
      */
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
