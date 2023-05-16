@@ -186,6 +186,7 @@ public class Cliente {
 
     public boolean ehEspecialista() {
         int mesAtual = Calendar.getInstance().get(Calendar.MONTH);
+        int anoAtual = Calendar.getInstance().get(Calendar.YEAR); // ainda vou ver como implementar
         return listaJaVistas.stream().filter(x -> x.getMesVisto() == mesAtual).toList().size() >= 5;
     }
 
