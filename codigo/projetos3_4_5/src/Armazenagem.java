@@ -15,7 +15,7 @@ public class Armazenagem {
      * @param list    lista de objetos
      */
     public static <T> void gravar(String nomeArq, LinkedList<T> list) throws IOException {
-        FileWriter arq = new FileWriter("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
+        FileWriter arq = new FileWriter("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv", true);
         PrintWriter gravarArq = new PrintWriter(arq);
         StringBuilder saida = new StringBuilder();
         for (T key : list) {
@@ -38,6 +38,7 @@ public class Armazenagem {
         LinkedList<T> list = new LinkedList<>();
         File file = new File("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
         Scanner entrada = new Scanner(file, "UTF-8");
+        entrada.nextLine();
         while (entrada.hasNext()) {
             list.add(metodo.apply(entrada.nextLine()));
         }

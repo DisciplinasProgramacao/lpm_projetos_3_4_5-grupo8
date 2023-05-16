@@ -6,13 +6,13 @@ import java.util.function.Function;
 
 public class PlataformaStreaming {
     private String nome;
-    private HashMap<String, Catalogo> catalogos;
+    private HashMap<Integer, Catalogo> catalogos;
     private HashMap<String, Cliente> clientes;
     private Cliente clienteAtual;
 
     PlataformaStreaming(String nome) {
         this.nome = nome;
-        this.catalogos = new HashMap<String, Catalogo>(250);
+        this.catalogos = new HashMap<Integer, Catalogo>(250);
         this.clientes = new HashMap<String, Cliente>(51900);
         this.clienteAtual = new Cliente(null, null, null);
     }
@@ -65,7 +65,7 @@ public class PlataformaStreaming {
      */
     public String getCatalogo() {
         StringBuilder str = new StringBuilder();
-        for (String key : catalogos.keySet()) {
+        for (int key : catalogos.keySet()) {
             str.append(catalogos.get(key).getNome());
             str.append(", ");
         }
@@ -92,11 +92,12 @@ public class PlataformaStreaming {
      * 
      */
     public boolean carregarCatalogos() {
-        Function<String, Filme> contrutorFilme = (str -> new Filme(str.split(";")[0],
+        Function<String, Filme> contrutorFilme = (str -> new Filme(Integer.parseInt(str.split(";")[0]),
                 str.split(";")[1],
                 str.split(";")[2],
                 Integer.parseInt(str.split(";")[3])));
-        Function<String, Serie> contrutorSerie = (str -> new Serie(str.split(";")[0],
+
+        Function<String, Serie> contrutorSerie = (str -> new Serie(Integer.parseInt(str.split(";")[0]),
                 str.split(";")[1],
                 str.split(";")[2]));
 
@@ -126,6 +127,13 @@ public class PlataformaStreaming {
     public boolean adicionarCliente(Cliente cliente) {
         if (validarLoginCliente(cliente)) {
             this.clientes.put(cliente.getLogin(), cliente);
+            LinkedList<Cliente> listCliente = new LinkedList<>();
+            listCliente.add(cliente);
+            try {
+                Armazenagem.gravar("POO_Espectadores", listCliente);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return true;
         }
         return false;
@@ -158,9 +166,7 @@ public class PlataformaStreaming {
     }
 
     /**
-     * Metodo que le um arquivo e retorna seu conteudo em uma lista de Cliente, no
-     * qual cada item da lista representa um objeto Cliente atualizado com sua
-     * audiencia
+     * Metodo que le um arquivo e atualiza a audiencia
      * 
      * @param nomeArq nome do arquivo .csv
      * 
@@ -190,19 +196,6 @@ public class PlataformaStreaming {
     }
 
     /**
-     * Salva os clientes em um arquivo
-     * 
-     * @param clientes Lista de clientes a serem salvos no arquivo
-     */
-    public void salvarClientes(LinkedList<Cliente> clientes) {
-        try {
-            Armazenagem.gravar("Clientes", clientes);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * valida se o login do cliente existe
      * 
      * @param cliente cliente a ser validado
@@ -226,7 +219,7 @@ public class PlataformaStreaming {
     public LinkedList<Catalogo> filtrarPorGenero(String genero) {
         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Catalogo serie;
-        for (String key : catalogos.keySet()) {
+        for (int key : catalogos.keySet()) {
             serie = catalogos.get(key);
             if (serie.getGenero().equals(genero)) {
                 filtro.add(serie);
@@ -246,7 +239,7 @@ public class PlataformaStreaming {
 
         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Catalogo serie;
-        for (String key : catalogos.keySet()) {
+        for (int key : catalogos.keySet()) {
             serie = catalogos.get(key);
             if (serie.getIdioma().equals(idioma)) {
                 filtro.add(serie);
@@ -264,7 +257,7 @@ public class PlataformaStreaming {
     public LinkedList<Catalogo> filtrarPorQtdEpisodios(int quantEpisodios) {
         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Serie serie;
-        for (String key : catalogos.keySet()) {
+        for (int key : catalogos.keySet()) {
             serie = (Serie) catalogos.get(key);
             if (serie.getEpisodios() == quantEpisodios) {
                 filtro.add(serie);
@@ -282,7 +275,7 @@ public class PlataformaStreaming {
     public LinkedList<Catalogo> filtrarPorDuracao(int duracao) {
         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Filme filme;
-        for (String key : catalogos.keySet()) {
+        for (int key : catalogos.keySet()) {
             filme = (Filme) catalogos.get(key);
             if (filme.getDuracao() == duracao) {
                 filtro.add(filme);
@@ -317,7 +310,7 @@ public class PlataformaStreaming {
      */
     public Catalogo buscarCatalogo(String midia) {
         try {
-            for (String key : catalogos.keySet()) {
+            for (int key : catalogos.keySet()) {
                 if (catalogos.get(key).getNome() == midia) {
                     return catalogos.get(key);
                 }

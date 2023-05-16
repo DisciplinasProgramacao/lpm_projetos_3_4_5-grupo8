@@ -1,9 +1,9 @@
 public abstract class Catalogo {
 
     private static final String[] GENEROS = new String[8];
-    private static Integer parseId;
+    private static int parseId;
     private String nome;
-    private String id;
+    private int id;
     private String genero;
     private String idioma;
     private int audiencia;
@@ -14,13 +14,13 @@ public abstract class Catalogo {
         parseId = 0;
     }
 
-    public Catalogo(String id, String nome, String dataLancamento) {
+    public Catalogo(int id, String nome, String dataLancamento) {
         this.nome = nome;
         this.audiencia = 0;
         this.avaliacao = new Avaliacao();
         this.dataLancamento = dataLancamento;
         this.id = id;
-        parseId = Integer.parseInt(id);
+        parseId = id;
     }
 
     public Catalogo(String nome, String dataLancamento, String genero, String idioma) {
@@ -30,8 +30,7 @@ public abstract class Catalogo {
         this.audiencia = 0;
         this.avaliacao = new Avaliacao();
         this.dataLancamento = dataLancamento;
-        parseId++;
-        this.id = parseId.toString();
+        this.id = ++parseId;
     }
 
     /**
@@ -76,7 +75,7 @@ public abstract class Catalogo {
     /**
      * @return id do conteudo
      */
-    public String getId() {
+    public int getId() {
         return this.id;
     }
 

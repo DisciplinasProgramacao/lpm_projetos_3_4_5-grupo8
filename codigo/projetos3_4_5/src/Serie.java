@@ -8,7 +8,7 @@ public class Serie extends Catalogo {
         this.quantidadeEpisodios = quantidadeEpisodios < 2 ? 0 : quantidadeEpisodios;
     }
 
-    public Serie(String idSerie, String nome, String dataLancamento) {
+    public Serie(int idSerie, String nome, String dataLancamento) {
         super(idSerie, nome, dataLancamento);
     }
 
