@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
@@ -182,15 +183,16 @@ public class Cliente {
      * @param midia midia a ser registrada audiencia
      */
     public void registrarAudiencia(Catalogo midia) {
-        Date data = Calendar.getInstance().getTime();
-        Assistido assistido = new Assistido(midia, data);
+        LocalDate hoje = LocalDate.now();
+        Assistido assistido = new Assistido(midia, hoje);
         listaJaVistas.add(assistido);
         listaParaVer.remove(midia);
     }
 
     public boolean ehEspecialista() {
+        LocalDate hoje = LocalDate.now();
         return listaJaVistas.stream()
-                .filter(x -> x.getData().until(Calendar.getInstance().getTime(), ChronoUnit.DAYS) <= 30).count() >= 5;
+                .filter(x -> x.getData().until(hoje, ChronoUnit.DAYS) <= 30).count() >= 5;
     }
 
     @Override

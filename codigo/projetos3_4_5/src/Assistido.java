@@ -1,18 +1,19 @@
-import java.util.Date;
-
+import java.time.LocalDate;
 
 public class Assistido {
-    public Date data;
+    public LocalDate data;
     private Catalogo catalogo;
 
-    public Assistido(Catalogo catalogo, Date data) {
+    public Assistido(Catalogo catalogo, LocalDate data) {
         this.catalogo = catalogo;
         this.data = data;
     }
-    public Date getData(){
+
+    public LocalDate getData() {
         return this.data;
     }
-    public Catalogo getCatalogo(){
+
+    public Catalogo getCatalogo() {
         return this.catalogo;
     }
 }
