@@ -1,4 +1,6 @@
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 
 public class Cliente {
@@ -185,9 +187,8 @@ public class Cliente {
     }
 
     public boolean ehEspecialista() {
-        int mesAtual = Calendar.getInstance().get(Calendar.MONTH);
-        int anoAtual = Calendar.getInstance().get(Calendar.YEAR); // ainda vou ver como implementar
-        return listaJaVistas.stream().filter(x -> x.getMesVisto() == mesAtual).toList().size() >= 5;
+        return listaJaVistas.stream()
+                .filter(x -> x.getData().until(Calendar.getInstance().getTime(), ChronoUnit.DAYS) <= 30).count() >= 5;
     }
 
     @Override
