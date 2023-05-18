@@ -97,8 +97,14 @@ public class App {
         System.out.println("Digite o numero de qual voce quer avaliar: ");
         numero = Integer.parseInt(teclado.nextLine());
         Catalogo catalogo = cliente.EscolherCatalogo(numero);
-        System.out.println("Qual sua nota de 0 a 10 para sua " + catalogo.getNome() + ": ");
+        System.out.println("Digite sua estrela de 1 a 5 para " + catalogo.getNome() + ": ");
         numero = Integer.parseInt(teclado.nextLine());
+
+        while(numero>5 || numero<1){
+            System.out.println("Numero invalido para a avaliacao. Digite sua avaliacao novamente: ");
+            numero = Integer.parseInt(teclado.nextLine());
+        }
+        System.out.println("Passou");
         catalogo.avaliar(numero, cliente);
     }
 
