@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
@@ -191,8 +190,8 @@ public class Cliente {
 
     public boolean ehEspecialista() {
         return listaJaVistas.stream()
-        .filter(x -> x.getData().until(Calendar.getInstance().getTime(), ChronoUnit.DAYS) <= 30).count() >= 5;
-}
+                .filter(x -> x.getData().until(Calendar.getInstance().getTime(), ChronoUnit.DAYS) <= 30).count() >= 5;
+    }
 
     @Override
     public int hashCode() {
