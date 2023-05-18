@@ -47,8 +47,8 @@ public abstract class Catalogo {
         return this.audiencia;
     }
 
-    public void avaliar(int avaliacao, Cliente cliente) {
-        this.avaliacao.avaliar(avaliacao, cliente);
+    public void avaliar(int avaliacao, int hashCode) {
+        this.avaliacao.avaliar(avaliacao, hashCode);
     }
 
     /**

@@ -1,5 +1,6 @@
 import java.util.Calendar;
 import java.util.LinkedList;
+import java.util.HashSet;
 
 public class Cliente {
 
@@ -9,6 +10,7 @@ public class Cliente {
     private String login;
     private LinkedList<Catalogo> listaParaVer;
     private LinkedList<Catalogo> listaJaVistas;
+    private  HashSet listaDeMidiasAvaliadas = new HashSet();
 
     // Construtor
     public Cliente(String nomeDeUsuario, String login, String senha) {
@@ -188,6 +190,14 @@ public class Cliente {
         int mesAtual = Calendar.getInstance().get(Calendar.MONTH);
         int anoAtual = Calendar.getInstance().get(Calendar.YEAR); // ainda vou ver como implementar
         return listaJaVistas.stream().filter(x -> x.getMesVisto() == mesAtual).toList().size() >= 5;
+    }
+
+    public void avaliar(int avaliacao, Catalogo catalogo) {
+        if(listaDeMidiasAvaliadas.add(catalogo)){
+            catalogo.avaliar(avaliacao, hashCode());
+        }else{
+            System.out.println("Cliente já avaliou");
+        }
     }
 
     @Override

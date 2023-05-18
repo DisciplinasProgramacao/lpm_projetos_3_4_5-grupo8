@@ -99,7 +99,7 @@ public class App {
         Catalogo catalogo = cliente.EscolherCatalogo(numero);
         System.out.println("Qual sua nota de 0 a 10 para sua " + catalogo.getNome() + ": ");
         numero = Integer.parseInt(teclado.nextLine());
-        catalogo.avaliar(numero, cliente);
+        cliente.avaliar(numero, catalogo);
     }
 
     private static void criarSerie(PlataformaStreaming plataformaStreaming) {
