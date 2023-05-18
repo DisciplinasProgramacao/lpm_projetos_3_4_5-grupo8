@@ -10,7 +10,7 @@ public class Cliente {
     private String senha;
     private String login;
     private LinkedList<Catalogo> listaParaVer;
-    private LinkedList<Catalogo> listaJaVistas;
+    private LinkedList<Assistido> listaJaVistas;
 
     // Construtor
     public Cliente(String nomeDeUsuario, String login, String senha) {
@@ -18,7 +18,7 @@ public class Cliente {
         this.senha = senha;
         this.login = login;
         this.listaParaVer = new LinkedList<Catalogo>();
-        this.listaJaVistas = new LinkedList<Catalogo>();
+        this.listaJaVistas = new LinkedList<Assistido>();
     }
 
     /**
@@ -29,8 +29,8 @@ public class Cliente {
     }
 
     public void CatalogoJaVisto() {
-        for (Catalogo catalogo : this.listaJaVistas) {
-            catalogo.toString();
+        for (Assistido catalogo : this.listaJaVistas) {
+            catalogo.getCatalogo().toString();
         }
     }
 
@@ -59,7 +59,7 @@ public class Cliente {
         return this.login;
     }
 
-    public LinkedList<Catalogo> getListaJaVistas() {
+    public LinkedList<Assistido> getListaJaVistas() {
         return this.listaJaVistas;
     }
 
@@ -119,9 +119,9 @@ public class Cliente {
                 listaGenero.add(catalogo);
             }
         }
-        for (Catalogo catalogo : listaJaVistas) {
-            if (catalogo.getGenero().equals(genero)) {
-                listaGenero.add(catalogo);
+        for (Assistido catalogo : listaJaVistas) {
+            if (catalogo.getCatalogo().getGenero().equals(genero)) {
+                listaGenero.add(catalogo.getCatalogo());
             }
         }
         return listaGenero;
@@ -141,9 +141,9 @@ public class Cliente {
                 listaIdioma.add(catalogo);
             }
         }
-        for (Catalogo catalogo : listaJaVistas) {
-            if (catalogo.getIdioma().equals(idioma)) {
-                listaIdioma.add(catalogo);
+        for (Assistido catalogo : listaJaVistas) {
+            if (catalogo.getCatalogo().getIdioma().equals(idioma)) {
+                listaIdioma.add(catalogo.getCatalogo());
             }
         }
         return listaIdioma;
@@ -166,11 +166,11 @@ public class Cliente {
                 listaqtdEpisodios.add(serie);
             }
         }
-        for (Catalogo serie : listaJaVistas) {
-            if (serie instanceof Serie)
-                filtrada = (Serie) serie;
+        for (Assistido serie : listaJaVistas) {
+            if (serie.getCatalogo() instanceof Serie)
+                filtrada = (Serie) serie.getCatalogo();
             if (filtrada.getEpisodios() == qtdEpisodios) {
-                listaqtdEpisodios.add(serie);
+                listaqtdEpisodios.add(serie.getCatalogo());
             }
         }
         return listaqtdEpisodios;
@@ -182,7 +182,9 @@ public class Cliente {
      * @param midia midia a ser registrada audiencia
      */
     public void registrarAudiencia(Catalogo midia) {
-        listaJaVistas.add(midia);
+        Date data = Calendar.getInstance().getTime();
+        Assistido assistido = new Assistido(midia, data);
+        listaJaVistas.add(assistido);
         listaParaVer.remove(midia);
     }
 
