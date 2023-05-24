@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 public class PlataformaStreamingTest {
     private PlataformaStreaming plataforma1;
     private Cliente cliente1;
-    private Serie serie1, serie2, serie3;
+    private Serie serie1, serie2;
     private Filme filme1, filme2, filme3;
 
     @BeforeEach
@@ -14,12 +14,12 @@ public class PlataformaStreamingTest {
         plataforma1 = new PlataformaStreaming("Netflix");
         cliente1 = new Cliente("Ana Souza", "aninha12", "123");
 
-        serie1 = new Serie(0, "The Blacklist", "02/02/2017", "Suspense", "EN", 10);
-        serie2 = new Serie(1, "Black mirror", "05/05/2018", "Terror", "PT", 10);
+        serie1 = new Serie("The Blacklist", "02/02/2017", "Suspense", "EN", 10);
+        serie2 = new Serie("Black mirror", "05/05/2018", "Terror", "PT", 10);
        
-        filme1 = new Filme(3, "O Poderoso Chefão", "01/01/1972", "Drama", "EN", 120);
-        filme2 = new Filme(4, "O Poderoso Chefão 2", "01/01/1974", "Drama", "EN", 120);
-        filme3 = new Filme(5, "Minions", "30/06/2022", "Comedia", "EN", 180);
+        filme1 = new Filme("O Poderoso Chefão", "01/01/1972", "Drama", "EN", 120);
+        filme2 = new Filme("O Poderoso Chefão 2", "01/01/1974", "Drama", "EN", 120);
+        filme3 = new Filme("Minions", "30/06/2022", "Comedia", "EN", 180);
     }
 
     @Test

@@ -16,12 +16,12 @@ public class ClienteTest {
         cliente = new Cliente("Nome Cliente", "login", "Senha");
         listacomquatroCatalogos = new LinkedList<>();
 
-        serie1 = new Serie(0, "The Blacklist", "02/02/2017", "Suspense", "EN", 10);
-        serie2 = new Serie(1, "Friends", "05/08/1999", "Comedia", "EN", 9);
-        serie3 = new Serie(2, "Suits", "20/10/2015", "Drama", "EN", 5);
-        filme1 = new Filme(3, "O Poderoso Chefão", "01/01/1972", "Drama", "EN", 120);
-        filme2 = new Filme(4, "O Poderoso Chefão 2", "01/01/1974", "Drama", "EN", 120);
-        filme3 = new Filme(5, "Minions", "30/06/2022", "Comedia", "EN", 180);
+        serie1 = new Serie("The Blacklist", "02/02/2017", "Suspense", "EN", 10);
+        serie2 = new Serie("Friends", "05/08/1999", "Comedia", "EN", 9);
+        serie3 = new Serie("Suits", "20/10/2015", "Drama", "EN", 5);
+        filme1 = new Filme("O Poderoso Chefão", "01/01/1972", "Drama", "EN", 120);
+        filme2 = new Filme("O Poderoso Chefão 2", "01/01/1974", "Drama", "EN", 120);
+        filme3 = new Filme("Minions", "30/06/2022", "Comedia", "EN", 180);
 
         listacomquatroCatalogos.add(serie1);
         listacomquatroCatalogos.add(serie2);
