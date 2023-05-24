@@ -26,7 +26,7 @@ public class Assistido {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("Mídia: " + this.catalogo.getNome() + 
+        stringBuilder.append("Mídia:\n" + this.catalogo.toString() + 
             "\nAssistido em: " + this.data.toString() );
 
         if(this.avaliacao != null){
