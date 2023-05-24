@@ -105,7 +105,8 @@ public abstract class Catalogo {
 
     @Override
     public String toString() {
-        return this.id + ";" + this.nome + ";" + this.dataLancamento + "\nAvaliação Média: " + this.avaliacaoMedia;
+        return this.id + ";" + this.nome + ";" + this.dataLancamento;
+        /* + "\nAvaliação Média: " + this.avaliacaoMedia*/
     }
 
 }
