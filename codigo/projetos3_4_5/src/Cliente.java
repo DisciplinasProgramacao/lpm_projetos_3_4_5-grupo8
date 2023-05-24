@@ -12,7 +12,7 @@ public class Cliente {
     private String senha;
     private String login;
     private LinkedList<Catalogo> listaParaVer;
-    private  HashSet listaDeMidiasAvaliadas = new HashSet();
+    private HashSet<Catalogo> listaDeMidiasAvaliadas = new HashSet<Catalogo>();
     private LinkedList<Assistido> listaJaVistas;
 
     // Construtor
@@ -197,12 +197,40 @@ public class Cliente {
                 .filter(x -> x.getData().until(hoje, ChronoUnit.DAYS) <= 30).count() >= 5;
     }
 
-    public void avaliar(int avaliacao, Catalogo catalogo) {
-        if(listaDeMidiasAvaliadas.add(catalogo)){
-            catalogo.avaliar(avaliacao, hashCode());
-        }else{
-            System.out.println("Cliente já avaliou");
+    private boolean clienteJaAvaliouMidia(Catalogo catalogo){
+        if(listaDeMidiasAvaliadas.add(catalogo)){            
+            return false;
         }
+        return true;
+    }
+
+    private Avaliacao avaliar(int nota, String comentario, Catalogo catalogo) {
+        if(ehEspecialista() && !comentario.isEmpty()){
+            return new Avaliacao(login, nota, comentario);
+        }
+
+        return new Avaliacao(login, nota);
+    }
+
+    public void adicionarAvaliacao(int nota, String comentario, Catalogo catalogo){
+        if(!clienteJaAvaliouMidia(catalogo)){
+            Avaliacao avaliacaoSendoFeita = avaliar(nota, comentario, catalogo);
+
+            for (Assistido assistido : listaJaVistas) {
+                if(assistido.getCatalogo() == catalogo){
+                    assistido.adicionarAvaliacao(avaliacaoSendoFeita);                    
+                }
+            }
+        }
+    }
+
+    public String listarMidiasAssistidas(){
+        String midias = "";
+        for (Assistido assistido : listaJaVistas){
+            midias += assistido.toString();
+        }
+
+        return midias;
     }
 
     @Override
