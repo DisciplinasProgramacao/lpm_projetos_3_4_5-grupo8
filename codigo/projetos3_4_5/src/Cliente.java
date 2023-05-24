@@ -31,13 +31,7 @@ public class Cliente {
         return this.senha;
     }
 
-    public void CatalogoJaVisto() {
-        for (Assistido catalogo : this.listaJaVistas) {
-            catalogo.getCatalogo().toString();
-        }
-    }
-
-    public Catalogo EscolherCatalogo(int posicao) {
+    public Catalogo escolherCatalogo(int posicao) {
         return this.listaParaVer.get(posicao);
     }
 

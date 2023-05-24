@@ -92,14 +92,16 @@ public class App {
     }
 
     private static void avaliarCatalogo(Cliente cliente) {
-        cliente.CatalogoJaVisto();
+        System.out.println(cliente.listarMidiasAssistidas());
         int numero = 0;
+
         System.out.println("Digite o numero de qual voce quer avaliar: ");
         numero = Integer.parseInt(teclado.nextLine());
-        Catalogo catalogo = cliente.EscolherCatalogo(numero);
+
+        Catalogo catalogo = cliente.escolherCatalogo(numero);
         System.out.println("Digite sua estrela de 1 a 5 para " + catalogo.getNome() + ": ");
         numero = Integer.parseInt(teclado.nextLine());
-        cliente.avaliar(numero, catalogo);
+        //cliente.avaliar(numero, catalogo);
     }
 
     private static void criarSerie(PlataformaStreaming plataformaStreaming) {
