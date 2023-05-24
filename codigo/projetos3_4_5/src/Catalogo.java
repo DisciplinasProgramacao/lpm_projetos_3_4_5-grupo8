@@ -1,3 +1,6 @@
+import java.math.BigDecimal;
+import java.util.List;
+
 public abstract class Catalogo {
 
     private static final String[] GENEROS = new String[8];
@@ -7,8 +10,9 @@ public abstract class Catalogo {
     private String genero;
     private String idioma;
     private int audiencia;
-    private Avaliacao avaliacao;
+    private List<Avaliacao> listaAvaliacoes;
     private String dataLancamento;
+    private BigDecimal avaliacaoMedia;
 
     static {
         parseId = 0;
@@ -17,8 +21,8 @@ public abstract class Catalogo {
     public Catalogo(int id, String nome, String dataLancamento) {
         this.nome = nome;
         this.audiencia = 0;
-        this.avaliacao = new Avaliacao();
         this.dataLancamento = dataLancamento;
+        this.avaliacaoMedia = new BigDecimal(0.0);
         this.id = id;
         parseId = id;
     }
@@ -28,8 +32,8 @@ public abstract class Catalogo {
         this.genero = genero; // Ainda não será implementado
         this.idioma = idioma; // Ainda não será implementado
         this.audiencia = 0;
-        this.avaliacao = new Avaliacao();
         this.dataLancamento = dataLancamento;
+        this.avaliacaoMedia = new BigDecimal(0.0);
         this.id = ++parseId;
     }
 
@@ -45,10 +49,6 @@ public abstract class Catalogo {
      */
     public int getAudiencia() {
         return this.audiencia;
-    }
-
-    public void avaliar(int avaliacao, int hashCode) {
-        this.avaliacao.avaliar(avaliacao, hashCode);
     }
 
     /**
@@ -72,6 +72,25 @@ public abstract class Catalogo {
         return this.nome;
     }
 
+    public void avaliarMidia(Avaliacao avaliacao){
+        this.listaAvaliacoes.add(avaliacao);
+    }
+
+    public BigDecimal mediaAvaliacao(){
+        int somaNotas = 0;
+        BigDecimal quantidadeAvaliacoes = new BigDecimal(listaAvaliacoes.size());
+        
+        for (Avaliacao avaliacao : listaAvaliacoes) {
+            somaNotas += avaliacao.getNota();
+        }
+
+        BigDecimal mediaAvaliacoes = new BigDecimal(somaNotas).divide(quantidadeAvaliacoes);
+
+        this.avaliacaoMedia = mediaAvaliacoes;
+
+        return mediaAvaliacoes;
+    }
+
     /**
      * @return id do conteudo
      */
@@ -86,7 +105,7 @@ public abstract class Catalogo {
 
     @Override
     public String toString() {
-        return this.id + ";" + this.nome + ";" + this.dataLancamento;
+        return this.id + ";" + this.nome + ";" + this.dataLancamento + "\nAvaliação Média: " + this.avaliacaoMedia;
     }
 
 }

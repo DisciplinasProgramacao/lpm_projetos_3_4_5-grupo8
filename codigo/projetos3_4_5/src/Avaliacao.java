@@ -1,32 +1,31 @@
-import java.util.HashMap;
-
 public class Avaliacao {
-    private int avaliacao = 0;
-    private int num_avaliacoes = 0;
-    private HashMap listaDeAvaliacoes = new HashMap();
+    private String loginCliente;
+    private int nota;
+    private String comentario;
 
-    Avaliacao(int avaliacao, int num_avaliacoes) {
-        init(avaliacao, num_avaliacoes);
+    public Avaliacao(String loginCliente, int nota){
+        init(loginCliente, nota, "");
     }
 
-    Avaliacao() {
-        init(0, 0);
+    public Avaliacao(String loginCliente, int nota, String comentario){
+        init(loginCliente, nota, comentario);
     }
 
-    public void init(int avaliacao, int num_avaliacoes) {
-        this.avaliacao = avaliacao;
-        this.num_avaliacoes = num_avaliacoes;
+    public void init(String loginCliente, int nota, String comentario) {
+        this.loginCliente = loginCliente;
+        this.nota = nota;
+        this.comentario = comentario;
     }
 
-    public void avaliar(int avaliacao, int hashCode) {
-        listaDeAvaliacoes.put(hashCode, avaliacao);
+    public int getNota(){
+        return this.nota;
     }
 
-    public double mediaAvaliacao(){
-        double media = 0;
-        for (Object avaliacao : listaDeAvaliacoes.values()) {
-            media += (int) avaliacao;
-        }
-        return media / listaDeAvaliacoes.size();
+    @Override
+    public String toString(){
+        if(comentario.isEmpty())
+            return "Nota: " + this.nota;
+
+        return "Nota: " + this.nota + "\nComentário: " + this.comentario;
     }
 }
