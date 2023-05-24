@@ -10,8 +10,8 @@ public class FilmeSerieTest {
     Filme filme;
     @BeforeEach
     public void setUp() {
-        filme = new Filme(1,"O Poderoso Chefão", "02/02/2017", "Suspense", "EN", 100);
-        serie = new Serie(0, "The Blacklist", "02/02/2017", "Suspense", "EN", 10);
+        filme = new Filme("O Poderoso Chefão", "02/02/2017", "Suspense", "EN", 100);
+        serie = new Serie("The Blacklist", "02/02/2017", "Suspense", "EN", 10);
     }
 
     @Test
