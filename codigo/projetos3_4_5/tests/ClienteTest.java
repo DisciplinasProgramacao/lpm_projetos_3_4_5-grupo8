@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+import org.junit.experimental.theories.suppliers.TestedOn;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.Assert.assertEquals;
@@ -121,4 +122,54 @@ public class ClienteTest {
         assertEquals(1, cliente.filtrarPorQtdEpisodios(9).size());
         assertEquals(1, cliente.filtrarPorQtdEpisodios(5).size());
     }
+
+    @Test
+    public void naoEhEspecialista(){
+        cliente.adicionarNaLista(filme1);
+        cliente.adicionarNaLista(filme2);
+        cliente.adicionarNaLista(filme3);
+        cliente.adicionarNaLista(serie1);
+        cliente.adicionarNaLista(serie2);
+        cliente.adicionarNaLista(serie3);
+        cliente.registrarAudiencia(filme1);
+        cliente.registrarAudiencia(filme2);
+        cliente.registrarAudiencia(serie1);
+        assertEquals(false, cliente.ehEspecialista());
+    }
+
+    @Test
+    public void ehEspecialista(){
+        cliente.adicionarNaLista(filme1);
+        cliente.adicionarNaLista(filme2);
+        cliente.adicionarNaLista(filme3);
+        cliente.adicionarNaLista(serie1);
+        cliente.adicionarNaLista(serie2);
+        cliente.adicionarNaLista(serie3);
+        cliente.registrarAudiencia(filme1);
+        cliente.registrarAudiencia(filme2);
+        cliente.registrarAudiencia(serie1);
+        cliente.registrarAudiencia(serie2);
+        cliente.registrarAudiencia(serie3);
+        assertEquals(true, cliente.ehEspecialista());
+    }
+
+    @Test
+    public void especialistaPodeComentar(){
+        cliente.adicionarNaLista(filme1);
+        cliente.adicionarNaLista(filme2);
+        cliente.adicionarNaLista(filme3);
+        cliente.adicionarNaLista(serie1);
+        cliente.adicionarNaLista(serie2);
+        cliente.adicionarNaLista(serie3);
+        cliente.registrarAudiencia(filme1);
+        cliente.registrarAudiencia(filme2);
+        cliente.registrarAudiencia(serie1);
+        cliente.registrarAudiencia(serie2);
+        cliente.registrarAudiencia(serie3);
+
+        cliente.adicionarAvaliacao(5, "Muito bom", filme1);
+        
+
+    }
+
 }
