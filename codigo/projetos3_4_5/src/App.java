@@ -6,12 +6,11 @@ public class App {
     static Scanner teclado = new Scanner(System.in);
     static LinkedList<Catalogo> listaDeNovasSeries = new LinkedList<Catalogo>();
     static LinkedList<Catalogo> listaDeNovosFilmes = new LinkedList<Catalogo>();
-    static Cliente ClienteTeste = new Cliente("Arthur", "arthur", "1234");
-    static PlataformaStreaming plataforma = new PlataformaStreaming("JoaoCaramflix");
+    static PlataformaStreaming plataforma;
 
     public static void main(String[] args) throws Exception {
         int opcao;
-
+        plataforma = new PlataformaStreaming("JoaoCaramflix");
         do {
             opcao = menuSites();
             limparTela();
