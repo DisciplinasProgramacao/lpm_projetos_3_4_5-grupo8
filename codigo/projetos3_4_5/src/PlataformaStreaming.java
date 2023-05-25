@@ -14,7 +14,7 @@ public class PlataformaStreaming {
         this.nome = nome;
         this.catalogos = new HashMap<Integer, Catalogo>(250);
         this.clientes = new HashMap<String, Cliente>(51900);
-        this.clienteAtual = new Cliente(null, null, null);
+        this.clienteAtual = null;
     }
 
     /**
@@ -58,9 +58,14 @@ public class PlataformaStreaming {
 
     /**
      * @return Cliente atual
+     * @throws IndexOutOfBoundsException
      */
-    public Cliente getClienteAtual() {
-        return this.clienteAtual;
+    public Cliente getClienteAtual() throws Exception {
+        if (this.clienteAtual != null) {
+            return this.clienteAtual;
+        } else {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
     // metodo para testes

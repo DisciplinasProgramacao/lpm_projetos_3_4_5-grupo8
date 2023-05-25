@@ -51,11 +51,18 @@ public class App {
                     pausa();
                     break;
                 case 7:
-                    escolherMidiaParaAssistir(ClienteTeste);
+                    try {
+                        escolherMidiaParaAssistir(plataforma.getClienteAtual());
+                    } catch (IndexOutOfBoundsException e) {
+                    }
                     pausa();
                     break;
                 case 8:
-                    avaliarCatalogo(ClienteTeste);
+                    try {
+                        avaliarCatalogo(plataforma.getClienteAtual());
+                    } catch (IndexOutOfBoundsException e) {
+                    }
+
                     pausa();
                     break;
                 default:
