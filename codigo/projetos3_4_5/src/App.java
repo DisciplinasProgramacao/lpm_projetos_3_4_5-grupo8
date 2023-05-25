@@ -26,7 +26,11 @@ public class App {
                     break;
                 case 3:
                     System.out.println("Exibindo catálogo.");
-                    System.out.println(plataforma.getCatalogo());
+                    try {
+                        System.out.println(plataforma.getCatalogo());
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Carregue o catalogo antes de exibir");
+                    }
                     pausa();
                     break;
                 case 4:
@@ -101,7 +105,7 @@ public class App {
         Catalogo catalogo = cliente.escolherCatalogo(numero);
         System.out.println("Digite sua estrela de 1 a 5 para " + catalogo.getNome() + ": ");
         numero = Integer.parseInt(teclado.nextLine());
-        //cliente.avaliar(numero, catalogo);
+        // cliente.avaliar(numero, catalogo);
     }
 
     private static void criarSerie(PlataformaStreaming plataformaStreaming) {
