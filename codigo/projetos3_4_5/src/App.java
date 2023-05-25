@@ -16,6 +16,9 @@ public class App {
             opcao = menuSites();
             limparTela();
             switch (opcao) {
+                case 0:
+                    plataforma.logoff();
+                    break;
                 case 1:
                     System.out.println("Carregando arquivo de Séries e filmes...");
                     plataforma.carregarCatalogos();
@@ -75,6 +78,7 @@ public class App {
         System.out.println("6 - Cadastrar Cliente");
         System.out.println("7 - Escolher midia para assistir");
         System.out.println("8 - Avaliar Series e Filmes assistidos");
+        System.out.println("0 - Sair");
         System.out.println("==========================");
         System.out.print("\nDigite sua opção: ");
         int opcao = Integer.parseInt(teclado.nextLine());
@@ -138,7 +142,6 @@ public class App {
         }
     }
 
-
     private static void cadastrarSerie(PlataformaStreaming plataformaStreaming) {
         System.out.print("Digite o nome da série: ");
         String nome = teclado.nextLine();
@@ -160,7 +163,6 @@ public class App {
         }
     }
 
-    
     public static void cadastrarCliente(PlataformaStreaming plataformaStreaming) {
         String nome, nomeUsuario, senha;
         System.out.println("==========================");
@@ -180,7 +182,7 @@ public class App {
         } else {
             System.out.println("Login inválido, já existe cliente cadastrado com esse login");
         }
-        
+
     }
 
     public static void limparTela() {
@@ -193,7 +195,7 @@ public class App {
         teclado.nextLine();
     }
 
-    //Metodo que permite o cliente avaliar uma midia ja vista posteriormente
+    // Metodo que permite o cliente avaliar uma midia ja vista posteriormente
     private static void avaliarCatalogo(Cliente cliente) {
         System.out.println("Ola " + cliente + "! Aqui esta toda sua midia assistida: ");
         System.out.println(cliente.listarMidiasAssistidas());
@@ -202,47 +204,48 @@ public class App {
         System.out.println("Digite o numero de qual midia voce deseja avaliar agora: ");
         numero = Integer.parseInt(teclado.nextLine());
         Catalogo catalogo = cliente.escolherCatalogo(numero);
-        
+
         System.out.println("Digite sua estrela de 1 a 5 para " + catalogo.getNome() + ": ");
         numero = Integer.parseInt(teclado.nextLine());
 
-        while(numero>5 || numero<1){
+        while (numero > 5 || numero < 1) {
             System.out.println("Numero invalido para a avaliacao. Digite sua avaliacao novamente: ");
             numero = Integer.parseInt(teclado.nextLine());
         }
         System.out.println("Midia: '" + catalogo.getNome() + "', avaliada com " + numero + "estrelas.");
 
-        //fazer aqui a validacao se a midia ja foi avaliada ou nao!!
+        // fazer aqui a validacao se a midia ja foi avaliada ou nao!!
 
-
-        //cliente.avaliar(numero, catalogo);
+        // cliente.avaliar(numero, catalogo);
     }
 
-    //Metodo que o cliente assiste uma midia e permite ele avaliar ou nao a midia assistida 
-    public static void escolherMidiaParaAssistir(Cliente cliente){
+    // Metodo que o cliente assiste uma midia e permite ele avaliar ou nao a midia
+    // assistida
+    public static void escolherMidiaParaAssistir(Cliente cliente) {
         int escolha = 0, numero = 0;
 
         System.out.println("Listando sua lista para assistir: ");
         String midiaParaAssistir = cliente.listarMidiasParaSeremAssistidas();
-        
+
         System.out.println(midiaParaAssistir);
 
-        /* 
-        System.out.println("Digite o numero da midia voce deseja assistir: ");
-        numero = Integer.parseInt(teclado.nextLine());
-        
-        System.out.println("Assistindo " + midiaParaAssistir.getNome() + "...");
-        System.out.println("Midia assistida. Voce deseja avaliar agora a midia assistida? Caso sim digite 0, caso nao digite 1");
-
-        if (escolha==0){
-            avaliarCatalogo(ClienteTeste);
-        }
-        else{
-            System.out.println("Ok. Esperamos sua avaliacao em outro momento."); 
-        }*/
-        
+        /*
+         * System.out.println("Digite o numero da midia voce deseja assistir: ");
+         * numero = Integer.parseInt(teclado.nextLine());
+         * 
+         * System.out.println("Assistindo " + midiaParaAssistir.getNome() + "...");
+         * System.out.
+         * println("Midia assistida. Voce deseja avaliar agora a midia assistida? Caso sim digite 0, caso nao digite 1"
+         * );
+         * 
+         * if (escolha==0){
+         * avaliarCatalogo(ClienteTeste);
+         * }
+         * else{
+         * System.out.println("Ok. Esperamos sua avaliacao em outro momento.");
+         * }
+         */
 
     }
-
 
 }

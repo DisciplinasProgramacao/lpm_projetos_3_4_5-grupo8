@@ -46,7 +46,7 @@ public class PlataformaStreaming {
     public String getClientes() {
         StringBuilder str = new StringBuilder();
         for (String key : clientes.keySet()) {
-            str.append(clientes.get(key).getLogin());
+            str.append(key);
             str.append(", ");
         }
         return str.toString().substring(0, str.length() - 2);
@@ -66,8 +66,8 @@ public class PlataformaStreaming {
     public String getCatalogo() {
         StringBuilder str = new StringBuilder();
         for (Catalogo content : catalogos.values()) {
-            str.append(content.toString());
-            str.append("\n ");
+            str.append(content.getNome());
+            str.append(", ");
         }
         return str.toString().substring(0, str.length() - 2);
     }
@@ -106,6 +106,7 @@ public class PlataformaStreaming {
         try {
             filmes = Armazenagem.ler("POO_Filmes", contrutorFilme);
             series = Armazenagem.ler("POO_Series", contrutorSerie);
+            this.catalogos.clear();
             for (Filme x : filmes) {
                 this.catalogos.put(x.getId(), x);
             }
@@ -150,6 +151,7 @@ public class PlataformaStreaming {
         LinkedList<Cliente> clientes;
         try {
             clientes = Armazenagem.ler("POO_Espectadores", contrutorCliente);
+            this.clientes.clear();
             for (Cliente x : clientes) {
                 this.clientes.put(x.getLogin(), x);
             }
