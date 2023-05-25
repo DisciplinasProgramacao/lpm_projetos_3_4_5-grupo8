@@ -61,11 +61,7 @@ public class PlataformaStreaming {
      * @throws IndexOutOfBoundsException
      */
     public Cliente getClienteAtual() throws Exception {
-        if (this.clienteAtual != null) {
-            return this.clienteAtual;
-        } else {
-            throw new IndexOutOfBoundsException();
-        }
+        return this.clienteAtual;
     }
 
     // metodo para testes

@@ -53,14 +53,14 @@ public class App {
                 case 7:
                     try {
                         escolherMidiaParaAssistir(plataforma.getClienteAtual());
-                    } catch (IndexOutOfBoundsException e) {
+                    } catch (NullPointerException e) { // cliente não logou
                     }
                     pausa();
                     break;
                 case 8:
                     try {
                         avaliarCatalogo(plataforma.getClienteAtual());
-                    } catch (IndexOutOfBoundsException e) {
+                    } catch (NullPointerException e) { // cliente não logou
                     }
 
                     pausa();
