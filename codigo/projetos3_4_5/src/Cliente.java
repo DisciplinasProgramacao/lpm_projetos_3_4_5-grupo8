@@ -209,6 +209,7 @@ public class Cliente {
     public void adicionarAvaliacao(int nota, String comentario, Catalogo catalogo){
         if(!clienteJaAvaliouMidia(catalogo)){
             Avaliacao avaliacaoSendoFeita = avaliar(nota, comentario, catalogo);
+            catalogo.avaliarMidia(avaliacaoSendoFeita);
 
             for (Assistido assistido : listaJaVistas) {
                 if(assistido.getCatalogo() == catalogo){
