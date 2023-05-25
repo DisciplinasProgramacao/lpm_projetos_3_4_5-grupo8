@@ -64,13 +64,10 @@ public class PlataformaStreaming {
      * @return String de catalogos
      */
     public String getCatalogo() {
-        int cont=1;
         StringBuilder str = new StringBuilder();
-        for (int key : catalogos.keySet()) {
-            str.append(cont + ",");
-            str.append(catalogos.get(key).getNome());
+        for (Catalogo content : catalogos.values()) {
+            str.append(content.toString());
             str.append("\n ");
-            cont++;
         }
         return str.toString().substring(0, str.length() - 2);
     }

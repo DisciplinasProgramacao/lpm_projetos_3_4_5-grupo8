@@ -19,7 +19,9 @@ public abstract class Catalogo {
     }
 
     public Catalogo(int id, String nome, String dataLancamento) {
-        parseId = id;
+        if (id > parseId) {
+            parseId = id;
+        }
         init(id, nome, dataLancamento, null, null);
     }
 
