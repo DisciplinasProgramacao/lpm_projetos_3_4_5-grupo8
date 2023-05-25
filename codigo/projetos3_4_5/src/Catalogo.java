@@ -1,5 +1,5 @@
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.LinkedList;
 
 public abstract class Catalogo {
 
@@ -10,7 +10,7 @@ public abstract class Catalogo {
     private String genero;
     private String idioma;
     private int audiencia;
-    private List<Avaliacao> listaAvaliacoes;
+    private LinkedList<Avaliacao> listaAvaliacoes;
     private String dataLancamento;
     private BigDecimal avaliacaoMedia;
 
@@ -19,24 +19,29 @@ public abstract class Catalogo {
     }
 
     public Catalogo(int id, String nome, String dataLancamento) {
-        this.nome = nome;
-        this.audiencia = 0;
-        this.dataLancamento = dataLancamento;
-        this.avaliacaoMedia = new BigDecimal(0.0);
-        this.id = id;
-        parseId = id;
+        init(nome, dataLancamento, null, null);
     }
 
     public Catalogo(String nome, String dataLancamento, String genero, String idioma) {
+        init(nome, dataLancamento, genero, idioma);
+    }
+
+    /**
+     * @param nome
+     * @param dataLancamento
+     * @param genero
+     * @param idioma
+     */
+    public void init(String nome, String dataLancamento, String genero, String idioma){
         this.nome = nome;
         this.genero = genero; // Ainda não será implementado
         this.idioma = idioma; // Ainda não será implementado
         this.audiencia = 0;
         this.dataLancamento = dataLancamento;
         this.avaliacaoMedia = new BigDecimal(0.0);
+        this.listaAvaliacoes = new LinkedList<Avaliacao>();
         this.id = ++parseId;
     }
-
     /**
      * Registra audiencia daquele conteudo audiovisual
      */

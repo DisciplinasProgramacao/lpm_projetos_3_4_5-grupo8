@@ -26,7 +26,11 @@ public class App {
                     break;
                 case 3:
                     System.out.println("Exibindo catálogo.");
-                    System.out.println(plataforma.getCatalogo());
+                    try {
+                        System.out.println(plataforma.getCatalogo());
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Carregue o catalogo antes de exibir");
+                    }
                     pausa();
                     break;
                 case 4:
@@ -76,6 +80,40 @@ public class App {
         int opcao = Integer.parseInt(teclado.nextLine());
 
         return opcao;
+    }
+
+    private static void avaliarCatalogo(Cliente cliente) {
+        System.out.println(cliente.listarMidiasAssistidas());
+        int numero = 0;
+
+        System.out.println("Digite o numero de qual voce quer avaliar: ");
+        numero = Integer.parseInt(teclado.nextLine());
+
+        Catalogo catalogo = cliente.escolherCatalogo(numero);
+        System.out.println("Digite sua estrela de 1 a 5 para " + catalogo.getNome() + ": ");
+        numero = Integer.parseInt(teclado.nextLine());
+        // cliente.avaliar(numero, catalogo);
+    }
+
+    private static void criarSerie(PlataformaStreaming plataformaStreaming) {
+        System.out.print("Digite o nome da série: ");
+        String nome = teclado.nextLine();
+        System.out.print("Digite a data de lançamento: ");
+        String dataLancamento = teclado.nextLine();
+        System.out.print("Digite o genero: ");
+        String genero = teclado.nextLine();
+        System.out.print("Digite o idioma: ");
+        String idioma = teclado.nextLine();
+        System.out.print("Digite a quantidade de episodios: ");
+        int quantidadeEpisodios = Integer.parseInt(teclado.nextLine());
+        Serie serie = new Serie(nome, dataLancamento, genero, idioma, quantidadeEpisodios);
+        plataformaStreaming.adicionarCatalogo(serie);
+        listaDeNovasSeries.add(serie);
+        try {
+            Armazenagem.gravar("POO_Series", serie);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void cadastrarFilme(PlataformaStreaming plataformaStreaming) {
