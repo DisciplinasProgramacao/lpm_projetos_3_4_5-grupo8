@@ -19,11 +19,12 @@ public abstract class Catalogo {
     }
 
     public Catalogo(int id, String nome, String dataLancamento) {
-        init(nome, dataLancamento, null, null);
+        parseId = id;
+        init(id, nome, dataLancamento, null, null);
     }
 
     public Catalogo(String nome, String dataLancamento, String genero, String idioma) {
-        init(nome, dataLancamento, genero, idioma);
+        init(++parseId, nome, dataLancamento, genero, idioma);
     }
 
     /**
@@ -32,7 +33,7 @@ public abstract class Catalogo {
      * @param genero
      * @param idioma
      */
-    public void init(String nome, String dataLancamento, String genero, String idioma){
+    public void init(int id, String nome, String dataLancamento, String genero, String idioma) {
         this.nome = nome;
         this.genero = genero; // Ainda não será implementado
         this.idioma = idioma; // Ainda não será implementado
@@ -40,8 +41,9 @@ public abstract class Catalogo {
         this.dataLancamento = dataLancamento;
         this.avaliacaoMedia = new BigDecimal(0.0);
         this.listaAvaliacoes = new LinkedList<Avaliacao>();
-        this.id = ++parseId;
+        this.id = id;
     }
+
     /**
      * Registra audiencia daquele conteudo audiovisual
      */
@@ -77,14 +79,14 @@ public abstract class Catalogo {
         return this.nome;
     }
 
-    public void avaliarMidia(Avaliacao avaliacao){
+    public void avaliarMidia(Avaliacao avaliacao) {
         this.listaAvaliacoes.add(avaliacao);
     }
 
-    public BigDecimal mediaAvaliacao(){
+    public BigDecimal mediaAvaliacao() {
         int somaNotas = 0;
         BigDecimal quantidadeAvaliacoes = new BigDecimal(listaAvaliacoes.size());
-        
+
         for (Avaliacao avaliacao : listaAvaliacoes) {
             somaNotas += avaliacao.getNota();
         }
@@ -111,7 +113,7 @@ public abstract class Catalogo {
     @Override
     public String toString() {
         return this.id + ";" + this.nome + ";" + this.dataLancamento;
-        /* + "\nAvaliação Média: " + this.avaliacaoMedia*/
+        /* + "\nAvaliação Média: " + this.avaliacaoMedia */
     }
 
 }
