@@ -198,7 +198,7 @@ public class Cliente {
         return true;
     }
 
-    private Avaliacao avaliar(int nota, String comentario, Catalogo catalogo) {
+    private Avaliacao avaliar(int nota, String comentario) {
         if(ehEspecialista() && !comentario.isEmpty()){
             return new Avaliacao(login, nota, comentario);
         }
@@ -208,7 +208,7 @@ public class Cliente {
 
     public void adicionarAvaliacao(int nota, String comentario, Catalogo catalogo){
         if(!clienteJaAvaliouMidia(catalogo)){
-            Avaliacao avaliacaoSendoFeita = avaliar(nota, comentario, catalogo);
+            Avaliacao avaliacaoSendoFeita = avaliar(nota, comentario);
 
             for (Assistido assistido : listaJaVistas) {
                 if(assistido.getCatalogo() == catalogo){
@@ -222,6 +222,15 @@ public class Cliente {
         String midias = "";
         for (Assistido assistido : listaJaVistas){
             midias += assistido.toString();
+        }
+
+        return midias;
+    }
+
+    public String listarMidiasParaSeremAssistidas(){
+        String midias = "";
+        for (Catalogo midiaParaSerVista : listaParaVer){
+            midias += midiaParaSerVista.toString();
         }
 
         return midias;

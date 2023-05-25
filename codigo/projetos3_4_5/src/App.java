@@ -30,36 +30,24 @@ public class App {
                     pausa();
                     break;
                 case 4:
-                    System.out.println("Exibindo filmes novos...");
-                    for (Catalogo catalogo : listaDeNovosFilmes) {
-                        System.out.println("#================================#");
-                        System.out.println(catalogo.toString());
-                    }
-                    pausa();
-                    break;
-                case 5:
                     cadastrarFilme(plataforma);
                     System.out.println("Filme cradastrado com sucesso!");
                     pausa();
                     break;
+                case 5:
+                    cadastrarSerie(plataforma);
+                    System.out.println("Serie cradastrada com sucesso!");
+                    pausa();
+                    break;
                 case 6:
-                    criarSerie(plataforma);
-                    System.out.println("Série criada com sucesso!");
-                    pausa();
-                    break;
-                case 7:
-                    System.out.println("Exibindo séries novas...");
-                    for (Catalogo catalogo : listaDeNovasSeries) {
-                        System.out.println("#================================#");
-                        System.out.println(catalogo.toString());
-                    }
-                    pausa();
-                    break;
-                case 8:
                     cadastrarCliente(plataforma);
                     pausa();
                     break;
-                case 9:
+                case 7:
+                    escolherMidiaParaAssistir(ClienteTeste);
+                    pausa();
+                    break;
+                case 8:
                     avaliarCatalogo(ClienteTeste);
                     pausa();
                     break;
@@ -77,52 +65,17 @@ public class App {
         System.out.println("==========================");
         System.out.println("1 - Carregar Séries e filmes");
         System.out.println("2 - Carregar Usuarios");
-        System.out.println("3 - Exibir Catalagos");
-        System.out.println("4 - Exibir filmes novos");
-        System.out.println("5 - Criar e salvar Filme");
-        System.out.println("6 - Criar e salvar Série");
-        System.out.println("7 - Exibir séries novas");
-        System.out.println("8 - Cadastrar Cliente");
-        System.out.println("9 - Avaliar Series e Filmes Vistos");
+        System.out.println("3 - Exibir Catalogo da plataforma");
+        System.out.println("4 - Cadastrar Filme");
+        System.out.println("5 - Cadastrar Serie");
+        System.out.println("6 - Cadastrar Cliente");
+        System.out.println("7 - Escolher midia para assistir");
+        System.out.println("8 - Avaliar Series e Filmes assistidos");
         System.out.println("==========================");
         System.out.print("\nDigite sua opção: ");
         int opcao = Integer.parseInt(teclado.nextLine());
 
         return opcao;
-    }
-
-    private static void avaliarCatalogo(Cliente cliente) {
-        System.out.println(cliente.listarMidiasAssistidas());
-        int numero = 0;
-
-        System.out.println("Digite o numero de qual voce quer avaliar: ");
-        numero = Integer.parseInt(teclado.nextLine());
-
-        Catalogo catalogo = cliente.escolherCatalogo(numero);
-        System.out.println("Digite sua estrela de 1 a 5 para " + catalogo.getNome() + ": ");
-        numero = Integer.parseInt(teclado.nextLine());
-        //cliente.avaliar(numero, catalogo);
-    }
-
-    private static void criarSerie(PlataformaStreaming plataformaStreaming) {
-        System.out.print("Digite o nome da série: ");
-        String nome = teclado.nextLine();
-        System.out.print("Digite a data de lançamento: ");
-        String dataLancamento = teclado.nextLine();
-        System.out.print("Digite o genero: ");
-        String genero = teclado.nextLine();
-        System.out.print("Digite o idioma: ");
-        String idioma = teclado.nextLine();
-        System.out.print("Digite a quantidade de episodios: ");
-        int quantidadeEpisodios = Integer.parseInt(teclado.nextLine());
-        Serie serie = new Serie(nome, dataLancamento, genero, idioma, quantidadeEpisodios);
-        plataformaStreaming.adicionarCatalogo(serie);
-        listaDeNovasSeries.add(serie);
-        try {
-            Armazenagem.gravar("POO_Series", serie);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private static void cadastrarFilme(PlataformaStreaming plataformaStreaming) {
@@ -147,16 +100,29 @@ public class App {
         }
     }
 
-    public static void limparTela() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+
+    private static void cadastrarSerie(PlataformaStreaming plataformaStreaming) {
+        System.out.print("Digite o nome da série: ");
+        String nome = teclado.nextLine();
+        System.out.print("Digite a data de lançamento: ");
+        String dataLancamento = teclado.nextLine();
+        System.out.print("Digite o genero: ");
+        String genero = teclado.nextLine();
+        System.out.print("Digite o idioma: ");
+        String idioma = teclado.nextLine();
+        System.out.print("Digite a quantidade de episodios: ");
+        int quantidadeEpisodios = Integer.parseInt(teclado.nextLine());
+        Serie serie = new Serie(nome, dataLancamento, genero, idioma, quantidadeEpisodios);
+        plataformaStreaming.adicionarCatalogo(serie);
+        listaDeNovasSeries.add(serie);
+        try {
+            Armazenagem.gravar("POO_Series", serie);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    static void pausa() {
-        System.out.println("Enter para continuar.");
-        teclado.nextLine();
-    }
-
+    
     public static void cadastrarCliente(PlataformaStreaming plataformaStreaming) {
         String nome, nomeUsuario, senha;
         System.out.println("==========================");
@@ -176,6 +142,69 @@ public class App {
         } else {
             System.out.println("Login inválido, já existe cliente cadastrado com esse login");
         }
-        ;
+        
     }
+
+    public static void limparTela() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    static void pausa() {
+        System.out.println("Enter para continuar.");
+        teclado.nextLine();
+    }
+
+    //Metodo que permite o cliente avaliar uma midia ja vista posteriormente
+    private static void avaliarCatalogo(Cliente cliente) {
+        System.out.println("Ola " + cliente + "! Aqui esta toda sua midia assistida: ");
+        System.out.println(cliente.listarMidiasAssistidas());
+        int numero = 0;
+
+        System.out.println("Digite o numero de qual midia voce deseja avaliar agora: ");
+        numero = Integer.parseInt(teclado.nextLine());
+        Catalogo catalogo = cliente.escolherCatalogo(numero);
+        
+        System.out.println("Digite sua estrela de 1 a 5 para " + catalogo.getNome() + ": ");
+        numero = Integer.parseInt(teclado.nextLine());
+
+        while(numero>5 || numero<1){
+            System.out.println("Numero invalido para a avaliacao. Digite sua avaliacao novamente: ");
+            numero = Integer.parseInt(teclado.nextLine());
+        }
+        System.out.println("Midia: '" + catalogo.getNome() + "', avaliada com " + numero + "estrelas.");
+
+        //fazer aqui a validacao se a midia ja foi avaliada ou nao!!
+
+
+        //cliente.avaliar(numero, catalogo);
+    }
+
+    //Metodo que o cliente assiste uma midia e permite ele avaliar ou nao a midia assistida 
+    public static void escolherMidiaParaAssistir(Cliente cliente){
+        int escolha = 0, numero = 0;
+
+        System.out.println("Listando sua lista para assistir: ");
+        String midiaParaAssistir = cliente.listarMidiasParaSeremAssistidas();
+        
+        System.out.println(midiaParaAssistir);
+
+        /* 
+        System.out.println("Digite o numero da midia voce deseja assistir: ");
+        numero = Integer.parseInt(teclado.nextLine());
+        
+        System.out.println("Assistindo " + midiaParaAssistir.getNome() + "...");
+        System.out.println("Midia assistida. Voce deseja avaliar agora a midia assistida? Caso sim digite 0, caso nao digite 1");
+
+        if (escolha==0){
+            avaliarCatalogo(ClienteTeste);
+        }
+        else{
+            System.out.println("Ok. Esperamos sua avaliacao em outro momento."); 
+        }*/
+        
+
+    }
+
+
 }
