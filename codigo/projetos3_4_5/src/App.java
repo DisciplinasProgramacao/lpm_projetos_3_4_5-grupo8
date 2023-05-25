@@ -7,9 +7,9 @@ public class App {
     static LinkedList<Catalogo> listaDeNovasSeries = new LinkedList<Catalogo>();
     static LinkedList<Catalogo> listaDeNovosFilmes = new LinkedList<Catalogo>();
     static Cliente ClienteTeste = new Cliente("Arthur", "arthur", "1234");
+    static PlataformaStreaming plataforma = new PlataformaStreaming("JoaoCaramflix");
 
     public static void main(String[] args) throws Exception {
-        PlataformaStreaming plataforma = new PlataformaStreaming("JoaoCaramflix");
         int opcao;
 
         do {
@@ -17,6 +17,7 @@ public class App {
             limparTela();
             switch (opcao) {
                 case 0:
+                    System.out.println("Saindo...");
                     plataforma.logoff();
                     break;
                 case 1:
@@ -37,17 +38,17 @@ public class App {
                     pausa();
                     break;
                 case 4:
-                    cadastrarFilme(plataforma);
+                    cadastrarFilme();
                     System.out.println("Filme cradastrado com sucesso!");
                     pausa();
                     break;
                 case 5:
-                    cadastrarSerie(plataforma);
+                    cadastrarSerie();
                     System.out.println("Serie cradastrada com sucesso!");
                     pausa();
                     break;
                 case 6:
-                    cadastrarCliente(plataforma);
+                    cadastrarCliente();
                     pausa();
                     break;
                 case 7:
@@ -62,13 +63,12 @@ public class App {
                     break;
             }
         } while (opcao != 0);
-        System.out.println("Saindo...");
 
     }
 
     public static int menuSites() {
         limparTela();
-        System.out.println("Menu");
+        System.out.println("Menu " + plataforma.getNome());
         System.out.println("==========================");
         System.out.println("1 - Carregar Séries e filmes");
         System.out.println("2 - Carregar Usuarios");
@@ -99,7 +99,7 @@ public class App {
         // cliente.avaliar(numero, catalogo);
     }
 
-    private static void cadastrarFilme(PlataformaStreaming plataformaStreaming) {
+    private static void cadastrarFilme() {
         System.out.print("Por gentileza, digite o nome do filme: ");
         String nome = teclado.nextLine();
         System.out.print("Digite a data de lançamento: ");
@@ -111,11 +111,11 @@ public class App {
         System.out.print("Digite a duracao: ");
         int duracao = Integer.parseInt(teclado.nextLine());
         Filme filme = new Filme(nome, dataLancamento, genero, idioma, duracao);
-        plataformaStreaming.adicionarCatalogo(filme);
+        plataforma.adicionarCatalogo(filme);
         listaDeNovasSeries.add(filme);
     }
 
-    private static void cadastrarSerie(PlataformaStreaming plataformaStreaming) {
+    private static void cadastrarSerie() {
         System.out.print("Digite o nome da série: ");
         String nome = teclado.nextLine();
         System.out.print("Digite a data de lançamento: ");
@@ -127,11 +127,11 @@ public class App {
         System.out.print("Digite a quantidade de episodios: ");
         int quantidadeEpisodios = Integer.parseInt(teclado.nextLine());
         Serie serie = new Serie(nome, dataLancamento, genero, idioma, quantidadeEpisodios);
-        plataformaStreaming.adicionarCatalogo(serie);
+        plataforma.adicionarCatalogo(serie);
         listaDeNovasSeries.add(serie);
     }
 
-    public static void cadastrarCliente(PlataformaStreaming plataformaStreaming) {
+    public static void cadastrarCliente() {
         String nome, nomeUsuario, senha;
         System.out.println("==========================");
         System.out.println("Cadastro de Cliente");
@@ -145,7 +145,7 @@ public class App {
 
         Cliente novoCliente = new Cliente(nome, nomeUsuario, senha);
 
-        if (plataformaStreaming.adicionarCliente(novoCliente)) {
+        if (plataforma.adicionarCliente(novoCliente)) {
             System.out.println("Cliente adicionado com sucesso!");
         } else {
             System.out.println("Login inválido, já existe cliente cadastrado com esse login");

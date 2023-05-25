@@ -52,6 +52,10 @@ public class PlataformaStreaming {
         return str.toString().substring(0, str.length() - 2);
     }
 
+    public String getNome() {
+        return this.nome;
+    }
+
     /**
      * @return Cliente atual
      */
