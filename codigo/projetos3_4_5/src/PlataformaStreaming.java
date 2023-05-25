@@ -80,6 +80,7 @@ public class PlataformaStreaming {
      */
     public void adicionarCatalogo(Catalogo catalogo) {
         try {
+            Armazenagem.gravar("POO_Series", catalogo);
             catalogos.put(catalogo.getId(), catalogo);
         } catch (Exception e) {
         }

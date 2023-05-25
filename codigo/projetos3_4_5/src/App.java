@@ -99,27 +99,6 @@ public class App {
         // cliente.avaliar(numero, catalogo);
     }
 
-    private static void criarSerie(PlataformaStreaming plataformaStreaming) {
-        System.out.print("Digite o nome da série: ");
-        String nome = teclado.nextLine();
-        System.out.print("Digite a data de lançamento: ");
-        String dataLancamento = teclado.nextLine();
-        System.out.print("Digite o genero: ");
-        String genero = teclado.nextLine();
-        System.out.print("Digite o idioma: ");
-        String idioma = teclado.nextLine();
-        System.out.print("Digite a quantidade de episodios: ");
-        int quantidadeEpisodios = Integer.parseInt(teclado.nextLine());
-        Serie serie = new Serie(nome, dataLancamento, genero, idioma, quantidadeEpisodios);
-        plataformaStreaming.adicionarCatalogo(serie);
-        listaDeNovasSeries.add(serie);
-        try {
-            Armazenagem.gravar("POO_Series", serie);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private static void cadastrarFilme(PlataformaStreaming plataformaStreaming) {
         System.out.print("Por gentileza, digite o nome do filme: ");
         String nome = teclado.nextLine();
@@ -134,12 +113,6 @@ public class App {
         Filme filme = new Filme(nome, dataLancamento, genero, idioma, duracao);
         plataformaStreaming.adicionarCatalogo(filme);
         listaDeNovasSeries.add(filme);
-
-        try {
-            Armazenagem.gravar("POO_Filmes", filme);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private static void cadastrarSerie(PlataformaStreaming plataformaStreaming) {
@@ -156,11 +129,6 @@ public class App {
         Serie serie = new Serie(nome, dataLancamento, genero, idioma, quantidadeEpisodios);
         plataformaStreaming.adicionarCatalogo(serie);
         listaDeNovasSeries.add(serie);
-        try {
-            Armazenagem.gravar("POO_Series", serie);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public static void cadastrarCliente(PlataformaStreaming plataformaStreaming) {
