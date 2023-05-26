@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
-
 public class PlataformaStreaming {
     private String nome;
     private HashMap<Integer, Catalogo> catalogos;
@@ -69,13 +68,18 @@ public class PlataformaStreaming {
      * @return String de catalogos
      */
     public String getCatalogo() {
+        int cont=1;
         StringBuilder str = new StringBuilder();
-        for (Catalogo content : catalogos.values()) {
-            str.append(content.getNome());
+        for (int key : catalogos.keySet()) {
+            str.append(cont + ",");
+            str.append(catalogos.get(key).getNome());
             str.append(", ");
+            str.append("\n ");
+            cont++;
         }
         return str.toString().substring(0, str.length() - 2);
     }
+
 
     /**
      * adicionar catalogo na plataforma
