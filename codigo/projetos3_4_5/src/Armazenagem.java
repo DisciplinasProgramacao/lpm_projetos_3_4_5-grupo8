@@ -9,23 +9,6 @@ import java.util.Scanner;
 import java.util.function.Function;
 
 public class Armazenagem {
-    /**
-     * Metodo que grava LinkedList de qualquer objeto no arquivo .csv
-     * 
-     * @param nomeArq nome do arquivo .csv
-     * @param list    lista de objetos
-     */
-    public static <T> void gravar(String nomeArq, Collection<T> list) throws IOException {
-        FileWriter arq = new FileWriter("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv", true);
-        PrintWriter gravarArq = new PrintWriter(arq);
-        StringBuilder saida = new StringBuilder();
-        for (T key : list) {
-            saida.append("\n");
-            saida.append(key.toString());
-        }
-        gravarArq.write(saida.toString());
-        arq.close();
-    }
 
     /**
      * Metodo que grava qualquer objeto no arquivo .csv
