@@ -6,7 +6,7 @@ import java.util.function.Function;
 public class PlataformaStreaming {
     private String nome;
     private HashMap<Integer, Catalogo> catalogos;
-    private HashMap<String, Cliente> clientes;
+    public HashMap<String, Cliente> clientes;
     private Cliente clienteAtual;
 
     PlataformaStreaming(String nome) {
@@ -29,13 +29,11 @@ public class PlataformaStreaming {
         Cliente cliente = clientes.get(login);
 
         if (cliente == null || cliente.getSenha() != senha) {
-            this.clienteAtual = null;
-        } else {
             this.clienteAtual = cliente;
+        } else {
+            this.clienteAtual = null;
         }
-
         return this.clienteAtual;
-
     }
 
     // metodo para testes
@@ -140,6 +138,7 @@ public class PlataformaStreaming {
             this.clientes.put(cliente.getLogin(), cliente);
             try {
                 Armazenagem.gravar("POO_Espectadores", cliente);
+                
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -46,8 +46,8 @@ public class App {
                     pausa();
                     break;
                 case 7:
-                    /*
-                    if (plataforma.validarLoginCliente(Cliente clienteTeste)) { //verificar como faz esse login
+       
+                    if (realizarLogin() /*plataforma.validarLoginCliente(Cliente clienteTeste)*/) { //verificar como faz esse login
                         int op = subMenuCliente();
                         
                         switch (op) {
@@ -95,9 +95,11 @@ public class App {
                                 System.out.println("Opcao invalida");
                                 break;
                         }
-                    } else
-                        System.out.println("Login invalido. Favor tentar logar novamente ou realizar seu cadastro.");*/
-                        System.out.println("Falta implementar NAO MEXE EM NADAAAA AQUI");
+                    } else{
+                        System.out.println("Login invalido. Favor tentar logar novamente ou realizar seu cadastro.");
+                    }
+                        
+                    
                         pausa();
                     break;
                 case 8:
@@ -121,7 +123,7 @@ public class App {
     //Menu geral da plataforma que oferece serviços de streaming
     public static int menuFlix() {
         limparTela();
-        System.out.println("Menu" + plataforma.getNome());
+        System.out.println("Menu " + plataforma.getNome());
         System.out.println("=================================================");
         System.out.println("1 - Carregar arquivo Catalogo");
         System.out.println("2 - Carregar arquivo Usuario");
@@ -143,7 +145,7 @@ public class App {
     //Menu de opcoes apos o cliente estar logado
     public static int subMenuCliente() {
         limparTela();
-        System.out.println("Ola, seja bem vindo ao" + plataforma.getNome());
+        System.out.println("Ola, seja bem vindo ao " + plataforma.getNome());
         System.out.println("==========================================================");
         System.out.println("1 - Exibir Catalogo");
         System.out.println("2 - Assistir uma midia");
@@ -163,6 +165,22 @@ public class App {
         return opcao;
     }
 
+    public static int subMenuFiltro(){
+        limparTela();
+        System.out.println("Menu Filtros");
+        System.out.println("==========================================================");
+        System.out.println("1 - Filtrar por genero");
+        System.out.println("2 - Filtrar por idioma");
+        System.out.println("3 - Filtrar por quantidade de episodios");
+        System.out.println("4 - Filtrar por duracao em minutos");
+        System.out.println("5 - Filtrar por nome");
+        System.out.println("6 - Sair");
+        System.out.println("==========================================================");
+        System.out.print("\nDigite sua opção: ");
+        int opcao = Integer.parseInt(teclado.nextLine());
+
+        return opcao;
+    }
    
     //Metodo para cadastrar um filme na plataforma
     private static void cadastrarFilme() {
@@ -235,6 +253,15 @@ public class App {
     static void pausa() {
         System.out.println("Enter para continuar.");
         teclado.nextLine();
+    }
+
+    public static boolean realizarLogin() {
+        System.out.println("Digite seu login: ");
+        String login = teclado.nextLine();
+        System.out.println("Digite sua senha: ");
+        String senha = teclado.nextLine();
+        System.out.println("oioioio");
+        return ((plataforma.login(login, senha) != null) ? true : false) ;
     }
 
 }
