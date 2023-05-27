@@ -230,7 +230,7 @@ public class App {
 
         System.out.println("Nome: ");
         nome = teclado.nextLine();
-        System.out.println("Nome de Usuario: ");
+        System.out.println("Nome de Usuario (login): ");
         nomeUsuario = teclado.nextLine();
         System.out.println("Senha: ");
         senha = teclado.nextLine();
