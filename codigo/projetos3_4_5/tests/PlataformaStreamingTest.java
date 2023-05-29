@@ -36,6 +36,14 @@ public class PlataformaStreamingTest {
     }
 
     @Test
+    public void deveRetornarClienteCasoLoginSejaEfetuadoComSucesso() throws Exception{
+        plataforma1.adicionarCliente(cliente1);
+        plataforma1.login("aninha12", "123");
+
+        assertEquals(cliente1, plataforma1.getClienteAtual());
+    }
+
+    @Test
     public void deveAdicionarFilmesNaPlataforma() {
         plataforma1.adicionarCatalogo(filme1);
         plataforma1.adicionarCatalogo(filme2);
