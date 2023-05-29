@@ -25,97 +25,46 @@ public class App {
                     plataforma.carregarCliente();
                     break;
                 case 3:
-                    System.out.println("Exibindo catalogo...");
                     try {
+                        System.out.println("Exibindo catalogo...");
                         System.out.println(plataforma.getCatalogo());
                     } catch (IndexOutOfBoundsException e) {
-                        System.out.println("Carregue o arquivo Catalogo antes de solicitar sua exibicao.");
+                        System.out.println("Erro. Voce deve carregar o arquivo Catalogo antes de solicitar sua exibicao.");
                     }
-                    pausa();
+                    
                     break;
                 case 4:
                     cadastrarFilme();
-                    pausa();
+
                     break;
                 case 5:
                     cadastrarSerie();
-                    pausa();
+
                     break;
                 case 6:
                     cadastrarCliente();
-                    pausa();
+
                     break;
                 case 7:
        
-                    if (realizarLogin() /*plataforma.validarLoginCliente(Cliente clienteTeste)*/) { //verificar como faz esse login
-                        int op = subMenuCliente();
-                        
-                        switch (op) {
-                            case 1:
-                                System.out.println("Exibindo catalogo...");
-                                try {
-                                    System.out.println(plataforma.getCatalogo());
-                                } catch (IndexOutOfBoundsException e) {
-                                    System.out.println("Carregue o arquivo Catalogo antes de solicitar sua exibicao.");
-                                }
-                                pausa();
-                                break;
-                            case 2:
-                                System.out.println("Falta implementar escolha da midia"); //fazer o metodo 
-                                break;
-                            case 3:
-                                System.out.println("Falta implementar midias assistidas"); //fazer o metodo
-                                break;
-                            case 4:
-                                System.out.println("Falta implementar midias p assistir futuramente"); //fazer o metodo
-                                break;
-                            case 5:
-                                System.out.println("Falta implementar adc na lista assistida "); //fazer o metodo
-                                break;
-                            case 6:
-                                System.out.println("Falta implementar adc na lista p assistir futuramente"); //fazer o metodo
-                                break;
-                            case 7:
-                                System.out.println("Falta implementar filtro catalogo"); //fazer o metodo
-                                break;
-                            case 8:
-                                System.out.println("Falta implementar filtro assistido"); //fazer o metodo
-                                break;
-                            case 9:
-                                System.out.println("Falta implementar filtro assistir futuramente"); //fazer o metodo
-                                break;
-                            case 10:
-                                System.out.println("Falta implementar avaliacao midia"); //fazer o metodo
-                                break;
-                            case 11:
-                                System.out.println("Saindo...");
-                                plataforma.logoff();
-                                break;
-                            default:          
-                                System.out.println("Opcao invalida");
-                                break;
-                        }
+                    if (realizarLogin() ) {
+                       // subMenuCliente();
+                        menuCliente();
                     } else{
                         System.out.println("Login invalido. Favor tentar logar novamente ou realizar seu cadastro.");
                     }
-                        
                     
-                        pausa();
                     break;
                 case 8:
                     System.out.println("Falta implementar audiencia"); //fazer o metodo
-                    pausa();
                     break;
                 case 9:
                     System.out.println("Falta implementar avaliacao"); //fazer o metodo
-                    pausa();
-                    break;
-                case 10:
-                    System.out.println("Saindo...");
                     break;
                 default:
                     break;
             }
+            pausa();
         } while (opcao != 0);
         System.out.println("Obrigado por utilizar o " + plataforma.getNome() + "! Ate breve :)");
     }
@@ -134,7 +83,7 @@ public class App {
         System.out.println("7 - Realizar login de um cliente");
         System.out.println("8 - Verificar audiencia de uma serie");
         System.out.println("9 - Verificar avaliacao de uma midia");
-        System.out.println("10 - Sair");
+        System.out.println("0 - Sair");
         System.out.println("=================================================");
         System.out.print("\nDigite sua opção: ");
         int opcao = Integer.parseInt(teclado.nextLine());
@@ -145,24 +94,84 @@ public class App {
     //Menu de opcoes apos o cliente estar logado
     public static int subMenuCliente() {
         limparTela();
-        System.out.println("Ola, seja bem vindo ao " + plataforma.getNome());
+        System.out.println("Ola, bem vindo ao " + plataforma.getNome());
         System.out.println("==========================================================");
-        System.out.println("1 - Exibir Catalogo");
-        System.out.println("2 - Assistir uma midia");
-        System.out.println("3 - Verificar midias assistidas");
-        System.out.println("4 - Verificar midias para assistir futuramente");
-        System.out.println("5 - Adicionar midia na lista de assistidas");
-        System.out.println("6 - Adicionar midia na lista para assistir futuramente");
-        System.out.println("7 - Filtrar catalogo");
-        System.out.println("8 - Filtrar midias assistidas");
-        System.out.println("9 - Filtrar midias para assistir futuramente");
-        System.out.println("10 - Avaliar uma midia");
-        System.out.println("11 - Sair");
+        System.out.println("1 - Carregar arquivo Catalogo");
+        System.out.println("2 - Exibir Catalogo");
+        System.out.println("3 - Assistir uma midia");
+        System.out.println("4 - Verificar midias assistidas");
+        System.out.println("5 - Verificar midias para assistir futuramente");
+        System.out.println("6 - Adicionar midia na lista de assistidas");
+        System.out.println("7 - Adicionar midia na lista para assistir futuramente");
+        System.out.println("8 - Filtrar catalogo");
+        System.out.println("9 - Filtrar midias assistidas");
+        System.out.println("10 - Filtrar midias para assistir futuramente");
+        System.out.println("11 - Avaliar uma midia");
+        System.out.println("0 - Sair");
         System.out.println("==========================================================");
         System.out.print("\nDigite sua opção: ");
         int opcao = Integer.parseInt(teclado.nextLine());
-
+       
         return opcao;
+    }
+
+    public static void menuCliente() {
+        
+            int op = subMenuCliente(); 
+            do{            
+                switch (op) {
+                    case 1:
+                        System.out.println("Carregando arquivo Catalogo com séries e filmes...");
+                        plataforma.carregarCatalogos();
+                        break;
+                    case 2:
+                        try {
+                            System.out.println("Exibindo catalogo...");
+                            System.out.println(plataforma.getCatalogo());
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println("Carregue o arquivo Catalogo antes de solicitar sua exibicao.");
+                        }
+                        break;
+                    case 3:
+                        System.out.println("Falta implementar escolha da midia"); //fazer o metodo 
+                        pausa();
+                        break;
+                    case 4:
+                        System.out.println("Falta implementar midias assistidas"); //fazer o metodo
+                        pausa();
+                        break;
+                    case 5:
+                        System.out.println("Falta implementar midias p assistir futuramente"); //fazer o metodo
+                        pausa();
+                        break;
+                    case 6:
+                        System.out.println("Falta implementar adc na lista assistida "); //fazer o metodo
+                        pausa();
+                        break;
+                    case 7:
+                        System.out.println("Falta implementar adc na lista p assistir futuramente"); //fazer o metodo
+                        pausa();
+                        break;
+                    case 8:
+                        System.out.println("Falta implementar filtro catalogo"); //fazer o metodo
+                        pausa();
+                        break;
+                    case 9:
+                        System.out.println("Falta implementar filtro assistido"); //fazer o metodo
+                        pausa();
+                        break;
+                    case 10:
+                        System.out.println("Falta implementar filtro assistir futuramente"); //fazer o metodo
+                        pausa();
+                        break;
+                    case 11:
+                        System.out.println("Falta implementar avaliacao midia"); //fazer o metodo
+                        pausa();
+                        break; 
+                } 
+                op = subMenuCliente();
+            } while(op != 0);
+            realizarLogoff();       
     }
 
     public static int subMenuFiltro(){
@@ -182,6 +191,18 @@ public class App {
         return opcao;
     }
    
+    //metodo que limpa a tela no terminal
+    public static void limparTela() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    //metodo que faz uma pausa 
+    static void pausa() {
+        System.out.println("Enter para continuar.");
+        teclado.nextLine();
+    }
+
     //Metodo para cadastrar um filme na plataforma
     private static void cadastrarFilme() {
         System.out.print("Por gentileza, digite o nome do filme: ");
@@ -245,23 +266,19 @@ public class App {
 
     }
 
-    public static void limparTela() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
-    static void pausa() {
-        System.out.println("Enter para continuar.");
-        teclado.nextLine();
-    }
-
+    //Metodo para realizar o login de um cliente na plataforma
     public static boolean realizarLogin() {
         System.out.println("Digite seu login: ");
         String login = teclado.nextLine();
         System.out.println("Digite sua senha: ");
         String senha = teclado.nextLine();
-        System.out.println("oioioio");
         return ((plataforma.login(login, senha) != null) ? true : false) ;
+    }
+
+    //Metodo para realizar o logoff de um cliente na plataforma
+    public static void realizarLogoff() {
+        plataforma.logoff();    
+        System.out.println("Saindo...");
     }
 
 }
