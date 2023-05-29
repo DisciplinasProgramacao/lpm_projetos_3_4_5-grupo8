@@ -28,11 +28,12 @@ public class PlataformaStreaming {
     public Cliente login(String login, String senha) {
         Cliente cliente = clientes.get(login);
 
-        if (cliente == null || cliente.getSenha() != senha) {
+        if (cliente != null && cliente.getSenha().equals(senha)) {
             this.clienteAtual = cliente;
         } else {
             this.clienteAtual = null;
         }
+        
         return this.clienteAtual;
     }
 
@@ -55,9 +56,9 @@ public class PlataformaStreaming {
 
     /**
      * @return Cliente atual
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException analisar essa exceção aqui
      */
-    public Cliente getClienteAtual() throws Exception {
+    public Cliente getClienteAtual() /*throws Exception*/ {
         return this.clienteAtual;
     }
 
