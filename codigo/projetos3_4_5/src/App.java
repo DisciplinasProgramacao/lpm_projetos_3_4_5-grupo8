@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -47,7 +46,6 @@ public class App {
                     } else{
                         System.out.println("Login invalido. Favor tentar logar novamente ou realizar seu cadastro.");
                     }
-                    
                     break;
                 case 8:
                     System.out.println("Falta implementar audiencia"); //fazer o metodo
@@ -85,8 +83,8 @@ public class App {
         return opcao;
     }
 
-    //Menu de opcoes apos o cliente estar logado
-    public static int subMenuCliente() {
+    //Opcoes para o cliente (após logar)
+    public static int opcoesCliente() {
         limparTela();
         System.out.println("Ola, bem vindo ao " + plataforma.getNome());
         System.out.println("==========================================================");
@@ -109,9 +107,9 @@ public class App {
         return opcao;
     }
 
+    //Menu para o cliente
     public static void menuCliente() {
-        
-            int op = subMenuCliente(); 
+            int op = opcoesCliente(); 
             do{            
                 switch (op) {
                     case 1:
@@ -131,31 +129,39 @@ public class App {
                         pausa();
                         break;
                     case 4:
-                        System.out.println("Falta implementar midias assistidas"); //fazer o metodo
-                        pausa();
+                        plataforma.visualizarListaDeAssistidos();
                         break;
                     case 5:
-                        System.out.println("Falta implementar midias p assistir futuramente"); //fazer o metodo
+                        plataforma.visualizarListaParaVerFuturamente();
                         pausa();
                         break;
                     case 6:
-                        System.out.println("Falta implementar adc na lista assistida "); //fazer o metodo
+                        System.out.println("Falta  adc na lista assistida "); //fazer o metodo
                         pausa();
                         break;
                     case 7:
-                        System.out.println("Falta implementar adc na lista p assistir futuramente"); //fazer o metodo
+                        System.out.println("Digite o nome da midia que deseja assistir futuramente: "); //fazer o metodo
+                        String midia = teclado.nextLine();
+                        boolean verificaMidiaAdicionada;
+
+                        verificaMidiaAdicionada = plataforma.adicionarMidiaNaListaParaVerFuturamente(midia);
+                        if(verificaMidiaAdicionada == false){
+                            System.out.println("Midia nao encontrada");
+                        }
                         pausa();
                         break;
                     case 8:
-                        System.out.println("Falta implementar filtro catalogo"); //fazer o metodo
+                        menuFiltro(); //catalogo
                         pausa();
                         break;
                     case 9:
-                        System.out.println("Falta implementar filtro assistido"); //fazer o metodo
+                       //midia assistidas
+                        menuFiltro();
                         pausa();
                         break;
                     case 10:
-                        System.out.println("Falta implementar filtro assistir futuramente"); //fazer o metodo
+                        //assistir futuramente
+                        menuFiltro();
                         pausa();
                         break;
                     case 11:
@@ -163,21 +169,22 @@ public class App {
                         pausa();
                         break; 
                 } 
-                op = subMenuCliente();
+                op = opcoesCliente();
             } while(op != 0);
             realizarLogoff();       
     }
 
-    public static int subMenuFiltro(){
+    //Opcoes filtros
+    public static int opcoesFiltro(){
         limparTela();
-        System.out.println("Menu Filtros");
+        System.out.println("Menu Filtros. Escolha sua opcao: ");
         System.out.println("==========================================================");
         System.out.println("1 - Filtrar por genero");
         System.out.println("2 - Filtrar por idioma");
         System.out.println("3 - Filtrar por quantidade de episodios");
         System.out.println("4 - Filtrar por duracao em minutos");
         System.out.println("5 - Filtrar por nome");
-        System.out.println("6 - Sair");
+        System.out.println("0 - Sair");
         System.out.println("==========================================================");
         System.out.print("\nDigite sua opção: ");
         int opcao = Integer.parseInt(teclado.nextLine());
@@ -185,6 +192,47 @@ public class App {
         return opcao;
     }
    
+    //Menu para os filtros
+    public static void menuFiltro() {
+        int op = opcoesFiltro(); 
+        do{            
+            switch (op) {
+                case 1:
+                    System.out.println("Para filtrar digite o genero: ");
+                    String genero = teclado.nextLine();
+                    plataforma.filtrarPorGenero(genero); 
+                    pausa();
+                    break;
+                case 2:
+                    System.out.println("Para filtrar digite o idioma: "); 
+                    String idioma = teclado.nextLine(); 
+                    plataforma.filtrarPorGenero(idioma); 
+                    pausa();
+                    break;
+                case 3:
+                    System.out.println("Para filtrar digite a quantidade de episodios: "); 
+                    int qtd = Integer.parseInt(teclado.nextLine());
+                    plataforma.filtrarPorQtdEpisodios(qtd); 
+                    pausa();
+                    break;
+                case 4:
+                    System.out.println("Para filtrar digite a duracao em minutos: "); 
+                    int duracao = Integer.parseInt(teclado.nextLine());
+                    plataforma.filtrarPorDuracao(duracao);  
+                    pausa();
+                    break;
+                case 5:
+                    System.out.println("Para filtrar digite o nome: "); 
+                    String nome = teclado.nextLine();
+                    plataforma.buscarCatalogo(nome); 
+                    pausa();
+                    break;
+            } 
+            op = opcoesFiltro();
+        } while(op != 0);
+              
+}
+
     //metodo que limpa a tela no terminal
     public static void limparTela() {
         System.out.print("\033[H\033[2J");

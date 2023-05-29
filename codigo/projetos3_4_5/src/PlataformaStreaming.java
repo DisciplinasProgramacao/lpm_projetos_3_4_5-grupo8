@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
+
 public class PlataformaStreaming {
     private String nome;
     private HashMap<Integer, Catalogo> catalogos;
@@ -331,4 +332,41 @@ public class PlataformaStreaming {
         }
     }
 
+
+    public boolean adicionarMidiaNaListaParaVerFuturamente(String midia) {
+        Catalogo midiaPesquisada= buscarCatalogo(midia);
+
+            if(midiaPesquisada!= null){           
+                    this.clienteAtual.adicionarNaLista(midiaPesquisada);
+                    return true;
+            }                
+            else{
+                return false;  //fazer exceçao
+            }
+    }
+
+    //Metodo que adiciona midia na lista de 'Midias para assistir futuramente' e verifica se a midia passada existe no catalogo 
+    public boolean adicionarMidiaNaListaDeAssistidos(String midia) {
+        Catalogo midiaPesquisada= buscarCatalogo(midia);
+
+            if(midiaPesquisada!= null){           
+                    this.clienteAtual.adicionarNaLista(midiaPesquisada);
+                    return true;
+            }                
+            else{
+                return false;  //fazer exceçao
+            }
+    }
+
+    //Metodo que verifica as midias assistidas pelo cliente
+    public LinkedList<Assistido> visualizarListaDeAssistidos() {
+        return (this.clienteAtual.getListaJaVistas());
+    }
+
+    //Metodo que verifica as midias que o cliente quer ver futuramente
+    public LinkedList<Catalogo> visualizarListaParaVerFuturamente() {
+        return (this.clienteAtual.getListaParaVer());
+    }
+
+    
 }
