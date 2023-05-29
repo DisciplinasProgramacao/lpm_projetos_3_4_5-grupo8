@@ -180,28 +180,6 @@ public class App {
             realizarLogoff();       
     }
 
-
-    public static void exibirMediaAvaliacaoCatalogo() {
-        System.out.println("Escreva o nome da midia que quer escolher: ");
-        String texto = teclado.nextLine();
-        Catalogo catalogo = plataforma.escolherCatalogoPorNome(texto);
-        BigDecimal media =  plataforma.mediaAvaliacao(catalogo);
-        System.out.println("A avaliação do catalogo " + catalogo.getNome() + " \nE a media da avaliação é: "+ media);
-    }
-
-    public static void avaliarMidia() {
-        System.out.println("Escreva o nome da midia que quer escolher: ");
-        String texto = teclado.nextLine();
-        Catalogo catalogo = plataforma.escolherCatalogoPorNome(texto);
-        
-        System.out.println("Comentar sobre a midia: ");
-        texto = teclado.nextLine();
-        System.out.println("Avaliar midia: ");
-        int avaliar = Integer.parseInt(teclado.nextLine());
-
-        plataforma.adicionarAvaliacao(avaliar, texto, catalogo);
-    }
-
     //Opcoes filtros
     public static int opcoesFiltro(){
         limparTela();
@@ -349,6 +327,29 @@ public class App {
     public static void realizarLogoff() {
         plataforma.logoff();    
         System.out.println("Saindo...");
+    }
+
+    //Metodo para exibir os catalogos disponiveis na plataforma
+    public static void exibirMediaAvaliacaoCatalogo() {
+        System.out.println("Escreva o nome da midia que quer escolher: ");
+        String texto = teclado.nextLine();
+        Catalogo catalogo = plataforma.escolherCatalogoPorNome(texto);
+        BigDecimal media =  plataforma.mediaAvaliacao(catalogo);
+        System.out.println("A avaliacao do catalogo " + catalogo.getNome() + " \nE a media da avaliacao e: "+ media);
+    }
+
+    //Metodo para avaliar midia
+    public static void avaliarMidia() {
+        System.out.println("Escreva o nome da midia que quer escolher: ");
+        String texto = teclado.nextLine();
+        Catalogo catalogo = plataforma.escolherCatalogoPorNome(texto);
+        
+        System.out.println("Comentar sobre a midia: ");
+        texto = teclado.nextLine();
+        System.out.println("Avaliar midia: ");
+        int avaliar = Integer.parseInt(teclado.nextLine());
+
+        plataforma.adicionarAvaliacao(avaliar, texto, catalogo);
     }
 
 }
