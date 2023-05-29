@@ -31,24 +31,18 @@ public class App {
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("Erro. Voce deve carregar o arquivo Catalogo antes de solicitar sua exibicao.");
                     }
-                    
                     break;
                 case 4:
                     cadastrarFilme();
-
                     break;
                 case 5:
                     cadastrarSerie();
-
                     break;
                 case 6:
                     cadastrarCliente();
-
                     break;
                 case 7:
-       
                     if (realizarLogin() ) {
-                       // subMenuCliente();
                         menuCliente();
                     } else{
                         System.out.println("Login invalido. Favor tentar logar novamente ou realizar seu cadastro.");
