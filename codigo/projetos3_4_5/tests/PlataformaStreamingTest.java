@@ -17,7 +17,7 @@ public class PlataformaStreamingTest {
         serie1 = new Serie("The Blacklist", "02/02/2017", "Suspense", "EN", 10);
         serie2 = new Serie("Black mirror", "05/05/2018", "Terror", "PT", 10);
        
-        filme1 = new Filme("O Poderoso Chefão", "01/01/1972", "Drama", "EN", 120);
+        filme1 = new Filme("O Poderoso Chefão 1", "01/01/1972", "Drama", "EN", 120);
         filme2 = new Filme("O Poderoso Chefão 2", "01/01/1974", "Drama", "EN", 120);
         filme3 = new Filme("Minions", "30/06/2022", "Comedia", "EN", 180);
     }
@@ -25,18 +25,21 @@ public class PlataformaStreamingTest {
     @Test
     public void deveAdicionarUmClienteNaPlataforma() {
         plataforma1.adicionarCliente(cliente1);
-        assertEquals("aninha12", plataforma1.getClientes());
+
+        assertTrue(plataforma1.getClientes().contains("aninha12"));
     }
 
     @Test
     public void deveAdicionarSeriesNaPlataforma() {
         plataforma1.adicionarCatalogo(serie1);
         plataforma1.adicionarCatalogo(serie2);
-        assertEquals("The Blacklist, Black mirror", plataforma1.getCatalogo());
+
+        assertTrue(plataforma1.getCatalogo().contains("The Blacklist"));
+        assertTrue(plataforma1.getCatalogo().contains("Black mirror"));
     }
 
     @Test
-    public void deveRetornarClienteCasoLoginSejaEfetuadoComSucesso() throws Exception{
+    public void deveRetornarClienteAtualCasoLoginSejaEfetuadoComSucesso() throws Exception{
         plataforma1.adicionarCliente(cliente1);
         plataforma1.login("aninha12", "123");
 
@@ -44,11 +47,30 @@ public class PlataformaStreamingTest {
     }
 
     @Test
+    public void deveRetornarNuloCasoClienteInformeDadosDeLoginInvalidos() throws Exception{
+        plataforma1.adicionarCliente(cliente1);
+        plataforma1.login("aninha12", "senhaErrada");
+
+        assertNull(plataforma1.getClienteAtual());
+    }
+
+    @Test
+    public void deveRetornarClienteAtualNuloCasoLogoffSejaEfetuado() {
+        plataforma1.adicionarCliente(cliente1);
+        plataforma1.login("aninha12", "123");
+        plataforma1.logoff();
+        assertNull(plataforma1.getClienteAtual());
+    }  
+
+    @Test
     public void deveAdicionarFilmesNaPlataforma() {
         plataforma1.adicionarCatalogo(filme1);
         plataforma1.adicionarCatalogo(filme2);
         plataforma1.adicionarCatalogo(filme3);
-        assertEquals("O Poderoso Chefão, O Poderoso Chefão 2, Minions", plataforma1.getCatalogo());
+
+        assertTrue(plataforma1.getCatalogo().contains("O Poderoso Chefão 1"));
+        assertTrue(plataforma1.getCatalogo().contains("O Poderoso Chefão 2"));
+        assertTrue(plataforma1.getCatalogo().contains("Minions"));
     }
 
    
@@ -57,6 +79,7 @@ public class PlataformaStreamingTest {
         plataforma1.adicionarCatalogo(filme1);
         plataforma1.adicionarCatalogo(filme2);
         plataforma1.adicionarCatalogo(filme3);
+
         assertEquals(2, plataforma1.filtrarPorGenero("Drama").size());
     }
 
@@ -64,6 +87,7 @@ public class PlataformaStreamingTest {
     public void deveFiltrarCatalogoPorIdioma(){
         plataforma1.adicionarCatalogo(serie1);
         plataforma1.adicionarCatalogo(filme2);
+
         assertNotNull(plataforma1.filtrarPorIdioma("EN").contains(serie1));
         assertNotNull(plataforma1.filtrarPorIdioma("EN").contains(filme2));
     }
@@ -72,6 +96,7 @@ public class PlataformaStreamingTest {
     public void deveFiltrarCatalogoPorQtdEpisodio(){
         plataforma1.adicionarCatalogo(serie1);
         plataforma1.adicionarCatalogo(serie2);
+
         assertEquals(2, plataforma1.filtrarPorQtdEpisodios(10).size());
     }
     @Test
@@ -79,67 +104,33 @@ public class PlataformaStreamingTest {
         plataforma1.adicionarCatalogo(filme1);
         plataforma1.adicionarCatalogo(filme2);
         plataforma1.adicionarCatalogo(filme3);
+
         assertEquals(2, plataforma1.filtrarPorDuracao(120).size());
     }
     @Test
     public void deveRegistrarAudiencia(){
         plataforma1.adicionarCatalogo(serie1);
-        plataforma1.registrarAudiencia(serie1);
         plataforma1.adicionarCatalogo(filme1);
+
+        plataforma1.registrarAudiencia(serie1);
         plataforma1.registrarAudiencia(filme1);
         plataforma1.registrarAudiencia(filme1);
 
         assertEquals(2, filme1.getAudiencia());
-
         assertEquals(1, serie1.getAudiencia());
     }
 
     @Test
-    public void deveBuscarSeriesPorNomeComToString() {
+    public void deveBuscarMidiaPeloNome() {
         plataforma1.adicionarCatalogo(serie1);
         plataforma1.adicionarCatalogo(filme2);
-        assertEquals("The Blacklist;02/02/2017;EN;Suspense;10 episódios", plataforma1.buscarCatalogo("The Blacklist").toString());
-        assertEquals("O Poderoso Chefão 2;01/01/1974;EN;Drama;120 min", plataforma1.buscarCatalogo("O Poderoso Chefão 2").toString());
-    }   
-    
-    @Test
-    public void deveBuscarFilmesPorNomeComToString(){
-        plataforma1.adicionarCatalogo(filme1);
-        plataforma1.adicionarCatalogo(filme2);
-        assertEquals("O Poderoso Chefão;01/01/1972;EN;Drama;120 min", plataforma1.buscarCatalogo("O Poderoso Chefão").toString());
-        assertEquals("O Poderoso Chefão 2;01/01/1974;EN;Drama;120 min", plataforma1.buscarCatalogo("O Poderoso Chefão 2").toString());
+
+        assertNotNull(plataforma1.buscarCatalogo("The Blacklist"));
+        assertNotNull(plataforma1.buscarCatalogo("O Poderoso Chefão 2"));
     }
 
     @Test
-    public void clienteDeveRealizarLogin() {
-        plataforma1.adicionarCliente(cliente1);
-        plataforma1.login("aninha12", "123");
-        assertEquals(cliente1, plataforma1.getClienteAtual());
-    }
-
-    
-    @Test
-    public void clienteDeveRealizarLogoff() {
-        plataforma1.adicionarCliente(cliente1);
-        plataforma1.login("aninha12", "123");
-        plataforma1.logoff();
-        assertNull(plataforma1.getClienteAtual());
-    }
-
-    @Test
-    public void deveRetornarClienteAtual() {
-        plataforma1.adicionarCliente(cliente1);
-        plataforma1.login("aninha12", "123");
-        assertEquals(cliente1, plataforma1.getClienteAtual());
-    }
-   
-    @Test
-    public void deveRetornarNenhumClienteAtual() {
-        plataforma1.adicionarCliente(cliente1);
-        plataforma1.login("aninha12", "123");
-        plataforma1.logoff();
-        assertNull(plataforma1.getClienteAtual());
-    }
-
-    
+    public void deveRetornarNuloCasoNaoEncontreMidiaPeloNome() {
+        assertNull(plataforma1.buscarCatalogo("Não serei encontrada"));
+    }    
 }

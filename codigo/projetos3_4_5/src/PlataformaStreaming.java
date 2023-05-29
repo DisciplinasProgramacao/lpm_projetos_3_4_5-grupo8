@@ -7,7 +7,7 @@ import java.util.function.Function;
 public class PlataformaStreaming {
     private String nome;
     private HashMap<Integer, Catalogo> catalogos;
-    public HashMap<String, Cliente> clientes;
+    private HashMap<String, Cliente> clientes;
     private Cliente clienteAtual;
 
     PlataformaStreaming(String nome) {
@@ -89,7 +89,7 @@ public class PlataformaStreaming {
      */
     public void adicionarCatalogo(Catalogo catalogo) {
         try {
-            Armazenagem.gravar("POO_Series", catalogo);
+            //Armazenagem.gravar("POO_Series", catalogo); //olhar
             catalogos.put(catalogo.getId(), catalogo);
         } catch (Exception e) {
         }
@@ -140,7 +140,6 @@ public class PlataformaStreaming {
             this.clientes.put(cliente.getLogin(), cliente);
             try {
                 Armazenagem.gravar("POO_Espectadores", cliente);
-                
             } catch (IOException e) {
                 e.printStackTrace();
             }
