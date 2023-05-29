@@ -89,7 +89,7 @@ public class PlataformaStreaming {
         Catalogo catalogo;
         catalogo = null;
         for (int key : catalogos.keySet()) {
-            catalogo = catalogos.get(key).getNome() == nomeFilme ? catalogos.get(key) : null;
+            catalogo = catalogos.get(key).getNome().equals(nomeFilme) ? catalogos.get(key) : null;
         }
         return catalogo;
     }
