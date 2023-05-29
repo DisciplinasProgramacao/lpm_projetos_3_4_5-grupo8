@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -51,7 +52,10 @@ public class App {
                     System.out.println("Falta implementar audiencia"); //fazer o metodo
                     break;
                 case 9:
-                    System.out.println("Falta implementar avaliacao"); //fazer o metodo
+                    System.out.println("Exibindo catalogo...");
+                    System.out.println(plataforma.getCatalogo());
+
+                    exibirMediaAvaliacaoCatalogo();
                     break;
                 default:
                     break;
@@ -165,13 +169,37 @@ public class App {
                         pausa();
                         break;
                     case 11:
-                        System.out.println("Falta implementar avaliacao midia"); //fazer o metodo
+                        System.out.println("Exibindo catalogo...");
+                        System.out.println(plataforma.getCatalogo());
+                        avaliarMidia();
                         pausa();
                         break; 
                 } 
                 op = opcoesCliente();
             } while(op != 0);
             realizarLogoff();       
+    }
+
+
+    public static void exibirMediaAvaliacaoCatalogo() {
+        System.out.println("Escreva o nome da midia que quer escolher: ");
+        String texto = teclado.nextLine();
+        Catalogo catalogo = plataforma.escolherCatalogoPorNome(texto);
+        BigDecimal media =  plataforma.mediaAvaliacao(catalogo);
+        System.out.println("A avaliação do catalogo " + catalogo.getNome() + " \nE a media da avaliação é: "+ media);
+    }
+
+    public static void avaliarMidia() {
+        System.out.println("Escreva o nome da midia que quer escolher: ");
+        String texto = teclado.nextLine();
+        Catalogo catalogo = plataforma.escolherCatalogoPorNome(texto);
+        
+        System.out.println("Comentar sobre a midia: ");
+        texto = teclado.nextLine();
+        System.out.println("Avaliar midia: ");
+        int avaliar = Integer.parseInt(teclado.nextLine());
+
+        plataforma.adicionarAvaliacao(avaliar, texto, catalogo);
     }
 
     //Opcoes filtros

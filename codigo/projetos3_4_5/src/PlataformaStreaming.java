@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Function;
 
@@ -80,6 +81,22 @@ public class PlataformaStreaming {
         return str.toString().substring(0, str.length() - 2);
     }
 
+    public void adicionarAvaliacao(int nota, String comentario, Catalogo catalogo) {
+        clienteAtual.adicionarAvaliacao(nota, comentario, catalogo);
+    }
+
+    public Catalogo escolherCatalogoPorNome(String nomeFilme) {
+        Catalogo catalogo;
+        catalogo = null;
+        for (int key : catalogos.keySet()) {
+            catalogo = catalogos.get(key).getNome() == nomeFilme ? catalogos.get(key) : null;
+        }
+        return catalogo;
+    }
+
+    public BigDecimal mediaAvaliacao(Catalogo catalogo) {
+        return catalogo.mediaAvaliacao();
+    }
 
     /**
      * adicionar catalogo na plataforma
