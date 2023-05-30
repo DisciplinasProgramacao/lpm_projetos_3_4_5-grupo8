@@ -129,8 +129,9 @@ public class PlataformaStreaming {
         if (validarLoginCliente(cliente)) {
             this.clientes.put(cliente.getLogin(), cliente);
             Armazenagem.gravar("POO_Espectadores", cliente);
+        } else {
+            throw new IllegalArgumentException();
         }
-        throw new IllegalArgumentException();
     }
 
     /**

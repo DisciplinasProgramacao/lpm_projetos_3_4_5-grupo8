@@ -183,6 +183,7 @@ public class Cliente {
     public void registrarAudiencia(Catalogo midia) {
         LocalDate hoje = LocalDate.now();
         Assistido assistido = new Assistido(midia, hoje);
+        midia.registrarAudiencia();
         listaJaVistas.add(assistido);
         listaParaVer.remove(midia);
     }
