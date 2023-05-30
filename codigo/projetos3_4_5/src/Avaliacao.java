@@ -30,6 +30,6 @@ public class Avaliacao {
         if(comentario.isEmpty())
             return "Nota: " + this.nota;
 
-        return "Nota: " + this.nota + "\nComentário: " + this.comentario;
+        return "Nota: " + this.nota + "\nComentario: " + this.comentario;
     }
 }

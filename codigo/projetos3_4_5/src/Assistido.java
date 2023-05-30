@@ -19,8 +19,10 @@ public class Assistido {
         return this.catalogo;
     }
 
-    public void adicionarAvaliacao(Avaliacao avaliacao){
+    public Avaliacao adicionarAvaliacao(Avaliacao avaliacao){
         this.avaliacao = avaliacao;
+        this.catalogo.avaliarMidia(avaliacao);
+        return this.avaliacao;
     }
 
     public String toString() {
