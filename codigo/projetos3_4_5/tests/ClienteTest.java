@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.Test;
-import org.junit.experimental.theories.suppliers.TestedOn;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.Assert.assertEquals;
