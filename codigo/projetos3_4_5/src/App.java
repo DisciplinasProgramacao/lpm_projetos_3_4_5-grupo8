@@ -131,15 +131,23 @@ public class App {
                         pausa();
                         break;
                     case 3:
-                        System.out.println("Falta implementar escolha da midia"); //fazer o metodo 
+                        plataforma.visualizarListaParaVerFuturamente();  
+                        System.out.println("Digite o nome da midia que deseja assistir: "); 
+                        String midiaEscolhida = teclado.nextLine();
+                        
+                        boolean verificaMidiaEscolhida;
+                        verificaMidiaEscolhida = plataforma.assistirMidia(midiaEscolhida);
+                        if(verificaMidiaEscolhida == false){
+                            System.out.println("Midia nao encontrada");
+                        }
                         pausa();
                         break;
                     case 4:
-                        plataforma.visualizarListaDeAssistidos();  //fazer o metodo
+                        plataforma.visualizarListaDeAssistidos();
                         pausa();
                         break;
                     case 5:
-                        plataforma.visualizarListaParaVerFuturamente();  //fazer o metodo
+                        plataforma.visualizarListaParaVerFuturamente();  
                         pausa();
                         break;
                     case 6:

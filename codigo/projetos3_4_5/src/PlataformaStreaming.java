@@ -330,6 +330,17 @@ public class PlataformaStreaming {
     public String visualizarListaDeAssistidos() {
         return (this.clienteAtual.listarMidiasAssistidas());
     }
+      
+    //AJUSTAR METODO
+    //Metodo que verifica as midias que o cliente quer ver futuramente
+    public void visualizarListaParaVerFuturamente() {
+        LinkedList<Catalogo> listaParaVer = this.clienteAtual.getListaParaVer();
+        int cont = 1;
+        for (Catalogo midia : listaParaVer) {
+            System.out.println( cont + " - " + midia.getNome());
+            cont++;
+        }
+    }
 
     public boolean assistirMidia(String nomeMidia){
         Catalogo catalogo = this.getClienteAtual().buscarMidiaNaListaParaVer(nomeMidia);
@@ -337,17 +348,7 @@ public class PlataformaStreaming {
             this.clienteAtual.registrarAudiencia(catalogo);
             return true;
         }
-
         return false;
     }
     
-    //AJUSTAR METODO
-    //Metodo que verifica as midias que o cliente quer ver futuramente
-    public void visualizarListaParaVerFuturamente() {
-        LinkedList<Catalogo> listaParaVer = this.clienteAtual.getListaParaVer();
-        for (Catalogo midia : listaParaVer) {
-            System.out.println(midia.getNome());
-        }
-    }
-
 }
