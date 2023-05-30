@@ -88,7 +88,7 @@ public class PlataformaStreamingTest {
         plataforma1.adicionarCatalogo(filme2);
         plataforma1.adicionarCatalogo(filme3);
 
-        assertEquals(2, plataforma1.filtrarPorGenero("Drama").size());
+        assertEquals(2, plataforma1.filtrarCatalogo(catalogo -> catalogo.getIdioma().equals("Drama")).size());
     }
 
     @Test

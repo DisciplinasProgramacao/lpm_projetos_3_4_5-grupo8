@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class App {
@@ -261,25 +262,27 @@ public class App {
                 case 1:
                     System.out.println("Para filtrar digite o genero: ");
                     String genero = teclado.nextLine();
-                    plataforma.filtrarPorGenero(genero);
+                    //plataforma.filtrarPorGenero(genero);
+                    plataforma.filtrarCatalogo(catalogo -> catalogo.getIdioma().equals(genero));
                     pausa();
                     break;
                 case 2:
                     System.out.println("Para filtrar digite o idioma: ");
                     String idioma = teclado.nextLine();
-                    plataforma.filtrarPorGenero(idioma);
+                    //plataforma.filtrarPorGenero(idioma);
+                    plataforma.filtrarCatalogo(catalogo -> catalogo.getIdioma().equals(idioma));
                     pausa();
                     break;
                 case 3:
                     System.out.println("Para filtrar digite a quantidade de episodios: ");
                     int qtd = Integer.parseInt(teclado.nextLine());
-                    plataforma.filtrarPorQtdEpisodios(qtd);
+                    //plataforma.filtrarPorQtdEpisodios(qtd);
                     pausa();
                     break;
                 case 4:
                     System.out.println("Para filtrar digite a duracao em minutos: ");
                     int duracao = Integer.parseInt(teclado.nextLine());
-                    plataforma.filtrarPorDuracao(duracao);
+                   // plataforma.filtrarPorDuracao(duracao);
                     pausa();
                     break;
                 case 5:
