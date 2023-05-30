@@ -337,7 +337,20 @@ public class PlataformaStreaming {
 
     // Metodo que verifica as midias que o cliente quer ver futuramente
     public String visualizarListaParaVerFuturamente() {
-        return this.clienteAtual.listarMidiasParaSeremAssistidas();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("-------------------");
+
+        int contador = 0;
+
+        for(Catalogo midia : this.clienteAtual.getListaParaVer()){
+            contador++;
+            stringBuilder.append("\n[" + contador + "] " + midia.getNome());
+        }
+
+        stringBuilder.append("\n-------------------");
+
+        return stringBuilder.toString();
     }
 
     /**

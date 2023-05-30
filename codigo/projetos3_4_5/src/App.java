@@ -144,7 +144,7 @@ public class App {
                     break;
                 case 3:
                     System.out.println("\n---Exibindo catalogo para ser assistido---");
-                    plataforma.visualizarListaParaVerFuturamente();
+                    System.out.println(plataforma.visualizarListaParaVerFuturamente());
                     System.out.println("\nDigite o nome da midia que deseja assistir: ");
                     String midiaEscolhida = teclado.nextLine();
 
@@ -180,7 +180,7 @@ public class App {
                     pausa();
                     break;
                 case 5:
-                    plataforma.visualizarListaParaVerFuturamente(); // fazer o metodo
+                    System.out.println(plataforma.visualizarListaParaVerFuturamente()); 
                     pausa();
                 case 6:
                     try {
