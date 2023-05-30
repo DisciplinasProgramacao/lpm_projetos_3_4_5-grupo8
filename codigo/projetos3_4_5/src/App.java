@@ -166,7 +166,7 @@ public class App {
                         pausa();
                         break;
                     case 5:
-                        plataforma.visualizarListaParaVerFuturamente();  
+                        plataforma.visualizarListaParaVerFuturamente();  //fazer o metodo
                         pausa();
                     case 6:
                         plataforma.carregarCatalogos();

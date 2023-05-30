@@ -66,9 +66,12 @@ public class PlataformaStreaming {
         return str.toString().substring(0, str.length() - 2);
     }
 
-    //TESTAR
-    public void adicionarAvaliacao(int nota, String comentario, Catalogo catalogo) {
-        clienteAtual.adicionarAvaliacao(nota, comentario, catalogo);
+    public Avaliacao adicionarAvaliacao(int nota, String comentario, Catalogo catalogo) {
+        return clienteAtual.adicionarAvaliacao(nota, comentario, catalogo);
+    }
+
+    public void adicionarComentarioAvaliacaoExistente(Avaliacao avaliacao, String comentario){
+        this.clienteAtual.adicionarComentarioAvaliacaoExistente(avaliacao, comentario);
     }
 
     //TESTAR
@@ -330,17 +333,6 @@ public class PlataformaStreaming {
     public String visualizarListaDeAssistidos() {
         return (this.clienteAtual.listarMidiasAssistidas());
     }
-      
-    //AJUSTAR METODO
-    //Metodo que verifica as midias que o cliente quer ver futuramente
-    public void visualizarListaParaVerFuturamente() {
-        LinkedList<Catalogo> listaParaVer = this.clienteAtual.getListaParaVer();
-        int cont = 1;
-        for (Catalogo midia : listaParaVer) {
-            System.out.println( cont + " - " + midia.getNome());
-            cont++;
-        }
-    }
 
     public boolean assistirMidia(String nomeMidia){
         Catalogo catalogo = this.getClienteAtual().buscarMidiaNaListaParaVer(nomeMidia);
@@ -348,7 +340,13 @@ public class PlataformaStreaming {
             this.clienteAtual.registrarAudiencia(catalogo);
             return true;
         }
+
         return false;
     }
     
+    //Metodo que verifica as midias que o cliente quer ver futuramente
+    public String visualizarListaParaVerFuturamente() {
+        return this.clienteAtual.listarMidiasParaSeremAssistidas();
+    }
+
 }

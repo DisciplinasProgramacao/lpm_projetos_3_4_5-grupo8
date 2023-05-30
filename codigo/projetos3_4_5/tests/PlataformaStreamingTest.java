@@ -3,6 +3,8 @@ import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
+
 public class PlataformaStreamingTest {
     private PlataformaStreaming plataforma1;
     private Cliente cliente1, clienteLogado;
@@ -155,5 +157,73 @@ public class PlataformaStreamingTest {
         plataforma1.assistirMidia("O Poderoso Chefão 2");
         
         assertTrue(plataforma1.visualizarListaDeAssistidos().contains("O Poderoso Chefão 2"));
+    }
+
+    @Test
+    public void deveAdicionarAvaliacaoEmUmaMidiaJaAssistidaComSucesso(){
+        plataforma1.login("logado", "login");
+        plataforma1.adicionarCatalogo(filme2);
+        
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+        plataforma1.assistirMidia("O Poderoso Chefão 2");
+
+        assertTrue(plataforma1.adicionarAvaliacao(5, "", filme2).toString().contains("Nota: 5"));
+    }
+
+    @Test
+    public void deveRetornarFalsoCasoTenteAvaliarMidiaNaoAssistida(){
+        plataforma1.login("logado", "login");
+        plataforma1.adicionarCatalogo(filme2);
+        
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+
+        assertNull(plataforma1.adicionarAvaliacao(5, "", filme2));
+    }
+
+    @Test
+    public void deveRetornarFalsoCasoTenteAvaliarDuasVezesAhMesmaMidia(){
+        plataforma1.login("logado", "login");
+        plataforma1.adicionarCatalogo(filme2);
+        
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+        plataforma1.assistirMidia("O Poderoso Chefão 2");
+
+        plataforma1.adicionarAvaliacao(5, "", filme2);
+        assertNull(plataforma1.adicionarAvaliacao(5, "", filme2));
+    }
+
+    @Test
+    public void naoDeveAdicionarComentarioEmAvaliacaoCasoClienteNaoSejaEspecialista(){
+        plataforma1.login("logado", "login");
+        plataforma1.adicionarCatalogo(filme2);
+        
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+        plataforma1.assistirMidia("O Poderoso Chefão 2");
+
+        Avaliacao avaliacaoFeita = plataforma1.adicionarAvaliacao(5, "", filme2);
+        plataforma1.adicionarComentarioAvaliacaoExistente(avaliacaoFeita, "filme maravilhoso");
+
+        assertFalse(plataforma1.visualizarListaDeAssistidos().contains("filme maravilhoso"));
+    }
+
+    @Test
+    public void deveRetornarMediaDeAvaliacoesQueUmaMidiaRecebeu(){
+        plataforma1.login("logado", "login");
+        plataforma1.adicionarCatalogo(filme2);
+        
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+        plataforma1.assistirMidia("O Poderoso Chefão 2");
+
+        plataforma1.adicionarAvaliacao(5, "", filme2);
+        plataforma1.logoff();
+
+        plataforma1.adicionarCliente(cliente1);
+        plataforma1.login("aninha12", "123");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+        plataforma1.assistirMidia("O Poderoso Chefão 2");
+
+        plataforma1.adicionarAvaliacao(3, "", filme2);        
+
+        assertEquals(new BigDecimal(4.0), plataforma1.mediaAvaliacao(filme2));
     }
 }

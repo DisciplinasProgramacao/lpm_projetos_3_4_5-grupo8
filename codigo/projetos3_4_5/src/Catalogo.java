@@ -88,12 +88,16 @@ public abstract class Catalogo {
     public BigDecimal mediaAvaliacao() {
         int somaNotas = 0;
         BigDecimal quantidadeAvaliacoes = new BigDecimal(listaAvaliacoes.size());
+        BigDecimal mediaAvaliacoes = new BigDecimal(0.0);
 
-        for (Avaliacao avaliacao : listaAvaliacoes) {
-            somaNotas += avaliacao.getNota();
+        if(quantidadeAvaliacoes.compareTo(BigDecimal.ZERO) > 0){
+            for (Avaliacao avaliacao : listaAvaliacoes) {
+                somaNotas += avaliacao.getNota();
+            }
+    
+            mediaAvaliacoes = new BigDecimal(somaNotas).divide(quantidadeAvaliacoes);
         }
-
-        BigDecimal mediaAvaliacoes = new BigDecimal(somaNotas).divide(quantidadeAvaliacoes);
+        
 
         this.avaliacaoMedia = mediaAvaliacoes;
 

@@ -1,7 +1,5 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.HashSet;
 
@@ -206,16 +204,24 @@ public class Cliente {
         return new Avaliacao(login, nota);
     }
 
-    public void adicionarAvaliacao(int nota, String comentario, Catalogo catalogo){
+    public void adicionarComentarioAvaliacaoExistente(Avaliacao avaliacao, String comentario){
+        if(avaliacao != null && (ehEspecialista() && !comentario.isEmpty())){
+            avaliacao.adicionarComentario(comentario);
+        }
+    }
+
+    public Avaliacao adicionarAvaliacao(int nota, String comentario, Catalogo catalogo){
         if(!clienteJaAvaliouMidia(catalogo)){
             Avaliacao avaliacaoSendoFeita = avaliar(nota, comentario);
-
+            Avaliacao avaliacaoFeita;
             for (Assistido assistido : listaJaVistas) {
                 if(assistido.getCatalogo() == catalogo){
-                    assistido.adicionarAvaliacao(avaliacaoSendoFeita);                    
+                    avaliacaoFeita = assistido.adicionarAvaliacao(avaliacaoSendoFeita);
+                    return avaliacaoFeita;                  
                 }
             }
         }
+        return null;
     }
 
     public String listarMidiasAssistidas(){
