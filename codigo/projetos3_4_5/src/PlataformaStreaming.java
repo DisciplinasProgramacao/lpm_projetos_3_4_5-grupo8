@@ -330,7 +330,6 @@ public class PlataformaStreaming {
         try {
             for (int key : catalogos.keySet()) {
                 if (catalogos.get(key).getNome().equals(midia)) {
-                if (catalogos.get(key).getNome().equals(midia)) {
                     return catalogos.get(key);
                 }
             }
