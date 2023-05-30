@@ -263,6 +263,14 @@ public class App {
                     System.out.println("Para filtrar digite o nome: "); 
                     String nome = teclado.nextLine();
                     plataforma.buscarCatalogo(nome); 
+
+                    if(plataforma.buscarCatalogo(nome) == null){
+                        System.out.println("Midia nao encontrada.");
+                    }
+                    else{
+                        System.out.println("A Midia [" + plataforma.buscarCatalogo(nome) + "] existe no catalogo.");
+                    }
+
                     pausa();
                     break;
             } 
