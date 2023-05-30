@@ -57,9 +57,8 @@ public class PlataformaStreaming {
         int cont=1;
         StringBuilder str = new StringBuilder();
         for (int key : catalogos.keySet()) {
-            str.append(cont + ",");
+            str.append("[" + cont + "] ");
             str.append(catalogos.get(key).getNome());
-            str.append(", ");
             str.append("\n ");
             cont++;
         }
