@@ -343,7 +343,7 @@ public class App {
     public static void exibirMediaAvaliacaoCatalogo() {
         System.out.println("Escreva o nome da midia que quer escolher: ");
         String texto = teclado.nextLine();
-        Catalogo catalogo = plataforma.escolherCatalogoPorNome(texto);
+        Catalogo catalogo = plataforma.buscarCatalogo(texto);
         BigDecimal media =  plataforma.mediaAvaliacao(catalogo);
         System.out.println("A avaliacao do catalogo " + catalogo.getNome() + " \nE a media da avaliacao e: "+ media);
     }
@@ -352,7 +352,7 @@ public class App {
     public static void avaliarMidia() {
         System.out.println("Escreva o nome da midia que deseja avaliar: ");
         String texto = teclado.nextLine();
-        Catalogo catalogo = plataforma.escolherCatalogoPorNome(texto);
+        Catalogo catalogo = plataforma.buscarCatalogo(texto);
         
         System.out.println("Deixe seu comentario sobre a midia: ");
         texto = teclado.nextLine();

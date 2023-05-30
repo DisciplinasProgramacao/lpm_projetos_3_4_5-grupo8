@@ -132,5 +132,17 @@ public class PlataformaStreamingTest {
     @Test
     public void deveRetornarNuloCasoNaoEncontreMidiaPeloNome() {
         assertNull(plataforma1.buscarCatalogo("Não serei encontrada"));
-    }    
+    }
+
+    @Test
+    public void deveAdicionarComentarioNaMidia(){
+        plataforma1.adicionarCliente(cliente1);
+        plataforma1.login("aninha12", "123");
+        plataforma1.adicionarCatalogo(serie1);
+
+        plataforma1.adicionarAvaliacao(10, "", serie1);
+        String oi = plataforma1.getClienteAtual().listarMidiasAssistidas();
+        System.out.println(plataforma1.getClienteAtual().listarMidiasAssistidas());
+
+    }
 }

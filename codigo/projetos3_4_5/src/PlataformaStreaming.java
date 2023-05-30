@@ -85,15 +85,6 @@ public class PlataformaStreaming {
         clienteAtual.adicionarAvaliacao(nota, comentario, catalogo);
     }
 
-    public Catalogo escolherCatalogoPorNome(String nomeFilme) {
-        Catalogo catalogo;
-        catalogo = null;
-        for (int key : catalogos.keySet()) {
-            catalogo = catalogos.get(key).getNome().equals(nomeFilme) ? catalogos.get(key) : null;
-        }
-        return catalogo;
-    }
-
     public BigDecimal mediaAvaliacao(Catalogo catalogo) {
         return catalogo.mediaAvaliacao();
     }
@@ -338,6 +329,7 @@ public class PlataformaStreaming {
     public Catalogo buscarCatalogo(String midia) {
         try {
             for (int key : catalogos.keySet()) {
+                if (catalogos.get(key).getNome().equals(midia)) {
                 if (catalogos.get(key).getNome().equals(midia)) {
                     return catalogos.get(key);
                 }

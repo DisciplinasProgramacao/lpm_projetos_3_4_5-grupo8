@@ -21,6 +21,10 @@ public class Avaliacao {
         return this.nota;
     }
 
+    public void adicionarComentario(String comentario){
+        this.comentario = comentario;
+    }
+
     @Override
     public String toString(){
         if(comentario.isEmpty())
