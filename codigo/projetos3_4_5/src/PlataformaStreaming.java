@@ -24,16 +24,19 @@ public class PlataformaStreaming {
 
     /**
      * @return Cliente atual
+     * @throws NullPointerException
      */
-    public Cliente getClienteAtual() {
-        return this.clienteAtual;
+    public Cliente getClienteAtual() throws NullPointerException {
+        if (this.clienteAtual != null)
+            return this.clienteAtual;
+        throw new NullPointerException();
     }
 
     /**
      * @return String de catalogos
      */
     public String getCatalogo() {
-        int cont=1;
+        int cont = 1;
         StringBuilder str = new StringBuilder();
         for (int key : catalogos.keySet()) {
             str.append("[" + cont + "] ");
@@ -45,14 +48,14 @@ public class PlataformaStreaming {
     }
 
     /**
-    * Logar na plataforma
-    * 
-    * @param login login do usuario
-    * @param senha senha do usuario
-    * 
-    * 
-    * @return cliente se sucesso, cliente nulo caso erro
-    */
+     * Logar na plataforma
+     * 
+     * @param login login do usuario
+     * @param senha senha do usuario
+     * 
+     * 
+     * @return cliente se sucesso, cliente nulo caso erro
+     */
     public Cliente login(String login, String senha) {
         Cliente cliente = clientes.get(login);
 
@@ -61,7 +64,7 @@ public class PlataformaStreaming {
         } else {
             this.clienteAtual = null;
         }
-        
+
         return this.clienteAtual;
     }
 
@@ -72,28 +75,27 @@ public class PlataformaStreaming {
     public void logoff() {
         this.clienteAtual = null;
     }
-   
+
     /**
      * adicionar catalogo na plataforma
      * 
      * @param catalogo catalogo a ser adicionado
+     * @throws IOException
      * 
      */
-    public void adicionarCatalogo(Catalogo catalogo) {
-        try {
-            //Armazenagem.gravar("POO_Series", catalogo); //olhar
-            catalogos.put(catalogo.getId(), catalogo);
-        } catch (Exception e) {
-        }
+    public void adicionarCatalogo(Catalogo catalogo) throws IOException {
+        Armazenagem.gravar("POO_Series", catalogo);
+        catalogos.put(catalogo.getId(), catalogo);
     }
 
     /**
      * adicionar catalogo na plataforma
      * 
      * @param catalogos linkedlist de catalogo a ser adicionado
+     * @throws FileNotFoundException
      * 
      */
-    public boolean carregarCatalogos() {
+    public void carregarCatalogos() throws FileNotFoundException {
         Function<String, Filme> contrutorFilme = (str -> new Filme(Integer.parseInt(str.split(";")[0]),
                 str.split(";")[1],
                 str.split(";")[2],
@@ -105,39 +107,30 @@ public class PlataformaStreaming {
 
         LinkedList<Filme> filmes;
         LinkedList<Serie> series;
-        try {
-            filmes = Armazenagem.ler("POO_Filmes", contrutorFilme);
-            series = Armazenagem.ler("POO_Series", contrutorSerie);
-            this.catalogos.clear();
-            for (Filme x : filmes) {
-                this.catalogos.put(x.getId(), x);
-            }
-            for (Serie x : series) {
-                this.catalogos.put(x.getId(), x);
-            }
-        } catch (FileNotFoundException e) {
-            return false;
+        filmes = Armazenagem.ler("POO_Filmes", contrutorFilme);
+        series = Armazenagem.ler("POO_Series", contrutorSerie);
+        this.catalogos.clear();
+        for (Filme x : filmes) {
+            this.catalogos.put(x.getId(), x);
         }
-        return true;
+        for (Serie x : series) {
+            this.catalogos.put(x.getId(), x);
+        }
     }
 
     /**
      * adicionar cliente na plataforma
      * 
      * @param cliente cliente a ser adicionado
-     * 
+     * @throws IOException
+     * @throws IllegalArgumentException cliente ja existe
      */
-    public boolean adicionarCliente(Cliente cliente) {
+    public void adicionarCliente(Cliente cliente) throws IOException, IllegalArgumentException {
         if (validarLoginCliente(cliente)) {
             this.clientes.put(cliente.getLogin(), cliente);
-            try {
-                Armazenagem.gravar("POO_Espectadores", cliente);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return true;
+            Armazenagem.gravar("POO_Espectadores", cliente);
         }
-        return false;
+        throw new IllegalArgumentException();
     }
 
     /**
@@ -285,58 +278,65 @@ public class PlataformaStreaming {
         return filtro;
     }
 
-
     /**
      * Buscar catalogo por nome
      * 
      * @param midia nome da midia a ser procurada
-     * 
+     * @throws NullPointerException      midia nao encontrada
+     * @throws IndexOutOfBoundsException catalogo vazio
      */
-    public Catalogo buscarCatalogo(String midia) {
-        try {
-            for (int key : catalogos.keySet()) {
-                if (catalogos.get(key).getNome().equals(midia)) {
-                    return catalogos.get(key);
-                }
+    public Catalogo buscarCatalogo(String midia) throws NullPointerException, IndexOutOfBoundsException {
+
+        for (int key : catalogos.keySet()) {
+            if (catalogos.get(key).getNome().equals(midia)) {
+                return catalogos.get(key);
             }
-            return null;
-        } catch (Exception e) {
-            return null;
         }
+        throw new NullPointerException();
     }
 
-    //CRIAR TESTE
-    /** 
+    // CRIAR TESTE
+    /**
      * Metodo que adiciona midia na lista de 'Midias para assistir futuramente'
+     * 
      * @param midia
+     * @throws NullPointerException      midia nao encontrada
+     * @throws IndexOutOfBoundsException catalogo vazio
      */
-    public void adicionarMidiaNaListaParaVerFuturamente(String midia) {
+    public void adicionarMidiaNaListaParaVerFuturamente(String midia)
+            throws NullPointerException, IndexOutOfBoundsException {
         Catalogo midiaPesquisada = buscarCatalogo(midia);
         this.clienteAtual.adicionarNaLista(midiaPesquisada);
     }
- 
-    //Metodo que verifica as midias assistidas pelo cliente
+
+    // Metodo que verifica as midias assistidas pelo cliente
     public String visualizarListaDeAssistidos() {
         return (this.clienteAtual.listarMidiasAssistidas());
     }
 
-    public boolean assistirMidia(String nomeMidia){
+    /**
+     * Assistir midia
+     * 
+     * @throws NullPointerException      cliente invalido
+     * @throws IndexOutOfBoundsException midia inexistente ou nao encontrada
+     */
+    public void assistirMidia(String nomeMidia) throws NullPointerException, IndexOutOfBoundsException {
         Catalogo catalogo = this.getClienteAtual().buscarMidiaNaListaParaVer(nomeMidia);
-        if(catalogo != null){
+        if (catalogo != null) {
             this.clienteAtual.registrarAudiencia(catalogo);
-            return true;
+        } else {
+            throw new IndexOutOfBoundsException();
         }
-
-        return false;
     }
-    
-    //Metodo que verifica as midias que o cliente quer ver futuramente
+
+    // Metodo que verifica as midias que o cliente quer ver futuramente
     public String visualizarListaParaVerFuturamente() {
         return this.clienteAtual.listarMidiasParaSeremAssistidas();
     }
 
-     /**
+    /**
      * Metodo que adiciona avaliacao em uma midia
+     * 
      * @param nota
      * @param comentario
      * @param catalogo
@@ -348,14 +348,15 @@ public class PlataformaStreaming {
 
     /**
      * Metodo que adiciona comentario em uma avaliacao ja existente
+     * 
      * @param avaliacao
      * @param comentario
      */
-    public void adicionarComentarioAvaliacaoExistente(Avaliacao avaliacao, String comentario){
+    public void adicionarComentarioAvaliacaoExistente(Avaliacao avaliacao, String comentario) {
         this.clienteAtual.adicionarComentarioAvaliacaoExistente(avaliacao, comentario);
     }
 
-    //TESTAR
+    // TESTAR
     public BigDecimal mediaAvaliacao(Catalogo catalogo) {
         return catalogo.mediaAvaliacao();
     }
