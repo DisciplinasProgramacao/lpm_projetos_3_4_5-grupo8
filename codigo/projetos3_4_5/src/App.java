@@ -7,7 +7,6 @@ public class App {
     static LinkedList<Catalogo> listaDeNovasSeries = new LinkedList<Catalogo>();
     static LinkedList<Catalogo> listaDeNovosFilmes = new LinkedList<Catalogo>();
     static PlataformaStreaming plataforma;
-    static Cliente clienteTeste = new Cliente("Ana Luiza", "ana.luiza", "123");
 
     public static void main(String[] args) throws Exception {
         int opcao;
@@ -26,7 +25,7 @@ public class App {
                     break;
                 case 3:
                     try {
-                        System.out.println("Exibindo catalogo...");
+                        System.out.println("---Exibindo catalogo---");
                         System.out.println(plataforma.getCatalogo());
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("Erro. Voce deve carregar o arquivo Catalogo antes de solicitar sua exibicao.");
@@ -42,7 +41,7 @@ public class App {
                     cadastrarCliente();
                     break;
                 case 7:
-                    if (realizarLogin() ) {
+                    if (realizarLogin()) {
                         menuCliente();
                     } else{
                         System.out.println("Login invalido. Favor tentar logar novamente ou realizar seu cadastro.");
@@ -52,7 +51,7 @@ public class App {
                     System.out.println("Falta implementar audiencia"); //fazer o metodo
                     break;
                 case 9:
-                    System.out.println("Exibindo catalogo...");
+                System.out.println("---Exibindo catalogo---");
                     System.out.println(plataforma.getCatalogo());
 
                     exibirMediaAvaliacaoCatalogo();
@@ -97,12 +96,11 @@ public class App {
         System.out.println("3 - Assistir uma midia");
         System.out.println("4 - Verificar midias assistidas");
         System.out.println("5 - Verificar midias para assistir futuramente");
-        System.out.println("6 - Adicionar midia na lista de assistidas");
-        System.out.println("7 - Adicionar midia na lista para assistir futuramente");
-        System.out.println("8 - Filtrar catalogo");
-        System.out.println("9 - Filtrar midias assistidas");
-        System.out.println("10 - Filtrar midias para assistir futuramente");
-        System.out.println("11 - Avaliar uma midia");
+        System.out.println("6 - Adicionar midia na lista para assistir futuramente");
+        System.out.println("7 - Filtrar catalogo");
+        System.out.println("8 - Filtrar midias assistidas");
+        System.out.println("9 - Filtrar midias para assistir futuramente");
+        System.out.println("10 - Avaliar uma midia");
         System.out.println("0 - Sair");
         System.out.println("==========================================================");
         System.out.print("\nDigite sua opção: ");
@@ -123,7 +121,7 @@ public class App {
                         break;
                     case 2:
                         try {
-                            System.out.println("Exibindo catalogo...");
+                            System.out.println("---Exibindo catalogo---");
                             System.out.println(plataforma.getCatalogo());
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("Carregue o arquivo Catalogo antes de solicitar sua exibicao.");
@@ -131,63 +129,79 @@ public class App {
                         pausa();
                         break;
                     case 3:
+                        System.out.println("\n---Exibindo catalogo para ser assistido---");
                         plataforma.visualizarListaParaVerFuturamente();  
-                        System.out.println("Digite o nome da midia que deseja assistir: "); 
+                        System.out.println("\nDigite o nome da midia que deseja assistir: "); 
                         String midiaEscolhida = teclado.nextLine();
                         
                         boolean verificaMidiaEscolhida;
                         verificaMidiaEscolhida = plataforma.assistirMidia(midiaEscolhida);
-                        if(verificaMidiaEscolhida == false){
-                            System.out.println("Midia nao encontrada");
+                    
+                        if(verificaMidiaEscolhida){
+                            System.out.println("\nAssistindo midia... \nMidia assistida.");
                         }
+                        else{
+                            System.out.println("Midia nao encontrada. Adicione uma midia na lista para assistir futuramente, para conseguir assistir.");
+                        }
+
+                        System.out.println("\nDeseja avaliar essa midia assistida? Digite '1' para sim e '2' para nao: ");
+                        int opcao = Integer.parseInt(teclado.nextLine());
+                        while(opcao != 1 && opcao != 2){
+                            System.out.println("Opcao invalida. Digite '1' para sim e '2' para nao: ");
+                            opcao = Integer.parseInt(teclado.nextLine());
+                        }
+                        if(opcao == 1){
+                            avaliarMidia();
+                        }
+                        if(opcao == 2){
+                            System.out.println("\nObrigado por assistir!");
+                        }
+
                         pausa();
                         break;
                     case 4:
-                        plataforma.visualizarListaDeAssistidos();
+                        String listaAssistidos;
+                        listaAssistidos = plataforma.visualizarListaDeAssistidos();
+                        System.out.println(listaAssistidos);
                         pausa();
                         break;
                     case 5:
                         plataforma.visualizarListaParaVerFuturamente();  
                         pausa();
-                        break;
                     case 6:
-                        System.out.println("Falta  adc na lista assistida "); //fazer o metodo
-                        pausa();
-                        break;
-                    case 7:
                         plataforma.carregarCatalogos();
-                        System.out.println("Exibindo catalogo...");
+                        System.out.println("---Exibindo catalogo---");
                         System.out.println(plataforma.getCatalogo());
 
-                        System.out.println("Digite o nome da midia que deseja assistir futuramente: "); 
+                        System.out.println("\nDigite o nome da midia que deseja assistir futuramente: "); 
                         String midia = teclado.nextLine();
 
                         try{
                             plataforma.adicionarMidiaNaListaParaVerFuturamente(midia);
                         } catch(Exception e){
-                            System.out.println("Midia nao encontrada. Digite o nome da midia novamente: ");
+                            System.out.println("\nMidia nao encontrada. Digite o nome da midia novamente: ");
                             midia = teclado.nextLine();
                             plataforma.adicionarMidiaNaListaParaVerFuturamente(midia);
                         }
                         pausa();
                         break;
-                    case 8:
+                    case 7:
                         menuFiltro(); //catalogo
                         pausa();
                         break;
-                    case 9:
+                    case 8:
                        //midia assistidas
                         menuFiltro();
                         pausa();
                         break;
-                    case 10:
+                    case 9:
                         //assistir futuramente
                         menuFiltro();
                         pausa();
                         break;
-                    case 11:
+                    case 10:
                         plataforma.carregarCatalogos();
-                        System.out.println("Exibindo catalogo...");
+                        System.out.println("---Exibindo catalogo---");
                         System.out.println(plataforma.getCatalogo());
                         avaliarMidia();
                         pausa();
@@ -271,6 +285,8 @@ public class App {
 
     //Metodo para cadastrar um filme na plataforma
     private static void cadastrarFilme() {
+        System.out.println("==========================");
+        System.out.println("--Cadastro de Filme--");
         System.out.print("Por gentileza, digite o nome do filme: ");
         String nome = teclado.nextLine();
         System.out.print("Digite a data de lançamento: ");
@@ -291,7 +307,9 @@ public class App {
 
     //Metodo para cadastrar uma serie na plataforma
     private static void cadastrarSerie() {
-        System.out.print("Digite o nome da série: ");
+        System.out.println("==========================");
+        System.out.println("--Cadastro de Serie--");
+        System.out.print("Digite o nome da serie: ");
         String nome = teclado.nextLine();
         System.out.print("Digite a data de lançamento: ");
         String dataLancamento = teclado.nextLine();
@@ -313,11 +331,11 @@ public class App {
     public static void cadastrarCliente() {
         String nome, nomeUsuario, senha;
         System.out.println("==========================");
-        System.out.println("Cadastro de Cliente");
+        System.out.println("--Cadastro de Cliente--");
 
         System.out.println("Nome: ");
         nome = teclado.nextLine();
-        System.out.println("Nome de Usuario (login): ");
+        System.out.println("login: ");
         nomeUsuario = teclado.nextLine();
         System.out.println("Senha: ");
         senha = teclado.nextLine();
@@ -325,15 +343,17 @@ public class App {
         Cliente novoCliente = new Cliente(nome, nomeUsuario, senha);
 
         if (plataforma.adicionarCliente(novoCliente)) {
-            System.out.println("Cliente adicionado com sucesso!");
+            System.out.println("\nCliente adicionado com sucesso!");
         } else {
-            System.out.println("Login invalido, já existe cliente cadastrado com esse login");
+            System.out.println("\nLogin invalido, já existe cliente cadastrado com esse login");
         }
 
     }
 
     //Metodo para realizar o login de um cliente na plataforma
     public static boolean realizarLogin() {
+        System.out.println("==========================");
+        System.out.println("--Realizando login--");
         System.out.println("Digite seu login: ");
         String login = teclado.nextLine();
         System.out.println("Digite sua senha: ");
@@ -343,22 +363,16 @@ public class App {
 
     //Metodo para realizar o logoff de um cliente na plataforma
     public static void realizarLogoff() {
-        plataforma.logoff();    
-        System.out.println("Saindo...");
+        plataforma.logoff();
+        System.out.println("==========================");
+        System.out.println("--Realizado logoff--");    
     }
 
-    //Metodo para exibir os catalogos disponiveis na plataforma
-    public static void exibirMediaAvaliacaoCatalogo() {
-        System.out.println("Escreva o nome da midia que quer escolher: ");
-        String texto = teclado.nextLine();
-        Catalogo catalogo = plataforma.buscarCatalogo(texto);
-        BigDecimal media =  plataforma.mediaAvaliacao(catalogo);
-        System.out.println("A avaliacao do catalogo " + catalogo.getNome() + " \nE a media da avaliacao e: "+ media);
-    }
-
-    //Metodo para avaliar midia
-    public static void avaliarMidia() {
-        System.out.println("Escreva o nome da midia que deseja avaliar: ");
+     //Metodo para avaliar uma midia
+     public static void avaliarMidia() {
+        System.out.println("==========================");
+        System.out.println("--Avaliando midia--");
+        System.out.println("\nDigite o nome da midia que deseja avaliar: ");
         String texto = teclado.nextLine();
         Catalogo catalogo = plataforma.buscarCatalogo(texto);
         
@@ -376,5 +390,18 @@ public class App {
 
         plataforma.adicionarAvaliacao(avaliacao, texto, catalogo);
     }
+
+    //Metodo para exibira media de avaliacao de uma midia
+    public static void exibirMediaAvaliacaoCatalogo() {
+        System.out.println("==========================");
+        System.out.println("--Realizando avaliacao--");
+        System.out.println("\nDigite o nome da midia que deseja avaliarr: ");
+        String texto = teclado.nextLine();
+        Catalogo catalogo = plataforma.buscarCatalogo(texto);
+        BigDecimal media =  plataforma.mediaAvaliacao(catalogo);
+        System.out.println("A avaliacao da midia " + catalogo.getNome() + " possui media de: "+ media);
+    }
+
+   
 
 }
