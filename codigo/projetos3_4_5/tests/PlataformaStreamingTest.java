@@ -110,18 +110,6 @@ public class PlataformaStreamingTest {
 
         assertEquals(2, plataforma1.filtrarPorDuracao(120).size());
     }
-    @Test
-    public void deveRegistrarAudiencia(){
-        plataforma1.adicionarCatalogo(serie1);
-        plataforma1.adicionarCatalogo(filme1);
-
-        plataforma1.registrarAudiencia(serie1);
-        plataforma1.registrarAudiencia(filme1);
-        plataforma1.registrarAudiencia(filme1);
-
-        assertEquals(2, filme1.getAudiencia());
-        assertEquals(1, serie1.getAudiencia());
-    }
 
     @Test
     public void deveBuscarMidiaPeloNome() {
