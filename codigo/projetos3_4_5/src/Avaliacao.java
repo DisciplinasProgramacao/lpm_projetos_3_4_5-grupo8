@@ -1,8 +1,10 @@
 public class Avaliacao {
+    //Atributos
     private String loginCliente;
     private int nota;
     private String comentario;
 
+    //Construtor
     public Avaliacao(String loginCliente, int nota){
         init(loginCliente, nota, "");
     }
@@ -17,10 +19,15 @@ public class Avaliacao {
         this.comentario = comentario;
     }
 
+    //Metodo que retorna a nota
     public int getNota(){
         return this.nota;
     }
 
+    /**
+     * Metodo que adiciona comentario em uma avaliacao
+     * @param comentario
+     */
     public void adicionarComentario(String comentario){
         this.comentario = comentario;
     }

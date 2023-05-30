@@ -1,7 +1,8 @@
 public class Filme extends Catalogo {
-
+    //atributo
     private int duracao;
 
+    //Construtores
     public Filme(int id, String nome, String dataLancamento, int duracao) {
         super(id, nome, dataLancamento);
         this.duracao = duracao;

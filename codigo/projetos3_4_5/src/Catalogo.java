@@ -3,6 +3,7 @@ import java.util.LinkedList;
 
 public abstract class Catalogo {
 
+    //Atributos
     private static final String[] GENEROS = new String[8];
     private static int parseId;
     private String nome;
@@ -18,6 +19,7 @@ public abstract class Catalogo {
         parseId = 0;
     }
 
+    //Construtor
     public Catalogo(int id, String nome, String dataLancamento) {
         if (id > parseId) {
             parseId = id;
@@ -29,12 +31,6 @@ public abstract class Catalogo {
         init(++parseId, nome, dataLancamento, genero, idioma);
     }
 
-    /**
-     * @param nome
-     * @param dataLancamento
-     * @param genero
-     * @param idioma
-     */
     public void init(int id, String nome, String dataLancamento, String genero, String idioma) {
         this.nome = nome;
         this.genero = genero; // Ainda não será implementado
@@ -81,10 +77,18 @@ public abstract class Catalogo {
         return this.nome;
     }
 
+    /**
+     * Metoro que avalia uma midia
+     * @param avaliacao
+     */
     public void avaliarMidia(Avaliacao avaliacao) {
         this.listaAvaliacoes.add(avaliacao);
     }
 
+    /**
+     * Metodo que retorna a media de avaliacoes de uma midia
+     * @return
+     */
     public BigDecimal mediaAvaliacao() {
         int somaNotas = 0;
         BigDecimal quantidadeAvaliacoes = new BigDecimal(listaAvaliacoes.size());
@@ -111,6 +115,10 @@ public abstract class Catalogo {
         return this.id;
     }
 
+    /**
+     * Metodo que retorna o mes visto em uma midia
+     * @return
+     */
     public int getMesVisto() {
         String[] aux = dataLancamento.split("/");
         return Integer.parseInt(aux[1]);

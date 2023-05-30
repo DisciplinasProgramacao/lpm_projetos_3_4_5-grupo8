@@ -76,7 +76,7 @@ public class App {
         System.out.println("5 - Cadastrar e Salvar Serie");
         System.out.println("6 - Cadastrar Cliente");
         System.out.println("7 - Realizar login de um cliente");
-        System.out.println("8 - Verificar audiencia de uma serie");
+        System.out.println("8 - Verificar audiencia de uma midia");
         System.out.println("9 - Verificar avaliacao de uma midia");
         System.out.println("0 - Sair");
         System.out.println("=================================================");

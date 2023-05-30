@@ -183,12 +183,21 @@ public class Cliente {
         listaParaVer.remove(midia);
     }
 
+    /**
+     * Metodo que verifica se o cleinte eh especialista
+     * @return
+     */
     public boolean ehEspecialista() {
         LocalDate hoje = LocalDate.now();
         return listaJaVistas.stream()
                 .filter(x -> x.getData().until(hoje, ChronoUnit.DAYS) <= 30).count() >= 5;
     }
 
+    /**
+     * Metodo que verifica se o cliente ja avaliou a midia
+     * @param catalogo
+     * @return
+     */
     private boolean clienteJaAvaliouMidia(Catalogo catalogo){
         if(listaDeMidiasAvaliadas.add(catalogo)){            
             return false;
@@ -196,6 +205,12 @@ public class Cliente {
         return true;
     }
 
+    /**
+     * Metodo que avalia uma midia com nota e comentario
+     * @param nota
+     * @param comentario
+     * @return
+     */
     private Avaliacao avaliar(int nota, String comentario) {
         if(ehEspecialista() && !comentario.isEmpty()){
             return new Avaliacao(login, nota, comentario);
@@ -204,12 +219,24 @@ public class Cliente {
         return new Avaliacao(login, nota);
     }
 
+    /**
+     * Metodo que adiciona um comentario a uma avaliacao existente
+     * @param avaliacao
+     * @param comentario
+     */
     public void adicionarComentarioAvaliacaoExistente(Avaliacao avaliacao, String comentario){
         if(avaliacao != null && (ehEspecialista() && !comentario.isEmpty())){
             avaliacao.adicionarComentario(comentario);
         }
     }
 
+    /**
+     * Metodo que adiciona avaliacao em uma midia
+     * @param nota
+     * @param comentario
+     * @param catalogo
+     * @return
+     */
     public Avaliacao adicionarAvaliacao(int nota, String comentario, Catalogo catalogo){
         if(!clienteJaAvaliouMidia(catalogo)){
             Avaliacao avaliacaoSendoFeita = avaliar(nota, comentario);
@@ -224,6 +251,10 @@ public class Cliente {
         return null;
     }
 
+    /**
+     * Metodo que lista todas as midias assistidas
+     * @return
+     */
     public String listarMidiasAssistidas(){
         String midias = "";
         for (Assistido assistido : listaJaVistas){
@@ -233,6 +264,10 @@ public class Cliente {
         return midias;
     }
 
+    /**
+     * Metodo que lista todas as midias para serem assistidas futuramente
+     * @return
+     */
     public String listarMidiasParaSeremAssistidas(){
         String midias = "";
         for (Catalogo midiaParaSerVista : listaParaVer){
