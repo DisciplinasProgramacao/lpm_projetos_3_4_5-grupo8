@@ -347,13 +347,23 @@ public class PlataformaStreaming {
         Catalogo midiaPesquisada = buscarCatalogo(midia);
         this.clienteAtual.adicionarNaLista(midiaPesquisada);
     }
-
-
+ 
     //Metodo que verifica as midias assistidas pelo cliente
-    public LinkedList<Assistido> visualizarListaDeAssistidos() {
-        return (this.clienteAtual.getListaJaVistas());
+    public String visualizarListaDeAssistidos() {
+        return (this.clienteAtual.listarMidiasAssistidas());
     }
 
+    //testar
+    public boolean assistirMidia(String nomeMidia){
+        Catalogo catalogo = this.getClienteAtual().buscarMidiaNaListaParaVer(nomeMidia);
+        if(catalogo != null){
+            this.clienteAtual.registrarAudiencia(catalogo);
+            return true;
+        }
+
+        return false;
+    }
+    
     //Metodo que verifica as midias que o cliente quer ver futuramente
     public void visualizarListaParaVerFuturamente() {
         LinkedList<Catalogo> listaParaVer = this.clienteAtual.getListaParaVer();

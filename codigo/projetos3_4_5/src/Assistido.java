@@ -26,11 +26,11 @@ public class Assistido {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("Mídia:\n" + this.catalogo.toString() + 
-            "\nAssistido em: " + this.data.toString() );
+        stringBuilder.append("- " + this.catalogo.toString() + 
+            "\n   Assistido em: " + this.data.toString() );
 
         if(this.avaliacao != null){
-            stringBuilder.append("\n" + this.avaliacao.toString());
+            stringBuilder.append("\n   " + this.avaliacao.toString() + "\n");
         }
 
         return stringBuilder.toString();

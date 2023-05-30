@@ -236,6 +236,16 @@ public class Cliente {
         return midias;
     }
 
+    //testar
+    public Catalogo buscarMidiaNaListaParaVer(String nomeMidia){
+        for (Catalogo catalogo : listaParaVer) {
+            if(catalogo.getNome().equals(nomeMidia)){
+                return catalogo;
+            }
+        }
+        return null;
+    }
+    
     @Override
     public int hashCode() {
         return this.nomeDeUsuario.hashCode();
