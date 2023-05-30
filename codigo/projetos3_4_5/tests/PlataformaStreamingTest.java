@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 public class PlataformaStreamingTest {
     private PlataformaStreaming plataforma1;
-    private Cliente cliente1;
+    private Cliente cliente1, clienteLogado;
     private Serie serie1, serie2;
     private Filme filme1, filme2, filme3;
 
@@ -13,6 +13,7 @@ public class PlataformaStreamingTest {
     public void setUp() {
         plataforma1 = new PlataformaStreaming("Netflix");
         cliente1 = new Cliente("Ana Souza", "aninha12", "123");
+        clienteLogado = new Cliente("To logado", "logado", "login");
 
         serie1 = new Serie("The Blacklist", "02/02/2017", "Suspense", "EN", 10);
         serie2 = new Serie("Black mirror", "05/05/2018", "Terror", "PT", 10);
@@ -20,6 +21,8 @@ public class PlataformaStreamingTest {
         filme1 = new Filme("O Poderoso Chefão 1", "01/01/1972", "Drama", "EN", 120);
         filme2 = new Filme("O Poderoso Chefão 2", "01/01/1974", "Drama", "EN", 120);
         filme3 = new Filme("Minions", "30/06/2022", "Comedia", "EN", 180);
+
+        plataforma1.adicionarCliente(clienteLogado);
     }
 
     @Test
@@ -135,21 +138,36 @@ public class PlataformaStreamingTest {
     }
 
     @Test
-    public void deveAdicionarComentarioNaMidia(){
-        plataforma1.adicionarCliente(cliente1);
-        plataforma1.login("aninha12", "123");
+    public void deveRetornarTrueCasoAssistaMidiaComSucesso(){
+        plataforma1.login("logado", "login");
         plataforma1.adicionarCatalogo(serie1);
         plataforma1.adicionarCatalogo(filme2);
 
         plataforma1.adicionarMidiaNaListaParaVerFuturamente("The Blacklist");
         plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
-        plataforma1.assistirMidia("The Blacklist");
+        
+        assertTrue(plataforma1.assistirMidia("O Poderoso Chefão 2"));
+        assertTrue(plataforma1.assistirMidia("The Blacklist"));
+    }
+
+    @Test
+    public void deveRetornarFalseCasoSoliciteAssistirMidiaQueNaoExistaNaListaParaVer(){
+        plataforma1.login("logado", "login");
+        plataforma1.adicionarCatalogo(serie1);
+
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("The Blacklist");
+        
+        assertFalse(plataforma1.assistirMidia("O Poderoso Chefão 2"));
+    }    
+
+    @Test
+    public void deveRetornarListaDeMidiasJaAssistidas(){
+        plataforma1.login("logado", "login");
+        plataforma1.adicionarCatalogo(filme2);
+
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
         plataforma1.assistirMidia("O Poderoso Chefão 2");
-        plataforma1.adicionarAvaliacao(10, "", serie1);
-
-
-        String oi = plataforma1.getClienteAtual().listarMidiasAssistidas();
-        System.out.println(plataforma1.getClienteAtual().listarMidiasAssistidas());
-
+        
+        assertTrue(plataforma1.visualizarListaDeAssistidos().contains("O Poderoso Chefão 2"));
     }
 }
