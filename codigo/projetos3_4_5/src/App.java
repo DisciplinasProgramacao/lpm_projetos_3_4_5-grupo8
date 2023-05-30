@@ -153,24 +153,14 @@ public class App {
 
                         System.out.println("Digite o nome da midia que deseja assistir futuramente: "); 
                         String midia = teclado.nextLine();
-                        
+
                         try{
-                            plataforma.adicionarVerFuturamente(midia);
+                            plataforma.adicionarMidiaNaListaParaVerFuturamente(midia);
                         } catch(Exception e){
-                            System.out.println("NAO ACHOU");
-                            System.out.println("Digite o nome da midia novamente: "); 
+                            System.out.println("Midia nao encontrada. Digite o nome da midia novamente: ");
                             midia = teclado.nextLine();
-                            plataforma.adicionarVerFuturamente(midia);
+                            plataforma.adicionarMidiaNaListaParaVerFuturamente(midia);
                         }
-                       
-
-                        /* 
-                        boolean verificaMidiaAdicionada;
-
-                        verificaMidiaAdicionada = plataforma.adicionarMidiaNaListaParaVerFuturamente(midia);
-                        if(verificaMidiaAdicionada == false){
-                            System.out.println("Midia nao encontrada");
-                        }*/
                         pausa();
                         break;
                     case 8:
