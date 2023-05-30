@@ -227,7 +227,6 @@ public class PlataformaStreaming {
                 filtro.add(serie);
             }
         }
-
         return filtro;
     }
 
@@ -360,6 +359,5 @@ public class PlataformaStreaming {
     public BigDecimal mediaAvaliacao(Catalogo catalogo) {
         return catalogo.mediaAvaliacao();
     }
-
 
 }

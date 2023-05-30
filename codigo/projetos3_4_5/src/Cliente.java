@@ -178,7 +178,7 @@ public class Cliente {
     /**
      * Registra a audiencia de uma serie e a adiciona na lista de ja vistas
      * 
-     * @param midia midia a ser registrada audiencia
+     * @param midia a ser registrada audiencia
      */
     public void registrarAudiencia(Catalogo midia) {
         LocalDate hoje = LocalDate.now();

@@ -238,7 +238,7 @@ public class App {
                 case 1:
                     System.out.println("Para filtrar digite o genero: ");
                     String genero = teclado.nextLine();
-                    plataforma.filtrarPorGenero(genero); 
+                    plataforma.filtrarPorGenero(genero);
                     pausa();
                     break;
                 case 2:
