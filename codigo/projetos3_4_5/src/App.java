@@ -119,6 +119,7 @@ public class App {
                     case 1:
                         System.out.println("Carregando arquivo Catalogo com séries e filmes...");
                         plataforma.carregarCatalogos();
+                        pausa();
                         break;
                     case 2:
                         try {
@@ -127,6 +128,7 @@ public class App {
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("Carregue o arquivo Catalogo antes de solicitar sua exibicao.");
                         }
+                        pausa();
                         break;
                     case 3:
                         System.out.println("Falta implementar escolha da midia"); //fazer o metodo 
@@ -134,6 +136,7 @@ public class App {
                         break;
                     case 4:
                         plataforma.visualizarListaDeAssistidos();
+                        pausa();
                         break;
                     case 5:
                         plataforma.visualizarListaParaVerFuturamente();
@@ -340,16 +343,23 @@ public class App {
 
     //Metodo para avaliar midia
     public static void avaliarMidia() {
-        System.out.println("Escreva o nome da midia que quer escolher: ");
+        System.out.println("Escreva o nome da midia que deseja avaliar: ");
         String texto = teclado.nextLine();
         Catalogo catalogo = plataforma.escolherCatalogoPorNome(texto);
         
-        System.out.println("Comentar sobre a midia: ");
+        System.out.println("Deixe seu comentario sobre a midia: ");
         texto = teclado.nextLine();
-        System.out.println("Avaliar midia: ");
-        int avaliar = Integer.parseInt(teclado.nextLine());
 
-        plataforma.adicionarAvaliacao(avaliar, texto, catalogo);
+        System.out.println("Digite sua avaliacao com estrelas de 1 a 5: ");
+        int avaliacao = Integer.parseInt(teclado.nextLine());
+
+        while (avaliacao > 5 || avaliacao < 1) {
+            System.out.println("Numero invalido para a avaliacao. Digite sua avaliacao novamente: ");
+            avaliacao = Integer.parseInt(teclado.nextLine());
+        }
+        //System.out.println("Midia: '" + catalogo.getNome() + "', avaliada com " + avaliacao + "estrelas.");
+
+        plataforma.adicionarAvaliacao(avaliacao, texto, catalogo);
     }
 
 }
