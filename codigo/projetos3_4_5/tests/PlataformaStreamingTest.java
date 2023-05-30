@@ -141,8 +141,8 @@ public class PlataformaStreamingTest {
         plataforma1.adicionarCatalogo(serie1);
         plataforma1.adicionarCatalogo(filme2);
 
-        plataforma1.adicionarVerFuturamente("The Blacklist");
-        plataforma1.adicionarVerFuturamente("O Poderoso Chefão 2");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("The Blacklist");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
         plataforma1.assistirMidia("The Blacklist");
         plataforma1.assistirMidia("O Poderoso Chefão 2");
         plataforma1.adicionarAvaliacao(10, "", serie1);
