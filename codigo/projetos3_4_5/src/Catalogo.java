@@ -43,13 +43,6 @@ public abstract class Catalogo {
     }
 
     /**
-     * Registra audiencia daquele conteudo audiovisual
-     */
-    public void registrarAudiencia() {
-        this.audiencia += 1;
-    }
-
-    /**
      * @return audiencia do conteudo
      */
     public int getAudiencia() {
@@ -75,6 +68,29 @@ public abstract class Catalogo {
      */
     public String getNome() {
         return this.nome;
+    }
+
+    /**
+     * @return id do conteudo
+     */
+    public int getId() {
+        return this.id;
+    }
+
+    /**
+     * Metodo que retorna o mes visto em uma midia
+     * @return
+     */
+    public int getMesVisto() {
+        String[] aux = dataLancamento.split("/");
+        return Integer.parseInt(aux[1]);
+    }
+    
+    /**
+     * Registra audiencia daquele conteudo audiovisual
+     */
+    public void registrarAudiencia() {
+        this.audiencia += 1;
     }
 
     /**
@@ -106,22 +122,6 @@ public abstract class Catalogo {
         this.avaliacaoMedia = mediaAvaliacoes;
 
         return mediaAvaliacoes;
-    }
-
-    /**
-     * @return id do conteudo
-     */
-    public int getId() {
-        return this.id;
-    }
-
-    /**
-     * Metodo que retorna o mes visto em uma midia
-     * @return
-     */
-    public int getMesVisto() {
-        String[] aux = dataLancamento.split("/");
-        return Integer.parseInt(aux[1]);
     }
 
     @Override

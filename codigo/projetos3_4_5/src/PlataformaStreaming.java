@@ -18,27 +18,6 @@ public class PlataformaStreaming {
         this.clienteAtual = null;
     }
 
-    /**
-     * Logar na plataforma
-     * 
-     * @param login login do usuario
-     * @param senha senha do usuario
-     * 
-     * 
-     * @return cliente se sucesso, cliente nulo caso erro
-     */
-    public Cliente login(String login, String senha) {
-        Cliente cliente = clientes.get(login);
-
-        if (cliente != null && cliente.getSenha().equals(senha)) {
-            this.clienteAtual = cliente;
-        } else {
-            this.clienteAtual = null;
-        }
-        
-        return this.clienteAtual;
-    }
-
     public String getNome() {
         return this.nome;
     }
@@ -65,19 +44,35 @@ public class PlataformaStreaming {
         return str.toString().substring(0, str.length() - 2);
     }
 
-    public Avaliacao adicionarAvaliacao(int nota, String comentario, Catalogo catalogo) {
-        return clienteAtual.adicionarAvaliacao(nota, comentario, catalogo);
+    /**
+    * Logar na plataforma
+    * 
+    * @param login login do usuario
+    * @param senha senha do usuario
+    * 
+    * 
+    * @return cliente se sucesso, cliente nulo caso erro
+    */
+    public Cliente login(String login, String senha) {
+        Cliente cliente = clientes.get(login);
+
+        if (cliente != null && cliente.getSenha().equals(senha)) {
+            this.clienteAtual = cliente;
+        } else {
+            this.clienteAtual = null;
+        }
+        
+        return this.clienteAtual;
     }
 
-    public void adicionarComentarioAvaliacaoExistente(Avaliacao avaliacao, String comentario){
-        this.clienteAtual.adicionarComentarioAvaliacaoExistente(avaliacao, comentario);
+    /**
+     * logoff do cliente na plataforma
+     * 
+     */
+    public void logoff() {
+        this.clienteAtual = null;
     }
-
-    //TESTAR
-    public BigDecimal mediaAvaliacao(Catalogo catalogo) {
-        return catalogo.mediaAvaliacao();
-    }
-
+   
     /**
      * adicionar catalogo na plataforma
      * 
@@ -291,13 +286,6 @@ public class PlataformaStreaming {
         return filtro;
     }
 
-    /**
-     * logoff do cliente na plataforma
-     * 
-     */
-    public void logoff() {
-        this.clienteAtual = null;
-    }
 
     /**
      * Buscar catalogo por nome
@@ -347,5 +335,31 @@ public class PlataformaStreaming {
     public String visualizarListaParaVerFuturamente() {
         return this.clienteAtual.listarMidiasParaSeremAssistidas();
     }
+
+     /**
+     * Metodo que adiciona avaliacao em uma midia
+     * @param nota
+     * @param comentario
+     * @param catalogo
+     * @return
+     */
+    public Avaliacao adicionarAvaliacao(int nota, String comentario, Catalogo catalogo) {
+        return clienteAtual.adicionarAvaliacao(nota, comentario, catalogo);
+    }
+
+    /**
+     * Metodo que adiciona comentario em uma avaliacao ja existente
+     * @param avaliacao
+     * @param comentario
+     */
+    public void adicionarComentarioAvaliacaoExistente(Avaliacao avaliacao, String comentario){
+        this.clienteAtual.adicionarComentarioAvaliacaoExistente(avaliacao, comentario);
+    }
+
+    //TESTAR
+    public BigDecimal mediaAvaliacao(Catalogo catalogo) {
+        return catalogo.mediaAvaliacao();
+    }
+
 
 }

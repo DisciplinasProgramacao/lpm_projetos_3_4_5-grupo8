@@ -29,10 +29,6 @@ public class Cliente {
         return this.senha;
     }
 
-    public Catalogo escolherCatalogo(int posicao) {
-        return this.listaParaVer.get(posicao);
-    }
-
     /**
      * @return nome do usuario
      */
@@ -56,6 +52,14 @@ public class Cliente {
 
     public LinkedList<Assistido> getListaJaVistas() {
         return this.listaJaVistas;
+    }
+    /**
+     * Metodo que escolhe um catalogo da lista para ver
+     * @param posicao
+     * @return
+     */
+    public Catalogo escolherCatalogo(int posicao) {
+        return this.listaParaVer.get(posicao);
     }
 
     /*
