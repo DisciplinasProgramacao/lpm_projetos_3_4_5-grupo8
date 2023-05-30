@@ -329,7 +329,7 @@ public class PlataformaStreaming {
     public Catalogo buscarCatalogo(String midia) {
         try {
             for (int key : catalogos.keySet()) {
-                if (catalogos.get(key).getNome() == midia) {
+                if (catalogos.get(key).getNome().equals(midia)) {
                     return catalogos.get(key);
                 }
             }
@@ -338,7 +338,6 @@ public class PlataformaStreaming {
             return null;
         }
     }
-
 
     public boolean adicionarMidiaNaListaParaVerFuturamente(String midia) {
         Catalogo midiaPesquisada = buscarCatalogo(midia);
@@ -356,14 +355,7 @@ public class PlataformaStreaming {
         Catalogo midiaPesquisada = buscarCatalogo(midia);
         this.clienteAtual.adicionarNaLista(midiaPesquisada);
     }
-
-
-
-
-
-
-
-
+ 
     //Metodo que adiciona midia na lista de 'Midias para assistir futuramente' e verifica se a midia passada existe no catalogo 
     public boolean adicionarMidiaNaListaDeAssistidos(String midia) {
         Catalogo midiaPesquisada= buscarCatalogo(midia);
@@ -390,6 +382,5 @@ public class PlataformaStreaming {
         }
     }
 
-    
     
 }
