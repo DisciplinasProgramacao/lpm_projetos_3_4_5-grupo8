@@ -135,11 +135,11 @@ public class App {
                         pausa();
                         break;
                     case 4:
-                        plataforma.visualizarListaDeAssistidos();
+                        plataforma.visualizarListaDeAssistidos();  //fazer o metodo
                         pausa();
                         break;
                     case 5:
-                        plataforma.visualizarListaParaVerFuturamente();
+                        plataforma.visualizarListaParaVerFuturamente();  //fazer o metodo
                         pausa();
                         break;
                     case 6:
@@ -147,14 +147,30 @@ public class App {
                         pausa();
                         break;
                     case 7:
-                        System.out.println("Digite o nome da midia que deseja assistir futuramente: "); //fazer o metodo
+                        plataforma.carregarCatalogos();
+                        System.out.println("Exibindo catalogo...");
+                        System.out.println(plataforma.getCatalogo());
+
+                        System.out.println("Digite o nome da midia que deseja assistir futuramente: "); 
                         String midia = teclado.nextLine();
+                        
+                        try{
+                            plataforma.adicionarVerFuturamente(midia);
+                        } catch(Exception e){
+                            System.out.println("NAO ACHOU");
+                            System.out.println("Digite o nome da midia novamente: "); 
+                            midia = teclado.nextLine();
+                            plataforma.adicionarVerFuturamente(midia);
+                        }
+                       
+
+                        /* 
                         boolean verificaMidiaAdicionada;
 
                         verificaMidiaAdicionada = plataforma.adicionarMidiaNaListaParaVerFuturamente(midia);
                         if(verificaMidiaAdicionada == false){
                             System.out.println("Midia nao encontrada");
-                        }
+                        }*/
                         pausa();
                         break;
                     case 8:
@@ -172,6 +188,7 @@ public class App {
                         pausa();
                         break;
                     case 11:
+                        plataforma.carregarCatalogos();
                         System.out.println("Exibindo catalogo...");
                         System.out.println(plataforma.getCatalogo());
                         avaliarMidia();
