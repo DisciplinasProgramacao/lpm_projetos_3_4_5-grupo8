@@ -26,10 +26,8 @@ public class PlataformaStreamingTest {
     }
 
     @Test
-    public void deveAdicionarUmClienteNaPlataforma() {
-        plataforma1.adicionarCliente(cliente1);
-
-        assertTrue(plataforma1.getClientes().contains("aninha12"));
+    public void deveRetornarTrueCasoClienteSejaAdicionadoNaPlataforma() {
+        assertTrue(plataforma1.adicionarCliente(cliente1));
     }
 
     @Test

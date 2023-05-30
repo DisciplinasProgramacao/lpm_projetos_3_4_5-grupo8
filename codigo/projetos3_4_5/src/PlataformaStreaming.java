@@ -39,32 +39,17 @@ public class PlataformaStreaming {
         return this.clienteAtual;
     }
 
-    // metodo para testes
-    /**
-     * @return String de clientes
-     */
-    public String getClientes() {
-        StringBuilder str = new StringBuilder();
-        for (String key : clientes.keySet()) {
-            str.append(key);
-            str.append(", ");
-        }
-        return str.toString().substring(0, str.length() - 2);
-    }
-
     public String getNome() {
         return this.nome;
     }
 
     /**
      * @return Cliente atual
-     * @throws IndexOutOfBoundsException analisar essa exceção aqui
      */
-    public Cliente getClienteAtual() /*throws Exception*/ {
+    public Cliente getClienteAtual() {
         return this.clienteAtual;
     }
 
-    // metodo para testes
     /**
      * @return String de catalogos
      */
@@ -81,10 +66,12 @@ public class PlataformaStreaming {
         return str.toString().substring(0, str.length() - 2);
     }
 
+    //TESTAR
     public void adicionarAvaliacao(int nota, String comentario, Catalogo catalogo) {
         clienteAtual.adicionarAvaliacao(nota, comentario, catalogo);
     }
 
+    //TESTAR
     public BigDecimal mediaAvaliacao(Catalogo catalogo) {
         return catalogo.mediaAvaliacao();
     }
@@ -303,16 +290,6 @@ public class PlataformaStreaming {
     }
 
     /**
-     * Registrar audiencia da midia
-     * 
-     * @param midia midia ser registrada
-     * 
-     */
-    public void registrarAudiencia(Catalogo midia) {
-        midia.registrarAudiencia();
-    }
-
-    /**
      * logoff do cliente na plataforma
      * 
      */
@@ -339,7 +316,8 @@ public class PlataformaStreaming {
         }
     }
 
-    /**
+    //CRIAR TESTE
+    /** 
      * Metodo que adiciona midia na lista de 'Midias para assistir futuramente'
      * @param midia
      */
@@ -353,7 +331,6 @@ public class PlataformaStreaming {
         return (this.clienteAtual.listarMidiasAssistidas());
     }
 
-    //testar
     public boolean assistirMidia(String nomeMidia){
         Catalogo catalogo = this.getClienteAtual().buscarMidiaNaListaParaVer(nomeMidia);
         if(catalogo != null){
@@ -364,6 +341,7 @@ public class PlataformaStreaming {
         return false;
     }
     
+    //AJUSTAR METODO
     //Metodo que verifica as midias que o cliente quer ver futuramente
     public void visualizarListaParaVerFuturamente() {
         LinkedList<Catalogo> listaParaVer = this.clienteAtual.getListaParaVer();
