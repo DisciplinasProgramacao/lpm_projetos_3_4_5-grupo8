@@ -53,8 +53,10 @@ public class Cliente {
     public LinkedList<Assistido> getListaJaVistas() {
         return this.listaJaVistas;
     }
+
     /**
      * Metodo que escolhe um catalogo da lista para ver
+     * 
      * @param posicao
      * @return
      */
@@ -189,6 +191,7 @@ public class Cliente {
 
     /**
      * Metodo que verifica se o cleinte eh especialista
+     * 
      * @return
      */
     public boolean ehEspecialista() {
@@ -199,11 +202,12 @@ public class Cliente {
 
     /**
      * Metodo que verifica se o cliente ja avaliou a midia
+     * 
      * @param catalogo
      * @return
      */
-    private boolean clienteJaAvaliouMidia(Catalogo catalogo){
-        if(listaDeMidiasAvaliadas.add(catalogo)){            
+    private boolean clienteJaAvaliouMidia(Catalogo catalogo) {
+        if (listaDeMidiasAvaliadas.add(catalogo)) {
             return false;
         }
         return true;
@@ -211,12 +215,13 @@ public class Cliente {
 
     /**
      * Metodo que avalia uma midia com nota e comentario
+     * 
      * @param nota
      * @param comentario
      * @return
      */
     private Avaliacao avaliar(int nota, String comentario) {
-        if(ehEspecialista() && !comentario.isEmpty()){
+        if (ehEspecialista() && !comentario.isEmpty()) {
             return new Avaliacao(login, nota, comentario);
         }
 
@@ -225,30 +230,32 @@ public class Cliente {
 
     /**
      * Metodo que adiciona um comentario a uma avaliacao existente
+     * 
      * @param avaliacao
      * @param comentario
      */
-    public void adicionarComentarioAvaliacaoExistente(Avaliacao avaliacao, String comentario){
-        if(avaliacao != null && (ehEspecialista() && !comentario.isEmpty())){
+    public void adicionarComentarioAvaliacaoExistente(Avaliacao avaliacao, String comentario) {
+        if (avaliacao != null && (ehEspecialista() && !comentario.isEmpty())) {
             avaliacao.adicionarComentario(comentario);
         }
     }
 
     /**
      * Metodo que adiciona avaliacao em uma midia
+     * 
      * @param nota
      * @param comentario
      * @param catalogo
      * @return
      */
-    public Avaliacao adicionarAvaliacao(int nota, String comentario, Catalogo catalogo){
-        if(!clienteJaAvaliouMidia(catalogo)){
+    public Avaliacao adicionarAvaliacao(int nota, String comentario, Catalogo catalogo) {
+        if (!clienteJaAvaliouMidia(catalogo)) {
             Avaliacao avaliacaoSendoFeita = avaliar(nota, comentario);
             Avaliacao avaliacaoFeita;
             for (Assistido assistido : listaJaVistas) {
-                if(assistido.getCatalogo() == catalogo){
+                if (assistido.getCatalogo() == catalogo) {
                     avaliacaoFeita = assistido.adicionarAvaliacao(avaliacaoSendoFeita);
-                    return avaliacaoFeita;                  
+                    return avaliacaoFeita;
                 }
             }
         }
@@ -257,11 +264,12 @@ public class Cliente {
 
     /**
      * Metodo que lista todas as midias assistidas
+     * 
      * @return
      */
-    public String listarMidiasAssistidas(){
+    public String listarMidiasAssistidas() {
         String midias = "";
-        for (Assistido assistido : listaJaVistas){
+        for (Assistido assistido : listaJaVistas) {
             midias += assistido.toString();
         }
 
@@ -270,27 +278,28 @@ public class Cliente {
 
     /**
      * Metodo que lista todas as midias para serem assistidas futuramente
+     * 
      * @return
      */
-    public String listarMidiasParaSeremAssistidas(){
+    public String listarMidiasParaSeremAssistidas() {
         String midias = "";
-        for (Catalogo midiaParaSerVista : listaParaVer){
+        for (Catalogo midiaParaSerVista : listaParaVer) {
             midias += midiaParaSerVista.toString();
         }
 
         return midias;
     }
 
-    //testar
-    public Catalogo buscarMidiaNaListaParaVer(String nomeMidia){
+    // testar
+    public Catalogo buscarMidiaNaListaParaVer(String nomeMidia) {
         for (Catalogo catalogo : listaParaVer) {
-            if(catalogo.getNome().equals(nomeMidia)){
+            if (catalogo.getNome().equals(nomeMidia)) {
                 return catalogo;
             }
         }
         return null;
     }
-    
+
     @Override
     public int hashCode() {
         return this.nomeDeUsuario.hashCode();

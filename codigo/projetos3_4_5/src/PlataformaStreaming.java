@@ -137,38 +137,31 @@ public class PlataformaStreaming {
      * adicionar cliente na plataforma
      * 
      * @param clientes linkedlist de cliente a ser adicionado
+     * @throws FileNotFoundException
      * 
      */
-    public boolean carregarCliente() {
+    public void carregarCliente() throws FileNotFoundException {
         Function<String, Cliente> contrutorCliente = (str -> new Cliente(str.split(";")[0], str.split(";")[1],
                 str.split(";")[2]));
 
         LinkedList<Cliente> clientes;
-        try {
-            clientes = Armazenagem.ler("POO_Espectadores", contrutorCliente);
-            this.clientes.clear();
-            for (Cliente x : clientes) {
-                this.clientes.put(x.getLogin(), x);
-            }
-        } catch (FileNotFoundException e) {
-            return false;
+        clientes = Armazenagem.ler("POO_Espectadores", contrutorCliente);
+        this.clientes.clear();
+        for (Cliente x : clientes) {
+            this.clientes.put(x.getLogin(), x);
         }
-        try {
-            carregarAudiencia("POO_Audiencia");
-        } catch (FileNotFoundException e) {
-        }
-        return true;
+        this.carregarAudiencia();
     }
 
     /**
      * Metodo que le um arquivo e atualiza a audiencia
      * 
      * @param nomeArq nome do arquivo .csv
-     * 
+     * @throws FileNotFoundException erro ao abrir o arquivo
      */
-    public void carregarAudiencia(String nomeArq)
+    public void carregarAudiencia()
             throws FileNotFoundException {
-        File file = new File("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv");
+        File file = new File("./codigo/projetos3_4_5/arquivos/POO_Audiencia.csv");
         Scanner entrada = new Scanner(file, "UTF-8");
         String linha;
         String linhaAux[];
@@ -179,11 +172,11 @@ public class PlataformaStreaming {
             linhaAux = linha.split(";");
             clienteAux = clientes.get(linhaAux[0]);
             if (clienteAux != null) {
+                catalogoAux = catalogos.get(Integer.parseInt(linhaAux[2]));
                 if (linhaAux[1].equals("F")) {
-                    catalogoAux = catalogos.get(linhaAux[2]);
                     clienteAux.adicionarNaLista(catalogoAux);
                 } else {
-                    clienteAux.retirarDaLista(linhaAux[2]);
+                    clienteAux.registrarAudiencia(catalogoAux);
                 }
             }
         }

@@ -25,7 +25,11 @@ public class App {
                     break;
                 case 2:
                     System.out.println("Carregando arquivo de Usuarios...");
-                    plataforma.carregarCliente();
+                    try {
+                        plataforma.carregarCliente();
+                    } catch (FileNotFoundException e) {
+                        System.out.println("Erro na abertura do arquivo");
+                    }
                     break;
                 case 3:
                     try {
