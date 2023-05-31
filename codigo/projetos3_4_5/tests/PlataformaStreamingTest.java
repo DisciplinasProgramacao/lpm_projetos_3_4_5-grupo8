@@ -91,7 +91,7 @@ public class PlataformaStreamingTest {
         plataforma1.adicionarCatalogo(filme2);
         plataforma1.adicionarCatalogo(filme3);
 
-        assertEquals(2, plataforma1.filtrarCatalogo(catalogo -> catalogo.getIdioma().equals("Drama")).size());
+        assertEquals(2, plataforma1.filtrarCatalogo("Drama").size());
     }
 
     @Test
@@ -99,8 +99,8 @@ public class PlataformaStreamingTest {
         plataforma1.adicionarCatalogo(serie1);
         plataforma1.adicionarCatalogo(filme2);
 
-        assertNotNull(plataforma1.filtrarPorIdioma("EN").contains(serie1));
-        assertNotNull(plataforma1.filtrarPorIdioma("EN").contains(filme2));
+        assertNotNull(plataforma1.filtrarCatalogo("EN").contains(serie1));
+        assertNotNull(plataforma1.filtrarCatalogo("EN").contains(filme2));
     }
 
     @Test
