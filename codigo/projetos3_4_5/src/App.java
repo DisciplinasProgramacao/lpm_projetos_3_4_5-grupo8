@@ -180,7 +180,7 @@ public class App {
                     pausa();
                     break;
                 case 5:
-                    System.out.println(plataforma.visualizarListaParaVerFuturamente()); 
+                    System.out.println(plataforma.visualizarListaParaVerFuturamente());
                     pausa();
                 case 6:
                     try {
@@ -262,27 +262,27 @@ public class App {
                 case 1:
                     System.out.println("Para filtrar digite o genero: ");
                     String genero = teclado.nextLine();
-                    //plataforma.filtrarPorGenero(genero);
+                    // plataforma.filtrarPorGenero(genero);
                     plataforma.filtrarCatalogo(catalogo -> catalogo.getIdioma().equals(genero));
                     pausa();
                     break;
                 case 2:
                     System.out.println("Para filtrar digite o idioma: ");
                     String idioma = teclado.nextLine();
-                    //plataforma.filtrarPorGenero(idioma);
+                    // plataforma.filtrarPorGenero(idioma);
                     plataforma.filtrarCatalogo(catalogo -> catalogo.getIdioma().equals(idioma));
                     pausa();
                     break;
                 case 3:
                     System.out.println("Para filtrar digite a quantidade de episodios: ");
                     int qtd = Integer.parseInt(teclado.nextLine());
-                    //plataforma.filtrarPorQtdEpisodios(qtd);
+                    // plataforma.filtrarPorQtdEpisodios(qtd);
                     pausa();
                     break;
                 case 4:
                     System.out.println("Para filtrar digite a duracao em minutos: ");
                     int duracao = Integer.parseInt(teclado.nextLine());
-                   // plataforma.filtrarPorDuracao(duracao);
+                    // plataforma.filtrarPorDuracao(duracao);
                     pausa();
                     break;
                 case 5:
@@ -336,6 +336,7 @@ public class App {
         Filme filme = new Filme(nome, dataLancamento, genero, idioma, duracao);
         try {
             plataforma.adicionarCatalogo(filme);
+            Armazenagem.gravar("POO_Series", filme);
         } catch (IOException e) {
             System.out.println("Erro na abertura do arquivo para cadastro");
         }
@@ -361,6 +362,7 @@ public class App {
         Serie serie = new Serie(nome, dataLancamento, genero, idioma, quantidadeEpisodios);
         try {
             plataforma.adicionarCatalogo(serie);
+            Armazenagem.gravar("POO_Series", serie);
         } catch (IOException e) {
             System.out.println("Erro na abertura do arquivo para cadastro");
         }
@@ -384,6 +386,7 @@ public class App {
         Cliente novoCliente = new Cliente(nome, nomeUsuario, senha);
         try {
             plataforma.adicionarCliente(novoCliente);
+            Armazenagem.gravar("POO_Espectadores", novoCliente);
             System.out.println("\nCliente adicionado com sucesso!");
         } catch (IllegalArgumentException e) {
             System.out.println("\nLogin invalido, já existe cliente cadastrado com esse login");
