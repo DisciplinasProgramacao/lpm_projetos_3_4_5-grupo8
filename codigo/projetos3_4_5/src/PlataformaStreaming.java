@@ -254,17 +254,17 @@ public class PlataformaStreaming {
     //  * @param quantEpisodios quantEpisodios a ser filtrado
     //  * 
     //  */
-    // public LinkedList<Catalogo> filtrarPorQtdEpisodios(int quantEpisodios) {
-    //     LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
-    //     Serie serie;
-    //     for (int key : catalogos.keySet()) {
-    //         serie = (Serie) catalogos.get(key);
-    //         if (serie.getEpisodios() == quantEpisodios) {
-    //             filtro.add(serie);
-    //         }
-    //     }
-    //     return filtro;
-    // }
+     public LinkedList<Catalogo> filtrarPorQtdEpisodios(int quantEpisodios) {
+         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
+         Serie serie;
+         for (int key : catalogos.keySet()) {
+             serie = (Serie) catalogos.get(key);
+             if (serie.getEpisodios() == quantEpisodios) {
+                 filtro.add(serie);
+             }
+         }
+         return filtro;
+     }
 
     // /**
     //  * filtra catalogo por duracao em minutos
@@ -272,17 +272,17 @@ public class PlataformaStreaming {
     //  * @param duracao duracao de midia a ser filtrado
     //  * 
     //  */
-    // public LinkedList<Catalogo> filtrarPorDuracao(int duracao) {
-    //     LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
-    //     Filme filme;
-    //     for (int key : catalogos.keySet()) {
-    //         filme = (Filme) catalogos.get(key);
-    //         if (filme.getDuracao() == duracao) {
-    //             filtro.add(filme);
-    //         }
-    //     }
-    //     return filtro;
-    // }
+    public LinkedList<Catalogo> filtrarPorDuracao(int duracao) {
+        LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
+        Filme filme;
+        for (int key : catalogos.keySet()) {
+            filme = (Filme) catalogos.get(key);
+            if (filme.getDuracao() == duracao) {
+                filtro.add(filme);
+            }
+        }
+        return filtro;
+    }
 
     /**
      * Buscar catalogo por nome
