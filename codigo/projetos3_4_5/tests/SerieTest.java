@@ -15,7 +15,7 @@ public class SerieTest {
     Avaliacao avaliacao1, avaliacao2;
 
     @BeforeEach
-    public void setUp() {
+    public void prepare() {
         serie = new Serie("The Blacklist", "02/02/2017", "Suspense", "EN", 10);
         avaliacao1 = new Avaliacao("eu", 4);
         avaliacao2 = new Avaliacao("voce", 5, "muito bom");

@@ -1,30 +1,55 @@
 import java.time.LocalDate;
 
 public class Assistido {
-    // Atributos
+
+    //#region ATRIBUTOS
     private LocalDate data;
     private Catalogo catalogo;
     private Avaliacao avaliacao;
+    //#endregion
 
-    // Construtor
+    //#region CONSTRUTOR
+    
+    /**
+     * Construtor da classe assistido, recebendo o catalogo e a data em que a midia foi assistida
+     * 
+     * @param catalogo
+     * @param data
+     * 
+     */
     public Assistido(Catalogo catalogo, LocalDate data) {
         this.catalogo = catalogo;
         this.data = data;
         this.avaliacao = null;
     }
+    //#endregion
 
+    /**
+     * Get para retornar a data em que a midia foi assistida
+     * 
+     * @return data em que a mídia foi assistida
+     * 
+     */
     public LocalDate getData() {
         return this.data;
     }
 
+    /**
+     * Get para retornar a midia assistida
+     * 
+     * @return catalogo assistido
+     * 
+     */    
     public Catalogo getCatalogo() {
         return this.catalogo;
     }
 
     /**
      * Metodo que adiciona uma avaliacao a uma midia assitida
+     * 
      * @param avaliacao
-     * @return
+     * @return Avaliacao efetuada
+     * 
      */
     public Avaliacao adicionarAvaliacao(Avaliacao avaliacao){
         this.avaliacao = avaliacao;
@@ -34,7 +59,9 @@ public class Assistido {
 
     /**
      * Metodo que retorna uma midia assistida com sua data de visualizacao
-     * @return
+     * 
+     * @return String com os dados formatados
+     * 
      */
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -48,5 +75,4 @@ public class Assistido {
 
         return stringBuilder.toString();
     }
-
 }
