@@ -34,9 +34,18 @@ public class Avaliacao {
 
     @Override
     public String toString(){
-        if(comentario.isEmpty())
-            return "Nota: " + this.nota;
+        StringBuilder stringBuilder = new StringBuilder();
 
-        return "Nota: " + this.nota + "\nComentario: " + this.comentario;
+        stringBuilder.append("\nPor: " + this.loginCliente + "\n");
+
+        if(comentario.isEmpty()){
+            stringBuilder.append("Nota:" + this.nota);
+        } else {
+            stringBuilder.append("Nota: " + this.nota + "\nComentario: " + this.comentario);
+        }
+
+        stringBuilder.append("\n--------------------");
+        
+        return stringBuilder.toString();
     }
 }
