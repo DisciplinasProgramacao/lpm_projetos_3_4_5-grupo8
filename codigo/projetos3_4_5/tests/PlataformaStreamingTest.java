@@ -1,9 +1,13 @@
 import org.junit.jupiter.api.Test;
+import org.junit.rules.ExpectedException;
+import org.junit.Rule;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertEquals;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -35,7 +39,7 @@ public class PlataformaStreamingTest {
 
     @Test
     public void deveRetornarTrueCasoClienteSejaAdicionadoNaPlataforma() {
-        // assertThrows​(plataforma1.adicionarCliente(cliente1));
+        Assertions.assertThrows(NullPointerException.class, () -> plataforma1.adicionarCliente(cliente1));
     }
 
     @Test
@@ -59,8 +63,7 @@ public class PlataformaStreamingTest {
     public void deveRetornarNuloCasoClienteInformeDadosDeLoginInvalidos() throws Exception {
         plataforma1.adicionarCliente(cliente1);
         plataforma1.login("aninha12", "senhaErrada");
-
-        assertNull(plataforma1.getClienteAtual());
+        Assertions.assertThrows(NullPointerException.class, () -> plataforma1.getClienteAtual());
     }
 
     @Test
@@ -68,7 +71,7 @@ public class PlataformaStreamingTest {
         plataforma1.adicionarCliente(cliente1);
         plataforma1.login("aninha12", "123");
         plataforma1.logoff();
-        assertNull(plataforma1.getClienteAtual());
+        Assertions.assertThrows(NullPointerException.class, () -> plataforma1.getClienteAtual());
     }
 
     @Test
@@ -128,7 +131,7 @@ public class PlataformaStreamingTest {
 
     @Test
     public void deveRetornarNuloCasoNaoEncontreMidiaPeloNome() {
-        assertNull(plataforma1.buscarCatalogo("Não serei encontrada"));
+        Assertions.assertThrows(NullPointerException.class, () -> plataforma1.buscarCatalogo("Não serei encontrada"));
     }
 
     @Test
@@ -140,8 +143,9 @@ public class PlataformaStreamingTest {
         plataforma1.adicionarMidiaNaListaParaVerFuturamente("The Blacklist");
         plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
 
-        // assertTrue(plataforma1.assistirMidia("O Poderoso Chefão 2"));
-        // assertTrue(plataforma1.assistirMidia("The Blacklist"));
+        assertDoesNotThrow(() -> plataforma1.assistirMidia("O Poderoso Chefão 2"));
+
+        assertDoesNotThrow(() -> plataforma1.assistirMidia("The Blacklist"));
     }
 
     @Test
@@ -151,7 +155,8 @@ public class PlataformaStreamingTest {
 
         plataforma1.adicionarMidiaNaListaParaVerFuturamente("The Blacklist");
 
-        // assertFalse(plataforma1.assistirMidia("O Poderoso Chefão 2"));
+        Assertions.assertThrows(IndexOutOfBoundsException.class,
+                () -> plataforma1.assistirMidia("O Poderoso Chefão 2"));
     }
 
     @Test
