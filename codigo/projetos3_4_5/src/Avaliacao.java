@@ -39,7 +39,7 @@ public class Avaliacao {
         stringBuilder.append("\nPor: " + this.loginCliente + "\n");
 
         if(comentario.isEmpty()){
-            stringBuilder.append("Nota:" + this.nota);
+            stringBuilder.append("Nota: " + this.nota);
         } else {
             stringBuilder.append("Nota: " + this.nota + "\nComentario: " + this.comentario);
         }

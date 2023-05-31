@@ -15,18 +15,18 @@ public class AvaliacaoTest {
 
     @Test
     public void deveRetornarStringApenasComNotaDaAvaliacaoCasoNaoPossuaComentario(){
-        assertEquals("Nota: 5", avaliacaoSemComentario.toString());
+        assertEquals("\nPor: login\nNota: 5\n--------------------", avaliacaoSemComentario.toString());
     }
 
     @Test
     public void deveRetornarStringComNotaEComentarioCasoPossuaComentario(){
-        assertEquals("Nota: 5\nComentario: comentario", avaliacaoComComentario.toString());
+        assertEquals("\nPor: login\nNota: 5\nComentario: comentario\n--------------------", avaliacaoComComentario.toString());
     }
 
     @Test
     public void deveAdicionarComentarioAUmaAvaliacao(){
         avaliacaoSemComentario.adicionarComentario("comentario adicionado");
-        assertEquals("Nota: 5\nComentario: comentario adicionado", avaliacaoSemComentario.toString());
+        assertEquals("\nPor: login\nNota: 5\nComentario: comentario adicionado\n--------------------", avaliacaoSemComentario.toString());
     }
 
 }
