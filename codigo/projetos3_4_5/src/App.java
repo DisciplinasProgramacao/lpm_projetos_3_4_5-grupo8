@@ -59,16 +59,24 @@ public class App {
                     String nomeMidia;
                     System.out.println("Digite o nome da midia que deseja verificar a audiencia: ");
                     nomeMidia = teclado.nextLine();
-
-                    plataforma.buscarCatalogo(nomeMidia); 
-
-                    System.out.println("A audiencia de '" + nomeMidia + "'  e: " + plataforma.buscarCatalogo(nomeMidia).getAudiencia());
+                                        
+                    try{
+                        Catalogo catalogoVerificado = plataforma.buscarCatalogo(nomeMidia);
+                        System.out.println("A audiencia de '" + nomeMidia + "' e: " + catalogoVerificado.getAudiencia()); 
+                    } catch (NullPointerException e){
+                        System.out.println("\nMidia nao encontrada na plataforma. Verique se voce carregou o arquivo Catalogo ou digitou o nome da midia corretamente.\n");
+                    }
+                
                     break;
                 case 9:
-                    System.out.println("---Exibindo catalogo---");
-                    System.out.println(plataforma.getCatalogo());
-
-                    exibirMediaAvaliacaoCatalogo();
+                   /* System.out.println("---Exibindo catalogo---");
+                    System.out.println(plataforma.getCatalogo());*/
+                    try{
+                        exibirMediaAvaliacaoCatalogo();
+                    } catch (NullPointerException e){
+                        System.out.println("\nMidia nao encontrada na plataforma. Verique se voce carregou o arquivo Catalogo.\n");
+                    }
+              
                     break;
                 default:
                     break;
@@ -155,24 +163,23 @@ public class App {
                     try {
                         plataforma.assistirMidia(midiaEscolhida);
                         System.out.println("\nAssistindo midia... \nMidia assistida.");
+                        System.out.println("\nDeseja avaliar essa midia assistida? Digite '1' para sim e '2' para nao: ");
+                        int opcao = Integer.parseInt(teclado.nextLine());
+                        while (opcao != 1 && opcao != 2) {
+                            System.out.println("Opcao invalida. Digite '1' para sim e '2' para nao: ");
+                            opcao = Integer.parseInt(teclado.nextLine());
+                        }
+                        if (opcao == 1) {
+                            avaliarMidia();
+                        }
+                        if (opcao == 2) {
+                            System.out.println("\nObrigado por assistir!");
+                        }
                     } catch (NullPointerException e) {
                         System.out.println("Erro no usuário");
                     } catch (IndexOutOfBoundsException a) {
                         System.out.println(
                                 "Midia nao encontrada. Adicione uma midia na lista para assistir futuramente, para conseguir assistir.");
-                    }
-
-                    System.out.println("\nDeseja avaliar essa midia assistida? Digite '1' para sim e '2' para nao: ");
-                    int opcao = Integer.parseInt(teclado.nextLine());
-                    while (opcao != 1 && opcao != 2) {
-                        System.out.println("Opcao invalida. Digite '1' para sim e '2' para nao: ");
-                        opcao = Integer.parseInt(teclado.nextLine());
-                    }
-                    if (opcao == 1) {
-                        avaliarMidia();
-                    }
-                    if (opcao == 2) {
-                        System.out.println("\nObrigado por assistir!");
                     }
 
                     pausa();
@@ -267,7 +274,6 @@ public class App {
                 case 1:
                     System.out.println("Para filtrar digite o genero: ");
                     String genero = teclado.nextLine();
-                    // plataforma.filtrarPorGenero(genero);
                     plataforma.filtrarCatalogo(genero);
                     pausa();
                     break;
@@ -292,7 +298,7 @@ public class App {
                 case 5:
                     System.out.println("Para filtrar digite o nome: ");
                     String nome = teclado.nextLine();
-
+                    
                     try {
                         plataforma.buscarCatalogo(nome);
                         System.out.println("A Midia [" + plataforma.buscarCatalogo(nome) + "] existe no catalogo.");
@@ -444,13 +450,19 @@ public class App {
 
     // Metodo para exibira media de avaliacao de uma midia
     public static void exibirMediaAvaliacaoCatalogo() {
-        System.out.println("==========================");
-        System.out.println("--Realizando avaliacao--");
-        System.out.println("\nDigite o nome da midia que deseja avaliarr: ");
+        System.out.println("=======================================");
+        System.out.println("--Verificando media de avaliacao--");
+        System.out.println("\nDigite o nome da midia que deseja verificar media: ");
         String texto = teclado.nextLine();
-        Catalogo catalogo = plataforma.buscarCatalogo(texto);
-        BigDecimal media = plataforma.mediaAvaliacao(catalogo);
-        System.out.println("A avaliacao da midia " + catalogo.getNome() + " possui media de: " + media);
+        try{
+            Catalogo catalogo = plataforma.buscarCatalogo(texto);
+            BigDecimal media = plataforma.mediaAvaliacao(catalogo);
+            System.out.println("\nA midia '" + catalogo.getNome() + "' possui avaliacao media de: " + media + " estrelas \n");
+        }
+        catch(NullPointerException e){
+            System.out.println("Midia nao encontrada. Verifique se digitou o nome corretamente.");
+        }
+       
     }
 
 }
