@@ -3,7 +3,7 @@ import java.util.LinkedList;
 
 public abstract class Catalogo {
 
-    //Atributos
+    //#region ATRIBUTOS
     private static final String[] GENEROS = new String[8];
     private static int parseId;
     private String nome;
@@ -18,8 +18,16 @@ public abstract class Catalogo {
     static {
         parseId = 0;
     }
+    //#endregion
 
-    //Construtor
+    //#region CONSTRUTOR
+
+    /**
+     * Construtor que cria um catálogo apenas com id, nome e data em que foi lançado
+     * @param id
+     * @param nome
+     * @param dataLancamento
+     */
     public Catalogo(int id, String nome, String dataLancamento) {
         if (id > parseId) {
             parseId = id;
@@ -27,10 +35,27 @@ public abstract class Catalogo {
         init(id, nome, dataLancamento, null, null);
     }
 
+    /**
+     * Construtor que cria um catálogo com nome, data em que foi lançado, genero e idioma
+     * 
+     * @param nome
+     * @param dataLancamento
+     * @param genero
+     * @param idioma
+     */
     public Catalogo(String nome, String dataLancamento, String genero, String idioma) {
         init(++parseId, nome, dataLancamento, genero, idioma);
     }
 
+    /**
+     * Método inicializador para ser utilizado pelos construtores
+     * 
+     * @param id
+     * @param nome
+     * @param dataLancamento
+     * @param genero
+     * @param idioma
+     */
     public void init(int id, String nome, String dataLancamento, String genero, String idioma) {
         this.nome = nome;
         this.genero = genero; // Ainda não será implementado
@@ -41,15 +66,21 @@ public abstract class Catalogo {
         this.listaAvaliacoes = new LinkedList<Avaliacao>();
         this.id = id;
     }
+    //#endregion
 
     /**
+     * Obtém a audiência da mídia
+     * 
      * @return audiencia do conteudo
+     * 
      */
     public int getAudiencia() {
         return this.audiencia;
     }
 
     /**
+     * Obtém string do gênero da mídia
+     * 
      * @return genero do conteudo
      */
     public String getGenero() {
@@ -57,6 +88,8 @@ public abstract class Catalogo {
     }
 
     /**
+     * Obtém o idioma da mídia
+     * 
      * @return idioma do conteudo
      */
     public String getIdioma() {
@@ -64,13 +97,17 @@ public abstract class Catalogo {
     }
 
     /**
-     * @return nome do conteudo
+     * Obtém o nome da mídia
+     * 
+     * @return string com o nome da mídia
      */
     public String getNome() {
         return this.nome;
     }
 
     /**
+     * Obtém o id da mídia
+     * 
      * @return id do conteudo
      */
     public int getId() {
@@ -78,7 +115,7 @@ public abstract class Catalogo {
     }
     
     /**
-     * Registra audiencia daquele conteudo audiovisual
+     * Incrementa audiência da midia
      */
     public void registrarAudiencia() {
         this.audiencia += 1;
@@ -86,7 +123,9 @@ public abstract class Catalogo {
 
     /**
      * Adiciona a avaliação a mídia
-     * @param avaliacao
+     * 
+     * @param avaliacao a ser armazenada
+     * 
      */
     public void avaliarMidia(Avaliacao avaliacao) {
         this.listaAvaliacoes.add(avaliacao);
@@ -94,7 +133,9 @@ public abstract class Catalogo {
 
     /**
      * Metodo que retorna a media de avaliacoes de uma midia
-     * @return
+     * 
+     * @return avaliação média
+     * 
      */
     public BigDecimal mediaAvaliacao() {
         int somaNotas = 0;
@@ -115,6 +156,12 @@ public abstract class Catalogo {
         return mediaAvaliacoes;
     }
 
+    /**
+     * Cria uma string com todas as avaliações da mídia ou com mensagem caso mídia não possua avaliações
+     * 
+     * @return String formatada de avaliações
+     * 
+     */
     public String mostrarAvaliacoes(){
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -131,6 +178,12 @@ public abstract class Catalogo {
         return stringBuilder.toString();
     }
 
+    /**
+     * Metodo que retorna uma string formatada com os dados do catálogo
+     * 
+     * @return String formatada
+     * 
+     */
     @Override
     public String toString() {
         return this.id + ";" + this.nome + ";" + this.dataLancamento;

@@ -4,28 +4,46 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 public class PlataformaStreaming {
+    //#region ATRIBUTOS
     private String nome;
     private HashMap<Integer, Catalogo> catalogos;
     private HashMap<String, Cliente> clientes;
     private Cliente clienteAtual;
+    //#endregion
 
+    //#region CONSTRUTOR
+    /**
+     * Construtor que cria plataforma de acordo com o nome recebido
+     * 
+     * @param nome
+     * 
+     */
     PlataformaStreaming(String nome) {
         this.nome = nome;
         this.catalogos = new HashMap<Integer, Catalogo>(250);
         this.clientes = new HashMap<String, Cliente>(51900);
         this.clienteAtual = null;
     }
+    //#endregion
 
+    /**
+     * Retorna o nome da plataforma
+     * 
+     * @return string com o nome da plataforma
+     * 
+     */
     public String getNome() {
         return this.nome;
     }
 
     /**
-     * @return Cliente atual
+     * Retorna o cliente atual, caso possua usuário logado e null pointer caso contrário
+     * 
+     * @return Cliente atual caso exista ou null pointer caso contrário
      * @throws NullPointerException
+     * 
      */
     public Cliente getClienteAtual() throws NullPointerException {
         if (this.clienteAtual != null)
@@ -34,7 +52,10 @@ public class PlataformaStreaming {
     }
 
     /**
+     * Retorna string formatada com os dados do catálogo
+     * 
      * @return String de catalogos
+     * 
      */
     public String getCatalogo() {
         int cont = 1;
@@ -49,11 +70,10 @@ public class PlataformaStreaming {
     }
 
     /**
-     * Logar na plataforma
+     * Realiza o login na plataforma, retorna cliente atual caso login efetuado do sucesso e null caso contrário
      * 
      * @param login login do usuario
      * @param senha senha do usuario
-     * 
      * 
      * @return cliente se sucesso, cliente nulo caso erro
      */
@@ -70,7 +90,7 @@ public class PlataformaStreaming {
     }
 
     /**
-     * logoff do cliente na plataforma
+     * Realiza o logoff do cliente da plataforma, colocando o cliente atual como nulo
      * 
      */
     public void logoff() {
@@ -78,7 +98,7 @@ public class PlataformaStreaming {
     }
 
     /**
-     * adicionar catalogo na plataforma
+     * Adiciona catalogo na plataforma, lança exceção caso ocorra erro ao adicionar catálogo
      * 
      * @param catalogo catalogo a ser adicionado
      * @throws IOException
@@ -89,7 +109,7 @@ public class PlataformaStreaming {
     }
 
     /**
-     * adicionar catalogo na plataforma
+     * Adiciona catalogos na plataforma, retorna FileNotFoundException caso não encontre o arquivo
      * 
      * @param catalogos linkedlist de catalogo a ser adicionado
      * @throws FileNotFoundException
@@ -119,11 +139,12 @@ public class PlataformaStreaming {
     }
 
     /**
-     * adicionar cliente na plataforma
+     * adicionar cliente na plataforma, retorna IllegalArgumentException caso cliente já exista
      * 
      * @param cliente cliente a ser adicionado
      * @throws IOException
      * @throws IllegalArgumentException cliente ja existe
+     * 
      */
     public void adicionarCliente(Cliente cliente) throws IOException, IllegalArgumentException {
         if (validarLoginCliente(cliente)) {
@@ -134,7 +155,7 @@ public class PlataformaStreaming {
     }
 
     /**
-     * adicionar cliente na plataforma
+     * Adicionar cliente na plataforma, retorna FileNotFoundException caso não encontre o arquivo
      * 
      * @param clientes linkedlist de cliente a ser adicionado
      * @throws FileNotFoundException
@@ -156,11 +177,9 @@ public class PlataformaStreaming {
     /**
      * Metodo que le um arquivo e atualiza a audiencia
      * 
-     * @param nomeArq nome do arquivo .csv
      * @throws FileNotFoundException erro ao abrir o arquivo
      */
-    public void carregarAudiencia()
-            throws FileNotFoundException {
+    public void carregarAudiencia() throws FileNotFoundException {
         File file = new File("./codigo/projetos3_4_5/arquivos/POO_Audiencia.csv");
         Scanner entrada = new Scanner(file, "UTF-8");
         String linha;
@@ -184,9 +203,10 @@ public class PlataformaStreaming {
     }
 
     /**
-     * valida se o login do cliente existe
+     * valida se o login do cliente existe, true caso exista e false caso contrário
      * 
      * @param cliente cliente a ser validado
+     * @return true caso cliente exista e false caso contrário
      * 
      */
     private boolean validarLoginCliente(Cliente cliente) {
@@ -202,6 +222,7 @@ public class PlataformaStreaming {
      * filtra catalogo por String
      * 
      * @param filtro genero a ser filtrado
+     * @return linked list de catálogos encontrados a partir do filtro
      * 
      */
     public LinkedList<Catalogo> filtrarCatalogo(String filtro) {
@@ -216,12 +237,13 @@ public class PlataformaStreaming {
         return filtrado;
     }
 
-    // /**
-    // * filtra catalogo por quantidade de episodios
-    // *
-    // * @param quantEpisodios quantEpisodios a ser filtrado
-    // *
-    // */
+    /**
+    * filtra catalogo por quantidade de episodios
+    *
+    * @param quantEpisodios quantEpisodios a ser filtrado
+    * @return linked list de catálogos encontrados a partir do filtro 
+    *
+    */
     public LinkedList<Catalogo> filtrarPorQtdEpisodios(int quantEpisodios) {
         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Serie serie;
@@ -234,12 +256,13 @@ public class PlataformaStreaming {
         return filtro;
     }
 
-    // /**
-    // * filtra catalogo por duracao em minutos
-    // *
-    // * @param duracao duracao de midia a ser filtrado
-    // *
-    // */
+    /**
+    * filtra catalogo por duracao em minutos
+    *
+    * @param duracao duracao de midia a ser filtrado
+    * @return linked list de catálogos encontrados a partir do filtro 
+    *
+    */
     public LinkedList<Catalogo> filtrarPorDuracao(int duracao) {
         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Filme filme;
@@ -258,6 +281,7 @@ public class PlataformaStreaming {
      * @param midia nome da midia a ser procurada
      * @throws NullPointerException      midia nao encontrada
      * @throws IndexOutOfBoundsException catalogo vazio
+     * @return catalogo encontrado e NullPointerException caso não encontre
      */
     public Catalogo buscarCatalogo(String midia) throws NullPointerException, IndexOutOfBoundsException {
 
@@ -269,7 +293,6 @@ public class PlataformaStreaming {
         throw new NullPointerException();
     }
 
-    // CRIAR TESTE
     /**
      * Metodo que adiciona midia na lista de 'Midias para assistir futuramente'
      * 
@@ -291,6 +314,7 @@ public class PlataformaStreaming {
     /**
      * Assistir midia
      * 
+     * @param nome da midia a ser assistida
      * @throws NullPointerException      cliente invalido
      * @throws IndexOutOfBoundsException midia inexistente ou nao encontrada
      */
@@ -303,7 +327,9 @@ public class PlataformaStreaming {
         }
     }
 
-    // Metodo que verifica as midias que o cliente quer ver futuramente
+    /**
+     * Metodo que verifica as midias que o cliente quer ver futuramente 
+     */
     public String visualizarListaParaVerFuturamente() {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -327,7 +353,7 @@ public class PlataformaStreaming {
      * @param nota
      * @param comentario
      * @param catalogo
-     * @return
+     * @return avaliação adicionada
      */
     public Avaliacao adicionarAvaliacao(int nota, String comentario, Catalogo catalogo) {
         return clienteAtual.adicionarAvaliacao(nota, comentario, catalogo);
@@ -343,7 +369,12 @@ public class PlataformaStreaming {
         this.clienteAtual.adicionarComentarioAvaliacaoExistente(avaliacao, comentario);
     }
 
-    // TESTAR
+    /**
+     * Retorna a avaliação média do catalogo sendo recebido como parametro
+     * 
+     * @param catalogo a retornar a avaliação média
+     * @return avaliação média do catálogo
+     */
     public BigDecimal mediaAvaliacao(Catalogo catalogo) {
         return catalogo.mediaAvaliacao();
     }

@@ -1,7 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.LinkedList;
 import java.util.Scanner;
 public class App {
     static Scanner teclado = new Scanner(System.in);

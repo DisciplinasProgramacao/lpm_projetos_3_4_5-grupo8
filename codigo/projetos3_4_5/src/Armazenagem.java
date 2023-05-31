@@ -26,8 +26,7 @@ public class Armazenagem {
     }
 
     /**
-     * Metodo que le um arquivo e retorna seu conteudo em uma lista de string, no
-     * qual cada item da lista representa uma linha
+     * Metodo que le um arquivo e retorna seu conteudo em uma lista de string, no qual cada item da lista representa uma linha
      * 
      * @param metodo  contrutor da classe
      * 
