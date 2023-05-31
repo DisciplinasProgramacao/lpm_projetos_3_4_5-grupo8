@@ -161,17 +161,19 @@ public class Cliente {
         LinkedList<Catalogo> listaqtdEpisodios = new LinkedList<Catalogo>();
         Serie filtrada = null;
         for (Catalogo serie : listaParaVer) {
-            if (serie instanceof Serie)
+            if (serie instanceof Serie) {
                 filtrada = (Serie) serie;
-            if (filtrada.getEpisodios() == qtdEpisodios) {
-                listaqtdEpisodios.add(serie);
+                if (filtrada.getEpisodios() == qtdEpisodios) {
+                    listaqtdEpisodios.add(serie);
+                }
             }
         }
         for (Assistido serie : listaJaVistas) {
-            if (serie.getCatalogo() instanceof Serie)
+            if (serie.getCatalogo() instanceof Serie) {
                 filtrada = (Serie) serie.getCatalogo();
-            if (filtrada.getEpisodios() == qtdEpisodios) {
-                listaqtdEpisodios.add(serie.getCatalogo());
+                if (filtrada.getEpisodios() == qtdEpisodios) {
+                    listaqtdEpisodios.add(serie.getCatalogo());
+                }
             }
         }
         return listaqtdEpisodios;
