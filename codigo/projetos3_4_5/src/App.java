@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.Scanner;
-
 public class App {
     static Scanner teclado = new Scanner(System.in);
     static PlataformaStreaming plataforma;
@@ -58,7 +57,13 @@ public class App {
                     }
                     break;
                 case 8:
-                    System.out.println("Falta implementar audiencia"); // fazer o metodo
+                    String nomeMidia;
+                    System.out.println("Digite o nome da midia que deseja verificar a audiencia: ");
+                    nomeMidia = teclado.nextLine();
+
+                    plataforma.buscarCatalogo(nomeMidia); 
+
+                    System.out.println("A audiencia de '" + nomeMidia + "'  e: " + plataforma.buscarCatalogo(nomeMidia).getAudiencia());
                     break;
                 case 9:
                     System.out.println("---Exibindo catalogo---");
@@ -182,6 +187,7 @@ public class App {
                 case 5:
                     System.out.println(plataforma.visualizarListaParaVerFuturamente()); 
                     pausa();
+                    break;
                 case 6:
                     try {
                         plataforma.carregarCatalogos();
