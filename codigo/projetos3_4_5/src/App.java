@@ -262,15 +262,14 @@ public class App {
                 case 1:
                     System.out.println("Para filtrar digite o genero: ");
                     String genero = teclado.nextLine();
-                    //plataforma.filtrarPorGenero(genero);
-                    plataforma.filtrarCatalogo(catalogo -> catalogo.getGenero().equals(genero));
+                    // plataforma.filtrarPorGenero(genero);
+                    plataforma.filtrarCatalogo(genero);
                     pausa();
                     break;
                 case 2:
                     System.out.println("Para filtrar digite o idioma: ");
                     String idioma = teclado.nextLine();
-                    // plataforma.filtrarPorGenero(idioma);
-                    plataforma.filtrarCatalogo(catalogo -> catalogo.getIdioma().equals(idioma));
+                    plataforma.filtrarCatalogo(idioma);
                     pausa();
                     break;
                 case 3:
