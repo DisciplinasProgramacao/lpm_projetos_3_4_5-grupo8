@@ -1,17 +1,12 @@
 import org.junit.jupiter.api.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.Rule;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertEquals;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 
@@ -38,8 +33,8 @@ public class PlataformaStreamingTest {
     }
 
     @Test
-    public void deveRetornarTrueCasoClienteSejaAdicionadoNaPlataforma() {
-        Assertions.assertThrows(NullPointerException.class, () -> plataforma1.adicionarCliente(cliente1));
+    public void naoDeveRetornarExcecaoCasoClienteSejaAdicionadoNaPlataforma() {
+        assertDoesNotThrow(() -> plataforma1.adicionarCliente(cliente1));
     }
 
     @Test
@@ -60,14 +55,14 @@ public class PlataformaStreamingTest {
     }
 
     @Test
-    public void deveRetornarNuloCasoClienteInformeDadosDeLoginInvalidos() throws Exception {
+    public void deveRetornarNullPointerExceptionAoBuscarClienteAtualCasoClienteInformeDadosDeLoginInvalidos() throws Exception {
         plataforma1.adicionarCliente(cliente1);
         plataforma1.login("aninha12", "senhaErrada");
         Assertions.assertThrows(NullPointerException.class, () -> plataforma1.getClienteAtual());
     }
 
     @Test
-    public void deveRetornarClienteAtualNuloCasoLogoffSejaEfetuado() throws IllegalArgumentException, IOException {
+    public void deveRetornarNullPointerExceptionAoBuscarClienteAtualLogoffSejaEfetuado() throws IllegalArgumentException, IOException {
         plataforma1.adicionarCliente(cliente1);
         plataforma1.login("aninha12", "123");
         plataforma1.logoff();
@@ -130,12 +125,12 @@ public class PlataformaStreamingTest {
     }
 
     @Test
-    public void deveRetornarNuloCasoNaoEncontreMidiaPeloNome() {
+    public void deveRetornarNullPointerExceptionCasoNaoEncontreMidiaPeloNome() {
         Assertions.assertThrows(NullPointerException.class, () -> plataforma1.buscarCatalogo("Não serei encontrada"));
     }
 
     @Test
-    public void deveRetornarTrueCasoAssistaMidiaComSucesso() throws IOException {
+    public void deveDeveLancarExcecaoCasoAssistaMidiaComSucesso() throws IOException {
         plataforma1.login("logado", "login");
         plataforma1.adicionarCatalogo(serie1);
         plataforma1.adicionarCatalogo(filme2);
@@ -149,7 +144,7 @@ public class PlataformaStreamingTest {
     }
 
     @Test
-    public void deveRetornarFalseCasoSoliciteAssistirMidiaQueNaoExistaNaListaParaVer() throws IOException {
+    public void deveRetornarIndexOutOfBoundsExceptionCasoSoliciteAssistirMidiaQueNaoExistaNaListaParaVer() throws IOException {
         plataforma1.login("logado", "login");
         plataforma1.adicionarCatalogo(serie1);
 
