@@ -85,7 +85,6 @@ public class PlataformaStreaming {
      * 
      */
     public void adicionarCatalogo(Catalogo catalogo) throws IOException {
-        Armazenagem.gravar("POO_Series", catalogo);
         catalogos.put(catalogo.getId(), catalogo);
     }
 
@@ -129,7 +128,6 @@ public class PlataformaStreaming {
     public void adicionarCliente(Cliente cliente) throws IOException, IllegalArgumentException {
         if (validarLoginCliente(cliente)) {
             this.clientes.put(cliente.getLogin(), cliente);
-            Armazenagem.gravar("POO_Espectadores", cliente);
         } else {
             throw new IllegalArgumentException();
         }
@@ -199,90 +197,60 @@ public class PlataformaStreaming {
 
         return true;
     }
-    public LinkedList<Catalogo> filtrarCatalogo(Predicate<Catalogo> filtro) {
-        LinkedList<Catalogo> resultados = new LinkedList<>();
 
-        for (Catalogo catalogo : catalogos.values()) {
-            if (filtro.test(catalogo)) {
-                resultados.add(catalogo);
+    /**
+     * filtra catalogo por String
+     * 
+     * @param filtro genero a ser filtrado
+     * 
+     */
+    public LinkedList<Catalogo> filtrarCatalogo(String filtro) {
+        LinkedList<Catalogo> filtrado = new LinkedList<Catalogo>();
+        Catalogo midia;
+        for (int key : catalogos.keySet()) {
+            midia = catalogos.get(key);
+            if (midia.getGenero().equals(filtro) || midia.getNome().equals(filtro) || midia.getIdioma().equals(filtro)) {
+                filtrado.add(midia);
             }
         }
-
-        return resultados;
+        return filtrado;
     }
 
     // /**
-    //  * filtra catalogo por genero
-    //  * 
-    //  * @param genero genero a ser filtrado
-    //  * 
-    //  */
-    // public LinkedList<Catalogo> filtrarPorGenero(String genero) {
-    //     LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
-    //     Catalogo serie;
-    //     for (int key : catalogos.keySet()) {
-    //         serie = catalogos.get(key);
-    //         if (serie.getGenero().equals(genero)) {
-    //             filtro.add(serie);
-    //         }
-    //     }
-    //     return filtro;
-    // }
+    // * filtra catalogo por quantidade de episodios
+    // *
+    // * @param quantEpisodios quantEpisodios a ser filtrado
+    // *
+    // */
+    public LinkedList<Catalogo> filtrarPorQtdEpisodios(int quantEpisodios) {
+        LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
+        Serie serie;
+        for (int key : catalogos.keySet()) {
+            serie = (Serie) catalogos.get(key);
+            if (serie.getEpisodios() == quantEpisodios) {
+                filtro.add(serie);
+            }
+        }
+        return filtro;
+    }
 
     // /**
-    //  * filtra catalogo por idioma
-    //  * 
-    //  * @param idioma idioma a ser filtrado
-    //  * 
-    //  */
-    // public LinkedList<Catalogo> filtrarPorIdioma(String idioma) {
-
-    //     LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
-    //     Catalogo serie;
-    //     for (int key : catalogos.keySet()) {
-    //         serie = catalogos.get(key);
-    //         if (serie.getIdioma().equals(idioma)) {
-    //             filtro.add(serie);
-    //         }
-    //     }
-    //     return filtro;
-    // }
-
-    // /**
-    //  * filtra catalogo por quantidade de episodios
-    //  * 
-    //  * @param quantEpisodios quantEpisodios a ser filtrado
-    //  * 
-    //  */
-    // public LinkedList<Catalogo> filtrarPorQtdEpisodios(int quantEpisodios) {
-    //     LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
-    //     Serie serie;
-    //     for (int key : catalogos.keySet()) {
-    //         serie = (Serie) catalogos.get(key);
-    //         if (serie.getEpisodios() == quantEpisodios) {
-    //             filtro.add(serie);
-    //         }
-    //     }
-    //     return filtro;
-    // }
-
-    // /**
-    //  * filtra catalogo por duracao em minutos
-    //  * 
-    //  * @param duracao duracao de midia a ser filtrado
-    //  * 
-    //  */
-    // public LinkedList<Catalogo> filtrarPorDuracao(int duracao) {
-    //     LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
-    //     Filme filme;
-    //     for (int key : catalogos.keySet()) {
-    //         filme = (Filme) catalogos.get(key);
-    //         if (filme.getDuracao() == duracao) {
-    //             filtro.add(filme);
-    //         }
-    //     }
-    //     return filtro;
-    // }
+    // * filtra catalogo por duracao em minutos
+    // *
+    // * @param duracao duracao de midia a ser filtrado
+    // *
+    // */
+    public LinkedList<Catalogo> filtrarPorDuracao(int duracao) {
+        LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
+        Filme filme;
+        for (int key : catalogos.keySet()) {
+            filme = (Filme) catalogos.get(key);
+            if (filme.getDuracao() == duracao) {
+                filtro.add(filme);
+            }
+        }
+        return filtro;
+    }
 
     /**
      * Buscar catalogo por nome
@@ -343,7 +311,7 @@ public class PlataformaStreaming {
 
         int contador = 0;
 
-        for(Catalogo midia : this.clienteAtual.getListaParaVer()){
+        for (Catalogo midia : this.clienteAtual.getListaParaVer()) {
             contador++;
             stringBuilder.append("\n[" + contador + "] " + midia.getNome());
         }

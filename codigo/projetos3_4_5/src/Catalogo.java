@@ -76,15 +76,6 @@ public abstract class Catalogo {
     public int getId() {
         return this.id;
     }
-
-    /**
-     * Metodo que retorna o mes visto em uma midia
-     * @return
-     */
-    public int getMesVisto() {
-        String[] aux = dataLancamento.split("/");
-        return Integer.parseInt(aux[1]);
-    }
     
     /**
      * Registra audiencia daquele conteudo audiovisual
@@ -94,7 +85,7 @@ public abstract class Catalogo {
     }
 
     /**
-     * Metoro que avalia uma midia
+     * Adiciona a avaliação a mídia
      * @param avaliacao
      */
     public void avaliarMidia(Avaliacao avaliacao) {
@@ -124,10 +115,24 @@ public abstract class Catalogo {
         return mediaAvaliacoes;
     }
 
+    public String mostrarAvaliacoes(){
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("-----AVALIACOES-----");
+        if(listaAvaliacoes.size() == 0){
+            stringBuilder.append("\nAinda nao existem avaliacoes para essa midia");
+            stringBuilder.append("\n--------------------");
+        } else {
+            for(Avaliacao avaliacao : listaAvaliacoes){
+                stringBuilder.append(avaliacao.toString());
+            }
+        }
+
+        return stringBuilder.toString();
+    }
+
     @Override
     public String toString() {
         return this.id + ";" + this.nome + ";" + this.dataLancamento;
-        /* + "\nAvaliação Média: " + this.avaliacaoMedia */
     }
-
 }
