@@ -179,7 +179,7 @@ public class App {
                         System.out.println("Erro no usuário");
                     } catch (IndexOutOfBoundsException a) {
                         System.out.println(
-                                "Midia nao encontrada. Adicione uma midia na lista para assistir futuramente, para conseguir assistir.");
+                                "Midia nao encontrada. Para conseguir assistir, adicione uma midia na lista para assistir futuramente.");
                     }
 
                     pausa();
