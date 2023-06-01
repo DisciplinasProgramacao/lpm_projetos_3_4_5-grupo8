@@ -5,16 +5,16 @@ import java.util.HashSet;
 
 public class Cliente {
 
-    //#region ATRIBUTOS
+    // #region ATRIBUTOS
     private String nomeDeUsuario;
     private String senha;
     private String login;
     private LinkedList<Catalogo> listaParaVer;
-    private HashSet<Catalogo> listaDeMidiasAvaliadas = new HashSet<Catalogo>();
+    private HashSet<Catalogo> listaDeMidiasAvaliadas;
     private LinkedList<Assistido> listaJaVistas;
-    //#endregion
+    // #endregion
 
-    //#region CONSTRUTOR
+    // #region CONSTRUTOR
     /**
      * Cria um cliente recebendo o nome de usuário, login e senha
      * 
@@ -29,8 +29,9 @@ public class Cliente {
         this.login = login;
         this.listaParaVer = new LinkedList<Catalogo>();
         this.listaJaVistas = new LinkedList<Assistido>();
+        listaDeMidiasAvaliadas = new HashSet<Catalogo>();
     }
-    //#endregion
+    // #endregion
 
     /**
      * Retorna a senha do usuário
@@ -53,7 +54,8 @@ public class Cliente {
     }
 
     /**
-     * Retorna uma linked list com todos os catálogos adicionados na lista para ver do cliente
+     * Retorna uma linked list com todos os catálogos adicionados na lista para ver
+     * do cliente
      * 
      * @return lista para ver
      */
@@ -121,10 +123,12 @@ public class Cliente {
     }
 
     /**
-     * Retorna, em um vetor/array, todos os elementos da lista. O vetor passado como parâmetro deve ser criado previamente.
+     * Retorna, em um vetor/array, todos os elementos da lista. O vetor passado como
+     * parâmetro deve ser criado previamente.
      * O retorno contém os elementos da lista.
      * 
-     * @param array Vetor/array para abrigar os elementos da lista. Deve ser previamente criado.
+     * @param array Vetor/array para abrigar os elementos da lista. Deve ser
+     *              previamente criado.
      * @return Outro vetor/array com os elementos da lista.
      */
 
@@ -209,7 +213,8 @@ public class Cliente {
     }
 
     /**
-     * Registra a audiencia de uma serie, adiciona na lista de ja vistas e remove da lista para ver
+     * Registra a audiencia de uma serie, adiciona na lista de ja vistas e remove da
+     * lista para ver
      * 
      * @param midia a ser registrada audiencia
      */
@@ -222,10 +227,11 @@ public class Cliente {
     }
 
     /**
-     * Metodo que verifica se o cleinte eh especialista, retorna true caso seja e false caso não seja
+     * Metodo que verifica se o cleinte eh especialista, retorna true caso seja e
+     * false caso não seja
      * 
      * @return true para cliente especialista e false caso contrario
-     *  
+     * 
      */
     public boolean ehEspecialista() {
         LocalDate hoje = LocalDate.now();
@@ -234,7 +240,8 @@ public class Cliente {
     }
 
     /**
-     * Metodo que verifica se o cliente ja avaliou a midia, retorna true caso já tenha avaliado e false caso seja a primeira ver que ele esteja avaliando
+     * Metodo que verifica se o cliente ja avaliou a midia, retorna true caso já
+     * tenha avaliado e false caso seja a primeira ver que ele esteja avaliando
      * 
      * @param catalogo
      * @return true caso cliente já tenha avaliado a mídia e false caso contrário
@@ -248,7 +255,8 @@ public class Cliente {
     }
 
     /**
-     * Metodo que avalia uma midia com nota e comentario e retorna a avaliação efetuada
+     * Metodo que avalia uma midia com nota e comentario e retorna a avaliação
+     * efetuada
      * 
      * @param nota
      * @param comentario
@@ -327,7 +335,8 @@ public class Cliente {
     }
 
     /**
-     * Busca mídia pelo nome na lista para ver, retorna a mídia caso seja encontrada e null caso contrário
+     * Busca mídia pelo nome na lista para ver, retorna a mídia caso seja encontrada
+     * e null caso contrário
      * 
      * @param nomeMidia
      * @return mídia encontrada e false caso contrário
