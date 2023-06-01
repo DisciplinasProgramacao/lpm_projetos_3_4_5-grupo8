@@ -2,6 +2,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Scanner;
+
 public class App {
     static Scanner teclado = new Scanner(System.in);
     static PlataformaStreaming plataforma;
@@ -59,24 +60,29 @@ public class App {
                     String nomeMidia;
                     System.out.println("Digite o nome da midia que deseja verificar a audiencia: ");
                     nomeMidia = teclado.nextLine();
-                                        
-                    try{
+
+                    try {
                         Catalogo catalogoVerificado = plataforma.buscarCatalogo(nomeMidia);
-                        System.out.println("A audiencia de '" + nomeMidia + "' e: " + catalogoVerificado.getAudiencia()); 
-                    } catch (NullPointerException e){
-                        System.out.println("\nMidia nao encontrada na plataforma. Verique se voce carregou o arquivo Catalogo ou digitou o nome da midia corretamente.\n");
+                        System.out
+                                .println("A audiencia de '" + nomeMidia + "' e: " + catalogoVerificado.getAudiencia());
+                    } catch (NullPointerException e) {
+                        System.out.println(
+                                "\nMidia nao encontrada na plataforma. Verique se voce carregou o arquivo Catalogo ou digitou o nome da midia corretamente.\n");
                     }
-                
+
                     break;
                 case 9:
-                   /* System.out.println("---Exibindo catalogo---");
-                    System.out.println(plataforma.getCatalogo());*/
-                    try{
+                    /*
+                     * System.out.println("---Exibindo catalogo---");
+                     * System.out.println(plataforma.getCatalogo());
+                     */
+                    try {
                         exibirMediaAvaliacaoCatalogo();
-                    } catch (NullPointerException e){
-                        System.out.println("\nMidia nao encontrada na plataforma. Verique se voce carregou o arquivo Catalogo.\n");
+                    } catch (NullPointerException e) {
+                        System.out.println(
+                                "\nMidia nao encontrada na plataforma. Verique se voce carregou o arquivo Catalogo.\n");
                     }
-              
+
                     break;
                 default:
                     break;
@@ -163,7 +169,8 @@ public class App {
                     try {
                         plataforma.assistirMidia(midiaEscolhida);
                         System.out.println("\nAssistindo midia... \nMidia assistida.");
-                        System.out.println("\nDeseja avaliar essa midia assistida? Digite '1' para sim e '2' para nao: ");
+                        System.out
+                                .println("\nDeseja avaliar essa midia assistida? Digite '1' para sim e '2' para nao: ");
                         int opcao = Integer.parseInt(teclado.nextLine());
                         while (opcao != 1 && opcao != 2) {
                             System.out.println("Opcao invalida. Digite '1' para sim e '2' para nao: ");
@@ -185,9 +192,7 @@ public class App {
                     pausa();
                     break;
                 case 4:
-                    String listaAssistidos;
-                    listaAssistidos = plataforma.visualizarListaDeAssistidos();
-                    System.out.println(listaAssistidos);
+                    System.out.println(plataforma.visualizarListaDeAssistidos());
                     pausa();
                     break;
                 case 5:
@@ -298,7 +303,7 @@ public class App {
                 case 5:
                     System.out.println("Para filtrar digite o nome: ");
                     String nome = teclado.nextLine();
-                    
+
                     try {
                         plataforma.buscarCatalogo(nome);
                         System.out.println("A Midia [" + plataforma.buscarCatalogo(nome) + "] existe no catalogo.");
@@ -342,7 +347,7 @@ public class App {
         String idioma = teclado.nextLine();
         System.out.print("Digite a duracao: ");
         int duracao = Integer.parseInt(teclado.nextLine());
-
+        // mudar, app nao pode ter acesso a classe filme
         Filme filme = new Filme(nome, dataLancamento, genero, idioma, duracao);
         try {
             plataforma.adicionarCatalogo(filme);
@@ -392,7 +397,7 @@ public class App {
         nomeUsuario = teclado.nextLine();
         System.out.println("Senha: ");
         senha = teclado.nextLine();
-
+        // mudar, app nao pode ter acesso a classe Cliente
         Cliente novoCliente = new Cliente(nome, nomeUsuario, senha);
         try {
             plataforma.adicionarCliente(novoCliente);
@@ -429,23 +434,29 @@ public class App {
         System.out.println("==========================");
         System.out.println("--Avaliando midia--");
         System.out.println("\nDigite o nome da midia que deseja avaliar: ");
-        String texto = teclado.nextLine();
-        Catalogo catalogo = plataforma.buscarCatalogo(texto);
+        String nomeMidia = teclado.nextLine();
 
-        System.out.println("Deixe seu comentario sobre a midia: ");
-        texto = teclado.nextLine();
+        try {
+            plataforma.buscarCatalogo(nomeMidia);
+            System.out.println("Deixe seu comentario sobre a midia: ");
+            String texto = teclado.nextLine();
 
-        System.out.println("Digite sua avaliacao com estrelas de 1 a 5: ");
-        int avaliacao = Integer.parseInt(teclado.nextLine());
+            System.out.println("Digite sua avaliacao com estrelas de 1 a 5: ");
+            int avaliacao = Integer.parseInt(teclado.nextLine());
 
-        while (avaliacao > 5 || avaliacao < 1) {
-            System.out.println("Numero invalido para a avaliacao. Digite sua avaliacao novamente: ");
-            avaliacao = Integer.parseInt(teclado.nextLine());
+            while (avaliacao > 5 || avaliacao < 1) {
+                System.out.println("Numero invalido para a avaliacao. Digite sua avaliacao novamente: ");
+                avaliacao = Integer.parseInt(teclado.nextLine());
+            }
+            // System.out.println("Midia: '" + catalogo.getNome() + "', avaliada com " +
+            // avaliacao + "estrelas.");
+
+            plataforma.adicionarAvaliacao(avaliacao, texto, plataforma.buscarCatalogo(nomeMidia));
+        } catch (NullPointerException e) {
+            System.out.println("Midia não encontrada");
+        } catch (IndexOutOfBoundsException a) {
+            System.out.println("Catalogo vazio");
         }
-        // System.out.println("Midia: '" + catalogo.getNome() + "', avaliada com " +
-        // avaliacao + "estrelas.");
-
-        plataforma.adicionarAvaliacao(avaliacao, texto, catalogo);
     }
 
     // Metodo para exibira media de avaliacao de uma midia
@@ -454,15 +465,15 @@ public class App {
         System.out.println("--Verificando media de avaliacao--");
         System.out.println("\nDigite o nome da midia que deseja verificar media: ");
         String texto = teclado.nextLine();
-        try{
-            Catalogo catalogo = plataforma.buscarCatalogo(texto);
-            BigDecimal media = plataforma.mediaAvaliacao(catalogo);
-            System.out.println("\nA midia '" + catalogo.getNome() + "' possui avaliacao media de: " + media + " estrelas \n");
-        }
-        catch(NullPointerException e){
+        try {
+            BigDecimal media = plataforma.mediaAvaliacao(plataforma.buscarCatalogo(texto));
+            System.out.println(
+                    "\nA midia '" + plataforma.buscarCatalogo(texto).getNome() + "' possui avaliacao media de: " + media
+                            + " estrelas \n");
+        } catch (NullPointerException e) {
             System.out.println("Midia nao encontrada. Verifique se digitou o nome corretamente.");
         }
-       
+
     }
 
 }
