@@ -84,6 +84,16 @@ public class App {
                     }
 
                     break;
+                case 10:
+                    for (Catalogo catalogo : plataforma.midiaMaisVista()) {
+                        catalogo.toString();
+                    }
+                    pausa();
+                    break;
+                case 11:
+                    
+                    pausa();
+                    break;
                 default:
                     break;
             }
@@ -106,6 +116,8 @@ public class App {
         System.out.println("7 - Realizar login de um cliente");
         System.out.println("8 - Verificar audiencia de uma midia");
         System.out.println("9 - Verificar avaliacao de uma midia");
+        System.out.println("10 - Verificar as 10 midias com a melhor avaliacao");
+        System.out.println("11 - Verificar as 10 midias com mais midia");
         System.out.println("0 - Sair");
         System.out.println("=================================================");
         System.out.print("\nDigite sua opção: ");

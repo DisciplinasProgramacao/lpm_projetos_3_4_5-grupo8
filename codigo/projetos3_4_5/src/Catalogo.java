@@ -139,7 +139,7 @@ public abstract class Catalogo {
      */
     public BigDecimal mediaAvaliacao() {
         int somaNotas = 0;
-        BigDecimal quantidadeAvaliacoes = new BigDecimal(listaAvaliacoes.size());
+        BigDecimal quantidadeAvaliacoes = new BigDecimal(quantidadeAvaliacoes());
         BigDecimal mediaAvaliacoes = new BigDecimal(0.0);
 
         if(quantidadeAvaliacoes.compareTo(BigDecimal.ZERO) > 0){
@@ -154,6 +154,10 @@ public abstract class Catalogo {
         this.avaliacaoMedia = mediaAvaliacoes;
 
         return mediaAvaliacoes;
+    }
+
+    public int quantidadeAvaliacoes() {
+        return listaAvaliacoes.size();
     }
 
     /**
