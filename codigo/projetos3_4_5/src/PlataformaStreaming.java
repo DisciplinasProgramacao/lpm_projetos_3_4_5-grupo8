@@ -379,7 +379,7 @@ public class PlataformaStreaming {
         return catalogo.mediaAvaliacao();
     }
 
-    public LinkedList<Catalogo> midiaMaisVista() {
+    public LinkedList<Catalogo> midiaMaisAvaliadas() {
         LinkedList<Catalogo> maisAvaliadas = new LinkedList<Catalogo>();
   
         // primeiro pega as midias com mais de 100 avaliacoes
@@ -395,5 +395,18 @@ public class PlataformaStreaming {
         return maisAvaliadas;
     }
 
-    
+    public LinkedList<Catalogo> midiaComMaisVisualizacao() {
+        LinkedList<Catalogo> midiaComMaisVisualizacao = new LinkedList<Catalogo>();
+  
+        // primeiro pega as midias e coloca na lista
+        for (int key : catalogos.keySet()) {
+                midiaComMaisVisualizacao.add(catalogos.get(key));
+        }
+
+        // depois orgena pelas mais avaliadas
+        Collections.sort(midiaComMaisVisualizacao, (a, b) -> { return Integer.compare(a.getAudiencia(), b.getAudiencia()); });        
+
+        return midiaComMaisVisualizacao;
+    }
+
 }

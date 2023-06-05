@@ -85,13 +85,17 @@ public class App {
 
                     break;
                 case 10:
-                    for (Catalogo catalogo : plataforma.midiaMaisVista()) {
+                    System.out.println("Midias mais avaliadas:");
+                    for (Catalogo catalogo : plataforma.midiaMaisAvaliadas()) {
                         catalogo.toString();
                     }
                     pausa();
                     break;
                 case 11:
-                    
+                    System.out.println("Midias mais visualizadas:");
+                    for (Catalogo catalogo : plataforma.midiaComMaisVisualizacao()) {
+                        catalogo.toString();
+                    }
                     pausa();
                     break;
                 default:
