@@ -15,6 +15,7 @@ public class PlataformaStreamingTest {
     private Cliente cliente1, clienteLogado;
     private Serie serie1, serie2;
     private Filme filme1, filme2, filme3;
+    private Assistido assistido1, assistido2, assistido3;
 
     @BeforeEach
     public void setUp() throws IllegalArgumentException, IOException {
@@ -28,6 +29,10 @@ public class PlataformaStreamingTest {
         filme1 = new Filme("O Poderoso Chefão 1", "01/01/1972", "Drama", "EN", 120);
         filme2 = new Filme("O Poderoso Chefão 2", "01/01/1974", "Drama", "EN", 120);
         filme3 = new Filme("Minions", "30/06/2022", "Comedia", "EN", 180);
+
+        assistido1 = new Assistido(filme1, null);
+        assistido2 = new Assistido(filme2, null);
+        assistido3 = new Assistido(serie2, null);
 
         plataforma1.adicionarCliente(clienteLogado);
     }
@@ -231,5 +236,33 @@ public class PlataformaStreamingTest {
         plataforma1.adicionarAvaliacao(3, "", filme2);
 
         assertEquals(new BigDecimal(4.0), plataforma1.mediaAvaliacao(filme2));
+    }
+
+    @Test
+    public void deveRetornarClienteQueMaisAssistiu() throws IOException{
+
+        plataforma1.adicionarCatalogo(filme2);
+        plataforma1.adicionarCatalogo(filme1);
+        plataforma1.adicionarCatalogo(filme3);
+
+        plataforma1.login("logado", "login");
+
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+        plataforma1.assistirMidia("O Poderoso Chefão 2");
+
+        plataforma1.adicionarAvaliacao(5, "", filme2);
+        plataforma1.logoff();
+
+        plataforma1.adicionarCliente(cliente1);
+        plataforma1.login("aninha12", "123");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+        plataforma1.assistirMidia("O Poderoso Chefão 2");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 1");
+        plataforma1.assistirMidia("O Poderoso Chefão 1");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("Minions");
+        plataforma1.assistirMidia("Minions");
+
+
+        assertEquals("3 - Ana Souza;aninha12;123", plataforma1.clienteQueMaisAssistiu());
     }
 }

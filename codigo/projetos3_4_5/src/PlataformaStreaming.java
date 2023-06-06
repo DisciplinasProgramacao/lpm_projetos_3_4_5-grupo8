@@ -408,5 +408,18 @@ public class PlataformaStreaming {
 
         return midiaComMaisVisualizacao;
     }
+    public String clienteQueMaisAssistiu(){
+        LinkedList<Cliente> clientesAux = new LinkedList<>();
+        String clienteQueMaisAssistiu = "";
+        for (String key: this.clientes.keySet()) {
+            clientesAux.add(this.clientes.get(key));
+        }
+
+        Collections.sort(clientesAux, (a, b) -> { return Integer.compare(a.getListaJaVistas().size(), b.getListaJaVistas().size()); });
+        
+        clienteQueMaisAssistiu = clientesAux.getLast().getListaJaVistas().size() + " - " + clientesAux.getLast();
+        return clienteQueMaisAssistiu;
+             
+    }
 
 }
