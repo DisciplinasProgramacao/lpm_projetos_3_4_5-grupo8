@@ -455,6 +455,24 @@ public class PlataformaStreaming {
         return clienteComMaiorAvaliacao;
     }
 
-   
+   /**
+     * Metodo que retorna a porcentagem dos clientes com pelo menos 15 avaliações; coloquei 3 ali pra testar mais facil. Só alterar p 15 depois.
+     * @return
+     */
+    public String calcularPorcentagemDeClienteComMinimoQuinzeAvaliacoes(){
+        String porcentagemCliente;
+
+        LinkedList<Cliente> clientesComAvaliacoesMinima = new LinkedList<Cliente>();
+    
+        for (String key: this.clientes.keySet()) {
+            if(clientes.get(key).quantidadeDeAvaliacoes() >= 3){
+                clientesComAvaliacoesMinima.add(this.clientes.get(key));
+            }
+        }
+
+        porcentagemCliente = (clientesComAvaliacoesMinima.size() * 100) / this.clientes.size() + "%";
+
+        return porcentagemCliente;
+    }
 
 }

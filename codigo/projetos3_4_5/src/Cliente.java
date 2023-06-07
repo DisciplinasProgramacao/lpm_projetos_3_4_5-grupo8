@@ -95,6 +95,10 @@ public class Cliente {
         return this.listaDeAvaliacoes;
     }
 
+    public int quantidadeDeAvaliacoes() {
+        return listaDeAvaliacoes.size();
+    }
+
     /**
      * Metodo que escolhe um catalogo da lista para ver e retorna o mesmo
      * 

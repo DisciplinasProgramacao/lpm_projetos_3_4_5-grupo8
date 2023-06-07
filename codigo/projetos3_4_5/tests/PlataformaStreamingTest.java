@@ -316,5 +316,48 @@ public class PlataformaStreamingTest {
     }
 
 
+    @Test
+    public void deveRetornarPorcentagemDeClientesComPeloMenosQuinzeAvaliazoes() throws IOException{
+        plataforma1.adicionarCatalogo(filme1);
+        plataforma1.adicionarCatalogo(filme2);
+        plataforma1.adicionarCatalogo(filme3);
+
+        plataforma1.adicionarCliente(cliente1);
+        plataforma1.login("aninha12", "123");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+        plataforma1.assistirMidia("O Poderoso Chefão 2");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 1");
+        plataforma1.assistirMidia("O Poderoso Chefão 1");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("Minions");
+        plataforma1.assistirMidia("Minions");
+        plataforma1.adicionarAvaliacao(4, "Excelente filme para assistir com as criancas", filme1);
+        plataforma1.adicionarAvaliacao(5, "Muito bom!", filme2);
+        plataforma1.adicionarAvaliacao(2, "Pessimo. Não gostei", filme3);
+        plataforma1.logoff();
+
+        plataforma1.adicionarCliente(cliente2);
+        plataforma1.login("ana.beatriz", "123");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 1");
+        plataforma1.assistirMidia("O Poderoso Chefão 1");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+        plataforma1.assistirMidia("O Poderoso Chefão 2");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("Minions");
+        plataforma1.assistirMidia("Minions");
+        plataforma1.adicionarAvaliacao(5, "Filme bom demais", filme1);
+        plataforma1.adicionarAvaliacao(4, "Excelente filme para assistir com amigos", filme2);
+        plataforma1.adicionarAvaliacao(2, "Pessimo. Não gostei", filme3);
+        plataforma1.logoff();
+ 
+        plataforma1.adicionarCliente(cliente3);
+        plataforma1.login("ana.maria", "123");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+        plataforma1.assistirMidia("O Poderoso Chefão 2");
+        plataforma1.adicionarAvaliacao(5, "Filme bom demais", filme2);
+        plataforma1.logoff();
+
+        //obs: o codigo conta com 4 clientes no total pois no BeforeEach tem um cliente logado. Logo, com os cleintes acima sao 4 clientes no total. Fiz com no min 3 avaliacoes pra nao precisar fazer com 15. Depois é só mudar o valor na plataformaStreaming e adc mais avaliaoces aqui no teste
+        assertEquals("50%", plataforma1.calcularPorcentagemDeClienteComMinimoQuinzeAvaliacoes());
+    }
+
 
 }

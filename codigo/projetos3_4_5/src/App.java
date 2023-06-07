@@ -85,19 +85,35 @@ public class App {
 
                     break;
                 case 10:
-                    System.out.println("Midias mais avaliadas:");
+                    System.out.println("---Exibindo Relatorio de Midias mais avaliadas---");
                     for (Catalogo catalogo : plataforma.midiaMaisAvaliadas()) {
                         catalogo.toString();
                     }
                     pausa();
                     break;
                 case 11:
-                    System.out.println("Midias mais visualizadas:");
+                    System.out.println("---Exibindo Relatorio de Midias mais visualizadas---");
                     for (Catalogo catalogo : plataforma.midiaComMaisVisualizacao()) {
                         catalogo.toString();
                     }
                     pausa();
                     break;
+                case 12:
+                    System.out.println("---Exibindo Relatorio do Cliente que mais assistiu---");
+                    //colocar aqui
+                    pausa();
+                    break;
+                case 13:
+                    System.out.println("---Exibindo Relatoriodo Cliente com mais avaliacoes---");
+                   //colocar aqui
+                    pausa();
+                    break;
+                case 14:
+                    System.out.println("---Exibindo Relatoriodo percentual de cliente com min 15 avaliacoes---");
+                    //colocar aqui
+                    pausa();
+                    break;
+                   
                 default:
                     break;
             }
@@ -120,8 +136,12 @@ public class App {
         System.out.println("7 - Realizar login de um cliente");
         System.out.println("8 - Verificar audiencia de uma midia");
         System.out.println("9 - Verificar avaliacao de uma midia");
-        System.out.println("10 - Verificar as 10 midias com a melhor avaliacao");
-        System.out.println("11 - Verificar as 10 midias com mais midia");
+        System.out.println("10 - Relatorio: 10 midias com a melhor avaliacao");
+        System.out.println("11 - Relatorio: 10 midias com mais visualizacoes");
+        System.out.println("12 - Relatorio: Cliente que assistiu mais midias");
+        System.out.println("13 - Relatorio: Cliente que possui mais avaliacoes");
+        System.out.println("14 - Relatorio: Percentual de clientes com pelo menos 15 avaliacoes");
+
         System.out.println("0 - Sair");
         System.out.println("=================================================");
         System.out.print("\nDigite sua opção: ");
@@ -238,16 +258,14 @@ public class App {
                     pausa();
                     break;
                 case 7:
-                    menuFiltro(); // catalogo
+                    menuFiltro(); 
                     pausa();
                     break;
                 case 8:
-                    // midia assistidas
                     menuFiltro();
                     pausa();
                     break;
                 case 9:
-                    // assistir futuramente
                     menuFiltro();
                     pausa();
                     break;
