@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 
 public class PlataformaStreamingTest {
     private PlataformaStreaming plataforma1;
-    private Cliente cliente1, clienteLogado;
+    private Cliente cliente1, cliente2, cliente3, clienteLogado;
     private Serie serie1, serie2;
     private Filme filme1, filme2, filme3;
     private Assistido assistido1, assistido2, assistido3;
@@ -21,6 +21,8 @@ public class PlataformaStreamingTest {
     public void setUp() throws IllegalArgumentException, IOException {
         plataforma1 = new PlataformaStreaming("Netflix");
         cliente1 = new Cliente("Ana Souza", "aninha12", "123");
+        cliente2 = new Cliente("Ana Beatriz", "ana.beatriz", "123");
+        cliente3 = new Cliente("Ana Maria", "ana.maria", "123");
         clienteLogado = new Cliente("To logado", "logado", "login");
 
         serie1 = new Serie("The Blacklist", "02/02/2017", "Suspense", "EN", 10);
@@ -261,8 +263,58 @@ public class PlataformaStreamingTest {
         plataforma1.assistirMidia("O Poderoso Chefão 1");
         plataforma1.adicionarMidiaNaListaParaVerFuturamente("Minions");
         plataforma1.assistirMidia("Minions");
-
+        plataforma1.logoff();
 
         assertEquals("3 - Ana Souza;aninha12;123", plataforma1.clienteQueMaisAssistiu());
     }
+
+
+    @Test
+    public void deveRetornarClienteComMaiorIndiceDeAvaliacao() throws IOException{
+        plataforma1.adicionarCatalogo(filme1);
+        plataforma1.adicionarCatalogo(filme2);
+        plataforma1.adicionarCatalogo(filme3);
+        plataforma1.adicionarCatalogo(serie1);
+        plataforma1.adicionarCatalogo(serie2);
+
+        plataforma1.adicionarCliente(cliente1);
+        plataforma1.login("aninha12", "123");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+        plataforma1.assistirMidia("O Poderoso Chefão 2");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 1");
+        plataforma1.assistirMidia("O Poderoso Chefão 1");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("Minions");
+        plataforma1.assistirMidia("Minions");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("The Blacklist");
+        plataforma1.assistirMidia("The Blacklist");
+        plataforma1.adicionarAvaliacao(4, "Excelente filme para assistir com as criancas", filme1);
+        plataforma1.adicionarAvaliacao(5, "Muito bom!", filme2);
+        plataforma1.adicionarAvaliacao(2, "Pessimo. Não gostei", filme3);
+        plataforma1.adicionarAvaliacao(2, "Serie muito pesada. Não gostei", serie1);
+        plataforma1.logoff();
+
+
+        plataforma1.adicionarCliente(cliente2);
+        plataforma1.login("ana.beatriz", "123");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+        plataforma1.assistirMidia("O Poderoso Chefão 2");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("The Blacklist");
+        plataforma1.assistirMidia("The Blacklist");
+        plataforma1.adicionarAvaliacao(5, "Filme bom demais", filme2);
+        plataforma1.adicionarAvaliacao(4, "Excelente serie para assistir com amigos", serie1);
+        plataforma1.logoff();
+
+
+        plataforma1.adicionarCliente(cliente3);
+        plataforma1.login("ana.maria", "123");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+        plataforma1.assistirMidia("O Poderoso Chefão 2");
+        plataforma1.adicionarAvaliacao(5, "Filme bom demais", filme2);
+        plataforma1.logoff();
+
+        assertEquals("Cliente: Ana Souza;aninha12;123; Qtd avaliacoes: 4", plataforma1.clienteComMaiorIndiceDeAvaliacao());
+    }
+
+
+
 }

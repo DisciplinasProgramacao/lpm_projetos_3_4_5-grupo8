@@ -379,6 +379,11 @@ public class PlataformaStreaming {
         return catalogo.mediaAvaliacao();
     }
 
+    /**
+     * Metodo que retorna as 10 midias de melhor avaliacao do catalogo, ordenada de modo decrescente
+     * @return
+     */
+
     public LinkedList<Catalogo> midiaMaisAvaliadas() {
         LinkedList<Catalogo> maisAvaliadas = new LinkedList<Catalogo>();
   
@@ -395,6 +400,10 @@ public class PlataformaStreaming {
         return maisAvaliadas;
     }
 
+    /**
+     * Metodo que retorna as 10 midias com mais visualizações do catalogo, ordenada de modo decrescente
+     * @return
+     */
     public LinkedList<Catalogo> midiaComMaisVisualizacao() {
         LinkedList<Catalogo> midiaComMaisVisualizacao = new LinkedList<Catalogo>();
   
@@ -408,6 +417,11 @@ public class PlataformaStreaming {
 
         return midiaComMaisVisualizacao;
     }
+
+    /**
+     * Metodo que retorna qual cliente assistiu mais midias
+     * @return
+     */
     public String clienteQueMaisAssistiu(){
         LinkedList<Cliente> clientesAux = new LinkedList<>();
         String clienteQueMaisAssistiu = "";
@@ -421,5 +435,26 @@ public class PlataformaStreaming {
         return clienteQueMaisAssistiu;
              
     }
+
+    /**
+     * Metodo que retorna qual cliente tem mais avaliacoes e quantas avaliacoes
+     * @return
+     */
+    public String clienteComMaiorIndiceDeAvaliacao() {
+        LinkedList<Cliente> clienteMaiorAva = new LinkedList<Cliente>();
+        String clienteComMaiorAvaliacao = "";
+
+        for (String key: this.clientes.keySet()) {
+            clienteMaiorAva.add(this.clientes.get(key));
+        }
+
+        Collections.sort(clienteMaiorAva, (a, b) -> { return Integer.compare(a.getListaDeAvaliacoes().size(), b.getListaDeAvaliacoes().size()); });
+        
+        clienteComMaiorAvaliacao = "Cliente: " + clienteMaiorAva.getLast() +  "; Qtd avaliacoes: " + clienteMaiorAva.getLast().getListaDeAvaliacoes().size();
+
+        return clienteComMaiorAvaliacao;
+    }
+
+   
 
 }

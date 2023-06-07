@@ -12,6 +12,8 @@ public class Cliente {
     private LinkedList<Catalogo> listaParaVer;
     private HashSet<Catalogo> listaDeMidiasAvaliadas;
     private LinkedList<Assistido> listaJaVistas;
+    private LinkedList<Avaliacao> listaDeAvaliacoes;
+
     // #endregion
 
     // #region CONSTRUTOR
@@ -30,6 +32,7 @@ public class Cliente {
         this.listaParaVer = new LinkedList<Catalogo>();
         this.listaJaVistas = new LinkedList<Assistido>();
         listaDeMidiasAvaliadas = new HashSet<Catalogo>();
+        this.listaDeAvaliacoes = new LinkedList<Avaliacao>();
     }
     // #endregion
 
@@ -80,6 +83,16 @@ public class Cliente {
      */
     public LinkedList<Assistido> getListaJaVistas() {
         return this.listaJaVistas;
+    }
+
+    /**
+     * Retorna uma linked list com todas as avaliações que o cliente já fez
+     * 
+     * @return lista de avaliações
+     * 
+     */
+    public LinkedList<Avaliacao> getListaDeAvaliacoes() {
+        return this.listaDeAvaliacoes;
     }
 
     /**
@@ -298,6 +311,7 @@ public class Cliente {
             for (Assistido assistido : listaJaVistas) {
                 if (assistido.getCatalogo() == catalogo) {
                     avaliacaoFeita = assistido.adicionarAvaliacao(avaliacaoSendoFeita);
+                    listaDeAvaliacoes.add(avaliacaoSendoFeita);
                     return avaliacaoFeita;
                 }
             }
