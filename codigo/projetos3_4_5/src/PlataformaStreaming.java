@@ -394,7 +394,7 @@ public class PlataformaStreaming {
             }
         }
 
-        // depois orgena pelas mais avaliadas
+        // depois ordena pelas mais avaliadas
         Collections.sort(maisAvaliadas, (a, b) -> { return a.mediaAvaliacao().compareTo(b.mediaAvaliacao()); });        
 
         return maisAvaliadas;
