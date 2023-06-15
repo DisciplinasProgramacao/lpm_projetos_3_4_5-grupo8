@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class PlataformaStreaming {
     //#region ATRIBUTOS
@@ -385,19 +386,13 @@ public class PlataformaStreaming {
      */
 
     public LinkedList<Catalogo> midiaMaisAvaliadas() {
-        LinkedList<Catalogo> maisAvaliadas = new LinkedList<Catalogo>();
-  
-        // primeiro pega as midias com mais de 100 avaliacoes
-        for (int key : catalogos.keySet()) {
-            if(catalogos.get(key).quantidadeAvaliacoes() >= 100){
-                maisAvaliadas.add(catalogos.get(key));
-            }
-        }
-
         // depois ordena pelas mais avaliadas
-        Collections.sort(maisAvaliadas, (a, b) -> { return a.mediaAvaliacao().compareTo(b.mediaAvaliacao()); });        
+        return catalogos.values().stream()
+                                 .filter(c -> ((Catalogo) c).quantidadeAvaliacoes() >= 100)
+                                 .sorted((a, b) -> { return ((Catalogo) a).mediaAvaliacao().compareTo(((Catalogo) b).mediaAvaliacao()); })
+                                 .limit(10)
+                                 .collect(Collectors.toCollection(LinkedList::new));
 
-        return maisAvaliadas;
     }
 
     /**
@@ -405,17 +400,11 @@ public class PlataformaStreaming {
      * @return
      */
     public LinkedList<Catalogo> midiaComMaisVisualizacao() {
-        LinkedList<Catalogo> midiaComMaisVisualizacao = new LinkedList<Catalogo>();
-  
-        // primeiro pega as midias e coloca na lista
-        for (int key : catalogos.keySet()) {
-                midiaComMaisVisualizacao.add(catalogos.get(key));
-        }
+        return catalogos.values().stream()
+                          .sorted((a, b) -> { return Integer.compare(a.getAudiencia(), b.getAudiencia()); })
+                          .limit(10)
+                          .collect(Collectors.toCollection(LinkedList::new));
 
-        // depois orgena pelas mais avaliadas
-        Collections.sort(midiaComMaisVisualizacao, (a, b) -> { return Integer.compare(a.getAudiencia(), b.getAudiencia()); });        
-
-        return midiaComMaisVisualizacao;
     }
 
     /**
