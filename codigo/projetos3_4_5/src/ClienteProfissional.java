@@ -3,7 +3,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 import java.util.HashSet;
 
-public class Cliente implements ICliente {
+public class ClienteProfissional implements ICliente {
 
     // #region ATRIBUTOS
     private String nomeDeUsuario;
@@ -25,7 +25,7 @@ public class Cliente implements ICliente {
      * @param senha
      * 
      */
-    public Cliente(String nomeDeUsuario, String login, String senha) {
+    public ClienteProfissional(String nomeDeUsuario, String login, String senha) {
         this.nomeDeUsuario = nomeDeUsuario;
         this.senha = senha;
         this.login = login;
