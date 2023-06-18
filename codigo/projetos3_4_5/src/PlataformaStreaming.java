@@ -137,6 +137,41 @@ public class PlataformaStreaming {
         for (Serie x : series) {
             this.catalogos.put(x.getId(), x);
         }
+        this.carregarLancamentos();
+    }
+
+    private void carregarLancamentos(){
+        Function<String, String[]> dividirTipo = (str -> (str.split(";")));
+        try {
+            LinkedList<String[]> lancamentos = Armazenagem.ler("POO_Lancamento", dividirTipo);
+            Catalogo aux;
+            String[] arrayStr = lancamentos.get(0);
+            for(int i = 0; i < arrayStr.length; i++){
+                aux = this.catalogos.get(Integer.parseInt(arrayStr[i]));
+                if(aux != null){
+                    aux.lancamento = true;
+                }
+            }
+        } catch (FileNotFoundException e) {//Se nao existir o arq do lancamento nao tem problema 
+        }
+    }
+    /** 
+     * Listar lancamentos
+     * 
+     * @return String com lancamentos
+     * 
+    */
+    public String lancamentos(){
+        StringBuilder x = new StringBuilder();
+        for(Catalogo y : catalogos.values()){
+            if(y.lancamento == true){
+                x.append(y.getId());
+                x.append(" - ");
+                x.append(y.getNome());
+                x.append("\n");
+            }
+        }
+        return x.toString();
     }
 
     /**
@@ -318,11 +353,19 @@ public class PlataformaStreaming {
      * @param nome da midia a ser assistida
      * @throws NullPointerException      cliente invalido
      * @throws IndexOutOfBoundsException midia inexistente ou nao encontrada
+     * @throws IllegalArgumentException Nao pode assistir lancamentos
      */
-    public void assistirMidia(String nomeMidia) throws NullPointerException, IndexOutOfBoundsException {
+    public void assistirMidia(String nomeMidia) throws NullPointerException, IndexOutOfBoundsException, IllegalArgumentException {
         Catalogo catalogo = this.getClienteAtual().buscarMidiaNaListaParaVer(nomeMidia);
         if (catalogo != null) {
-            this.clienteAtual.registrarAudiencia(catalogo);
+            if(!catalogo.lancamento){
+                this.clienteAtual.registrarAudiencia(catalogo);
+            }else{
+                if(clienteAtual.podeVerLancamento())
+                    this.clienteAtual.registrarAudiencia(catalogo);
+                else throw new IllegalArgumentException();
+            }
+            
         } else {
             throw new IndexOutOfBoundsException();
         }

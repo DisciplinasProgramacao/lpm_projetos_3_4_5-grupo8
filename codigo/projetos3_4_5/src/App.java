@@ -223,6 +223,8 @@ public class App {
                     } catch (IndexOutOfBoundsException a) {
                         System.out.println(
                                 "Midia nao encontrada. Para conseguir assistir, adicione uma midia na lista para assistir futuramente.");
+                    } catch (IllegalArgumentException b){
+                        System.out.println("Nao pode assistir lancamento");
                     }
 
                     pausa();
