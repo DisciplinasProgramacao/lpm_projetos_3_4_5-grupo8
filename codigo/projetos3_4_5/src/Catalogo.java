@@ -14,6 +14,7 @@ public abstract class Catalogo {
     private LinkedList<Avaliacao> listaAvaliacoes;
     private String dataLancamento;
     private BigDecimal avaliacaoMedia;
+    public boolean lancamento;
 
     static {
         parseId = 0;
@@ -65,6 +66,7 @@ public abstract class Catalogo {
         this.avaliacaoMedia = new BigDecimal(0.0);
         this.listaAvaliacoes = new LinkedList<Avaliacao>();
         this.id = id;
+        this.lancamento = false;
     }
     //#endregion
 
