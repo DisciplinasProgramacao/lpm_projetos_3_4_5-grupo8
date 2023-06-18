@@ -1,9 +1,8 @@
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 import java.util.HashSet;
 
-public class Cliente implements ICliente {
+public class Cliente {
 
     // #region ATRIBUTOS
     private String nomeDeUsuario;
@@ -13,6 +12,7 @@ public class Cliente implements ICliente {
     private HashSet<Catalogo> listaDeMidiasAvaliadas;
     private LinkedList<Assistido> listaJaVistas;
     private LinkedList<Avaliacao> listaDeAvaliacoes;
+    private State estadoCliente;
 
     // #endregion
 
@@ -33,6 +33,7 @@ public class Cliente implements ICliente {
         this.listaJaVistas = new LinkedList<Assistido>();
         listaDeMidiasAvaliadas = new HashSet<Catalogo>();
         this.listaDeAvaliacoes = new LinkedList<Avaliacao>();
+        this.estadoCliente = new StateStandart();
     }
     // #endregion
 
@@ -244,16 +245,23 @@ public class Cliente implements ICliente {
     }
 
     /**
-     * Metodo que verifica se o cleinte eh especialista, retorna true caso seja e
-     * false caso não seja
+     * Metodo que verifica se o cliente pode comentar na avaliacao
      * 
-     * @return true para cliente especialista e false caso contrario
+     * @return TRUE caso possa comentar
      * 
      */
-    public boolean ehEspecialista() {
-        LocalDate hoje = LocalDate.now();
-        return listaJaVistas.stream()
-                .filter(x -> x.getData().until(hoje, ChronoUnit.DAYS) <= 30).count() >= 5;
+    public boolean podeComentar() {
+        return this.getEstadoCliente().podeComentar();
+    }
+
+    /**
+     * Metodo que verifica se o cliente pode assistir lançamento
+     * 
+     * @return TRUE caso possa assistir
+     * 
+     */
+    public boolean podeVerLancamento() {
+        return this.getEstadoCliente().podeAssistirLancamento();
     }
 
     /**
@@ -280,7 +288,7 @@ public class Cliente implements ICliente {
      * @return Avaliação efetuada
      */
     private Avaliacao avaliar(int nota, String comentario) {
-        if (ehEspecialista() && !comentario.isEmpty()) {
+        if (podeComentar() && !comentario.isEmpty()) {
             return new Avaliacao(login, nota, comentario);
         }
 
@@ -294,7 +302,7 @@ public class Cliente implements ICliente {
      * @param comentario
      */
     public void adicionarComentarioAvaliacaoExistente(Avaliacao avaliacao, String comentario) {
-        if (avaliacao != null && (ehEspecialista() && !comentario.isEmpty())) {
+        if (avaliacao != null && (podeComentar() && !comentario.isEmpty())) {
             avaliacao.adicionarComentario(comentario);
         }
     }
@@ -389,21 +397,24 @@ public class Cliente implements ICliente {
         return this.nomeDeUsuario + ";" + this.login + ";" + this.senha;
     }
 
-    @Override
-    public void tornarStandart() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tornarStandart'");
+    private void changeState(State estadoCliente) {
+        this.estadoCliente = estadoCliente;
     }
 
-    @Override
-    public void tornarEspecialista() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tornarEspecialista'");
+    public void tornarStandart(){
+        this.changeState(this.estadoCliente.tornarStandart());
     }
 
-    @Override
-    public void tornarProfissional() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tornarProfissional'");
+    public void tornarEspecialista(){
+        this.changeState(this.estadoCliente.tornarEspecialista(this));
     }
+
+    public void tornarProfissional(){
+        this.changeState(this.estadoCliente.tornarProfissional());
+    }
+
+    public State getEstadoCliente() {
+        return this.estadoCliente;
+    }
+
 }

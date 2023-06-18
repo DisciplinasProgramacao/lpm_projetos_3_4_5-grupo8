@@ -133,7 +133,8 @@ public class ClienteTest {
         cliente.registrarAudiencia(filme1);
         cliente.registrarAudiencia(filme2);
         cliente.registrarAudiencia(serie1);
-        assertEquals(false, cliente.ehEspecialista());
+        cliente.tornarEspecialista();
+        assertEquals(false, cliente.podeComentar());
     }
 
     @Test
@@ -149,7 +150,8 @@ public class ClienteTest {
         cliente.registrarAudiencia(serie1);
         cliente.registrarAudiencia(serie2);
         cliente.registrarAudiencia(serie3);
-        assertEquals(true, cliente.ehEspecialista());
+        cliente.tornarEspecialista();
+        assertEquals(true, cliente.podeComentar());
     }
 
     @Test
@@ -165,7 +167,7 @@ public class ClienteTest {
         cliente.registrarAudiencia(serie1);
         cliente.registrarAudiencia(serie2);
         cliente.registrarAudiencia(serie3);
-
+        cliente.tornarEspecialista();
         cliente.adicionarAvaliacao(5, "Muito bom", filme1);
         
 
