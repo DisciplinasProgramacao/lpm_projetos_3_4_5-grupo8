@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 import java.util.HashSet;
 
@@ -406,7 +407,9 @@ public class Cliente {
     }
 
     public void tornarEspecialista(){
-        this.changeState(this.estadoCliente.tornarEspecialista(this));
+        LocalDate hoje = LocalDate.now();
+        if(this.getListaJaVistas().stream().filter(x -> x.getData().until(hoje, ChronoUnit.DAYS) <= 30).count() >= 5)
+            this.changeState(this.estadoCliente.tornarEspecialista());
     }
 
     public void tornarProfissional(){

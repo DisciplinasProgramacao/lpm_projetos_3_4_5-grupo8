@@ -1,7 +1,7 @@
 
 public class StateEspecialista extends State {
     @Override
-    public State tornarEspecialista(Cliente cliente) {
+    public State tornarEspecialista() {
         return this;
     }
 

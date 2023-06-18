@@ -4,12 +4,8 @@ import java.time.temporal.ChronoUnit;
 public class StateStandart extends State{
 
     @Override
-    public State tornarEspecialista(Cliente cliente) {
-        LocalDate hoje = LocalDate.now();
-        if(cliente.getListaJaVistas().stream().filter(x -> x.getData().until(hoje, ChronoUnit.DAYS) <= 30).count() >= 5)
-            return new StateEspecialista();
-        else 
-            return this;
+    public State tornarEspecialista() {
+        return new StateEspecialista();
     }
 
     @Override
