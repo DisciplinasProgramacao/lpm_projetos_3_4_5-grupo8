@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class PlataformaStreaming {
@@ -412,17 +413,15 @@ public class PlataformaStreaming {
      * @return
      */
     public String clienteQueMaisAssistiu(){
-        LinkedList<Cliente> clientesAux = new LinkedList<>();
-        String clienteQueMaisAssistiu = "";
-        for (String key: this.clientes.keySet()) {
-            clientesAux.add(this.clientes.get(key));
-        }
+        Predicate<Cliente> predicado = (c) -> c.getListaJaVistas().size() > 0;
+        LinkedList<Cliente> clientes = filtroRelatorios(new ArrayList<>(this.clientes.values()), predicado);
+        return clientes.getLast().getListaJaVistas().size() + " - " + clientes.getLast();
+    }
 
-        Collections.sort(clientesAux, (a, b) -> { return Integer.compare(a.getListaJaVistas().size(), b.getListaJaVistas().size()); });
-        
-        clienteQueMaisAssistiu = clientesAux.getLast().getListaJaVistas().size() + " - " + clientesAux.getLast();
-        return clienteQueMaisAssistiu;
-             
+     public static <T> LinkedList<T> filtroRelatorios(List<T> lista, Predicate<T> predicado) {
+        return lista.stream()
+                .filter(predicado)
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**
