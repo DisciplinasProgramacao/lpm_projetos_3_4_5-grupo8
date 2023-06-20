@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class PlataformaStreaming {
@@ -481,26 +482,29 @@ public class PlataformaStreaming {
      * @return
      */
 
-    public LinkedList<Catalogo> midiasMelhorAvaliadas() {
+    public void midiasMelhorAvaliadas() {
         // depois ordena pelas mais avaliadas
-        return catalogos.values().stream()
-                                 .filter(c -> ((Catalogo) c).quantidadeAvaliacoes() >= 100)
-                                 .sorted((a, b) -> { return ((Catalogo) a).mediaAvaliacao().compareTo(((Catalogo) b).mediaAvaliacao()); })
-                                 .limit(10)
-                                 .collect(Collectors.toCollection(LinkedList::new));
-
+        LinkedList<Catalogo> list = streamDefault(c -> ((Catalogo) c).quantidadeAvaliacoes() >= 100, 
+                            (a, b) -> { return ((Catalogo) a).mediaAvaliacao().compareTo(((Catalogo) b).mediaAvaliacao()); });
+        Relatorio.exibirRelatorio(list, "melhor avaliacao");
     }
 
     /**
      * Metodo que retorna as 10 midias com mais visualizações do catalogo, ordenada de modo decrescente
      * @return
      */
-    public LinkedList<Catalogo> midiaComMaisVisualizacao() {
-        return catalogos.values().stream()
-                          .sorted((a, b) -> { return Integer.compare(a.getAudiencia(), b.getAudiencia()); })
-                          .limit(10)
-                          .collect(Collectors.toCollection(LinkedList::new));
+    public void midiaComMaisVisualizacao() {
+        LinkedList<Catalogo> list = streamDefault(null, 
+                            (a, b) -> { return Integer.compare(((Catalogo) a).getAudiencia(), ((Catalogo) b).getAudiencia()); });
+        Relatorio.exibirRelatorio(list, "mais visualizadas");
+    }
 
+    public LinkedList<Catalogo> streamDefault(Predicate comparador, Comparator sort) {
+        return (LinkedList<Catalogo>) catalogos.values().stream()
+                                                        .filter(comparador)
+                                                        .sorted(sort)
+                                                        .limit(10)
+                                                        .collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**
