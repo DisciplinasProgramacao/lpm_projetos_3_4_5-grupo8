@@ -12,23 +12,13 @@ public class Relatorio {
         this.catalogo = catalogo;
     }
 
-    
-    public String criarRelatorioClienteQueMaisAssistiu(){
+   public String criarRelatorioClienteQueMaisAssistiu(){ //ok
         
 
         return "Cliente que mais assistiu: , total:";
     }
 
-    /* Metodo alternativo para o cliente com mais avaliacoes usando streams FALTA TESTAR
-    public String criarRelatorioClienteComMaisAvaliacoes(LinkedList<Cliente> clientes){
-        Cliente cliente = Collections.max(clientes.stream().collect(Collectors.toMap(c -> c, c -> c.getListaDeAvaliacoes().size())).entrySet(), Map.Entry.comparingByValue()).getKey();
-
-        return "Cliente com mais avaliacoes: " + cliente.getNomeUsuario() + ", com "
-                + cliente.getListaDeAvaliacoes().size() + " avaliacoes";
-    }*/
-
-
-    public String criarRelatorioClienteComMaisAvaliacoes(){
+    public String criarRelatorioClienteComMaisAvaliacoes(){ //ok
 
         return "Cliente que mais avaliou: ";
     }

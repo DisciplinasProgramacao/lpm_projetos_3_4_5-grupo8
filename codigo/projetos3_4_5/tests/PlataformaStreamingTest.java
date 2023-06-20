@@ -277,6 +277,32 @@ public class PlataformaStreamingTest {
         assertEquals("Cliente que mais assistiu: Ana Souza, total: 3", plataforma1.criarRelatorioClienteQueMaisAssistiu());
     }
 
+
+    @Test
+    public void deveRetornarClienteQueMaisAvaliouCom3() {
+            
+            plataforma1.login("aninha12", "123");    
+            plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 1");
+            plataforma1.assistirMidia("O Poderoso Chefão 1");
+            plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+            plataforma1.assistirMidia("O Poderoso Chefão 2");
+            plataforma1.adicionarMidiaNaListaParaVerFuturamente("Minions");
+            plataforma1.assistirMidia("Minions");
+            plataforma1.logoff();
+    
+            plataforma1.login("ana.beatriz", "123");
+            plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+            plataforma1.assistirMidia("O Poderoso Chefão 2");
+            plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 1");
+            plataforma1.logoff();
+    
+            assertEquals("Cliente que mais assistiu: Ana Souza, total: 3", plataforma1.criarRelatorioClienteQueMaisAssistiu());
+    }
+
+
+
+
+
     @Test
     public void deveRetornarRelatorioGeneroAudiencia(){
 

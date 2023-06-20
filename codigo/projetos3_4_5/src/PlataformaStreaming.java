@@ -603,7 +603,7 @@ public class PlataformaStreaming {
 
 
 
-     /*RELATORIOS OFICIAIS */
+     /***************************RELATORIOS OFICIAIS***************************************/
     /**
      * Metodo que retorna qual cliente assistiu mais midias
      * @return
@@ -616,7 +616,18 @@ public class PlataformaStreaming {
         return "Cliente que mais assistiu: " + clientes.getLast().getNomeUsuario() + ", total: " + clientes.getLast().getListaJaVistas().size() ;
     }
 
+    public String criarRelatorioClienteComMaisAvaliacoes(){
+        LinkedList<Cliente> clientes = this.clientes.values().stream()
+                                                              .filter(c -> c.getListaDeAvaliacoes().size() > 0)
+                                                              .collect(Collectors.toCollection(LinkedList::new));
 
+        return "Cliente que mais avaliou: " + clientes.getLast().getNomeUsuario() + ", total avaliacoes: " + clientes.getLast().getListaDeAvaliacoes().size() ; 
+    }
+
+    public String criarRelatorioPorcentagemDeClienteNoMinQuinzeAvaliacoes(){
+
+        return "Porcentagem total: ";
+    }
 
 
 }
