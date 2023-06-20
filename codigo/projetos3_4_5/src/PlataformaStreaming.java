@@ -613,7 +613,7 @@ public class PlataformaStreaming {
                                                               .filter(c -> c.getListaJaVistas().size() > 0)
                                                               .collect(Collectors.toCollection(LinkedList::new));
       
-        return "Cliente que mais assistiu: " + clientes.getLast() + ", total: " + clientes.getLast().getListaJaVistas().size();
+        return "Cliente que mais assistiu: " + clientes.getLast().getNomeUsuario() + ", total: " + clientes.getLast().getListaJaVistas().size() ;
     }
 
 

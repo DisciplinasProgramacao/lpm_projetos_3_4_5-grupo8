@@ -274,7 +274,7 @@ public class PlataformaStreamingTest {
         plataforma1.assistirMidia("Black mirror");
         plataforma1.logoff();
 
-        assertEquals("Cliente que mais assistiu: Ana Souza;aninha12;123, total: 3", plataforma1.criarRelatorioClienteQueMaisAssistiu());
+        assertEquals("Cliente que mais assistiu: Ana Souza, total: 3", plataforma1.criarRelatorioClienteQueMaisAssistiu());
     }
 
     @Test
