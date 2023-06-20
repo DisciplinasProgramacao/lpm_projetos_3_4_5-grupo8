@@ -503,17 +503,7 @@ public class PlataformaStreaming {
 
     }
 
-    /**
-     * Metodo que retorna qual cliente assistiu mais midias
-     * @return
-     */
-    public String clienteQueMaisAssistiu(){
-        LinkedList<Cliente> clientes = this.clientes.values().stream()
-                                                              .filter(c -> c.getListaJaVistas().size() > 0)
-                                                              .collect(Collectors.toCollection(LinkedList::new));
-        return clientes.getLast().getListaJaVistas().size() + " - " + clientes.getLast();
-    }
-
+   
     /**
      * Método que retorna relatório por genero com 10 midias
      * @param genero
@@ -603,5 +593,30 @@ public class PlataformaStreaming {
 
         return porcentagemCliente;
     }
+
+
+
+
+
+
+
+
+
+
+     /*RELATORIOS OFICIAIS */
+    /**
+     * Metodo que retorna qual cliente assistiu mais midias
+     * @return
+     */
+    public String criarRelatorioClienteQueMaisAssistiu(){
+        LinkedList<Cliente> clientes = this.clientes.values().stream()
+                                                              .filter(c -> c.getListaJaVistas().size() > 0)
+                                                              .collect(Collectors.toCollection(LinkedList::new));
+      
+        return "Cliente que mais assistiu: " + clientes.getLast() + ", total: " + clientes.getLast().getListaJaVistas().size();
+    }
+
+
+
 
 }

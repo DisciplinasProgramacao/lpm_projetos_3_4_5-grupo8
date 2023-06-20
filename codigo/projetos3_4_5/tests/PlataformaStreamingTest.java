@@ -5,8 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.Assert.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 
@@ -276,7 +274,7 @@ public class PlataformaStreamingTest {
         plataforma1.assistirMidia("Black mirror");
         plataforma1.logoff();
 
-        assertEquals("3 - Ana Souza;aninha12;123", plataforma1.clienteQueMaisAssistiu());
+        assertEquals("Cliente que mais assistiu: Ana Souza;aninha12;123, total: 3", plataforma1.criarRelatorioClienteQueMaisAssistiu());
     }
 
     @Test
