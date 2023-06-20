@@ -111,20 +111,29 @@ public class PlataformaStreaming {
 
     /**
      * Adiciona catalogos na plataforma, retorna FileNotFoundException caso não encontre o arquivo
+     * Cria filmes com idioma e genêro aleatórios dentro da lista de permitidos
      * 
      * @param catalogos linkedlist de catalogo a ser adicionado
      * @throws FileNotFoundException
      * 
      */
     public void carregarCatalogos() throws FileNotFoundException {
+        Random random = new Random();
+        EnumGeneros[] generos = EnumGeneros.values();
+        String[] idiomas = {"Português", "Inglês", "Espanhol", "Japonês"};
+
         Function<String, Filme> contrutorFilme = (str -> new Filme(Integer.parseInt(str.split(";")[0]),
                 str.split(";")[1],
                 str.split(";")[2],
-                Integer.parseInt(str.split(";")[3])));
+                Integer.parseInt(str.split(";")[3]),
+                generos[random.nextInt(generos.length)].getDescricao(),
+                idiomas[random.nextInt(idiomas.length)]));
 
         Function<String, Serie> contrutorSerie = (str -> new Serie(Integer.parseInt(str.split(";")[0]),
                 str.split(";")[1],
-                str.split(";")[2]));
+                str.split(";")[2],
+                generos[random.nextInt(generos.length)].getDescricao(),
+                idiomas[random.nextInt(idiomas.length)]));
 
         LinkedList<Filme> filmes;
         LinkedList<Serie> series;

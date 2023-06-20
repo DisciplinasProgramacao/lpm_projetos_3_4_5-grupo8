@@ -26,9 +26,11 @@ public class Serie extends Catalogo {
      * @param idSerie
      * @param nome
      * @param dataLancamento
+     * @param genero
+     * @param idioma
      */
-    public Serie(int idSerie, String nome, String dataLancamento) {
-        super(idSerie, nome, dataLancamento);
+    public Serie(int idSerie, String nome, String dataLancamento, String genero, String idioma) {
+        super(idSerie, nome, dataLancamento, genero, idioma);
     }
     //#endregion
 

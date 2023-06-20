@@ -1,10 +1,10 @@
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public abstract class Catalogo {
 
     //#region ATRIBUTOS
-    private static final String[] GENEROS = new String[8];
     private static int parseId;
     private String nome;
     private int id;
@@ -28,28 +28,37 @@ public abstract class Catalogo {
      * @param id
      * @param nome
      * @param dataLancamento
+     * @param genero
+     * @param idioma
      */
-    public Catalogo(int id, String nome, String dataLancamento) {
+    public Catalogo(int id, String nome, String dataLancamento, String genero, String idioma) {
         if (id > parseId) {
             parseId = id;
         }
-        init(id, nome, dataLancamento, null, null);
+        init(id, nome, dataLancamento, genero, idioma);
     }
 
     /**
      * Construtor que cria um catálogo com nome, data em que foi lançado, genero e idioma
+     * Valida o genero que recebe como parâmetro, deve ser um dos valores definidos no enum, caso receba valor inválido lança exceção
      * 
      * @param nome
      * @param dataLancamento
      * @param genero
      * @param idioma
+     * @throws IllegalArgumentException caso genero informado seja inválido
      */
-    public Catalogo(String nome, String dataLancamento, String genero, String idioma) {
-        init(++parseId, nome, dataLancamento, genero, idioma);
+    public Catalogo(String nome, String dataLancamento, String genero, String idioma) throws IllegalArgumentException {
+        EnumGeneros generoEncontrado = Arrays.stream(EnumGeneros.values())
+            .filter(g -> g.getDescricao().equals(genero))
+            .findAny()
+            .orElseThrow(() -> {throw new IllegalArgumentException("Genero " + genero + " nao esta dentro dos valores permitidos");});
+
+        init(++parseId, nome, dataLancamento, generoEncontrado.getDescricao(), idioma);
     }
 
     /**
-     * Método inicializador para ser utilizado pelos construtores
+     * Método inicializador para ser utilizado pelos construtores     
      * 
      * @param id
      * @param nome
@@ -58,9 +67,9 @@ public abstract class Catalogo {
      * @param idioma
      */
     public void init(int id, String nome, String dataLancamento, String genero, String idioma) {
+        this.genero = genero;
         this.nome = nome;
-        this.genero = genero; // Ainda não será implementado
-        this.idioma = idioma; // Ainda não será implementado
+        this.idioma = idioma;
         this.audiencia = 0;
         this.dataLancamento = dataLancamento;
         this.avaliacaoMedia = new BigDecimal(0.0);

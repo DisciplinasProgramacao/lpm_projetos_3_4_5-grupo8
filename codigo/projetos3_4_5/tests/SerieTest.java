@@ -1,14 +1,10 @@
 import org.junit.jupiter.api.Test;
-
-import static org.junit.Assert.assertEquals;
-
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.math.BigDecimal;
 
-
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
 public class SerieTest {
     Serie serie;
@@ -56,6 +52,16 @@ public class SerieTest {
     @Test
     public void deveRetornarAvaliacaoMediaIgualAZeroCasoNaoPossuaAvaliacoes(){
         assertEquals(new BigDecimal(0.0), serie.mediaAvaliacao());
+    }
+
+    @Test
+    public void deveLancarExcecaoCasoGeneroDoFilmeNaoExistaNoEnum(){
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Serie("Suits", "02/02/2017", "GeneroInvalido", "EN", 10));
+    }
+
+    @Test
+    public void naoDeveLancarExcecaoCasoGeneroDoFilmeExistaNoEnum(){
+        assertDoesNotThrow(() -> new Filme("Fullmetal Brotherhood","02/02/2003", "Anime", "EN", 100));
     }
 
 }

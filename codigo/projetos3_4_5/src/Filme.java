@@ -13,8 +13,8 @@ public class Filme extends Catalogo {
      * @param duracao
      * 
      */
-    public Filme(int id, String nome, String dataLancamento, int duracao) {
-        super(id, nome, dataLancamento);
+    public Filme(int id, String nome, String dataLancamento, int duracao, String genero, String idioma) {
+        super(id, nome, dataLancamento, genero, idioma);
         this.duracao = duracao;
     }
 

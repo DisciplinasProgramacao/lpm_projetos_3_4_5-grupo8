@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +15,7 @@ public class FilmeTest {
 
     @BeforeEach
     public void prepare() {
-        filme = new Filme("O Poderoso Chefão", "02/02/2017", "Suspense", "EN", 100);
+        filme = new Filme("O Poderoso Chefão", "02/02/2017", "Ação", "EN", 100);
         avaliacao1 = new Avaliacao("Joao Feliz", 4);
         avaliacao2 = new Avaliacao("Maria Animada", 5, "muito bom");
     }
@@ -46,5 +47,15 @@ public class FilmeTest {
     @Test
     public void deveRetornarAvaliacaoMediaIgualAZeroCasoNaoPossuaAvaliacoes(){
         assertEquals(new BigDecimal(0.0), filme.mediaAvaliacao());
-    }    
+    }
+
+    @Test
+    public void deveLancarExcecaoCasoGeneroDoFilmeNaoExistaNoEnum(){
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Filme("Nome","02/02/2003", "GeneroNaoExistente", "EN", 100));
+    }
+
+    @Test
+    public void naoDeveLancarExcecaoCasoGeneroDoFilmeExistaNoEnum(){
+        assertDoesNotThrow(() -> new Filme("Nome","02/02/2003", "Anime", "EN", 100));
+    }
 }
