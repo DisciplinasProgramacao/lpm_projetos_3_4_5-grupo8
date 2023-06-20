@@ -232,4 +232,40 @@ public class PlataformaStreamingTest {
 
         assertEquals(new BigDecimal(4.0), plataforma1.mediaAvaliacao(filme2));
     }
+    @Test
+    public void deveRetornarClienteQueMaisAssistiuCom3(){
+        
+
+        plataforma1.login("logado", "login");
+
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+        plataforma1.assistirMidia("O Poderoso Chefão 2");
+
+        plataforma1.adicionarAvaliacao(5, "", filme2);
+        plataforma1.logoff();
+
+        plataforma1.login("aninha12", "123");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+        plataforma1.assistirMidia("O Poderoso Chefão 2");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 1");
+        plataforma1.assistirMidia("O Poderoso Chefão 1");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("Minions");
+        plataforma1.assistirMidia("Minions");
+        plataforma1.logoff();
+
+        plataforma1.login("ana.beatriz", "123");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+        plataforma1.assistirMidia("O Poderoso Chefão 2");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 1");
+        plataforma1.assistirMidia("O Poderoso Chefão 1");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("Minions");
+        plataforma1.assistirMidia("Minions");
+        plataforma1.adicionarMidiaNaListaParaVerFuturamente("Black mirror");
+        plataforma1.assistirMidia("Black mirror");
+        plataforma1.logoff();   
+
+        assertEquals("3 - Ana Souza;aninha12;123", plataforma1.clienteQueMaisAssistiu());
+
+
+    }
 }
