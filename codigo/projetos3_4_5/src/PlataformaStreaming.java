@@ -508,18 +508,12 @@ public class PlataformaStreaming {
      * @return
      */
     public String clienteQueMaisAssistiu(){
-        LinkedList<Cliente> clientesAux = new LinkedList<>();
-        String clienteQueMaisAssistiu = "";
-        for (String key: this.clientes.keySet()) {
-            clientesAux.add(this.clientes.get(key));
-        }
-
-        Collections.sort(clientesAux, (a, b) -> { return Integer.compare(a.getListaJaVistas().size(), b.getListaJaVistas().size()); });
-        
-        clienteQueMaisAssistiu = clientesAux.getLast().getListaJaVistas().size() + " - " + clientesAux.getLast();
-        return clienteQueMaisAssistiu;
-             
+        LinkedList<Cliente> clientes = this.clientes.values().stream()
+                                                              .filter(c -> c.getListaJaVistas().size() > 0)
+                                                              .collect(Collectors.toCollection(LinkedList::new));
+        return clientes.getLast().getListaJaVistas().size() + " - " + clientes.getLast();
     }
+
 
     /**
      * Metodo que retorna qual cliente tem mais avaliacoes e quantas avaliacoes
