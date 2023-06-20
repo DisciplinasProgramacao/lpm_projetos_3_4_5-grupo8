@@ -11,6 +11,8 @@ public class Filme extends Catalogo {
      * @param nome
      * @param dataLancamento
      * @param duracao
+     * @param genero
+     * @param idioma
      * 
      */
     public Filme(int id, String nome, String dataLancamento, int duracao, String genero, String idioma) {
