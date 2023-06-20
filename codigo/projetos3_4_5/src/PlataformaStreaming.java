@@ -507,22 +507,56 @@ public class PlataformaStreaming {
                                                         .collect(Collectors.toCollection(LinkedList::new));
     }
 
+   
     /**
-     * Metodo que retorna qual cliente assistiu mais midias
-     * @return
+     * Método que retorna relatório por genero com 10 midias
+     * @param genero
+     * @return String
      */
-    public String clienteQueMaisAssistiu(){
-        LinkedList<Cliente> clientesAux = new LinkedList<>();
-        String clienteQueMaisAssistiu = "";
-        for (String key: this.clientes.keySet()) {
-            clientesAux.add(this.clientes.get(key));
+    public String relatorioPorGeneroAudiencia(String genero) {
+        LinkedList<Catalogo> catalogos = this.catalogos.values().stream()
+                                                                .filter(c -> c.getGenero().equals(genero))
+                                                                .sorted((a, b) -> { return Integer.compare(a.getAudiencia(), b.getAudiencia()); })
+                                                                .limit(10)
+                                                                .collect(Collectors.toCollection(LinkedList::new));
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("Relatório por gênero: " + genero + "\n");
+
+        int contador = 0;
+
+        for (Catalogo midia : catalogos) {
+            contador++;
+            stringBuilder.append("\n[" + contador + "] " + midia.getNome());
         }
 
-        Collections.sort(clientesAux, (a, b) -> { return Integer.compare(a.getListaJaVistas().size(), b.getListaJaVistas().size()); });
-        
-        clienteQueMaisAssistiu = clientesAux.getLast().getListaJaVistas().size() + " - " + clientesAux.getLast();
-        return clienteQueMaisAssistiu;
-             
+        return stringBuilder.toString();
+    }
+    /**
+     * Metodo que retorna relatorio por genero com 10 midias mais bem avaliadas
+     * @return String
+     * @param genero
+     */
+    public String relatorioPorGeneroAvaliacao(String genero) {
+        LinkedList<Catalogo> catalogos = this.catalogos.values().stream()
+                                                                .filter(c -> c.getGenero().equals(genero))
+                                                                .sorted((a, b) -> { return ((Catalogo) a).mediaAvaliacao().compareTo(((Catalogo) b).mediaAvaliacao()); })
+                                                                .limit(10)
+                                                                .collect(Collectors.toCollection(LinkedList::new));
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("Relatório por gênero: " + genero + "\n");
+
+        int contador = 0;
+
+        for (Catalogo midia : catalogos) {
+            contador++;
+            stringBuilder.append("\n[" + contador + "] " + midia.getNome());
+        }
+
+        return stringBuilder.toString();
     }
 
     /**
@@ -563,5 +597,30 @@ public class PlataformaStreaming {
 
         return porcentagemCliente;
     }
+
+
+
+
+
+
+
+
+
+
+     /*RELATORIOS OFICIAIS */
+    /**
+     * Metodo que retorna qual cliente assistiu mais midias
+     * @return
+     */
+    public String criarRelatorioClienteQueMaisAssistiu(){
+        LinkedList<Cliente> clientes = this.clientes.values().stream()
+                                                              .filter(c -> c.getListaJaVistas().size() > 0)
+                                                              .collect(Collectors.toCollection(LinkedList::new));
+      
+        return "Cliente que mais assistiu: " + clientes.getLast().getNomeUsuario() + ", total: " + clientes.getLast().getListaJaVistas().size() ;
+    }
+
+
+
 
 }
