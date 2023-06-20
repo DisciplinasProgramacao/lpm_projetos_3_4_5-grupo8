@@ -39,7 +39,14 @@ public class PlataformaStreaming {
     public String getNome() {
         return this.nome;
     }
+    //Metodos testes
+    public HashMap<Integer, Catalogo> getCatalogos() {
+        return this.catalogos;
+    }
 
+    public HashMap<String, Cliente> getClientes() {
+        return this.clientes;
+    }
     /**
      * Retorna o cliente atual, caso possua usuário logado e null pointer caso contrário
      * 
@@ -493,11 +500,11 @@ public class PlataformaStreaming {
      * Metodo que retorna as 10 midias com mais visualizações do catalogo, ordenada de modo decrescente
      * @return
      */
-    public void midiaComMaisVisualizacao() {
-        LinkedList<Catalogo> list = streamDefault(null, 
-                            (a, b) -> { return Integer.compare(((Catalogo) a).getAudiencia(), ((Catalogo) b).getAudiencia()); });
-        Relatorio.exibirRelatorio(list, "mais visualizadas");
-    }
+    // public void midiaComMaisVisualizacao() {
+    //     LinkedList<Catalogo> list = streamDefault(null, 
+    //                         (a, b) -> { return Integer.compare(((Catalogo) a).getAudiencia(), ((Catalogo) b).getAudiencia()); });
+    //     Relatorio.exibirRelatorio(list, "mais visualizadas");
+    // }
 
     public LinkedList<Catalogo> streamDefault(Predicate comparador, Comparator sort) {
         return (LinkedList<Catalogo>) catalogos.values().stream()
@@ -513,25 +520,9 @@ public class PlataformaStreaming {
      * @param genero
      * @return String
      */
-    public String relatorioPorGeneroAudiencia(String genero) {
-        LinkedList<Catalogo> catalogos = this.catalogos.values().stream()
-                                                                .filter(c -> c.getGenero().equals(genero))
-                                                                .sorted((a, b) -> { return Integer.compare(a.getAudiencia(), b.getAudiencia()); })
-                                                                .limit(10)
-                                                                .collect(Collectors.toCollection(LinkedList::new));
-
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append("Relatório por gênero: " + genero + "\n");
-
-        int contador = 0;
-
-        for (Catalogo midia : catalogos) {
-            contador++;
-            stringBuilder.append("\n[" + contador + "] " + midia.getNome());
-        }
-
-        return stringBuilder.toString();
+    public void relatorioPorGeneroAudiencia(String genero) {
+        Relatorio relatorio = new Relatorio(this.clientes, this.catalogos);
+        relatorio.relatorioPorGeneroAudiencia(genero);
     }
     /**
      * Metodo que retorna relatorio por genero com 10 midias mais bem avaliadas
