@@ -110,6 +110,33 @@ public class PlataformaStreaming {
     }
 
     /**
+     * Método que cadastra uma mídia (filme ou série), recebe todos os dados da midia, cria o objeto e adiciona ao catálogo da plataforma
+     * Caso gênero seja inválido lança IllegalArgumentException
+     * Caso ocorra erro ao adicionar mídia ao catálogo lança IOException
+     * 
+     * @param nome
+     * @param dataLancamento
+     * @param genero
+     * @param idioma
+     * @param duracao
+     * @throws IOException caso ocorra erro ao adicionar filme ao catálogo ou ao gravar no arquivo
+     * @throws IllegalArgumentException caso gênero informado inválido
+     */
+    public void cadastrarMidia(String nome, String dataLancamento, String genero, String idioma, int duracao, int quantidadeEpisodios) throws IOException, IllegalArgumentException{
+        Catalogo midia;
+
+        if(duracao > 0){
+            midia = new Filme(nome, dataLancamento, genero, idioma, duracao);
+            Armazenagem.gravar("POO_Filmes", midia);
+        } else {
+            midia = new Serie(nome, dataLancamento, genero, idioma, quantidadeEpisodios);
+            Armazenagem.gravar("POO_Series", midia);
+        }
+
+        adicionarCatalogo(midia);
+    }
+
+    /**
      * Adiciona catalogos na plataforma, retorna FileNotFoundException caso não encontre o arquivo
      * Cria filmes com idioma e genêro aleatórios dentro da lista de permitidos
      * 
@@ -197,6 +224,23 @@ public class PlataformaStreaming {
         } else {
             throw new IllegalArgumentException();
         }
+    }
+
+    /**
+     * Método que cadastra um cliente, recebe todos os dados do cliente, cria o objeto e adiciona a lista de clientes da plataforma
+     * Caso já exista cliente com o login informado lança IllegalArgumentException
+     * Caso ocorra erro ao adicionar cliente a plataforma lança IOException
+     * @param nome
+     * @param nomeUsuario
+     * @param senha
+     * @throws IOException
+     * @throws IllegalArgumentException
+     */
+    public void cadastrarCliente(String nome, String nomeUsuario, String senha) throws IOException, IllegalArgumentException{
+        Cliente novoCliente = new Cliente(nome, nomeUsuario, senha);
+
+        adicionarCliente(novoCliente);
+        Armazenagem.gravar("POO_Espectadores", novoCliente);
     }
 
     /**
@@ -437,7 +481,7 @@ public class PlataformaStreaming {
      * @return
      */
 
-    public LinkedList<Catalogo> midiaMaisAvaliadas() {
+    public LinkedList<Catalogo> midiasMelhorAvaliadas() {
         // depois ordena pelas mais avaliadas
         return catalogos.values().stream()
                                  .filter(c -> ((Catalogo) c).quantidadeAvaliacoes() >= 100)

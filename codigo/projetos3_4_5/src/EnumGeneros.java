@@ -1,9 +1,9 @@
 public enum EnumGeneros {
-    ACAO("Ação"),
+    ACAO("Acao"),
     ANIME("Anime"),
     AVENTURA("Aventura"),
-    COMEDIA("Comédia"),
-    DOCUMENTARIO("Documentário"),
+    COMEDIA("Comedia"),
+    DOCUMENTARIO("Documentario"),
     DRAMA("Drama"),
     POLICIAL("Policial"),
     ROMANCE("Romance"),

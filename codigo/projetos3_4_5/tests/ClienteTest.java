@@ -17,11 +17,11 @@ public class ClienteTest {
         listacomquatroCatalogos = new LinkedList<>();
 
         serie1 = new Serie("The Blacklist", "02/02/2017", "Suspense", "EN", 10);
-        serie2 = new Serie("Friends", "05/08/1999", "Comédia", "EN", 9);
+        serie2 = new Serie("Friends", "05/08/1999", "Comedia", "EN", 9);
         serie3 = new Serie("Suits", "20/10/2015", "Drama", "EN", 5);
         filme1 = new Filme("O Poderoso Chefão", "01/01/1972", "Drama", "EN", 120);
         filme2 = new Filme("O Poderoso Chefão 2", "01/01/1974", "Drama", "EN", 120);
-        filme3 = new Filme("Minions", "30/06/2022", "Comédia", "EN", 180);
+        filme3 = new Filme("Minions", "30/06/2022", "Comedia", "EN", 180);
 
         listacomquatroCatalogos.add(serie1);
         listacomquatroCatalogos.add(serie2);
@@ -66,7 +66,7 @@ public class ClienteTest {
             cliente.adicionarNaLista(serie);
         }
 
-        LinkedList<Catalogo> listaFiltrada = cliente.filtrarPorGenero("Comédia");
+        LinkedList<Catalogo> listaFiltrada = cliente.filtrarPorGenero("Comedia");
 
         assertEquals(1, listaFiltrada.size());
     }
@@ -90,7 +90,7 @@ public class ClienteTest {
         cliente.registrarAudiencia(filme2);
         cliente.registrarAudiencia(serie1);
         assertEquals(3, cliente.filtrarPorGenero("Drama").size());
-        assertEquals(2, cliente.filtrarPorGenero("Comédia").size());
+        assertEquals(2, cliente.filtrarPorGenero("Comedia").size());
         assertEquals(1, cliente.filtrarPorGenero("Suspense").size());
     }
     @Test

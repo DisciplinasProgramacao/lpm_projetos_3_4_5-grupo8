@@ -10,53 +10,36 @@ public class App {
     public static void main(String[] args) {
         int opcao;
         plataforma = new PlataformaStreaming("JoaoCaramflix");
+        carregarArquivos();
         do {
             opcao = menuFlix();
             limparTela();
             switch (opcao) {
                 case 1:
-                    System.out.println("Carregando arquivo Catalogo com séries e filmes...");
-                    try {
-                        plataforma.carregarCatalogos();
-                    } catch (FileNotFoundException e) {
-                        System.out.println("Erro na abertura de arquivo.");
-                    }
-
-                    break;
-                case 2:
-                    System.out.println("Carregando arquivo de Usuarios...");
-                    try {
-                        plataforma.carregarCliente();
-                    } catch (FileNotFoundException e) {
-                        System.out.println("Erro na abertura do arquivo");
-                    }
-                    break;
-                case 3:
                     try {
                         System.out.println("---Exibindo catalogo---");
                         System.out.println(plataforma.getCatalogo());
                     } catch (IndexOutOfBoundsException e) {
-                        System.out.println(
-                                "Erro. Voce deve carregar o arquivo Catalogo antes de solicitar sua exibicao.");
+                        System.out.println("Erro. Nao existem midias cadastradas no catalogo. " + e);
                     }
                     break;
-                case 4:
+                case 2:
                     cadastrarFilme();
                     break;
-                case 5:
+                case 3:
                     cadastrarSerie();
                     break;
-                case 6:
+                case 4:
                     cadastrarCliente();
                     break;
-                case 7:
+                case 5:
                     if (realizarLogin()) {
                         menuCliente();
                     } else {
                         System.out.println("Login invalido. Favor tentar logar novamente ou realizar seu cadastro.");
                     }
                     break;
-                case 8:
+                case 6:
                     String nomeMidia;
                     System.out.println("Digite o nome da midia que deseja verificar a audiencia: ");
                     nomeMidia = teclado.nextLine();
@@ -66,12 +49,11 @@ public class App {
                         System.out
                                 .println("A audiencia de '" + nomeMidia + "' e: " + catalogoVerificado.getAudiencia());
                     } catch (NullPointerException e) {
-                        System.out.println(
-                                "\nMidia nao encontrada na plataforma. Verique se voce carregou o arquivo Catalogo ou digitou o nome da midia corretamente.\n");
+                        System.out.println("\nMidia nao encontrada na plataforma. Verique se voce digitou o nome da midia corretamente.\n" + e);
                     }
 
                     break;
-                case 9:
+                case 7:
                     /*
                      * System.out.println("---Exibindo catalogo---");
                      * System.out.println(plataforma.getCatalogo());
@@ -79,41 +61,39 @@ public class App {
                     try {
                         exibirMediaAvaliacaoCatalogo();
                     } catch (NullPointerException e) {
-                        System.out.println(
-                                "\nMidia nao encontrada na plataforma. Verique se voce carregou o arquivo Catalogo.\n");
+                        System.out.println("\nMidia nao encontrada na plataforma. Verique se voce digitou o nome corretamente.\n" + e);
                     }
 
                     break;
-                case 10:
-                    System.out.println("---Exibindo Relatorio de Midias mais avaliadas---");
-                    for (Catalogo catalogo : plataforma.midiaMaisAvaliadas()) {
+                case 8:
+                    System.out.println("---Exibindo Relatorio de Midias com melhor avaliacao---");
+                    for (Catalogo catalogo : plataforma.midiasMelhorAvaliadas()) {
                         catalogo.toString();
                     }
                     pausa();
                     break;
-                case 11:
+                case 9:
                     System.out.println("---Exibindo Relatorio de Midias mais visualizadas---");
                     for (Catalogo catalogo : plataforma.midiaComMaisVisualizacao()) {
                         catalogo.toString();
                     }
                     pausa();
                     break;
-                case 12:
+                case 10:
                     System.out.println("---Exibindo Relatorio do Cliente que mais assistiu---");
                     //colocar aqui
                     pausa();
                     break;
-                case 13:
+                case 11:
                     System.out.println("---Exibindo Relatoriodo Cliente com mais avaliacoes---");
                    //colocar aqui
                     pausa();
                     break;
-                case 14:
+                case 12:
                     System.out.println("---Exibindo Relatoriodo percentual de cliente com min 15 avaliacoes---");
                     //colocar aqui
                     pausa();
-                    break;
-                   
+                    break;                   
                 default:
                     break;
             }
@@ -127,16 +107,14 @@ public class App {
         limparTela();
         System.out.println("Menu " + plataforma.getNome());
         System.out.println("=================================================");
-        System.out.println("1 - Carregar arquivo Catalogo");
-        System.out.println("2 - Carregar arquivo Usuario");
-        System.out.println("3 - Exibir Catalogo");
-        System.out.println("4 - Cadastrar e Salvar Filme");
-        System.out.println("5 - Cadastrar e Salvar Serie");
-        System.out.println("6 - Cadastrar Cliente");
-        System.out.println("7 - Realizar login de um cliente");
-        System.out.println("8 - Verificar audiencia de uma midia");
-        System.out.println("9 - Verificar avaliacao de uma midia");
-        System.out.println("10 - Visualizar Relatorios");
+        System.out.println("1 - Exibir Catalogo");
+        System.out.println("2 - Cadastrar e Salvar Filme");
+        System.out.println("3 - Cadastrar e Salvar Serie");
+        System.out.println("4 - Cadastrar Cliente");
+        System.out.println("5 - Realizar login de um cliente");
+        System.out.println("6 - Verificar audiencia de uma midia");
+        System.out.println("7 - Verificar avaliacao de uma midia");
+        System.out.println("8 - Visualizar Relatorios");
         System.out.println("0 - Sair");
         System.out.println("=================================================");
         System.out.print("\nDigite sua opção: ");
@@ -150,16 +128,15 @@ public class App {
         limparTela();
         System.out.println("Ola, bem vindo ao " + plataforma.getNome());
         System.out.println("==========================================================");
-        System.out.println("1 - Carregar arquivo Catalogo");
-        System.out.println("2 - Exibir Catalogo");
-        System.out.println("3 - Assistir uma midia");
-        System.out.println("4 - Verificar midias assistidas");
-        System.out.println("5 - Verificar midias para assistir futuramente");
-        System.out.println("6 - Adicionar midia na lista para assistir futuramente");
-        System.out.println("7 - Filtrar catalogo");
-        System.out.println("8 - Filtrar midias assistidas");
-        System.out.println("9 - Filtrar midias para assistir futuramente");
-        System.out.println("10 - Avaliar uma midia");
+        System.out.println("1 - Exibir Catalogo");
+        System.out.println("2 - Assistir uma midia");
+        System.out.println("3 - Verificar midias assistidas");
+        System.out.println("4 - Verificar midias para assistir futuramente");
+        System.out.println("5 - Adicionar midia na lista para assistir futuramente");
+        System.out.println("6 - Filtrar catalogo");
+        System.out.println("7 - Filtrar midias assistidas");
+        System.out.println("8 - Filtrar midias para assistir futuramente");
+        System.out.println("9 - Avaliar uma midia");
         System.out.println("0 - Sair");
         System.out.println("==========================================================");
         System.out.print("\nDigite sua opção: ");
@@ -174,15 +151,6 @@ public class App {
         do {
             switch (op) {
                 case 1:
-                    System.out.println("Carregando arquivo Catalogo com séries e filmes...");
-                    try {
-                        plataforma.carregarCatalogos();
-                    } catch (FileNotFoundException e) {
-                        System.out.println("Erro na abertura de arquivo.");
-                    }
-                    pausa();
-                    break;
-                case 2:
                     try {
                         System.out.println("---Exibindo catalogo---");
                         System.out.println(plataforma.getCatalogo());
@@ -191,7 +159,7 @@ public class App {
                     }
                     pausa();
                     break;
-                case 3:
+                case 2:
                     System.out.println("\n---Exibindo catalogo para ser assistido---");
                     System.out.println(plataforma.visualizarListaParaVerFuturamente());
                     System.out.println("\nDigite o nome da midia que deseja assistir: ");
@@ -224,15 +192,15 @@ public class App {
 
                     pausa();
                     break;
-                case 4:
+                case 3:
                     System.out.println(plataforma.visualizarListaDeAssistidos());
                     pausa();
                     break;
-                case 5:
+                case 4:
                     System.out.println(plataforma.visualizarListaParaVerFuturamente());
                     pausa();
                     break;
-                case 6:
+                case 5:
                     try {
                         plataforma.carregarCatalogos();
                     } catch (FileNotFoundException e) {
@@ -254,8 +222,12 @@ public class App {
                     }
                     pausa();
                     break;
-                case 7:
+                case 6:
                     menuFiltro(); 
+                    pausa();
+                    break;
+                case 7:
+                    menuFiltro();
                     pausa();
                     break;
                 case 8:
@@ -263,10 +235,6 @@ public class App {
                     pausa();
                     break;
                 case 9:
-                    menuFiltro();
-                    pausa();
-                    break;
-                case 10:
                     try {
                         plataforma.carregarCatalogos();
                     } catch (FileNotFoundException e) {
@@ -277,6 +245,8 @@ public class App {
                     System.out.println(plataforma.getCatalogo());
                     avaliarMidia();
                     pausa();
+                    break;
+                default:
                     break;
             }
             op = opcoesCliente();
@@ -398,8 +368,6 @@ public class App {
 
     }
 
-
-
     // metodo que limpa a tela no terminal
     public static void limparTela() {
         System.out.print("\033[H\033[2J");
@@ -426,16 +394,16 @@ public class App {
         String idioma = teclado.nextLine();
         System.out.print("Digite a duracao: ");
         int duracao = Integer.parseInt(teclado.nextLine());
-        // mudar, app nao pode ter acesso a classe filme
-        Filme filme = new Filme(nome, dataLancamento, genero, idioma, duracao);
+
         try {
-            plataforma.adicionarCatalogo(filme);
-            Armazenagem.gravar("POO_Series", filme);
+            plataforma.cadastrarMidia(nome, dataLancamento, genero, idioma, duracao, 0);
+            System.out.println("Filme cadastrado com sucesso!");
         } catch (IOException e) {
-            System.out.println("Erro na abertura do arquivo para cadastro");
+            System.out.println("Erro ao adicionar filme ao catalogo ou ao gravar no arquivo\n" + e);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro ao cadastrar filme\n" + e);
         }
 
-        System.out.println("Filme cradastrado com sucesso!");
     }
 
     // Metodo para cadastrar uma serie na plataforma
@@ -453,15 +421,14 @@ public class App {
         System.out.print("Digite a quantidade de episodios: ");
         int quantidadeEpisodios = Integer.parseInt(teclado.nextLine());
 
-        Serie serie = new Serie(nome, dataLancamento, genero, idioma, quantidadeEpisodios);
         try {
-            plataforma.adicionarCatalogo(serie);
-            Armazenagem.gravar("POO_Series", serie);
+            plataforma.cadastrarMidia(nome, dataLancamento, genero, idioma, 0, quantidadeEpisodios);
+            System.out.println("Serie cadastrada com sucesso!");
         } catch (IOException e) {
-            System.out.println("Erro na abertura do arquivo para cadastro");
+            System.out.println("Erro ao adicionar serie ao catalogo ou ao gravar no arquivo\n" + e);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro ao cadastrar serie\n" + e);
         }
-
-        System.out.println("Serie cradastrada com sucesso!");
     }
 
     // Metodo para cadastrar um cliente na plataforma
@@ -477,15 +444,14 @@ public class App {
         System.out.println("Senha: ");
         senha = teclado.nextLine();
         // mudar, app nao pode ter acesso a classe Cliente
-        Cliente novoCliente = new Cliente(nome, nomeUsuario, senha);
+
         try {
-            plataforma.adicionarCliente(novoCliente);
-            Armazenagem.gravar("POO_Espectadores", novoCliente);
+            plataforma.cadastrarCliente(nome, nomeUsuario, senha);
             System.out.println("\nCliente adicionado com sucesso!");
         } catch (IllegalArgumentException e) {
-            System.out.println("\nLogin invalido, já existe cliente cadastrado com esse login");
+            System.out.println("\nLogin invalido, já existe cliente cadastrado com esse login\n" + e);
         } catch (IOException e) {
-            System.out.println("Erro na criação do cliente no arquivo");
+            System.out.println("Erro na criação do cliente no arquivo\n" + e);
         }
 
     }
@@ -555,4 +521,19 @@ public class App {
 
     }
 
+    public static void carregarArquivos(){
+        System.out.println("Carregando arquivo Catalogo com séries e filmes...");
+        try {
+            plataforma.carregarCatalogos();
+        } catch (FileNotFoundException e) {
+            System.out.println("Erro na leitura dos arquivos de catalogo. " + e);
+        }
+
+        System.out.println("Carregando arquivo de Usuarios...");
+        try {
+            plataforma.carregarCliente();
+        } catch (FileNotFoundException e) {
+            System.out.println("Erro na leitura do arquivo de clientes. " + e);
+        }
+    }
 }

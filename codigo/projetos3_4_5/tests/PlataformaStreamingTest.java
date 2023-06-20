@@ -27,7 +27,7 @@ public class PlataformaStreamingTest {
 
         filme1 = new Filme("O Poderoso Chefão 1", "01/01/1972", "Drama", "EN", 120);
         filme2 = new Filme("O Poderoso Chefão 2", "01/01/1974", "Drama", "EN", 120);
-        filme3 = new Filme("Minions", "30/06/2022", "Comédia", "EN", 180);
+        filme3 = new Filme("Minions", "30/06/2022", "Comedia", "EN", 180);
 
         plataforma1.adicionarCliente(clienteLogado);
     }

@@ -15,7 +15,7 @@ public class FilmeTest {
 
     @BeforeEach
     public void prepare() {
-        filme = new Filme("O Poderoso Chefão", "02/02/2017", "Ação", "EN", 100);
+        filme = new Filme("O Poderoso Chefão", "02/02/2017", "Acao", "EN", 100);
         avaliacao1 = new Avaliacao("Joao Feliz", 4);
         avaliacao2 = new Avaliacao("Maria Animada", 5, "muito bom");
     }
