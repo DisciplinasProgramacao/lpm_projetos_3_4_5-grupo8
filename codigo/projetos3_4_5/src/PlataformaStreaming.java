@@ -514,6 +514,56 @@ public class PlataformaStreaming {
         return clientes.getLast().getListaJaVistas().size() + " - " + clientes.getLast();
     }
 
+    /**
+     * Método que retorna relatório por genero com 10 midias
+     * @param genero
+     * @return String
+     */
+    public String relatorioPorGeneroAudiencia(String genero) {
+        LinkedList<Catalogo> catalogos = this.catalogos.values().stream()
+                                                                .filter(c -> c.getGenero().equals(genero))
+                                                                .sorted((a, b) -> { return Integer.compare(a.getAudiencia(), b.getAudiencia()); })
+                                                                .limit(10)
+                                                                .collect(Collectors.toCollection(LinkedList::new));
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("Relatório por gênero: " + genero + "\n");
+
+        int contador = 0;
+
+        for (Catalogo midia : catalogos) {
+            contador++;
+            stringBuilder.append("\n[" + contador + "] " + midia.getNome());
+        }
+
+        return stringBuilder.toString();
+    }
+    /**
+     * Metodo que retorna relatorio por genero com 10 midias mais bem avaliadas
+     * @return String
+     * @param genero
+     */
+    public String relatorioPorGeneroAvaliacao(String genero) {
+        LinkedList<Catalogo> catalogos = this.catalogos.values().stream()
+                                                                .filter(c -> c.getGenero().equals(genero))
+                                                                .sorted((a, b) -> { return ((Catalogo) a).mediaAvaliacao().compareTo(((Catalogo) b).mediaAvaliacao()); })
+                                                                .limit(10)
+                                                                .collect(Collectors.toCollection(LinkedList::new));
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("Relatório por gênero: " + genero + "\n");
+
+        int contador = 0;
+
+        for (Catalogo midia : catalogos) {
+            contador++;
+            stringBuilder.append("\n[" + contador + "] " + midia.getNome());
+        }
+
+        return stringBuilder.toString();
+    }
 
     /**
      * Metodo que retorna qual cliente tem mais avaliacoes e quantas avaliacoes
