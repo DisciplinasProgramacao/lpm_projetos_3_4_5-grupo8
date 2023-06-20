@@ -48,5 +48,18 @@ public class Relatorio {
         return "10 melhores midias assistidas: ";
     }
 
+    public static void exibirRelatorio(LinkedList<Catalogo> list, String titulo){
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("---Exibindo Relatorio de Midias com "+ titulo + "---");
+        stringBuilder.append("\n--------------------------------------------------------");
+        for(Catalogo catalogo : list){
+            stringBuilder.append("\n" + catalogo.toString());
+        }
+        stringBuilder.append("\n--------------------------------------------------------");
+
+        System.out.println(stringBuilder);
+    }
+
    
 }

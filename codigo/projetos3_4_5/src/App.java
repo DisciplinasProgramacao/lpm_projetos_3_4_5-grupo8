@@ -66,17 +66,11 @@ public class App {
 
                     break;
                 case 8:
-                    System.out.println("---Exibindo Relatorio de Midias com melhor avaliacao---");
-                    for (Catalogo catalogo : plataforma.midiasMelhorAvaliadas()) {
-                        catalogo.toString();
-                    }
+                    plataforma.midiasMelhorAvaliadas();
                     pausa();
                     break;
                 case 9:
-                    System.out.println("---Exibindo Relatorio de Midias mais visualizadas---");
-                    for (Catalogo catalogo : plataforma.midiaComMaisVisualizacao()) {
-                        catalogo.toString();
-                    }
+                    plataforma.midiaComMaisVisualizacao();
                     pausa();
                     break;
                 case 10:
