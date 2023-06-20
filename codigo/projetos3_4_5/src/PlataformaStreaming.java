@@ -487,16 +487,6 @@ public class PlataformaStreaming {
         return clienteComMaiorAvaliacao;
     }
 
-    // Metodo alternativo para o cliente com mais avaliacoes usando streams FALTA TESTAR
-    public String clienteComMaisAvaliacoes(LinkedList<Cliente> clientes){
-        Cliente cliente = Collections.max(clientes.stream().collect(Collectors.toMap(c -> c, c -> c.getListaDeAvaliacoes().size())).entrySet(), Map.Entry.comparingByValue()).getKey();
-
-        return "Cliente com mais avaliacoes: " + cliente.getNomeUsuario() + ", com "
-                + cliente.getListaDeAvaliacoes().size() + " avaliacoes";
-    }
-
-
-
      /**
      * Metodo que retorna a porcentagem dos clientes com pelo menos 15 avaliações; coloquei 3 ali pra testar mais facil. Só alterar p 15 depois.
      * @return

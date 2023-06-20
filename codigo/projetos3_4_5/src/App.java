@@ -136,12 +136,7 @@ public class App {
         System.out.println("7 - Realizar login de um cliente");
         System.out.println("8 - Verificar audiencia de uma midia");
         System.out.println("9 - Verificar avaliacao de uma midia");
-        System.out.println("10 - Relatorio: 10 midias com a melhor avaliacao");
-        System.out.println("11 - Relatorio: 10 midias com mais visualizacoes");
-        System.out.println("12 - Relatorio: Cliente que assistiu mais midias");
-        System.out.println("13 - Relatorio: Cliente que possui mais avaliacoes");
-        System.out.println("14 - Relatorio: Percentual de clientes com pelo menos 15 avaliacoes");
-
+        System.out.println("10 - Visualizar Relatorios");
         System.out.println("0 - Sair");
         System.out.println("=================================================");
         System.out.print("\nDigite sua opção: ");
@@ -356,6 +351,54 @@ public class App {
         } while (op != 0);
 
     }
+
+    //Opcoes relatorios
+    public static int opcoesRelatorio() {
+        limparTela();
+        System.out.println("Menu Relatorios. Escolha sua opcao: ");
+        System.out.println("==========================================================");
+        System.out.println("1 - Relatorio: Cliente que assistiu mais midias e o total");
+        System.out.println("2 - Relatorio: Cliente que possui mais avaliacoes");
+        System.out.println("3 - Relatorio: Porcentagem de clientes com pelo menos 15 avaliacoes");
+        System.out.println("4 - Relatorio: 10 midias com melhor avalicao");
+        System.out.println("5 - Relatorio: 10 midias com mais visualizacoes");
+        System.out.println("4 - Relatorio: 10 midias com melhor avalicao - por genero");
+        System.out.println("5 - Relatorio: 10 midias com mais visualizacoes - por genero");
+        System.out.println("0 - Sair");
+        System.out.println("==========================================================");
+        System.out.print("\nDigite sua opção: ");
+        int opcao = Integer.parseInt(teclado.nextLine());
+
+        return opcao;
+    }
+        
+    //Menu relatorios
+     public static void menuRelatorio() {
+        int op = opcoesRelatorio();
+        do {
+            switch (op) {
+                case 1:
+                 
+                    break;
+                case 2:
+                
+                    break;
+                case 3:
+             
+                    break;
+                case 4:
+             
+                    break;
+                case 5:
+             
+                    break;
+            }
+            op = opcoesFiltro();
+        } while (op != 0);
+
+    }
+
+
 
     // metodo que limpa a tela no terminal
     public static void limparTela() {
