@@ -484,7 +484,7 @@ public class PlataformaStreaming {
      */
 
     public void midiasMelhorAvaliadas() {
-        relatorio.midiasMelhorAvaliadas(catalogos);
+       // relatorio.midiasMelhorAvaliadas(catalogos);
     }
 
     /**
@@ -492,7 +492,7 @@ public class PlataformaStreaming {
      * @return
      */
     public void midiaComMaisVisualizacao() {
-        relatorio.midiaComMaisVisualizacao(catalogos);
+       // relatorio.midiaComMaisVisualizacao(catalogos);
     }
 
    
@@ -502,7 +502,7 @@ public class PlataformaStreaming {
      * @return String
      */
     public void relatorioPorGeneroAudiencia(String genero) {
-        relatorio.relatorioPorGeneroAudiencia(genero, catalogos);
+       // relatorio.relatorioPorGeneroAudiencia(genero, catalogos);
     }
     /**
      * Metodo que retorna relatorio por genero com 10 midias mais bem avaliadas
@@ -510,7 +510,7 @@ public class PlataformaStreaming {
      * @param genero
      */
     public void relatorioPorGeneroAvaliacao(String genero) {
-        relatorio.relatorioPorGeneroAvaliacao(genero, catalogos);
+      //  relatorio.relatorioPorGeneroAvaliacao(genero, catalogos);
     }
 
     /**
@@ -518,7 +518,7 @@ public class PlataformaStreaming {
      * @return
      */
     public void clienteComMaiorIndiceDeAvaliacao() {
-        relatorio.clienteComMaiorIndiceDeAvaliacao(clientes);
+        //relatorio.clienteComMaiorIndiceDeAvaliacao(clientes);
     }
 
      /**
@@ -526,7 +526,7 @@ public class PlataformaStreaming {
      * @return
      */
     public void calcularPorcentagemDeClienteComMinimoQuinzeAvaliacoes(){
-        relatorio.calcularPorcentagemDeClienteComMinimoQuinzeAvaliacoes(clientes);
+       // relatorio.calcularPorcentagemDeClienteComMinimoQuinzeAvaliacoes(clientes);
     }
 
 
