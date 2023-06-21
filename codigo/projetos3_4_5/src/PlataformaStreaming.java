@@ -589,8 +589,8 @@ public class PlataformaStreaming {
      * Metodo que retorna a porcentagem de clientes com pleo menos 15 avaliacoes 
      * @return
      */
-    public void porcentagemClientes(){
-        relatorio.criarRelatorioPorcentagemDeClienteNoMinQuinzeAvaliacoes(clientes);
+    public String porcentagemClientes(){
+        return relatorio.criarRelatorioPorcentagemDeClienteNoMinQuinzeAvaliacoes(clientes);
     }
     
     /**

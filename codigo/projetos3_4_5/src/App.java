@@ -361,7 +361,7 @@ public class App {
                     break;
                 case 3:
                     System.out.println("---Relatorio 3---");
-                    plataforma.porcentagemClientes();
+                    System.out.println(plataforma.porcentagemClientes());
                     pausa();
                     break;
                 case 4:

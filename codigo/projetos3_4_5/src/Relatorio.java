@@ -64,16 +64,17 @@ public class Relatorio {
     public String criarRelatorioPorcentagemDeClienteNoMinQuinzeAvaliacoes(HashMap<String, Cliente> clientesMap){
         double porcentagemCliente;
         double clientesComAvaliacoesMinima = clientesMap.values().stream()
-                                                              .filter(cliente -> cliente.getListaDeAvaliacoes().size() >= 2) //trocar aqui pra 15 quando arrumar o teste
+                                                              .filter(cliente -> cliente.getListaDeAvaliacoes().size() >= 15) //
                                                               .count();
-
+    
         porcentagemCliente = ((clientesComAvaliacoesMinima * 100) /(double) clientesMap.size());
+    
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         String porcentagemFormatada = decimalFormat.format(porcentagemCliente);
+        System.out.println(porcentagemFormatada);
 
         return "Porcentagem total: "+ porcentagemFormatada + "%";
     }
-
      
     public void criarRelatorioMidiasComMelhoresAvaliacoes(HashMap<Integer,Catalogo> catalogoMap) {
         Predicate<Catalogo> predicate = (c) -> c.quantidadeAvaliacoes() >= 100;
