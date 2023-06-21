@@ -9,6 +9,13 @@
             "name": "App",
             "request": "launch",
             "mainClass": "App",
+            "projectName": "lpm_projetos_3_4_5-grupo8_c1c4ce1c"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "App",
             "projectName": "lpm_projetos_3_4_5-grupo8_eb394a51"
         },
         {
