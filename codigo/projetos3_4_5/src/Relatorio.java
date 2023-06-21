@@ -46,13 +46,20 @@ public class Relatorio {
         return retorno;
     }
 
-    //public String criarRelatorioClienteComMaisAvaliacoes(HashMap<String, Cliente> clientesMap){
-    //    LinkedList<Cliente> clientes = clientesMap.values().stream()
-    //                                                          .filter(c -> c.getListaDeAvaliacoes().size() > 0)
-    //                                                          .collect(Collectors.toCollection(LinkedList::new));
+    public void criarRelatorioClienteComMaisAvaliacoes(HashMap<String,Cliente> clientesMap){
+        Predicate<Cliente> predicate = (c) -> c.getListaDeAvaliacoes().size() > 0;
 
-    //    return "Cliente que mais avaliou: " + clientes.getLast().getNomeUsuario() + ", total avaliacoes: " + clientes.getLast().getListaDeAvaliacoes().size() ; 
-    //}
+        LinkedList<Cliente> clientes = 
+        streamDefault(predicate,
+                      clientesMap);
+
+        if(!clientes.isEmpty()){
+            exibirRelatorioUsuario(clientes.getLast(), clientes.getLast().getListaDeAvaliacoes().size(), "que mais avaliou");
+        }else{
+            System.out.println("Nao ha clientes com avaliacoes");
+        }
+    }
+ 
 
     
     public String criarRelatorioPorcentagemDeClienteNoMinQuinzeAvaliacoes(HashMap<String, Cliente> clientesMap){
@@ -100,35 +107,6 @@ public class Relatorio {
             System.out.println("Nao ha midias vistas");
         }
     }
-
-
-
-
-    public void criarRelatorioClienteComMaisAvaliacoes(HashMap<String,Cliente> clientesMap){
-        Predicate<Cliente> predicate = (c) -> c.getListaDeAvaliacoes().size() > 0;
-
-        LinkedList<Cliente> clientes = 
-        streamDefault(predicate,
-                      clientesMap);
-
-        if(!clientes.isEmpty()){
-            exibirRelatorioUsuario(clientes.getLast(), clientes.getLast().getListaDeAvaliacoes().size(), "que mais avaliou");
-        }else{
-            System.out.println("Nao ha clientes com avaliacoes");
-        }
-    }
-
-    /*public void clienteComMaiorIndiceDeAvaliacao(HashMap<String,Cliente> clientesMap) {
-        LinkedList<Cliente> clienteMaiorAva = 
-        streamDefault(null,
-                      (a, b) -> { return Integer.compare(a.getListaDeAvaliacoes().size(), b.getListaDeAvaliacoes().size()); },
-                      clientesMap);
-        
-        exibirRelatorioUsuario(clienteMaiorAva.getLast(), clienteMaiorAva.getLast().getListaDeAvaliacoes().size(), "com maior avaliacoes");
-    } */
-
-   
-   
 
 
 
