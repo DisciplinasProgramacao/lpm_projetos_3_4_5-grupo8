@@ -94,7 +94,7 @@ public class PlataformaStreamingTest {
         plataforma1.adicionarCatalogo(filme2);
         plataforma1.adicionarCatalogo(filme3);
 
-        assertEquals(2, plataforma1.filtrarCatalogo("Drama").size());
+        assertTrue(plataforma1.filtrarCatalogo("Drama").contains("O Poderoso Chefão 2"));
     }
 
     @Test
@@ -102,8 +102,8 @@ public class PlataformaStreamingTest {
         plataforma1.adicionarCatalogo(serie1);
         plataforma1.adicionarCatalogo(filme2);
 
-        assertNotNull(plataforma1.filtrarCatalogo("EN").contains(serie1));
-        assertNotNull(plataforma1.filtrarCatalogo("EN").contains(filme2));
+        assertNotNull(plataforma1.filtrarCatalogo("EN").contains("The Blacklist"));
+        assertNotNull(plataforma1.filtrarCatalogo("EN").contains("O Poderoso Chefão 1"));
     }
 
     @Test
@@ -111,7 +111,8 @@ public class PlataformaStreamingTest {
         plataforma1.adicionarCatalogo(serie1);
         plataforma1.adicionarCatalogo(serie2);
 
-        assertEquals(2, plataforma1.filtrarPorQtdEpisodios(10).size());
+        assertTrue(plataforma1.filtrarPorQtdEpisodios(10).contains("The Blacklist"));
+        assertTrue(plataforma1.filtrarPorQtdEpisodios(10).contains("Black mirror"));
     }
 
     @Test
@@ -120,7 +121,8 @@ public class PlataformaStreamingTest {
         plataforma1.adicionarCatalogo(filme2);
         plataforma1.adicionarCatalogo(filme3);
 
-        assertEquals(2, plataforma1.filtrarPorDuracao(120).size());
+        assertTrue(plataforma1.filtrarPorDuracao(120).contains("O Poderoso Chefão 1"));
+        assertTrue(plataforma1.filtrarPorDuracao(120).contains("O Poderoso Chefão 2"));
     }
 
     @Test

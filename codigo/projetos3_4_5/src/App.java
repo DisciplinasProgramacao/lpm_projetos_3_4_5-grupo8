@@ -280,25 +280,25 @@ public class App {
                 case 1:
                     System.out.println("Para filtrar digite o genero: ");
                     String genero = teclado.nextLine();
-                    plataforma.filtrarCatalogo(genero);
+                    System.out.println(plataforma.filtrarCatalogo(genero));
                     pausa();
                     break;
                 case 2:
                     System.out.println("Para filtrar digite o idioma: ");
                     String idioma = teclado.nextLine();
-                    plataforma.filtrarCatalogo(idioma);
+                    System.out.println(plataforma.filtrarCatalogo(idioma));
                     pausa();
                     break;
                 case 3:
                     System.out.println("Para filtrar digite a quantidade de episodios: ");
                     int qtd = Integer.parseInt(teclado.nextLine());
-                    plataforma.filtrarPorQtdEpisodios(qtd);
+                    System.out.println(plataforma.filtrarPorQtdEpisodios(qtd));
                     pausa();
                     break;
                 case 4:
                     System.out.println("Para filtrar digite a duracao em minutos: ");
                     int duracao = Integer.parseInt(teclado.nextLine());
-                    plataforma.filtrarPorDuracao(duracao);
+                    System.out.println(plataforma.filtrarPorDuracao(duracao));
                     pausa();
                     break;
                 case 5:

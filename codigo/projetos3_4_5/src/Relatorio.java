@@ -2,7 +2,6 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.text.DecimalFormat;
-import static java.util.stream.Collectors.joining;
 
 public class Relatorio {
 

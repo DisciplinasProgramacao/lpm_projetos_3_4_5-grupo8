@@ -2,11 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.*;
 import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class PlataformaStreaming {
     //#region ATRIBUTOS
@@ -76,6 +73,8 @@ public class PlataformaStreaming {
         for (int key : catalogos.keySet()) {
             str.append("[" + cont + "] ");
             str.append(catalogos.get(key).getNome());
+            str.append(" | " + catalogos.get(key).getGenero());
+            str.append(" | " + catalogos.get(key).getIdioma());
             str.append("\n ");
             cont++;
         }
@@ -200,7 +199,7 @@ public class PlataformaStreaming {
     public void carregarCatalogos() throws FileNotFoundException {
         Random random = new Random();
         EnumGeneros[] generos = EnumGeneros.values();
-        String[] idiomas = {"Português", "Inglês", "Espanhol", "Japonês"};
+        String[] idiomas = {"Portugues", "Ingles", "Espanhol", "Japones"};
 
         Function<String, Filme> contrutorFilme = (str -> new Filme(Integer.parseInt(str.split(";")[0]),
                 str.split(";")[1],
@@ -366,7 +365,7 @@ public class PlataformaStreaming {
      * @return linked list de catálogos encontrados a partir do filtro
      * 
      */
-    public LinkedList<Catalogo> filtrarCatalogo(String filtro) {
+    public String filtrarCatalogo(String filtro) {
         LinkedList<Catalogo> filtrado = new LinkedList<Catalogo>();
         Catalogo midia;
         for (int key : catalogos.keySet()) {
@@ -375,7 +374,32 @@ public class PlataformaStreaming {
                 filtrado.add(midia);
             }
         }
-        return filtrado;
+        if(filtrado.size() > 0){
+            return formatarRetornoFiltro(filtrado);
+        }
+        return "Nao foram encontradas midias correspondentes ao filtro";
+    }
+
+    /**
+     * Metodo que formata as midias filtradas
+     */
+    private String formatarRetornoFiltro(LinkedList<Catalogo> listaFiltros) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("-------------------");
+
+        int contador = 0;
+
+        for (Catalogo midia : listaFiltros) {
+            contador++;
+            stringBuilder.append("\n[" + contador + "] " + midia.getNome());
+            stringBuilder.append(" | " + midia.getGenero());
+            stringBuilder.append(" | " + midia.getIdioma());
+        }
+
+        stringBuilder.append("\n-------------------");
+
+        return stringBuilder.toString();
     }
 
     /**
@@ -385,16 +409,22 @@ public class PlataformaStreaming {
     * @return linked list de catálogos encontrados a partir do filtro 
     *
     */
-    public LinkedList<Catalogo> filtrarPorQtdEpisodios(int quantEpisodios) {
+    public String filtrarPorQtdEpisodios(int quantEpisodios) {
         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Serie serie;
         for (int key : catalogos.keySet()) {
-            serie = (Serie) catalogos.get(key);
-            if (serie.getEpisodios() == quantEpisodios) {
-                filtro.add(serie);
+            if(catalogos.get(key) instanceof Serie){
+                serie = (Serie) catalogos.get(key);
+                if (serie.getEpisodios() == quantEpisodios) {
+                    filtro.add(serie);
+                }
             }
         }
-        return filtro;
+
+        if(filtro.size() > 0){
+            return formatarRetornoFiltro(filtro);
+        }
+        return "Nao foram encontradas midias correspondentes ao filtro";
     }
 
     /**
@@ -404,16 +434,22 @@ public class PlataformaStreaming {
     * @return linked list de catálogos encontrados a partir do filtro 
     *
     */
-    public LinkedList<Catalogo> filtrarPorDuracao(int duracao) {
+    public String filtrarPorDuracao(int duracao) {
         LinkedList<Catalogo> filtro = new LinkedList<Catalogo>();
         Filme filme;
         for (int key : catalogos.keySet()) {
-            filme = (Filme) catalogos.get(key);
-            if (filme.getDuracao() == duracao) {
-                filtro.add(filme);
+            if(catalogos.get(key) instanceof Filme){
+                filme = (Filme) catalogos.get(key);
+                if (filme.getDuracao() == duracao) {
+                    filtro.add(filme);
+                }
             }
         }
-        return filtro;
+
+        if(filtro.size() > 0){
+            return formatarRetornoFiltro(filtro);
+        }
+        return "Nao foram encontradas midias correspondentes ao filtro";        
     }
 
     /**
@@ -465,10 +501,11 @@ public class PlataformaStreaming {
         if (catalogo != null) {
             if(!catalogo.lancamento){
                 this.clienteAtual.registrarAudiencia(catalogo);
-                this.clienteAtual.tornarEspecialista();
+                tornarClienteEspecialista();
             }else{
-                if(clienteAtual.podeVerLancamento())
+                if(clienteAtual.podeVerLancamento()){
                     this.clienteAtual.registrarAudiencia(catalogo);
+                }
                 else throw new IllegalArgumentException();
             }
             
