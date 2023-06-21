@@ -30,13 +30,10 @@ public class Relatorio {
     public String criarRelatorioClienteQueMaisAssistiu(HashMap<String, Cliente> clientesMap) {
         String retorno = "";
 
-        Predicate<Cliente> predicate = (cliente) -> cliente.getListaJaVistas().size() > 0;
-        Comparator<Cliente> comparator = (a, b) -> Integer.compare(a.getListaJaVistas().size(), b.getListaJaVistas().size());
-
-        LinkedList<Cliente> clientes = 
-        streamDefault(predicate,
-                      comparator,
-                      clientesMap);
+        LinkedList<Cliente> clientes = clientesMap.values().stream()
+                .filter(c -> c.getListaJaVistas().size() > 0)
+                .collect(Collectors.toCollection(LinkedList::new));
+                Collections.sort(clientes, (a, b) -> { return Integer.compare(a.getListaJaVistas().size(), b.getListaJaVistas().size()); });
         
         if (!clientes.isEmpty()) {
             Cliente clienteMaisAssistiu = clientes.getLast();
