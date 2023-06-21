@@ -5,132 +5,98 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.joining;
 
 public class Relatorio {
-    private final HashMap<String, Cliente> clientes;
-    private final HashMap<Integer, Catalogo> catalogos;
-
-    public Relatorio(HashMap<String, Cliente> clientes, HashMap<Integer, Catalogo> catalogos) {
-        this.clientes = clientes;
-        this.catalogos = catalogos;
-    }
 
     /**
      * Metodo que retorna as 10 midias de melhor avaliacao do catalogo, ordenada de modo decrescente
      * @return
      */
 
-    public void midiasMelhorAvaliadas() {
+    public void midiasMelhorAvaliadas(HashMap<Integer,Catalogo> listCatalogo) {
         // depois ordena pelas mais avaliadas
-        LinkedList<Catalogo> list = streamDefault(c -> ((Catalogo) c).quantidadeAvaliacoes() >= 100, 
-                            (a, b) -> { return ((Catalogo) a).mediaAvaliacao().compareTo(((Catalogo) b).mediaAvaliacao()); });
-        this.exibirRelatorio(list, "melhor avaliacao");
+        LinkedList<Catalogo> list = 
+        streamDefault(c -> c.quantidadeAvaliacoes() >= 100, 
+                     (a, b) -> { return a.mediaAvaliacao().compareTo(b.mediaAvaliacao()); },
+                     listCatalogo);
+        exibirRelatorioCatalogo(list, "melhor avaliacao");
     }
 
     /**
      * Metodo que retorna as 10 midias com mais visualizações do catalogo, ordenada de modo decrescente
      * @return
      */
-    public void midiaComMaisVisualizacao() {
-        LinkedList<Catalogo> list = streamDefault(null, 
-                            (a, b) -> { return Integer.compare(((Catalogo) a).getAudiencia(), ((Catalogo) b).getAudiencia()); });
-        this.exibirRelatorio(list, "mais visualizadas");
-    }
+    public void midiaComMaisVisualizacao(HashMap<Integer,Catalogo> listCatalogo) {
+        LinkedList<Catalogo> list = 
+        streamDefault(null, 
+                     (a, b) -> { return Integer.compare(a.getAudiencia(), b.getAudiencia()); },
+                     listCatalogo);
 
-    public LinkedList<Catalogo> streamDefault(Predicate comparador, Comparator sort) {
-        return (LinkedList<Catalogo>) catalogos.values().stream()
-                                                        .filter(comparador)
-                                                        .sorted(sort)
-                                                        .limit(10)
-                                                        .collect(Collectors.toCollection(LinkedList::new));
+        exibirRelatorioCatalogo(list, "mais visualizadas");
     }
-
    
     /**
      * Método que retorna relatório por genero com 10 midias
      * @param genero
      * @return String
      */
-    public String relatorioPorGeneroAudiencia(String genero) {
-        LinkedList<Catalogo> catalogos = this.catalogos.values().stream()
-                                                                .filter(c -> c.getGenero().equals(genero))
-                                                                .sorted((a, b) -> { return Integer.compare(a.getAudiencia(), b.getAudiencia()); })
-                                                                .limit(10)
-                                                                .collect(Collectors.toCollection(LinkedList::new));
+    public void relatorioPorGeneroAudiencia(String genero, HashMap<Integer,Catalogo> listCatalogo) {
+        LinkedList<Catalogo> list = 
+        streamDefault(c -> c.getGenero().equals(genero), 
+                     (a, b) -> { return Integer.compare(a.getAudiencia(), b.getAudiencia()); },
+                     listCatalogo);
 
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append("Relatório por gênero: " + genero + "\n");
-
-        int contador = 0;
-
-        for (Catalogo midia : catalogos) {
-            contador++;
-            stringBuilder.append("\n[" + contador + "] " + midia.getNome());
-        }
-
-        return stringBuilder.toString();
+        exibirRelatorioCatalogo(list, "mais audiencia");
     }
     /**
      * Metodo que retorna relatorio por genero com 10 midias mais bem avaliadas
      * @return String
      * @param genero
      */
-    public void relatorioPorGeneroAvaliacao(String genero) {
-        LinkedList<Catalogo> catalogos = this.catalogos.values().stream()
-                                                                .filter(c -> c.getGenero().equals(genero))
-                                                                .sorted((a, b) -> { return ((Catalogo) a).mediaAvaliacao().compareTo(((Catalogo) b).mediaAvaliacao()); })
-                                                                .limit(10)
-                                                                .collect(Collectors.toCollection(LinkedList::new));
+    public void relatorioPorGeneroAvaliacao(String genero, HashMap<Integer,Catalogo> listCatalogo) {
+        LinkedList<Catalogo> list = 
+        streamDefault(c -> c.getGenero().equals(genero),
+                     (a, b) -> { return a.mediaAvaliacao().compareTo(b.mediaAvaliacao()); },
+                     listCatalogo);
 
-        // StringBuilder stringBuilder = new StringBuilder();
+        exibirRelatorioCatalogo(list, "melhor avaliacao por genero");
+    }
 
-        // stringBuilder.append("Relatório por gênero: " + genero + "\n");
-
-        // int contador = 0;
-
-        // for (Catalogo midia : catalogos) {
-        //     contador++;
-        //     stringBuilder.append("\n[" + contador + "] " + midia.getNome());
-        // }
-
-
-        this.exibirRelatorio(catalogos, "relatorioPorGeneroAvaliacao");
+    public <k,T> LinkedList<T> streamDefault(Predicate<T> comparador, Comparator<T> sort, HashMap<k,T> list) {
+        return list.values().stream()
+                            .filter(comparador)
+                            .sorted(sort)
+                            .limit(10)
+                            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**
      * Metodo que retorna qual cliente tem mais avaliacoes e quantas avaliacoes
      * @return
      */
-    public String clienteComMaiorIndiceDeAvaliacao() {
-        LinkedList<Cliente> clienteMaiorAva = new LinkedList<Cliente>();
-        String clienteComMaiorAvaliacao = "";
-
-        for (String key: this.clientes.keySet()) {
-            clienteMaiorAva.add(this.clientes.get(key));
-        }
-
-        Collections.sort(clienteMaiorAva, (a, b) -> { return Integer.compare(a.getListaDeAvaliacoes().size(), b.getListaDeAvaliacoes().size()); });
+    public void clienteComMaiorIndiceDeAvaliacao(HashMap<String,Cliente> clientesMap) {
+        LinkedList<Cliente> clienteMaiorAva = 
+        streamDefault(null,
+                      (a, b) -> { return Integer.compare(a.getListaDeAvaliacoes().size(), b.getListaDeAvaliacoes().size()); },
+                      clientesMap);
         
-        clienteComMaiorAvaliacao = "Cliente: " + clienteMaiorAva.getLast() +  "; Qtd avaliacoes: " + clienteMaiorAva.getLast().getListaDeAvaliacoes().size();
-
-        return clienteComMaiorAvaliacao;
+        exibirRelatorioUsuario(clienteMaiorAva.getLast(), clienteMaiorAva.getLast().getListaDeAvaliacoes().size(), "com maior avaliacoes");
     }
 
      /**
      * Metodo que retorna a porcentagem dos clientes com pelo menos 15 avaliações; coloquei 3 ali pra testar mais facil. Só alterar p 15 depois.
      * @return
      */
-    public String calcularPorcentagemDeClienteComMinimoQuinzeAvaliacoes(){
+    public String calcularPorcentagemDeClienteComMinimoQuinzeAvaliacoes(HashMap<String,Cliente> clientesMap) {
         String porcentagemCliente;
 
         LinkedList<Cliente> clientesComAvaliacoesMinima = new LinkedList<Cliente>();
     
-        for (String key: this.clientes.keySet()) {
-            if(clientes.get(key).quantidadeDeAvaliacoes() >= 3){
-                clientesComAvaliacoesMinima.add(this.clientes.get(key));
+        for (String key: clientesMap.keySet()) {
+            if(clientesMap.get(key).quantidadeDeAvaliacoes() >= 3){
+                clientesComAvaliacoesMinima.add(clientesMap.get(key));
             }
         }
 
-        porcentagemCliente = (clientesComAvaliacoesMinima.size() * 100) / this.clientes.size() + "%";
+        porcentagemCliente = (clientesComAvaliacoesMinima.size() * 100) / clientesMap.size() + "%";
 
         return porcentagemCliente;
     }
@@ -138,20 +104,21 @@ public class Relatorio {
      * Metodo que retorna qual cliente assistiu mais midias
      * @return
      */
-    public String criarRelatorioClienteQueMaisAssistiu(){
-        LinkedList<Cliente> clientes = this.clientes.values().stream()
-                                                              .filter(c -> c.getListaJaVistas().size() > 0)
-                                                              .collect(Collectors.toCollection(LinkedList::new));
-      
-        return "Cliente que mais assistiu: " + clientes.getLast().getNomeUsuario() + ", total: " + clientes.getLast().getListaJaVistas().size() ;
+    public void criarRelatorioClienteQueMaisAssistiu(HashMap<String,Cliente> clientesMap){
+        LinkedList<Cliente> clientes = 
+        streamDefault(c -> c.getListaJaVistas().size() > 0,
+                      null,
+                      clientesMap);
+
+        exibirRelatorioUsuario(clientes.getLast(), clientes.getLast().getListaJaVistas().size(), "que mais assistiu");
     }
 
-    public String criarRelatorioClienteComMaisAvaliacoes(){
-        LinkedList<Cliente> clientes = this.clientes.values().stream()
-                                                              .filter(c -> c.getListaDeAvaliacoes().size() > 0)
-                                                              .collect(Collectors.toCollection(LinkedList::new));
-
-        return "Cliente que mais avaliou: " + clientes.getLast().getNomeUsuario() + ", total avaliacoes: " + clientes.getLast().getListaDeAvaliacoes().size() ; 
+    public void criarRelatorioClienteComMaisAvaliacoes(HashMap<String,Cliente> clientesMap){
+        LinkedList<Cliente> clientes = 
+        streamDefault(c -> c.getListaDeAvaliacoes().size() > 0,
+                      null,
+                      clientesMap);
+        exibirRelatorioUsuario(clientes.getLast(), clientes.getLast().getListaDeAvaliacoes().size(), "que mais avaliou");
     }
 
     public String criarRelatorioPorcentagemDeClienteNoMinQuinzeAvaliacoes(){
@@ -159,7 +126,7 @@ public class Relatorio {
         return "Porcentagem total: ";
     }
 
-    public void exibirRelatorio(LinkedList<Catalogo> list, String titulo){
+    public void exibirRelatorioCatalogo(LinkedList<Catalogo> list, String titulo){
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append("---Exibindo Relatorio de Midias com "+ titulo + "---");
@@ -167,6 +134,17 @@ public class Relatorio {
         for(Catalogo catalogo : list){
             stringBuilder.append("\n" + catalogo.toString());
         }
+        stringBuilder.append("\n--------------------------------------------------------");
+
+        System.out.println(stringBuilder);
+    }
+
+    public <T> void exibirRelatorioUsuario(Cliente cliente, Integer quantidade, String titulo){
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("---Exibindo Relatorio do Usuario "+ titulo + "---");
+        stringBuilder.append("\n--------------------------------------------------------");
+        stringBuilder.append("\nCliente: " + cliente.getNomeUsuario() + ", Quantidade: "+ quantidade);
         stringBuilder.append("\n--------------------------------------------------------");
 
         System.out.println(stringBuilder);
