@@ -52,8 +52,12 @@ public class Assistido {
      * 
      */
     public Avaliacao adicionarAvaliacao(Avaliacao avaliacao){
-        this.avaliacao = avaliacao;
-        return this.catalogo.avaliarMidia(avaliacao);
+        Avaliacao avaliacaoEfetuada = this.catalogo.avaliarMidia(avaliacao);
+
+        if(avaliacaoEfetuada != null)
+            this.avaliacao = avaliacao;
+
+        return avaliacaoEfetuada;
     }
 
     /**

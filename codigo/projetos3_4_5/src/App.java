@@ -195,12 +195,6 @@ public class App {
                     pausa();
                     break;
                 case 5:
-                    try {
-                        plataforma.carregarCatalogos();
-                    } catch (FileNotFoundException e) {
-                        System.out.println("Erro na abertura de arquivo.");
-                        break;
-                    }
                     System.out.println("---Exibindo catalogo---");
                     System.out.println(plataforma.getCatalogo());
 
@@ -229,14 +223,8 @@ public class App {
                     pausa();
                     break;
                 case 9:
-                    try {
-                        plataforma.carregarCatalogos();
-                    } catch (FileNotFoundException e) {
-                        System.out.println("Erro na abertura de arquivo.");
-                        break;
-                    }
-                    System.out.println("---Exibindo catalogo---");
-                    System.out.println(plataforma.getCatalogo());
+                    System.out.println("---Midias assistidas---");
+                    System.out.println(plataforma.visualizarListaDeAssistidos());
                     avaliarMidia();
                     pausa();
                     break;
@@ -471,7 +459,6 @@ public class App {
     // Metodo para avaliar uma midia
     public static void avaliarMidia() {
         System.out.println("==========================");
-        System.out.println("--Avaliando midia--");
         System.out.println("\nDigite o nome da midia que deseja avaliar: ");
         String nomeMidia = teclado.nextLine();
 
@@ -486,11 +473,14 @@ public class App {
             while (avaliacao > 5 || avaliacao < 1) {
                 System.out.println("Numero invalido para a avaliacao. Digite sua avaliacao novamente: ");
                 avaliacao = Integer.parseInt(teclado.nextLine());
-            }
-            // System.out.println("Midia: '" + catalogo.getNome() + "', avaliada com " +
-            // avaliacao + "estrelas.");
+            }            
 
-            plataforma.adicionarAvaliacao(avaliacao, texto, plataforma.buscarCatalogo(nomeMidia));
+            if(plataforma.adicionarAvaliacao(avaliacao, texto, plataforma.buscarCatalogo(nomeMidia)) == null){
+                System.out.println("Midia ja avaliada, avaliacao nao adicionada");
+            }else{
+                System.out.println("Midia: '" + nomeMidia + "', avaliada com " + avaliacao + "estrelas.");
+                System.out.println("Avaliacao realizada com sucesso");
+            };
         } catch (NullPointerException e) {
             System.out.println("Midia não encontrada");
         } catch (IndexOutOfBoundsException a) {
