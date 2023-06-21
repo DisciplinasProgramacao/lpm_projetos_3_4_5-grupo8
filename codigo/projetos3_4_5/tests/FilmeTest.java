@@ -15,7 +15,7 @@ public class FilmeTest {
 
     @BeforeEach
     public void prepare() {
-        filme = new Filme("O Poderoso Chefão", "02/02/2017", "Acao", "EN", 100);
+        filme = new Filme("O Poderoso Chefão", "02/02/2017", "Acao", "EN", 100, false);
         avaliacao1 = new Avaliacao("Joao Feliz", 4);
         avaliacao2 = new Avaliacao("Maria Animada", 5, "muito bom");
     }
@@ -51,11 +51,11 @@ public class FilmeTest {
 
     @Test
     public void deveLancarExcecaoCasoGeneroDoFilmeNaoExistaNoEnum(){
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Filme("Nome","02/02/2003", "GeneroNaoExistente", "EN", 100));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Filme("Nome","02/02/2003", "GeneroNaoExistente", "EN", 100, false));
     }
 
     @Test
     public void naoDeveLancarExcecaoCasoGeneroDoFilmeExistaNoEnum(){
-        assertDoesNotThrow(() -> new Filme("Nome","02/02/2003", "Anime", "EN", 100));
+        assertDoesNotThrow(() -> new Filme("Nome","02/02/2003", "Anime", "EN", 100, false));
     }
 }

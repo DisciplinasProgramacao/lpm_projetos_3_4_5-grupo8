@@ -99,6 +99,29 @@ public class PlataformaStreaming {
      */
     public void logoff() {
         this.clienteAtual = null;
+
+        StringBuilder espec = new StringBuilder("#Especialistas");
+        StringBuilder prof = new StringBuilder("#Profissionais");
+
+        for(Cliente client : clientes.values()){
+
+            if(client.getEstadoCliente().podeAssistirLancamento()){
+                prof.append("\n");
+                prof.append(client.getLogin());
+            } else if(client.getEstadoCliente().podeComentar()){
+                espec.append("\n");
+                espec.append(client.getLogin());
+            }   
+        }
+
+        try {
+            Armazenagem.gravarReescrevendoArquivo("POO_Especialistas", espec.toString());
+        } catch (IOException e) {
+        }
+        try {
+            Armazenagem.gravarReescrevendoArquivo("POO_profissionais", prof.toString());
+        } catch (IOException e) {
+        }
     }
 
     /**
@@ -125,18 +148,36 @@ public class PlataformaStreaming {
      * @throws IOException caso ocorra erro ao adicionar filme ao catálogo ou ao gravar no arquivo
      * @throws IllegalArgumentException caso gênero informado inválido
      */
-    public void cadastrarMidia(String nome, String dataLancamento, String genero, String idioma, int duracao, int quantidadeEpisodios) throws IOException, IllegalArgumentException{
+    public void cadastrarMidia(String nome, String dataLancamento, String genero, String idioma, int duracao, int quantidadeEpisodios, boolean lancamento) throws IOException, IllegalArgumentException{
         Catalogo midia;
 
         if(duracao > 0){
-            midia = new Filme(nome, dataLancamento, genero, idioma, duracao);
+            midia = new Filme(nome, dataLancamento, genero, idioma, duracao, lancamento);
             Armazenagem.gravar("POO_Filmes", midia);
+            
         } else {
-            midia = new Serie(nome, dataLancamento, genero, idioma, quantidadeEpisodios);
+            midia = new Serie(nome, dataLancamento, genero, idioma, quantidadeEpisodios, lancamento);
             Armazenagem.gravar("POO_Series", midia);
         }
 
         adicionarCatalogo(midia);
+        if(lancamento == true){
+            carregarEAdicionarLancamento();
+        }
+    }
+
+    private void carregarEAdicionarLancamento(){
+        StringBuilder a = new StringBuilder("#Lancamentos");
+        for(Catalogo cat : catalogos.values()){
+            if(cat.lancamento){
+                a.append("\n");
+                a.append(cat.getId());
+            }
+        }
+        try {
+            Armazenagem.gravarReescrevendoArquivo("POO_Lancamento", a.toString());
+        } catch (IOException e) {
+        }
     }
 
     /**
@@ -157,13 +198,13 @@ public class PlataformaStreaming {
                 str.split(";")[2],
                 Integer.parseInt(str.split(";")[3]),
                 generos[random.nextInt(generos.length)].getDescricao(),
-                idiomas[random.nextInt(idiomas.length)]));
+                idiomas[random.nextInt(idiomas.length)], false));
 
         Function<String, Serie> contrutorSerie = (str -> new Serie(Integer.parseInt(str.split(";")[0]),
                 str.split(";")[1],
                 str.split(";")[2],
                 generos[random.nextInt(generos.length)].getDescricao(),
-                idiomas[random.nextInt(idiomas.length)]));
+                idiomas[random.nextInt(idiomas.length)], false));
 
         LinkedList<Filme> filmes;
         LinkedList<Serie> series;
@@ -180,13 +221,12 @@ public class PlataformaStreaming {
     }
 
     private void carregarLancamentos(){
-        Function<String, String[]> dividirTipo = (str -> (str.split(";")));
+        Function<String, String> dividirTipo = (str -> str);
         try {
-            LinkedList<String[]> lancamentos = Armazenagem.ler("POO_Lancamento", dividirTipo);
+            LinkedList<String> data = Armazenagem.ler("POO_Lancamento", dividirTipo);
             Catalogo aux;
-            String[] arrayStr = lancamentos.get(0);
-            for(int i = 0; i < arrayStr.length; i++){
-                aux = this.catalogos.get(Integer.parseInt(arrayStr[i]));
+            for(String str : data){
+                aux = this.catalogos.get(Integer.parseInt(str));
                 if(aux != null){
                     aux.lancamento = true;
                 }
@@ -564,5 +604,26 @@ public class PlataformaStreaming {
         return "Porcentagem total: "+ porcentagemFormatada + "%";
     }
 
+    /**
+     * Tornar cliente especialista
+     */
+    public void tornarClienteEspecialista(){
+        clienteAtual.tornarEspecialista();
+    }
+
+    /**
+     * Tornar cliente profissional
+     */
+    public void tornarClienteProfissional(){
+        clienteAtual.tornarProfissional();
+    }
+
+    /**
+     * Tornar cliente standart
+     */
+    public void tornarClienteStandart(){
+        clienteAtual.tornarStandart();
+    }
+    
 
 }

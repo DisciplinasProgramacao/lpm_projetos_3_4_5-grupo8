@@ -67,7 +67,7 @@ public class App {
                     break;
                 case 8:
                    menuRelatorio();
-                    break;                   
+                    break;
                 default:
                     break;
             }
@@ -111,6 +111,8 @@ public class App {
         System.out.println("7 - Filtrar midias assistidas");
         System.out.println("8 - Filtrar midias para assistir futuramente");
         System.out.println("9 - Avaliar uma midia");
+        System.out.println("10 - Alterar seu estado");
+        System.out.println("11 - Assistir Lançamento");
         System.out.println("0 - Sair");
         System.out.println("==========================================================");
         System.out.print("\nDigite sua opção: ");
@@ -206,6 +208,42 @@ public class App {
                     System.out.println("---Midias assistidas---");
                     System.out.println(plataforma.visualizarListaDeAssistidos());
                     avaliarMidia();
+                    pausa();
+                    break;
+                case 10:
+                    alterarEstadoCliente();
+                    break;
+                case 11:
+                    System.out.println("--Exibindo Lançamentos--");
+                    System.out.println(plataforma.lancamentos());
+                    System.out.println("\nDigite o nome da midia que deseja assistir: ");
+                    String midiaEscolhidaLancamento = teclado.nextLine();
+
+                    try {
+                        plataforma.adicionarMidiaNaListaParaVerFuturamente(midiaEscolhidaLancamento);
+                        plataforma.assistirMidia(midiaEscolhidaLancamento);
+                        System.out.println("\nAssistindo midia... \nMidia assistida.");
+                        System.out
+                                .println("\nDeseja avaliar essa midia assistida? Digite '1' para sim e '2' para nao: ");
+                        int opcao = Integer.parseInt(teclado.nextLine());
+                        while (opcao != 1 && opcao != 2) {
+                            System.out.println("Opcao invalida. Digite '1' para sim e '2' para nao: ");
+                            opcao = Integer.parseInt(teclado.nextLine());
+                        }
+                        if (opcao == 1) {
+                            avaliarMidia();
+                        }
+                        if (opcao == 2) {
+                            System.out.println("\nObrigado por assistir!");
+                        }
+                    } catch (NullPointerException e) {
+                        System.out.println("Erro no usuário");
+                    } catch (IndexOutOfBoundsException a) {
+                        System.out.println(
+                                "Midia nao encontrada. Para conseguir assistir, adicione uma midia na lista para assistir futuramente.");
+                    } catch (IllegalArgumentException b){
+                        System.out.println("Nao pode assistir lancamento");
+                    }
                     pausa();
                     break;
                 default:
@@ -358,14 +396,19 @@ public class App {
         String idioma = teclado.nextLine();
         System.out.print("Digite a duracao: ");
         int duracao = Integer.parseInt(teclado.nextLine());
+        System.out.print("Lancamento? se sim digite 1, se não digite 2: ");
+        int lancamento = Integer.parseInt(teclado.nextLine());
 
         try {
-            plataforma.cadastrarMidia(nome, dataLancamento, genero, idioma, duracao, 0);
+            plataforma.cadastrarMidia(nome, dataLancamento, genero, idioma, duracao, 0, lancamento == 1 ? true : false);
             System.out.println("Filme cadastrado com sucesso!");
         } catch (IOException e) {
             System.out.println("Erro ao adicionar filme ao catalogo ou ao gravar no arquivo\n" + e);
         } catch (IllegalArgumentException e) {
             System.out.println("Erro ao cadastrar filme\n" + e);
+        }
+        if(lancamento == 1){
+            
         }
 
     }
@@ -384,9 +427,11 @@ public class App {
         String idioma = teclado.nextLine();
         System.out.print("Digite a quantidade de episodios: ");
         int quantidadeEpisodios = Integer.parseInt(teclado.nextLine());
+        System.out.print("Lancamento? se sim digite 1, se não digite 2: ");
+        int lancamento = Integer.parseInt(teclado.nextLine());
 
         try {
-            plataforma.cadastrarMidia(nome, dataLancamento, genero, idioma, 0, quantidadeEpisodios);
+            plataforma.cadastrarMidia(nome, dataLancamento, genero, idioma, 0, quantidadeEpisodios, lancamento == 1 ? true : false);
             System.out.println("Serie cadastrada com sucesso!");
         } catch (IOException e) {
             System.out.println("Erro ao adicionar serie ao catalogo ou ao gravar no arquivo\n" + e);
@@ -436,6 +481,7 @@ public class App {
         plataforma.logoff();
         System.out.println("==========================");
         System.out.println("--Realizado logoff--");
+        pausa();
     }
 
     // Metodo para avaliar uma midia
@@ -500,6 +546,27 @@ public class App {
             plataforma.carregarCliente();
         } catch (FileNotFoundException e) {
             System.out.println("Erro na leitura do arquivo de clientes. " + e);
+        }
+    }
+
+    public static void alterarEstadoCliente(){
+        System.out.println("=======================================");
+        System.out.println("--Alterar estado cliente--");
+        System.out.println("1- Tornar standart");
+        System.out.println("2- Tornar especialista");
+        System.out.println("3- Tornar profissional");
+        System.out.print("\nDigite sua opção: ");
+        int opcao = Integer.parseInt(teclado.nextLine());
+        switch(opcao){
+            case 1:
+                plataforma.tornarClienteStandart();
+                break;
+            case 2:
+                plataforma.tornarClienteEspecialista();
+                break;
+            case 3:
+                plataforma.tornarClienteProfissional();
+                break;
         }
     }
 }

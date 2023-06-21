@@ -31,11 +31,11 @@ public abstract class Catalogo {
      * @param genero
      * @param idioma
      */
-    public Catalogo(int id, String nome, String dataLancamento, String genero, String idioma) {
+    public Catalogo(int id, String nome, String dataLancamento, String genero, String idioma, boolean Lancamento) {
         if (id > parseId) {
             parseId = id;
         }
-        init(id, nome, dataLancamento, genero, idioma);
+        init(id, nome, dataLancamento, genero, idioma, Lancamento);
     }
 
     /**
@@ -48,13 +48,13 @@ public abstract class Catalogo {
      * @param idioma
      * @throws IllegalArgumentException caso genero informado seja inválido
      */
-    public Catalogo(String nome, String dataLancamento, String genero, String idioma) throws IllegalArgumentException {
+    public Catalogo(String nome, String dataLancamento, String genero, String idioma, Boolean lancamento) throws IllegalArgumentException {
         EnumGeneros generoEncontrado = Arrays.stream(EnumGeneros.values())
             .filter(g -> g.getDescricao().equals(genero))
             .findAny()
             .orElseThrow(() -> {throw new IllegalArgumentException("Genero " + genero + " nao esta dentro dos valores permitidos");});
 
-        init(++parseId, nome, dataLancamento, generoEncontrado.getDescricao(), idioma);
+        init(++parseId, nome, dataLancamento, generoEncontrado.getDescricao(), idioma, lancamento);
     }
 
     /**
@@ -66,7 +66,7 @@ public abstract class Catalogo {
      * @param genero
      * @param idioma
      */
-    public void init(int id, String nome, String dataLancamento, String genero, String idioma) {
+    public void init(int id, String nome, String dataLancamento, String genero, String idioma, boolean lancamento) {
         this.genero = genero;
         this.nome = nome;
         this.idioma = idioma;
@@ -75,7 +75,7 @@ public abstract class Catalogo {
         this.avaliacaoMedia = new BigDecimal(0.0);
         this.listaAvaliacoes = new LinkedList<Avaliacao>();
         this.id = id;
-        this.lancamento = false;
+        this.lancamento = lancamento;
     }
     //#endregion
 

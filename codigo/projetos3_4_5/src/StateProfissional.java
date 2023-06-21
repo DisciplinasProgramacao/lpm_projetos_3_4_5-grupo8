@@ -1,5 +1,4 @@
 public class StateProfissional extends State {
-
     @Override
     public State tornarEspecialista() {
         return new StateEspecialista();
