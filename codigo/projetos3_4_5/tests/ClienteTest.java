@@ -2,6 +2,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.LinkedList;
 
@@ -169,8 +171,23 @@ public class ClienteTest {
         cliente.registrarAudiencia(serie3);
         cliente.tornarEspecialista();
         cliente.adicionarAvaliacao(5, "Muito bom", filme1);
-        
+    }
 
+    @Test
+    public void deveRetornarAvaliacaoCasoSejaEfetuadaComSucesso(){
+        cliente.adicionarNaLista(filme1);
+        cliente.registrarAudiencia(filme1);
+        
+        assertNotNull(cliente.adicionarAvaliacao(5, "Muito bom", filme1));
+    }
+
+    @Test
+    public void deveRetornarNuloCasoClienteJaTenhaAvaliadoMidia(){
+        cliente.adicionarNaLista(filme1);
+        cliente.registrarAudiencia(filme1);
+        cliente.adicionarAvaliacao(5, "Muito bom", filme1);
+        
+        assertNull(cliente.adicionarAvaliacao(5, "Muito bom", filme1));
     }
 
 }

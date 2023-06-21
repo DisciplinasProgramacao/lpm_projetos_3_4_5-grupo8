@@ -138,8 +138,18 @@ public abstract class Catalogo {
      * @param avaliacao a ser armazenada
      * 
      */
-    public void avaliarMidia(Avaliacao avaliacao) {
-        this.listaAvaliacoes.add(avaliacao);
+    public Avaliacao avaliarMidia(Avaliacao avaliacao) {
+        String loginCliente = this.listaAvaliacoes.stream()
+                                                .filter(c -> c.getLoginCliente().equals(avaliacao.getLoginCliente()))
+                                                .findFirst()
+                                                .map(Avaliacao::getLoginCliente)
+                                                .orElse(null);
+        if(loginCliente == null){
+            this.listaAvaliacoes.add(avaliacao);
+            return avaliacao;
+        }
+        
+        return null;
     }
 
     /**

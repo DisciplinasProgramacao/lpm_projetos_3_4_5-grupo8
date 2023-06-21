@@ -29,7 +29,6 @@ public class PlataformaStreamingTest {
         filme3 = new Filme("Minions", "30/06/2022", "Comedia", "EN", 180);
 
         plataforma1.adicionarCliente(clienteLogado);
-        plataforma1.adicionarCliente(cliente1);
         plataforma1.adicionarCliente(cliente2);
 
         plataforma1.adicionarCatalogo(serie1);

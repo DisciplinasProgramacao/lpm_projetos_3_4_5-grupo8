@@ -54,6 +54,15 @@ public class Avaliacao {
     public int getNota(){
         return this.nota;
     }
+    
+    /**
+     * Retorna o login do usuário que realizou a avaliação
+     * 
+     * @return Login do cliente
+     */
+    public String getLoginCliente(){
+        return this.loginCliente;
+    }
 
     /**
      * Metodo que adiciona comentario em uma avaliacao

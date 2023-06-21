@@ -266,21 +266,6 @@ public class Cliente {
     }
 
     /**
-     * Metodo que verifica se o cliente ja avaliou a midia, retorna true caso já
-     * tenha avaliado e false caso seja a primeira ver que ele esteja avaliando
-     * 
-     * @param catalogo
-     * @return true caso cliente já tenha avaliado a mídia e false caso contrário
-     * 
-     */
-    private boolean clienteJaAvaliouMidia(Catalogo catalogo) {
-        if (listaDeMidiasAvaliadas.add(catalogo)) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Metodo que avalia uma midia com nota e comentario e retorna a avaliação
      * efetuada
      * 
@@ -318,18 +303,20 @@ public class Cliente {
      * 
      */
     public Avaliacao adicionarAvaliacao(int nota, String comentario, Catalogo catalogo) {
-        if (!clienteJaAvaliouMidia(catalogo)) {
             Avaliacao avaliacaoSendoFeita = avaliar(nota, comentario);
             Avaliacao avaliacaoFeita;
-            for (Assistido assistido : listaJaVistas) {
-                if (assistido.getCatalogo() == catalogo) {
-                    avaliacaoFeita = assistido.adicionarAvaliacao(avaliacaoSendoFeita);
-                    listaDeAvaliacoes.add(avaliacaoSendoFeita);
-                    return avaliacaoFeita;
-                }
+
+            avaliacaoFeita = listaJaVistas.stream()
+                                .filter(assistido -> assistido.getCatalogo() == catalogo)
+                                .findFirst()
+                                .map(assistido -> assistido.adicionarAvaliacao(avaliacaoSendoFeita))
+                                .orElse(null);
+
+            if(avaliacaoFeita != null){
+                listaDeAvaliacoes.add(avaliacaoSendoFeita);
             }
-        }
-        return null;
+
+            return avaliacaoFeita;
     }
 
     /**
