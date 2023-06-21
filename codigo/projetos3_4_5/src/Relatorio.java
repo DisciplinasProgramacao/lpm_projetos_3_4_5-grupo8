@@ -9,7 +9,7 @@ public class Relatorio {
     public <k,T> LinkedList<T> streamDefault(Predicate<T> comparador, Comparator<T> sort, HashMap<k,T> list) {
         return list.values().stream()
                             .filter(comparador)
-                            .sorted(sort)
+                            .sorted(sort.reversed())
                             .limit(10)
                             .collect(Collectors.toCollection(LinkedList::new));
     }
@@ -23,7 +23,7 @@ public class Relatorio {
 
     public <k,T> LinkedList<T> streamDefault(Comparator<T> sort, HashMap<k,T> list) {
         return list.values().stream()
-                            .sorted(sort)
+                            .sorted(sort.reversed())
                             .limit(10)
                             .collect(Collectors.toCollection(LinkedList::new));
     }
