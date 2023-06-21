@@ -1,7 +1,6 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
-import java.util.HashSet;
 
 public class Cliente {
 
@@ -10,7 +9,6 @@ public class Cliente {
     private String senha;
     private String login;
     private LinkedList<Catalogo> listaParaVer;
-    private HashSet<Catalogo> listaDeMidiasAvaliadas;
     private LinkedList<Assistido> listaJaVistas;
     private LinkedList<Avaliacao> listaDeAvaliacoes;
     private State estadoCliente;
@@ -32,7 +30,6 @@ public class Cliente {
         this.login = login;
         this.listaParaVer = new LinkedList<Catalogo>();
         this.listaJaVistas = new LinkedList<Assistido>();
-        listaDeMidiasAvaliadas = new HashSet<Catalogo>();
         this.listaDeAvaliacoes = new LinkedList<Avaliacao>();
         this.estadoCliente = new StateStandart();
     }
