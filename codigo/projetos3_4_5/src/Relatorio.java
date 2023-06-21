@@ -9,7 +9,7 @@ public class Relatorio {
     public <k,T> LinkedList<T> streamDefault(Predicate<T> comparador, Comparator<T> sort, HashMap<k,T> list) {
         return list.values().stream()
                             .filter(comparador)
-                            .sorted(sort)
+                            .sorted(sort.reversed())
                             .limit(10)
                             .collect(Collectors.toCollection(LinkedList::new));
     }
@@ -23,7 +23,7 @@ public class Relatorio {
 
     public <k,T> LinkedList<T> streamDefault(Comparator<T> sort, HashMap<k,T> list) {
         return list.values().stream()
-                            .sorted(sort)
+                            .sorted(sort.reversed())
                             .limit(10)
                             .collect(Collectors.toCollection(LinkedList::new));
     }
@@ -31,7 +31,7 @@ public class Relatorio {
     public String criarRelatorioClienteQueMaisAssistiu(HashMap<String, Cliente> clientesMap) {
         String retorno = "";
 
-        Predicate<Cliente> predicate = (cliente) -> cliente.getListaDeAvaliacoes().size() > 0;
+        Predicate<Cliente> predicate = (cliente) -> cliente.getListaJaVistas().size() > 0;
         Comparator<Cliente> comparator = (a, b) -> Integer.compare(a.getListaJaVistas().size(), b.getListaJaVistas().size());
 
         LinkedList<Cliente> clientes = 
