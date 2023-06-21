@@ -73,7 +73,6 @@ public class Relatorio {
      * @param genero
      * @return String
      */
-    /* 
     public void relatorioPorGeneroAudiencia(String genero, HashMap<Integer,Catalogo> listCatalogo) {
         LinkedList<Catalogo> list = 
         streamDefault(c -> c.getGenero().equals(genero), 
@@ -81,13 +80,12 @@ public class Relatorio {
                      listCatalogo);
 
         exibirRelatorioCatalogo(list, "mais audiencia");
-    }*/
+    }
     /**
      * Metodo que retorna relatorio por genero com 10 midias mais bem avaliadas
      * @return String
      * @param genero
      */
-    /* 
     public void relatorioPorGeneroAvaliacao(String genero, HashMap<Integer,Catalogo> listCatalogo) {
         LinkedList<Catalogo> list = 
         streamDefault(c -> c.getGenero().equals(genero),
@@ -95,7 +93,7 @@ public class Relatorio {
                      listCatalogo);
 
         exibirRelatorioCatalogo(list, "melhor avaliacao por genero");
-    }*/
+    }
 
   
   

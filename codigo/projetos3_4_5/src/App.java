@@ -351,6 +351,7 @@ public class App {
             switch (op) {
                 case 1:
                     System.out.println("---Relatorio 1---");
+                    plataforma.criarRelatorioClienteQueMaisAssistiu();
                     break;
                 case 2:
                     System.out.println("---Relatorio 2---");
@@ -364,10 +365,25 @@ public class App {
                 case 5:
                     System.out.println("---Relatorio 5---");
                     break;
+                case 6:
+                    System.out.println("---Relatorio 6---");
+                    System.out.println("Qual genero deseja obter o relatório?");
+                    String genero = teclado.nextLine();
+                    plataforma.relatorioPorGeneroAvaliacao(genero);
+                    pausa();
+                    break;
+                case 7:
+                    System.out.println("---Relatorio 7---");
+                    System.out.println("Qual genero deseja obter o relatório?");
+                    String generoEscolhido = teclado.nextLine();
+                    plataforma.relatorioPorGeneroAudiencia(generoEscolhido);
+                    pausa();
+                    break;
+                default:
+                    break;
             }
-            op = opcoesFiltro();
+            op = opcoesRelatorio();
         } while (op != 0);
-
     }
 
     // metodo que limpa a tela no terminal

@@ -543,7 +543,7 @@ public class PlataformaStreaming {
      * @return String
      */
     public void relatorioPorGeneroAudiencia(String genero) {
-       // relatorio.relatorioPorGeneroAudiencia(genero, catalogos);
+       relatorio.relatorioPorGeneroAudiencia(genero, catalogos);
     }
     /**
      * Metodo que retorna relatorio por genero com 10 midias mais bem avaliadas
@@ -551,7 +551,7 @@ public class PlataformaStreaming {
      * @param genero
      */
     public void relatorioPorGeneroAvaliacao(String genero) {
-      //  relatorio.relatorioPorGeneroAvaliacao(genero, catalogos);
+        relatorio.relatorioPorGeneroAvaliacao(genero, catalogos);
     }
 
     /**
