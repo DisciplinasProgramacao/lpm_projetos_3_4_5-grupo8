@@ -15,8 +15,8 @@ public class Filme extends Catalogo {
      * @param idioma
      * 
      */
-    public Filme(int id, String nome, String dataLancamento, int duracao, String genero, String idioma) {
-        super(id, nome, dataLancamento, genero, idioma);
+    public Filme(int id, String nome, String dataLancamento, int duracao, String genero, String idioma, boolean lancamento) {
+        super(id, nome, dataLancamento, genero, idioma, lancamento);
         this.duracao = duracao;
     }
 
@@ -30,8 +30,8 @@ public class Filme extends Catalogo {
      * @param duracao
      * 
      */
-    public Filme(String nome, String dataLancamento, String genero, String idioma, int duracao) {
-        super(nome, dataLancamento, genero, idioma);
+    public Filme(String nome, String dataLancamento, String genero, String idioma, int duracao, boolean lancamento) {
+        super(nome, dataLancamento, genero, idioma, lancamento);
         this.duracao = duracao;
     }
     //#endregion

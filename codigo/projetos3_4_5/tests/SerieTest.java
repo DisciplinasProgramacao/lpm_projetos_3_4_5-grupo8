@@ -12,7 +12,7 @@ public class SerieTest {
 
     @BeforeEach
     public void prepare() {
-        serie = new Serie("The Blacklist", "02/02/2017", "Suspense", "EN", 10);
+        serie = new Serie("The Blacklist", "02/02/2017", "Suspense", "EN", 10, false);
         avaliacao1 = new Avaliacao("eu", 4);
         avaliacao2 = new Avaliacao("voce", 5, "muito bom");
     }
@@ -56,12 +56,12 @@ public class SerieTest {
 
     @Test
     public void deveLancarExcecaoCasoGeneroDoFilmeNaoExistaNoEnum(){
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Serie("Suits", "02/02/2017", "GeneroInvalido", "EN", 10));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Serie("Suits", "02/02/2017", "GeneroInvalido", "EN", 10, false));
     }
 
     @Test
     public void naoDeveLancarExcecaoCasoGeneroDoFilmeExistaNoEnum(){
-        assertDoesNotThrow(() -> new Filme("Fullmetal Brotherhood","02/02/2003", "Anime", "EN", 100));
+        assertDoesNotThrow(() -> new Filme("Fullmetal Brotherhood","02/02/2003", "Anime", "EN", 100, false));
     }
 
 }

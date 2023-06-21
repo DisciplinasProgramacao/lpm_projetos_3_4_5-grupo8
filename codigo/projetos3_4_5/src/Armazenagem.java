@@ -16,10 +16,25 @@ public class Armazenagem {
      * @param item    objeto a ser salvo
      */
     public static <T> void gravar(String nomeArq, T item) throws IOException {
-        FileWriter arq = new FileWriter("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv", true);
+        gravarAppendDef(nomeArq, item, true);
+    }
+
+    /**
+     * Metodo que grava qualquer objeto no arquivo .csv nao dando append
+     * 
+     * @param nomeArq nome do arquivo .csv
+     * @param item    objeto a ser salvo
+     */
+    public static <T> void gravarReescrevendoArquivo(String nomeArq, T item) throws IOException {
+        gravarAppendDef(nomeArq, item, false);
+    }
+
+    private static <T> void gravarAppendDef(String nomeArq, T item, boolean append) throws IOException{
+        FileWriter arq = new FileWriter("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv", append);
         PrintWriter gravarArq = new PrintWriter(arq);
         StringBuilder saida = new StringBuilder();
-        saida.append("\n");
+        if(append)
+            saida.append("\n");
         saida.append(item.toString());
         gravarArq.write(saida.toString());
         arq.close();

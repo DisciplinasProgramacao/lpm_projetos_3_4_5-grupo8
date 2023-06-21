@@ -15,8 +15,8 @@ public class Serie extends Catalogo {
      * @param quantidadeEpisodios
      * 
      */
-    public Serie(String nome, String dataLancamento, String genero, String idioma, int quantidadeEpisodios) {
-        super(nome, dataLancamento, genero, idioma);
+    public Serie(String nome, String dataLancamento, String genero, String idioma, int quantidadeEpisodios, boolean lancamento) {
+        super(nome, dataLancamento, genero, idioma, lancamento);
         this.quantidadeEpisodios = quantidadeEpisodios < 2 ? 0 : quantidadeEpisodios;
     }
 
@@ -29,8 +29,8 @@ public class Serie extends Catalogo {
      * @param genero
      * @param idioma
      */
-    public Serie(int idSerie, String nome, String dataLancamento, String genero, String idioma) {
-        super(idSerie, nome, dataLancamento, genero, idioma);
+    public Serie(int idSerie, String nome, String dataLancamento, String genero, String idioma, boolean lancamento) {
+        super(idSerie, nome, dataLancamento, genero, idioma, lancamento);
     }
     //#endregion
 
