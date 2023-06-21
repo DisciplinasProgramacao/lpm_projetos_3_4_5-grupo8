@@ -16,14 +16,17 @@ public class Relatorio {
 
 
     
-    public void criarRelatorioClienteQueMaisAssistiu(HashMap<String,Cliente> clientesMap){
-        LinkedList<Cliente> clientes = 
-        streamDefault(c -> c.getListaJaVistas().size() > 0,
-                      null,
-                      clientesMap);
+    public void criarRelatorioClienteQueMaisAssistiu(HashMap<String, Cliente> clientesMap) {
+    LinkedList<Cliente> clientes = clientesMap.values().stream()
+            .filter(c -> c.getListaJaVistas().size() > 0)
+            .collect(Collectors.toCollection(LinkedList::new));
 
-        exibirRelatorioUsuario(clientes.getLast(), clientes.getLast().getListaJaVistas().size(), "que mais assistiu");
+    if (!clientes.isEmpty()) {
+        Cliente clienteMaisAssistiu = clientes.getLast();
+        exibirRelatorioUsuario(clienteMaisAssistiu, clienteMaisAssistiu.getListaJaVistas().size(), "que mais assistiu");
     }
+}
+
 
 
     public void criarRelatorioClienteComMaisAvaliacoes(HashMap<String,Cliente> clientesMap){
