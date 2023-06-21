@@ -42,6 +42,15 @@ public class PlataformaStreaming {
         return this.nome;
     }
 
+    //Metodos testes
+    public HashMap<Integer, Catalogo> getCatalogos() {
+        return this.catalogos;
+    }
+
+    public HashMap<String, Cliente> getClientes() {
+        return this.clientes;
+    }
+
     /**
      * Retorna o cliente atual, caso possua usuário logado e null pointer caso contrário
      * 
@@ -526,8 +535,8 @@ public class PlataformaStreaming {
      * Metodo que retorna qual cliente assistiu mais midias
      * @return
      */
-    public void clienteQueMaisAssistiu(){
-        relatorio.criarRelatorioClienteQueMaisAssistiu(clientes);
+    public String clienteQueMaisAssistiu(){
+        return relatorio.criarRelatorioClienteQueMaisAssistiu(clientes);
     }
 
      /**
@@ -567,8 +576,8 @@ public class PlataformaStreaming {
      * @param genero
      * @return String
      */
-    public void relatorioPorGeneroAudiencia(String genero) {
-       relatorio.relatorioPorGeneroAudiencia(genero, catalogos);
+    public String relatorioPorGeneroAudiencia(String genero) {
+       return relatorio.relatorioPorGeneroAudiencia(genero, catalogos);
     }
     /**
      * Metodo que retorna relatorio por genero com 10 midias mais bem avaliadas

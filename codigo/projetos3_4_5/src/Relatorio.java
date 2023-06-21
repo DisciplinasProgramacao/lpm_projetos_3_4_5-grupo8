@@ -28,7 +28,8 @@ public class Relatorio {
                             .collect(Collectors.toCollection(LinkedList::new));
     }
 
-    public void criarRelatorioClienteQueMaisAssistiu(HashMap<String, Cliente> clientesMap) {
+    public String criarRelatorioClienteQueMaisAssistiu(HashMap<String, Cliente> clientesMap) {
+        String retorno = "";
 
         Predicate<Cliente> predicate = (cliente) -> cliente.getListaDeAvaliacoes().size() > 0;
         Comparator<Cliente> comparator = (a, b) -> Integer.compare(a.getListaJaVistas().size(), b.getListaJaVistas().size());
@@ -40,8 +41,9 @@ public class Relatorio {
         
         if (!clientes.isEmpty()) {
             Cliente clienteMaisAssistiu = clientes.getLast();
-            exibirRelatorioUsuario(clienteMaisAssistiu, clienteMaisAssistiu.getListaJaVistas().size(), "que mais assistiu");
+            retorno = exibirRelatorioUsuario(clienteMaisAssistiu, clienteMaisAssistiu.getListaJaVistas().size(), "que mais assistiu");
         }
+        return retorno;
     }
 
     //public String criarRelatorioClienteComMaisAvaliacoes(HashMap<String, Cliente> clientesMap){
@@ -136,7 +138,9 @@ public class Relatorio {
      * @param genero
      * @return String
      */
-    public void relatorioPorGeneroAudiencia(String genero, HashMap<Integer,Catalogo> catalogoMap) {
+    public String relatorioPorGeneroAudiencia(String genero, HashMap<Integer,Catalogo> catalogoMap) {
+        String retorno = "";
+
         Predicate<Catalogo> predicate = (c) -> c.getGenero().equals(genero);
         Comparator<Catalogo> comparator = (a, b) -> Integer.compare(a.getAudiencia(), b.getAudiencia());
         
@@ -146,10 +150,11 @@ public class Relatorio {
                      catalogoMap);
 
         if(!list.isEmpty()){
-            exibirRelatorioCatalogo(list, "mais audiencia");
+            retorno = exibirRelatorioCatalogo(list, "mais audiencia");
         }else{
             System.out.println("Nao ha midias com esse genero");
         }
+        return retorno;
     }
     /**
      * Metodo que retorna relatorio por genero com 10 midias mais bem avaliadas
@@ -173,7 +178,7 @@ public class Relatorio {
 
   
     /******************************** EXIBICAO DOS RELATORIOS *****************************/
-    public void exibirRelatorioCatalogo(LinkedList<Catalogo> list, String titulo){
+    public String exibirRelatorioCatalogo(LinkedList<Catalogo> list, String titulo){
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append("---Exibindo Relatorio de Midias com "+ titulo + "---");
@@ -184,9 +189,10 @@ public class Relatorio {
         stringBuilder.append("\n--------------------------------------------------------");
 
         System.out.println(stringBuilder);
+        return stringBuilder.toString();
     }
 
-    public <T> void exibirRelatorioUsuario(Cliente cliente, Integer quantidade, String titulo){
+    public <T> String exibirRelatorioUsuario(Cliente cliente, Integer quantidade, String titulo){
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append("---Exibindo Relatorio do Usuario "+ titulo + "---");
@@ -195,6 +201,7 @@ public class Relatorio {
         stringBuilder.append("\n--------------------------------------------------------");
 
         System.out.println(stringBuilder);
+        return stringBuilder.toString();
     }
 
    
