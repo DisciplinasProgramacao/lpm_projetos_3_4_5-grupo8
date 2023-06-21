@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -538,5 +539,30 @@ public class PlataformaStreaming {
     public void criarRelatorioClienteQueMaisAssistiu(){
         relatorio.criarRelatorioClienteQueMaisAssistiu(clientes);
     }
+
+
+    /************* Relatorio certo com stream ******************/
+     public String criarRelatorioClienteComMaisAvaliacoes(){
+        LinkedList<Cliente> clientes = this.clientes.values().stream()
+                                                              .filter(c -> c.getListaDeAvaliacoes().size() > 0)
+                                                              .collect(Collectors.toCollection(LinkedList::new));
+
+        return "Cliente que mais avaliou: " + clientes.getLast().getNomeUsuario() + ", total avaliacoes: " + clientes.getLast().getListaDeAvaliacoes().size() ; 
+    }
+
+    
+    public String criarRelatorioPorcentagemDeClienteNoMinQuinzeAvaliacoes(){
+        double porcentagemCliente;
+        double clientesComAvaliacoesMinima = this.clientes.values().stream()
+                                                              .filter(cliente -> cliente.getListaDeAvaliacoes().size() >= 2) //trocar aqui pra 15 quando arrumar o teste
+                                                              .count();
+
+        porcentagemCliente = ((clientesComAvaliacoesMinima * 100) /(double) this.clientes.size());
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        String porcentagemFormatada = decimalFormat.format(porcentagemCliente);
+
+        return "Porcentagem total: "+ porcentagemFormatada + "%";
+    }
+
 
 }

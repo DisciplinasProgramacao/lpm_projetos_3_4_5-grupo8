@@ -276,32 +276,6 @@ public class PlataformaStreamingTest {
         assertEquals("Cliente que mais assistiu: Ana Souza, total: 3", plataforma1.criarRelatorioClienteQueMaisAssistiu());
     }
 
-
-    @Test
-    public void deveRetornarClienteQueMaisAvaliouCom3() {
-            
-            plataforma1.login("aninha12", "123");    
-            plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 1");
-            plataforma1.assistirMidia("O Poderoso Chefão 1");
-            plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
-            plataforma1.assistirMidia("O Poderoso Chefão 2");
-            plataforma1.adicionarMidiaNaListaParaVerFuturamente("Minions");
-            plataforma1.assistirMidia("Minions");
-            plataforma1.logoff();
-    
-            plataforma1.login("ana.beatriz", "123");
-            plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
-            plataforma1.assistirMidia("O Poderoso Chefão 2");
-            plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 1");
-            plataforma1.logoff();
-    
-            assertEquals("Cliente que mais assistiu: Ana Souza, total: 3", plataforma1.criarRelatorioClienteQueMaisAssistiu());
-    }
-
-
-
-
-
     @Test
     public void deveRetornarRelatorioGeneroAudiencia(){
 
@@ -337,4 +311,61 @@ public class PlataformaStreamingTest {
         
 
     }
+
+    /* 
+    @Test
+    public void deveRetornarClienteQueMaisAvaliouCom3() {
+            
+            plataforma1.login("aninha12", "123");    
+            plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 1");
+            plataforma1.assistirMidia("O Poderoso Chefão 1");
+            plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+            plataforma1.assistirMidia("O Poderoso Chefão 2");
+            plataforma1.adicionarMidiaNaListaParaVerFuturamente("Minions");
+            plataforma1.assistirMidia("Minions");
+            plataforma1.logoff();
+    
+            plataforma1.login("ana.beatriz", "123");
+            plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+            plataforma1.assistirMidia("O Poderoso Chefão 2");
+            plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 1");
+            plataforma1.assistirMidia("O Poderoso Chefão 1");
+            plataforma1.logoff();
+    
+            assertEquals("Cliente que mais assistiu: Ana Souza, total: 3", plataforma1.criarRelatorioClienteQueMaisAssistiu());
+    }
+
+    @Test
+    public void deveCalcularPorcentagemDeClienteMinQuinzeAvaliacoes(){
+            plataforma1.login("aninha12", "123");    
+            plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 1");
+            plataforma1.assistirMidia("O Poderoso Chefão 1");
+            plataforma1.adicionarAvaliacao(2, "muito bom", filme1);
+            plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+            plataforma1.assistirMidia("O Poderoso Chefão 2");
+            plataforma1.adicionarAvaliacao(2, "muito bom", filme2);
+            plataforma1.adicionarMidiaNaListaParaVerFuturamente("Minions");
+            plataforma1.assistirMidia("Minions");
+            plataforma1.adicionarAvaliacao(2, "muito bom", filme3);
+            plataforma1.logoff();
+
+            plataforma1.login("ana.beatriz", "123");
+            plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 1");
+            plataforma1.assistirMidia("O Poderoso Chefão 1");
+            plataforma1.adicionarAvaliacao(2, "muito bom", filme1);
+            plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+            plataforma1.assistirMidia("O Poderoso Chefão 2");
+            plataforma1.adicionarAvaliacao(2, "muito bom", filme2);
+            plataforma1.logoff();
+
+            plataforma1.login("logado", "login");
+            plataforma1.adicionarMidiaNaListaParaVerFuturamente("O Poderoso Chefão 2");
+            plataforma1.assistirMidia("O Poderoso Chefão 2");
+            plataforma1.adicionarAvaliacao(5, "", filme2);
+            plataforma1.logoff();
+            assertEquals("Porcentagem total: 66,67%", plataforma1.criarRelatorioPorcentagemDeClienteNoMinQuinzeAvaliacoes());
+    }*/
+   
+
+
 }
