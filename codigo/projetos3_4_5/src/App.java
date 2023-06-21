@@ -351,23 +351,27 @@ public class App {
             switch (op) {
                 case 1:
                     System.out.println("---Relatorio 1---");
-                    plataforma.criarRelatorioClienteQueMaisAssistiu();
+                    plataforma.clienteQueMaisAssistiu();
                     pausa();
                     break;
                 case 2:
                     System.out.println("---Relatorio 2---");
+                    plataforma.clienteQueMaisAvaliou();
                     pausa();
                     break;
                 case 3:
                     System.out.println("---Relatorio 3---");
+                    plataforma.porcentagemClientes();
                     pausa();
                     break;
                 case 4:
                     System.out.println("---Relatorio 4---");
+                    plataforma.midiasMelhorAvaliadas();
                     pausa();
                     break;
                 case 5:
                     System.out.println("---Relatorio 5---");
+                    plataforma.midiaComMaisVisualizacao();
                     pausa();
                     break;
                 case 6:

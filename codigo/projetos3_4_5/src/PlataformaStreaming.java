@@ -519,13 +519,39 @@ public class PlataformaStreaming {
         return catalogo.mediaAvaliacao();
     }
 
+
+
+     /**************************** RELATORIOS ************************/
+    /**
+     * Metodo que retorna qual cliente assistiu mais midias
+     * @return
+     */
+    public void clienteQueMaisAssistiu(){
+        relatorio.criarRelatorioClienteQueMaisAssistiu(clientes);
+    }
+
+     /**
+     * Metodo que retorna qual cliente possui mais avaliacoes
+     * @return
+     */
+    public void clienteQueMaisAvaliou(){
+        relatorio.criarRelatorioClienteComMaisAvaliacoes(clientes);
+    }
+
+     /**
+     * Metodo que retorna a porcentagem de clientes com pleo menos 15 avaliacoes 
+     * @return
+     */
+    public void porcentagemClientes(){
+        relatorio.criarRelatorioPorcentagemDeClienteNoMinQuinzeAvaliacoes(clientes);
+    }
+    
     /**
      * Metodo que retorna as 10 midias de melhor avaliacao do catalogo, ordenada de modo decrescente
      * @return
      */
-
     public void midiasMelhorAvaliadas() {
-       // relatorio.midiasMelhorAvaliadas(catalogos);
+       relatorio.criarRelatorioMidiasComMelhoresAvaliacoes(catalogos);
     }
 
     /**
@@ -533,9 +559,8 @@ public class PlataformaStreaming {
      * @return
      */
     public void midiaComMaisVisualizacao() {
-       // relatorio.midiaComMaisVisualizacao(catalogos);
+       relatorio.criarRelatorioMidiasComMaisVisualizacoes(catalogos); 
     }
-
    
     /**
      * Método que retorna relatório por genero com 10 midias
@@ -554,34 +579,11 @@ public class PlataformaStreaming {
         relatorio.relatorioPorGeneroAvaliacao(genero, catalogos);
     }
 
-    /**
-     * Metodo que retorna qual cliente tem mais avaliacoes e quantas avaliacoes
-     * @return
-     */
-    public void clienteComMaiorIndiceDeAvaliacao() {
-        //relatorio.clienteComMaiorIndiceDeAvaliacao(clientes);
-    }
-
-     /**
-     * Metodo que retorna a porcentagem dos clientes com pelo menos 15 avaliações; coloquei 3 ali pra testar mais facil. Só alterar p 15 depois.
-     * @return
-     */
-    public void calcularPorcentagemDeClienteComMinimoQuinzeAvaliacoes(){
-       // relatorio.calcularPorcentagemDeClienteComMinimoQuinzeAvaliacoes(clientes);
-    }
-
-
-     /*RELATORIOS OFICIAIS */
-    /**
-     * Metodo que retorna qual cliente assistiu mais midias
-     * @return
-     */
-    public void criarRelatorioClienteQueMaisAssistiu(){
-        relatorio.criarRelatorioClienteQueMaisAssistiu(clientes);
-    }
+   
 
 
     /************* Relatorio certo com stream ******************/
+    /* 
      public String criarRelatorioClienteComMaisAvaliacoes(){
         LinkedList<Cliente> clientes = this.clientes.values().stream()
                                                               .filter(c -> c.getListaDeAvaliacoes().size() > 0)
@@ -602,7 +604,8 @@ public class PlataformaStreaming {
         String porcentagemFormatada = decimalFormat.format(porcentagemCliente);
 
         return "Porcentagem total: "+ porcentagemFormatada + "%";
-    }
+    }*/
+
 
     /**
      * Tornar cliente especialista

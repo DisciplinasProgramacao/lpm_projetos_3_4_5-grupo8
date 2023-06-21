@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
+import java.text.DecimalFormat;
 import static java.util.stream.Collectors.joining;
 
 public class Relatorio {
@@ -14,30 +14,70 @@ public class Relatorio {
                             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+    public void criarRelatorioClienteQueMaisAssistiu(HashMap<String, Cliente> clientesMap) {
+        LinkedList<Cliente> clientes = clientesMap.values().stream()
+                .filter(c -> c.getListaJaVistas().size() > 0)
+                .collect(Collectors.toCollection(LinkedList::new));
+
+        if (!clientes.isEmpty()) {
+            Cliente clienteMaisAssistiu = clientes.getLast();
+            exibirRelatorioUsuario(clienteMaisAssistiu, clienteMaisAssistiu.getListaJaVistas().size(), "que mais assistiu");
+        }
+    }
+
+    public String criarRelatorioClienteComMaisAvaliacoes(HashMap<String, Cliente> clientesMap){
+        LinkedList<Cliente> clientes = clientesMap.values().stream()
+                                                              .filter(c -> c.getListaDeAvaliacoes().size() > 0)
+                                                              .collect(Collectors.toCollection(LinkedList::new));
+
+        return "Cliente que mais avaliou: " + clientes.getLast().getNomeUsuario() + ", total avaliacoes: " + clientes.getLast().getListaDeAvaliacoes().size() ; 
+    }
 
     
-    public void criarRelatorioClienteQueMaisAssistiu(HashMap<String, Cliente> clientesMap) {
-    LinkedList<Cliente> clientes = clientesMap.values().stream()
-            .filter(c -> c.getListaJaVistas().size() > 0)
-            .collect(Collectors.toCollection(LinkedList::new));
+    public String criarRelatorioPorcentagemDeClienteNoMinQuinzeAvaliacoes(HashMap<String, Cliente> clientesMap){
+        double porcentagemCliente;
+        double clientesComAvaliacoesMinima = clientesMap.values().stream()
+                                                              .filter(cliente -> cliente.getListaDeAvaliacoes().size() >= 2) //trocar aqui pra 15 quando arrumar o teste
+                                                              .count();
 
-    if (!clientes.isEmpty()) {
-        Cliente clienteMaisAssistiu = clientes.getLast();
-        exibirRelatorioUsuario(clienteMaisAssistiu, clienteMaisAssistiu.getListaJaVistas().size(), "que mais assistiu");
+        porcentagemCliente = ((clientesComAvaliacoesMinima * 100) /(double) clientesMap.size());
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        String porcentagemFormatada = decimalFormat.format(porcentagemCliente);
+
+        return "Porcentagem total: "+ porcentagemFormatada + "%";
     }
-}
+
+     
+    public void criarRelatorioMidiasComMelhoresAvaliacoes(HashMap<Integer,Catalogo> listCatalogo) {
+        // depois ordena pelas mais avaliadas
+        LinkedList<Catalogo> list = 
+        streamDefault(c -> c.quantidadeAvaliacoes() >= 100, 
+                     (a, b) -> { return a.mediaAvaliacao().compareTo(b.mediaAvaliacao()); },
+                     listCatalogo);
+        exibirRelatorioCatalogo(list, "melhor avaliacao");
+    }
+
+     
+    public void criarRelatorioMidiasComMaisVisualizacoes(HashMap<Integer,Catalogo> listCatalogo) {
+        LinkedList<Catalogo> list = 
+        streamDefault(null, 
+                     (a, b) -> { return Integer.compare(a.getAudiencia(), b.getAudiencia()); },
+                     listCatalogo);
+
+        exibirRelatorioCatalogo(list, "mais visualizadas");
+    }
 
 
 
+/* 
     public void criarRelatorioClienteComMaisAvaliacoes(HashMap<String,Cliente> clientesMap){
         LinkedList<Cliente> clientes = 
         streamDefault(c -> c.getListaDeAvaliacoes().size() > 0,
                       null,
                       clientesMap);
         exibirRelatorioUsuario(clientes.getLast(), clientes.getLast().getListaDeAvaliacoes().size(), "que mais avaliou");
-    }
+    }*/
 
-    
     /*public void clienteComMaiorIndiceDeAvaliacao(HashMap<String,Cliente> clientesMap) {
         LinkedList<Cliente> clienteMaiorAva = 
         streamDefault(null,
@@ -47,25 +87,7 @@ public class Relatorio {
         exibirRelatorioUsuario(clienteMaiorAva.getLast(), clienteMaiorAva.getLast().getListaDeAvaliacoes().size(), "com maior avaliacoes");
     } */
 
-    /*
-    public void criarRelatorioMidiasComMelhoresAvaliacoes(HashMap<Integer,Catalogo> listCatalogo) {
-        // depois ordena pelas mais avaliadas
-        LinkedList<Catalogo> list = 
-        streamDefault(c -> c.quantidadeAvaliacoes() >= 100, 
-                     (a, b) -> { return a.mediaAvaliacao().compareTo(b.mediaAvaliacao()); },
-                     listCatalogo);
-        exibirRelatorioCatalogo(list, "melhor avaliacao");
-    }*/
-
-    /* 
-    public void criarRelatorioMidiasComMaisVisualizacoes(HashMap<Integer,Catalogo> listCatalogo) {
-        LinkedList<Catalogo> list = 
-        streamDefault(null, 
-                     (a, b) -> { return Integer.compare(a.getAudiencia(), b.getAudiencia()); },
-                     listCatalogo);
-
-        exibirRelatorioCatalogo(list, "mais visualizadas");
-    }*/
+   
    
 
 
@@ -99,10 +121,6 @@ public class Relatorio {
     }
 
   
-  
-
-
-
     /******************************** EXIBICAO DOS RELATORIOS *****************************/
     public void exibirRelatorioCatalogo(LinkedList<Catalogo> list, String titulo){
         StringBuilder stringBuilder = new StringBuilder();
