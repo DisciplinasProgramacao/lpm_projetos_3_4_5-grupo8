@@ -31,7 +31,7 @@ public class Relatorio {
     public String criarRelatorioClienteQueMaisAssistiu(HashMap<String, Cliente> clientesMap) {
         String retorno = "";
 
-        Predicate<Cliente> predicate = (cliente) -> cliente.getListaDeAvaliacoes().size() > 0;
+        Predicate<Cliente> predicate = (cliente) -> cliente.getListaJaVistas().size() > 0;
         Comparator<Cliente> comparator = (a, b) -> Integer.compare(a.getListaJaVistas().size(), b.getListaJaVistas().size());
 
         LinkedList<Cliente> clientes = 
