@@ -65,12 +65,11 @@ public class Relatorio {
                                                               .count();
     
         porcentagemCliente = ((clientesComAvaliacoesMinima * 100) /(double) clientesMap.size());
-    
+     
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         String porcentagemFormatada = decimalFormat.format(porcentagemCliente);
-        System.out.println(porcentagemFormatada);
-
-        return "Porcentagem total: "+ porcentagemFormatada + "%";
+       
+        return exibirRelatorioPorcentagem(porcentagemFormatada);
     }
      
     public void criarRelatorioMidiasComMelhoresAvaliacoes(HashMap<Integer,Catalogo> catalogoMap) {
@@ -179,5 +178,16 @@ public class Relatorio {
         return stringBuilder.toString();
     }
 
+    public <T> String exibirRelatorioPorcentagem( String porcentagem){
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("---Exibindo Relatorio da porcentagem dos clientes com pelo menos 15 avalia\u00E7\u00F5es ---");
+        stringBuilder.append("\n--------------------------------------------------------");
+        stringBuilder.append("\nPorcentagem total: " + porcentagem + " %");
+        stringBuilder.append("\n--------------------------------------------------------");
+
+        System.out.println(stringBuilder);
+        return stringBuilder.toString();
+    }
    
 }
