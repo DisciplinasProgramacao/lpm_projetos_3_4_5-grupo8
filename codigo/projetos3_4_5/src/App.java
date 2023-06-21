@@ -66,27 +66,7 @@ public class App {
 
                     break;
                 case 8:
-                    plataforma.midiasMelhorAvaliadas();
-                    pausa();
-                    break;
-                case 9:
-                    plataforma.midiaComMaisVisualizacao();
-                    pausa();
-                    break;
-                case 10:
-                    System.out.println("---Exibindo Relatorio do Cliente que mais assistiu---");
-                    //colocar aqui
-                    pausa();
-                    break;
-                case 11:
-                    System.out.println("---Exibindo Relatoriodo Cliente com mais avaliacoes---");
-                   //colocar aqui
-                    pausa();
-                    break;
-                case 12:
-                    System.out.println("---Exibindo Relatoriodo percentual de cliente com min 15 avaliacoes---");
-                    //colocar aqui
-                    pausa();
+                   menuRelatorio();
                     break;                   
                 default:
                     break;
@@ -298,6 +278,8 @@ public class App {
 
                     pausa();
                     break;
+                default:
+                    break;
             }
             op = opcoesFiltro();
         } while (op != 0);
@@ -314,8 +296,8 @@ public class App {
         System.out.println("3 - Relatorio: Porcentagem de clientes com pelo menos 15 avaliacoes");
         System.out.println("4 - Relatorio: 10 midias com melhor avalicao");
         System.out.println("5 - Relatorio: 10 midias com mais visualizacoes");
-        System.out.println("4 - Relatorio: 10 midias com melhor avalicao - por genero");
-        System.out.println("5 - Relatorio: 10 midias com mais visualizacoes - por genero");
+        System.out.println("6 - Relatorio: 10 midias com melhor avalicao - por genero");
+        System.out.println("7 - Relatorio: 10 midias com mais visualizacoes - por genero");
         System.out.println("0 - Sair");
         System.out.println("==========================================================");
         System.out.print("\nDigite sua opção: ");
@@ -330,19 +312,19 @@ public class App {
         do {
             switch (op) {
                 case 1:
-                 
+                    System.out.println("---Relatorio 1---");
                     break;
                 case 2:
-                
+                    System.out.println("---Relatorio 2---");
                     break;
                 case 3:
-             
+                    System.out.println("---Relatorio 3---");
                     break;
                 case 4:
-             
+                    System.out.println("---Relatorio 4---");
                     break;
                 case 5:
-             
+                    System.out.println("---Relatorio 5---");
                     break;
             }
             op = opcoesFiltro();
