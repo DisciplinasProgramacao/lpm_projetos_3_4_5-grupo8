@@ -17,7 +17,10 @@ public class Relatorio {
     public void criarRelatorioClienteQueMaisAssistiu(HashMap<String, Cliente> clientesMap) {
         LinkedList<Cliente> clientes = clientesMap.values().stream()
                 .filter(c -> c.getListaJaVistas().size() > 0)
+
                 .collect(Collectors.toCollection(LinkedList::new));
+                Collections.sort(clientes, (a, b) -> { return Integer.compare(a.getListaJaVistas().size(), b.getListaJaVistas().size()); });
+
 
         if (!clientes.isEmpty()) {
             Cliente clienteMaisAssistiu = clientes.getLast();
