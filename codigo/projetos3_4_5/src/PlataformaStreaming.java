@@ -465,6 +465,7 @@ public class PlataformaStreaming {
         if (catalogo != null) {
             if(!catalogo.lancamento){
                 this.clienteAtual.registrarAudiencia(catalogo);
+                this.clienteAtual.tornarEspecialista();
             }else{
                 if(clienteAtual.podeVerLancamento())
                     this.clienteAtual.registrarAudiencia(catalogo);
