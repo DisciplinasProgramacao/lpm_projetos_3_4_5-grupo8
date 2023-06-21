@@ -14,27 +14,43 @@ public class Relatorio {
                             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+    public <k,T> LinkedList<T> streamDefault(Predicate<T> comparador, HashMap<k,T> list) {
+        return list.values().stream()
+                            .filter(comparador)
+                            .limit(10)
+                            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public <k,T> LinkedList<T> streamDefault(Comparator<T> sort, HashMap<k,T> list) {
+        return list.values().stream()
+                            .sorted(sort)
+                            .limit(10)
+                            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
     public void criarRelatorioClienteQueMaisAssistiu(HashMap<String, Cliente> clientesMap) {
-        LinkedList<Cliente> clientes = clientesMap.values().stream()
-                .filter(c -> c.getListaJaVistas().size() > 0)
 
-                .collect(Collectors.toCollection(LinkedList::new));
-                Collections.sort(clientes, (a, b) -> { return Integer.compare(a.getListaJaVistas().size(), b.getListaJaVistas().size()); });
+        Predicate<Cliente> predicate = (cliente) -> cliente.getListaDeAvaliacoes().size() > 0;
+        Comparator<Cliente> comparator = (a, b) -> Integer.compare(a.getListaJaVistas().size(), b.getListaJaVistas().size());
 
-
+        LinkedList<Cliente> clientes = 
+        streamDefault(predicate,
+                      comparator,
+                      clientesMap);
+        
         if (!clientes.isEmpty()) {
             Cliente clienteMaisAssistiu = clientes.getLast();
             exibirRelatorioUsuario(clienteMaisAssistiu, clienteMaisAssistiu.getListaJaVistas().size(), "que mais assistiu");
         }
     }
 
-    public String criarRelatorioClienteComMaisAvaliacoes(HashMap<String, Cliente> clientesMap){
-        LinkedList<Cliente> clientes = clientesMap.values().stream()
-                                                              .filter(c -> c.getListaDeAvaliacoes().size() > 0)
-                                                              .collect(Collectors.toCollection(LinkedList::new));
+    //public String criarRelatorioClienteComMaisAvaliacoes(HashMap<String, Cliente> clientesMap){
+    //    LinkedList<Cliente> clientes = clientesMap.values().stream()
+    //                                                          .filter(c -> c.getListaDeAvaliacoes().size() > 0)
+    //                                                          .collect(Collectors.toCollection(LinkedList::new));
 
-        return "Cliente que mais avaliou: " + clientes.getLast().getNomeUsuario() + ", total avaliacoes: " + clientes.getLast().getListaDeAvaliacoes().size() ; 
-    }
+    //    return "Cliente que mais avaliou: " + clientes.getLast().getNomeUsuario() + ", total avaliacoes: " + clientes.getLast().getListaDeAvaliacoes().size() ; 
+    //}
 
     
     public String criarRelatorioPorcentagemDeClienteNoMinQuinzeAvaliacoes(HashMap<String, Cliente> clientesMap){
@@ -51,35 +67,54 @@ public class Relatorio {
     }
 
      
-    public void criarRelatorioMidiasComMelhoresAvaliacoes(HashMap<Integer,Catalogo> listCatalogo) {
+    public void criarRelatorioMidiasComMelhoresAvaliacoes(HashMap<Integer,Catalogo> catalogoMap) {
+        Predicate<Catalogo> predicate = (c) -> c.quantidadeAvaliacoes() >= 100;
+        Comparator<Catalogo> comparator = (a, b) -> a.mediaAvaliacao().compareTo(b.mediaAvaliacao());
+        
         // depois ordena pelas mais avaliadas
         LinkedList<Catalogo> list = 
-        streamDefault(c -> c.quantidadeAvaliacoes() >= 100, 
-                     (a, b) -> { return a.mediaAvaliacao().compareTo(b.mediaAvaliacao()); },
-                     listCatalogo);
-        exibirRelatorioCatalogo(list, "melhor avaliacao");
+        streamDefault(predicate,
+                      comparator,
+                     catalogoMap);
+
+        if(!list.isEmpty()){
+            exibirRelatorioCatalogo(list, "melhor avaliacao");
+        }else{
+            System.out.println("Nao ha midias com mais de 100 avaliacoes");
+        }
     }
 
      
-    public void criarRelatorioMidiasComMaisVisualizacoes(HashMap<Integer,Catalogo> listCatalogo) {
+    public void criarRelatorioMidiasComMaisVisualizacoes(HashMap<Integer,Catalogo> catalogoMap) {
+        Comparator<Catalogo> comparator = (a, b) -> Integer.compare(a.getAudiencia(), b.getAudiencia());
+        
         LinkedList<Catalogo> list = 
-        streamDefault(null, 
-                     (a, b) -> { return Integer.compare(a.getAudiencia(), b.getAudiencia()); },
-                     listCatalogo);
+        streamDefault(comparator,
+                     catalogoMap);
 
-        exibirRelatorioCatalogo(list, "mais visualizadas");
+        if(!list.isEmpty()){
+            exibirRelatorioCatalogo(list, "mais visualizadas");
+        }else{
+            System.out.println("Nao ha midias vistas");
+        }
     }
 
 
 
-/* 
+
     public void criarRelatorioClienteComMaisAvaliacoes(HashMap<String,Cliente> clientesMap){
+        Predicate<Cliente> predicate = (c) -> c.getListaDeAvaliacoes().size() > 0;
+
         LinkedList<Cliente> clientes = 
-        streamDefault(c -> c.getListaDeAvaliacoes().size() > 0,
-                      null,
+        streamDefault(predicate,
                       clientesMap);
-        exibirRelatorioUsuario(clientes.getLast(), clientes.getLast().getListaDeAvaliacoes().size(), "que mais avaliou");
-    }*/
+
+        if(!clientes.isEmpty()){
+            exibirRelatorioUsuario(clientes.getLast(), clientes.getLast().getListaDeAvaliacoes().size(), "que mais avaliou");
+        }else{
+            System.out.println("Nao ha clientes com avaliacoes");
+        }
+    }
 
     /*public void clienteComMaiorIndiceDeAvaliacao(HashMap<String,Cliente> clientesMap) {
         LinkedList<Cliente> clienteMaiorAva = 
@@ -101,26 +136,39 @@ public class Relatorio {
      * @param genero
      * @return String
      */
-    public void relatorioPorGeneroAudiencia(String genero, HashMap<Integer,Catalogo> listCatalogo) {
+    public void relatorioPorGeneroAudiencia(String genero, HashMap<Integer,Catalogo> catalogoMap) {
+        Predicate<Catalogo> predicate = (c) -> c.getGenero().equals(genero);
+        Comparator<Catalogo> comparator = (a, b) -> Integer.compare(a.getAudiencia(), b.getAudiencia());
+        
         LinkedList<Catalogo> list = 
-        streamDefault(c -> c.getGenero().equals(genero), 
-                     (a, b) -> { return Integer.compare(a.getAudiencia(), b.getAudiencia()); },
-                     listCatalogo);
+        streamDefault(predicate, 
+                     comparator,
+                     catalogoMap);
 
-        exibirRelatorioCatalogo(list, "mais audiencia");
+        if(!list.isEmpty()){
+            exibirRelatorioCatalogo(list, "mais audiencia");
+        }else{
+            System.out.println("Nao ha midias com esse genero");
+        }
     }
     /**
      * Metodo que retorna relatorio por genero com 10 midias mais bem avaliadas
      * @return String
      * @param genero
      */
-    public void relatorioPorGeneroAvaliacao(String genero, HashMap<Integer,Catalogo> listCatalogo) {
-        LinkedList<Catalogo> list = 
-        streamDefault(c -> c.getGenero().equals(genero),
-                     (a, b) -> { return a.mediaAvaliacao().compareTo(b.mediaAvaliacao()); },
-                     listCatalogo);
+    public void relatorioPorGeneroAvaliacao(String genero, HashMap<Integer,Catalogo> catalogoMap) {
+        Predicate<Catalogo> predicate = (c) -> c.getGenero().equals(genero);
+        Comparator<Catalogo> comparator = (a, b) -> a.mediaAvaliacao().compareTo(b.mediaAvaliacao());
 
-        exibirRelatorioCatalogo(list, "melhor avaliacao por genero");
+        LinkedList<Catalogo> list = 
+        streamDefault(predicate,
+                     comparator,
+                     catalogoMap);
+        if(!list.isEmpty()){
+            exibirRelatorioCatalogo(list, "melhor avaliacao por genero");
+        }else{
+            System.out.println("Nao ha midias com esse genero");
+        }
     }
 
   
