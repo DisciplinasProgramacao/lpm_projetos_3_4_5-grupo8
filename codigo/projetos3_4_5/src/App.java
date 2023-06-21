@@ -361,7 +361,7 @@ public class App {
                     break;
                 case 3:
                     System.out.println("---Relatorio 3---");
-                    System.out.println(plataforma.porcentagemClientes());
+                    plataforma.porcentagemClientes();
                     pausa();
                     break;
                 case 4:
@@ -511,6 +511,10 @@ public class App {
 
     // Metodo para avaliar uma midia
     public static void avaliarMidia() {
+        if(!plataforma.getClienteAtual().podeComentar()){
+            System.out.println("Voce nao pode avaliar midias.");
+            return;
+        }
         System.out.println("==========================");
         System.out.println("\nDigite o nome da midia que deseja avaliar: ");
         String nomeMidia = teclado.nextLine();
@@ -529,7 +533,7 @@ public class App {
             }            
 
             if(plataforma.adicionarAvaliacao(avaliacao, texto, plataforma.buscarCatalogo(nomeMidia)) == null){
-                System.out.println("Midia ja avaliada, avaliacao nao adicionada");
+                System.out.println("Midia ja avaliada, avaliacao nao adicionada ou não pode comentar");
             }else{
                 System.out.println("Midia: '" + nomeMidia + "', avaliada com " + avaliacao + "estrelas.");
                 System.out.println("Avaliacao realizada com sucesso");

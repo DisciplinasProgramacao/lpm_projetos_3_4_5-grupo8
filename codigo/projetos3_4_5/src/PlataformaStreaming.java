@@ -226,6 +226,31 @@ public class PlataformaStreaming {
             this.catalogos.put(x.getId(), x);
         }
         this.carregarLancamentos();
+        this.carregarEspeciais();
+    }
+
+    private void carregarEspeciais(){
+        try {
+            Function<String, String> dividirTipo = (str -> str);
+            LinkedList<String> data = Armazenagem.ler("POO_Especialistas", dividirTipo);
+            Cliente aux;
+            for(String str : data){
+                aux = this.clientes.get(str);
+                if(aux != null){
+                    aux.getEstadoCliente().tornarEspecialista();
+                }
+            }
+            LinkedList<String> data2 = Armazenagem.ler("POO_Profissionais", dividirTipo);
+            for(String str : data2){
+                aux = this.clientes.get(str);
+                if(aux != null){
+                    aux.getEstadoCliente().tornarProfissional();
+                }
+            }
+
+
+        } catch (FileNotFoundException e) {//Se nao existir o arq do lancamento nao tem problema 
+        }
     }
 
     private void carregarLancamentos(){
@@ -501,7 +526,8 @@ public class PlataformaStreaming {
         if (catalogo != null) {
             if(!catalogo.lancamento){
                 this.clienteAtual.registrarAudiencia(catalogo);
-                tornarClienteEspecialista();
+                if(!this.clienteAtual.podeComentar())
+                    tornarClienteEspecialista();
             }else{
                 if(clienteAtual.podeVerLancamento()){
                     this.clienteAtual.registrarAudiencia(catalogo);
