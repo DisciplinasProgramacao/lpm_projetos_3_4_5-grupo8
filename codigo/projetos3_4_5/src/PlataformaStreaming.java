@@ -151,6 +151,9 @@ public class PlataformaStreaming {
         }
     }
 
+    /**
+     * Caso a mídia adicionada seja um lançamento, esse método é invocado para carregar em um arquivo os dados de lançamento
+     */
     private void carregarEAdicionarLancamento(){
         StringBuilder a = new StringBuilder("#Lancamentos");
         for(Catalogo cat : catalogos.values()){
@@ -205,6 +208,9 @@ public class PlataformaStreaming {
         this.carregarLancamentos();
     }
 
+    /**
+     * Pega os dados de um cliente e seta o seu estado como especialista ou profissional atendendo as condições
+     */
     private void carregarEspeciais(){
         try {
             Function<String, String> dividirTipo = (str -> str);
@@ -222,6 +228,9 @@ public class PlataformaStreaming {
         }
     }
 
+    /**
+     * Pega os dados de lançamento e caso a midia seja de lançamento seta a midia como de lançamento
+     */
     private void carregarLancamentos(){
         Function<String, String> dividirTipo = (str -> str);
         try {
