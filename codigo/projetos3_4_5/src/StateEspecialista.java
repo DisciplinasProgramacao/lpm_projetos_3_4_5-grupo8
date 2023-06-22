@@ -8,7 +8,7 @@ public class StateEspecialista extends State {
         return this;
     }
 
-    /*
+    /**
     * Cliente especialista pode tornar-se profissional. 
     * Muda o seu estado para profissional
     */
@@ -23,7 +23,7 @@ public class StateEspecialista extends State {
         return new StateStandart();
     }
 
-    /*
+    /**
     * Método que verifica se o cliente pode comentar. 
     * Como o cliente é especialista, ele pode adicionar comentário em uma avaliação
     * @return true
@@ -33,7 +33,7 @@ public class StateEspecialista extends State {
         return true;
     }
 
-    /*
+    /**
     * Método que verifica se o cliente pode assistir uma midia de lançamento.
     * Como o cliente é especialista, ele não pode assistir.
     * @return false

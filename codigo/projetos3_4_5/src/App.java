@@ -79,44 +79,57 @@ public class App {
     // Menu geral da plataforma que oferece serviços de streaming
     public static int menuFlix() {
         limparTela();
-        System.out.println("Menu " + plataforma.getNome());
-        System.out.println("=================================================");
-        System.out.println("1 - Exibir Catalogo");
-        System.out.println("2 - Cadastrar e Salvar Filme");
-        System.out.println("3 - Cadastrar e Salvar Serie");
-        System.out.println("4 - Cadastrar Cliente");
-        System.out.println("5 - Realizar login de um cliente");
-        System.out.println("6 - Verificar audiencia de uma midia");
-        System.out.println("7 - Verificar avaliacao de uma midia");
-        System.out.println("8 - Visualizar Relatorios");
-        System.out.println("0 - Sair");
-        System.out.println("=================================================");
-        System.out.print("\nDigite sua opção: ");
-        int opcao = Integer.parseInt(teclado.nextLine());
-
+        int opcao=-1;
+        do{
+            System.out.println("Menu " + plataforma.getNome());
+            System.out.println("=================================================");
+            System.out.println("1 - Exibir Catalogo");
+            System.out.println("2 - Cadastrar e Salvar Filme");
+            System.out.println("3 - Cadastrar e Salvar Serie");
+            System.out.println("4 - Cadastrar Cliente");
+            System.out.println("5 - Realizar login de um cliente");
+            System.out.println("6 - Verificar audiencia de uma midia");
+            System.out.println("7 - Verificar avaliacao de uma midia");
+            System.out.println("8 - Visualizar Relatorios");
+            System.out.println("0 - Sair");
+            System.out.println("=================================================");
+            System.out.print("\nDigite sua opção: ");
+            try {
+                opcao = Integer.parseInt(teclado.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Opcao invalida.");
+            }
+        }while(!(opcao>=0  && opcao <=8));
         return opcao;
     }
 
     // Opcoes para o cliente (após logar)
     public static int opcoesCliente() {
         limparTela();
-        System.out.println("Ola, bem vindo ao " + plataforma.getNome());
-        System.out.println("==========================================================");
-        System.out.println("1 - Exibir Catalogo");
-        System.out.println("2 - Assistir uma midia");
-        System.out.println("3 - Verificar midias assistidas");
-        System.out.println("4 - Verificar midias para assistir futuramente");
-        System.out.println("5 - Adicionar midia na lista para assistir futuramente");
-        System.out.println("6 - Filtrar catalogo");
-        System.out.println("7 - Filtrar midias assistidas");
-        System.out.println("8 - Filtrar midias para assistir futuramente");
-        System.out.println("9 - Avaliar uma midia");
-        System.out.println("10 - Alterar seu estado");
-        System.out.println("11 - Assistir Lançamento");
-        System.out.println("0 - Sair");
-        System.out.println("==========================================================");
-        System.out.print("\nDigite sua opção: ");
-        int opcao = Integer.parseInt(teclado.nextLine());
+        int opcao = -1;
+        do{
+            System.out.println("Ola, bem vindo ao " + plataforma.getNome());
+            System.out.println("==========================================================");
+            System.out.println("1 - Exibir Catalogo");
+            System.out.println("2 - Assistir uma midia");
+            System.out.println("3 - Verificar midias assistidas");
+            System.out.println("4 - Verificar midias para assistir futuramente");
+            System.out.println("5 - Adicionar midia na lista para assistir futuramente");
+            System.out.println("6 - Filtrar catalogo");
+            System.out.println("7 - Filtrar midias assistidas");
+            System.out.println("8 - Filtrar midias para assistir futuramente");
+            System.out.println("9 - Avaliar uma midia");
+            System.out.println("10 - Alterar seu estado");
+            System.out.println("11 - Assistir Lançamento");
+            System.out.println("0 - Sair");
+            System.out.println("==========================================================");
+            System.out.print("\nDigite sua opção: ");
+            try {
+                opcao = Integer.parseInt(teclado.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Opcao invalida.");
+            }
+        }while(!(opcao>=0  && opcao <=11));
 
         return opcao;
     }
@@ -146,10 +159,14 @@ public class App {
                         System.out.println("\nAssistindo midia... \nMidia assistida.");
                         System.out
                                 .println("\nDeseja avaliar essa midia assistida? Digite '1' para sim e '2' para nao: ");
-                        int opcao = Integer.parseInt(teclado.nextLine());
+                        int opcao = -1;
                         while (opcao != 1 && opcao != 2) {
-                            System.out.println("Opcao invalida. Digite '1' para sim e '2' para nao: ");
-                            opcao = Integer.parseInt(teclado.nextLine());
+                            try {
+                                opcao = Integer.parseInt(teclado.nextLine());
+                            } catch (NumberFormatException e) {
+                                System.out.println("Opcao invalida.");
+                                System.out.println("Digite '1' para sim e '2' para nao: ");
+                            }  
                         }
                         if (opcao == 1) {
                             avaliarMidia();
@@ -225,10 +242,14 @@ public class App {
                         System.out.println("\nAssistindo midia... \nMidia assistida.");
                         System.out
                                 .println("\nDeseja avaliar essa midia assistida? Digite '1' para sim e '2' para nao: ");
-                        int opcao = Integer.parseInt(teclado.nextLine());
+                        int opcao = -1;
                         while (opcao != 1 && opcao != 2) {
-                            System.out.println("Opcao invalida. Digite '1' para sim e '2' para nao: ");
-                            opcao = Integer.parseInt(teclado.nextLine());
+                            try {
+                                opcao = Integer.parseInt(teclado.nextLine());
+                            } catch (NumberFormatException e) {
+                                System.out.println("Opcao invalida.");
+                                System.out.println("Digite '1' para sim e '2' para nao: ");
+                            }  
                         }
                         if (opcao == 1) {
                             avaliarMidia();
@@ -257,18 +278,24 @@ public class App {
     // Opcoes filtros
     public static int opcoesFiltro() {
         limparTela();
-        System.out.println("Menu Filtros. Escolha sua opcao: ");
-        System.out.println("==========================================================");
-        System.out.println("1 - Filtrar por genero");
-        System.out.println("2 - Filtrar por idioma");
-        System.out.println("3 - Filtrar por quantidade de episodios");
-        System.out.println("4 - Filtrar por duracao em minutos");
-        System.out.println("5 - Filtrar por nome");
-        System.out.println("0 - Sair");
-        System.out.println("==========================================================");
-        System.out.print("\nDigite sua opção: ");
-        int opcao = Integer.parseInt(teclado.nextLine());
-
+        int opcao=-1;
+        do{
+            System.out.println("Menu Filtros. Escolha sua opcao: ");
+            System.out.println("==========================================================");
+            System.out.println("1 - Filtrar por genero");
+            System.out.println("2 - Filtrar por idioma");
+            System.out.println("3 - Filtrar por quantidade de episodios");
+            System.out.println("4 - Filtrar por duracao em minutos");
+            System.out.println("5 - Filtrar por nome");
+            System.out.println("0 - Sair");
+            System.out.println("==========================================================");
+            System.out.print("\nDigite sua opção: ");
+        try {
+            opcao = Integer.parseInt(teclado.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Opcao invalida.");
+        }
+        }while(!(opcao>=0  && opcao <=5));
         return opcao;
     }
 
@@ -303,13 +330,26 @@ public class App {
                     break;
                 case 3:
                     System.out.println("Para filtrar digite a quantidade de episodios: ");
-                    int qtd = Integer.parseInt(teclado.nextLine());
-                    System.out.println(plataforma.filtrarPorQtdEpisodios(qtd));
+                    int qtd;
+                    try {
+                        qtd = Integer.parseInt(teclado.nextLine());
+                    } catch (NumberFormatException e) {
+                        System.out.println("Opcao invalida.");
+                        qtd = -1;
+                    }
+                    if(qtd >= 0)
+                        System.out.println(plataforma.filtrarPorQtdEpisodios(qtd));
                     pausa();
                     break;
                 case 4:
-                    System.out.println("Para filtrar digite a duracao em minutos: ");
-                    int duracao = Integer.parseInt(teclado.nextLine());
+                    int duracao;
+                    try {
+                        duracao = Integer.parseInt(teclado.nextLine());
+                    } catch (NumberFormatException e) {
+                        System.out.println("Opcao invalida.");
+                        duracao = -1;
+                    }
+                    if(duracao >= 0)
                     System.out.println(plataforma.filtrarPorDuracao(duracao));
                     pausa();
                     break;
@@ -339,19 +379,26 @@ public class App {
     //Opcoes relatorios
     public static int opcoesRelatorio() {
         limparTela();
-        System.out.println("Menu Relatorios. Escolha sua opcao: ");
-        System.out.println("==========================================================");
-        System.out.println("1 - Relatorio: Cliente que assistiu mais midias e o total");
-        System.out.println("2 - Relatorio: Cliente que possui mais avaliacoes");
-        System.out.println("3 - Relatorio: Porcentagem de clientes com pelo menos 15 avaliacoes");
-        System.out.println("4 - Relatorio: 10 midias com melhor avalicao");
-        System.out.println("5 - Relatorio: 10 midias com mais visualizacoes");
-        System.out.println("6 - Relatorio: 10 midias com melhor avalicao - por genero");
-        System.out.println("7 - Relatorio: 10 midias com mais visualizacoes - por genero");
-        System.out.println("0 - Sair");
-        System.out.println("==========================================================");
-        System.out.print("\nDigite sua opção: ");
-        int opcao = Integer.parseInt(teclado.nextLine());
+        int opcao = -1;
+        do{
+            System.out.println("Menu Relatorios. Escolha sua opcao: ");
+            System.out.println("==========================================================");
+            System.out.println("1 - Relatorio: Cliente que assistiu mais midias e o total");
+            System.out.println("2 - Relatorio: Cliente que possui mais avaliacoes");
+            System.out.println("3 - Relatorio: Porcentagem de clientes com pelo menos 15 avaliacoes");
+            System.out.println("4 - Relatorio: 10 midias com melhor avalicao");
+            System.out.println("5 - Relatorio: 10 midias com mais visualizacoes");
+            System.out.println("6 - Relatorio: 10 midias com melhor avalicao - por genero");
+            System.out.println("7 - Relatorio: 10 midias com mais visualizacoes - por genero");
+            System.out.println("0 - Sair");
+            System.out.println("==========================================================");
+            System.out.print("\nDigite sua opção: ");
+        try {
+            opcao = Integer.parseInt(teclado.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Opcao invalida.");
+        }
+        }while(!(opcao>=0  && opcao <=7));
 
         return opcao;
     }
@@ -457,32 +504,27 @@ public class App {
         try{
             opcaoGenero = Integer.parseInt(teclado.nextLine());
             genero = EnumGeneros.values()[opcaoGenero-1].toString();
+            System.out.print("Digite o Idioma: ");
+            String idioma = teclado.nextLine();
+            System.out.print("Digite a duracao: ");
+            int duracao = Integer.parseInt(teclado.nextLine());
+            System.out.print("Lancamento? se sim digite 1, se não digite 2: ");
+            int lancamento = Integer.parseInt(teclado.nextLine());
+            plataforma.cadastrarMidia(nome, dataLancamento, genero, idioma, duracao, 0, lancamento == 1 ? true : false);
+            System.out.println("Filme cadastrado com sucesso!");
         }catch(NumberFormatException e){
             System.out.println("Input invalido. " + e);
             return;
         }catch(ArrayIndexOutOfBoundsException e){
             System.out.println("Opcao invalida, digite um numero valido. " + e);
             return;
-        }
-        System.out.print("Digite o Idioma: ");
-        String idioma = teclado.nextLine();
-        System.out.print("Digite a duracao: ");
-        int duracao = Integer.parseInt(teclado.nextLine());
-        System.out.print("Lancamento? se sim digite 1, se não digite 2: ");
-        int lancamento = Integer.parseInt(teclado.nextLine());
-
-        try {
-            plataforma.cadastrarMidia(nome, dataLancamento, genero, idioma, duracao, 0, lancamento == 1 ? true : false);
-            System.out.println("Filme cadastrado com sucesso!");
         } catch (IOException e) {
             System.out.println("Erro ao adicionar filme ao catalogo ou ao gravar no arquivo\n" + e);
+            return;
         } catch (IllegalArgumentException e) {
             System.out.println("Erro ao cadastrar filme\n" + e);
+            return;
         }
-        if(lancamento == 1){
-            
-        }
-
     }
 
     private static void opcoesGeneros(){
@@ -509,28 +551,26 @@ public class App {
         try{
             opcaoGenero = Integer.parseInt(teclado.nextLine());
             genero = EnumGeneros.values()[opcaoGenero-1].toString();
+            System.out.print("Digite o idioma: ");
+            String idioma = teclado.nextLine();
+            System.out.print("Digite a quantidade de episodios: ");
+            int quantidadeEpisodios = Integer.parseInt(teclado.nextLine());
+            System.out.print("Lancamento? se sim digite 1, se não digite 2: ");
+            int lancamento = Integer.parseInt(teclado.nextLine());
+            plataforma.cadastrarMidia(nome, dataLancamento, genero, idioma, 0, quantidadeEpisodios, lancamento == 1 ? true : false);
+            System.out.println("Serie cadastrada com sucesso!");
         }catch(NumberFormatException e){
             System.out.println("Input invalido. " + e);
             return;
         }catch(ArrayIndexOutOfBoundsException e){
             System.out.println("Opcao invalida, digite um numero valido. " + e);
             return;
-        }
-
-        System.out.print("Digite o idioma: ");
-        String idioma = teclado.nextLine();
-        System.out.print("Digite a quantidade de episodios: ");
-        int quantidadeEpisodios = Integer.parseInt(teclado.nextLine());
-        System.out.print("Lancamento? se sim digite 1, se não digite 2: ");
-        int lancamento = Integer.parseInt(teclado.nextLine());
-
-        try {
-            plataforma.cadastrarMidia(nome, dataLancamento, genero, idioma, 0, quantidadeEpisodios, lancamento == 1 ? true : false);
-            System.out.println("Serie cadastrada com sucesso!");
-        } catch (IOException e) {
+        }catch (IOException e) {
             System.out.println("Erro ao adicionar serie ao catalogo ou ao gravar no arquivo\n" + e);
+            return;
         } catch (IllegalArgumentException e) {
             System.out.println("Erro ao cadastrar serie\n" + e);
+            return;
         }
     }
 
@@ -580,19 +620,18 @@ public class App {
 
     // Metodo para avaliar uma midia
     public static void avaliarMidia() {
-        if(!plataforma.getClienteAtual().podeComentar()){
-            System.out.println("Voce nao pode avaliar midias.");
-            return;
-        }
+
         System.out.println("==========================");
         System.out.println("\nDigite o nome da midia que deseja avaliar: ");
         String nomeMidia = teclado.nextLine();
 
         try {
+            String texto = "";
             plataforma.buscarCatalogo(nomeMidia);
-            System.out.println("Deixe seu comentario sobre a midia: ");
-            String texto = teclado.nextLine();
-
+            if(plataforma.getClienteAtual().podeComentar()){
+                System.out.println("Deixe seu comentario sobre a midia: ");
+                texto = teclado.nextLine();
+            }
             System.out.println("Digite sua avaliacao com estrelas de 1 a 5: ");
             int avaliacao = Integer.parseInt(teclado.nextLine());
 
@@ -611,6 +650,9 @@ public class App {
             System.out.println("Midia não encontrada");
         } catch (IndexOutOfBoundsException a) {
             System.out.println("Catalogo vazio");
+        }catch(NumberFormatException e){
+            System.out.println("Input invalido. " + e);
+            return;
         }
     }
 
@@ -654,7 +696,14 @@ public class App {
         System.out.println("2- Tornar especialista");
         System.out.println("3- Tornar profissional");
         System.out.print("\nDigite sua opção: ");
-        int opcao = Integer.parseInt(teclado.nextLine());
+        int opcao = 0;
+        try {
+            opcao = Integer.parseInt(teclado.nextLine());
+        } catch(NumberFormatException e){
+            System.out.println("Numero invalido " + e);
+            return;
+        }
+        
         switch(opcao){
             case 1:
                 plataforma.tornarClienteStandart();

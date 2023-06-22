@@ -13,7 +13,7 @@ public class StateProfissional extends State {
         return this;
     }
 
-     /*
+     /**
     * Cliente profissional pode tornar-se normal. 
     * Muda o seu estado para standart (normal)
     */
@@ -22,7 +22,7 @@ public class StateProfissional extends State {
         return new StateStandart();
     }
 
-    /*
+    /**
     * Método que verifica se o cliente pode comentar. 
     * Como o cliente é profissional, ele pode adicionar comentário em uma avaliação
     * @return true
@@ -32,7 +32,7 @@ public class StateProfissional extends State {
         return true;
     }
 
-    /*
+    /**
     * Método que verifica se o cliente pode assistir uma midia de lançamento.
     * Como o cliente é profissional, ele pode assistir.
     * @return true
