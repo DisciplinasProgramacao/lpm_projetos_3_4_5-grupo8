@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 
 public class Cliente {
@@ -378,7 +377,7 @@ public class Cliente {
     }
 
     /**
-     * Método que retorna o estado de um cliente: normal, especialista ou profissional
+     * Método muda o estado de um cliente: normal, especialista ou profissional
      * @param estadoCliente
      */
     private void changeState(State estadoCliente) {
@@ -397,9 +396,7 @@ public class Cliente {
      * Metodo que gera o cliente como especialista. Ele verifica se o viu/avaliou pelo menos 5 mídias no mês passado
      */
     public void tornarEspecialista(){
-        LocalDate hoje = LocalDate.now();
-        if(this.getListaJaVistas().stream().filter(x -> x.getData().until(hoje, ChronoUnit.DAYS) <= 30).count() >= 5)
-            this.changeState(this.estadoCliente.tornarEspecialista());
+        this.changeState(this.estadoCliente.tornarEspecialista(this.listaJaVistas));
     }
 
     /**

@@ -1,10 +1,12 @@
+import java.util.LinkedList;
+
 public class StateEspecialista extends State {
 
     // Métodos obrigatórios herdados da classe State, implementando restrições para um cliente ser especialista. 
      
     //Retorna o estado do cliente como especialista
     @Override
-    public State tornarEspecialista() {
+    public State tornarEspecialista(LinkedList<Assistido> listaJaVistas) {
         return this;
     }
 

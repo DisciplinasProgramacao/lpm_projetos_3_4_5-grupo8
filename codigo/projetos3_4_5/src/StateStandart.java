@@ -1,10 +1,17 @@
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.LinkedList;
+
 public class StateStandart extends State{
     // Métodos obrigatórios herdados da classe State, implementando restrições para um cliente normal.
 
     //Cliente normal pode tornar-se especialista
     @Override
-    public State tornarEspecialista() {
-        return new StateEspecialista();
+    public State tornarEspecialista(LinkedList<Assistido> listaJaVistas) {
+        LocalDate hoje = LocalDate.now();
+        if(listaJaVistas.stream().filter(x -> x.getData().until(hoje, ChronoUnit.DAYS) <= 30).count() >= 5)
+            return new StateEspecialista();
+        else return this;
     }
 
     /**

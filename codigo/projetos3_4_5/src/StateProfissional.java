@@ -1,10 +1,17 @@
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.LinkedList;
+
 public class StateProfissional extends State {
     // Métodos obrigatórios herdados da classe State, implementando restrições para um cliente ser profissional.
 
     //Cliente profissional pode tornar-se especialista
     @Override
-    public State tornarEspecialista() {
-        return new StateEspecialista();
+    public State tornarEspecialista(LinkedList<Assistido> listaJaVistas) {
+        LocalDate hoje = LocalDate.now();
+        if(listaJaVistas.stream().filter(x -> x.getData().until(hoje, ChronoUnit.DAYS) <= 30).count() >= 5)
+            return new StateEspecialista();
+        else return this;
     }
 
     //Retorna o estado do cliente como profissional
@@ -13,7 +20,7 @@ public class StateProfissional extends State {
         return this;
     }
 
-     /**
+    /**
     * Cliente profissional pode tornar-se normal. 
     * Muda o seu estado para standart (normal)
     */

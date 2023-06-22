@@ -1,5 +1,4 @@
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.LinkedList;
 
 public abstract class Catalogo {
@@ -170,7 +169,7 @@ public abstract class Catalogo {
 
         this.avaliacaoMedia = mediaAvaliacoes;
 
-        return mediaAvaliacoes;
+        return this.avaliacaoMedia;
     }
 
     /**

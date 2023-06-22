@@ -107,29 +107,6 @@ public class PlataformaStreaming {
      */
     public void logoff() {
         this.clienteAtual = null;
-
-        StringBuilder espec = new StringBuilder("#Especialistas");
-        StringBuilder prof = new StringBuilder("#Profissionais");
-
-        for(Cliente client : clientes.values()){
-
-            if(client.getEstadoCliente().podeAssistirLancamento()){
-                prof.append("\n");
-                prof.append(client.getLogin());
-            } else if(client.getEstadoCliente().podeComentar()){
-                espec.append("\n");
-                espec.append(client.getLogin());
-            }   
-        }
-
-        try {
-            Armazenagem.gravarReescrevendoArquivo("POO_Especialistas", espec.toString());
-        } catch (IOException e) {
-        }
-        try {
-            Armazenagem.gravarReescrevendoArquivo("POO_profissionais", prof.toString());
-        } catch (IOException e) {
-        }
     }
 
     /**
@@ -226,20 +203,12 @@ public class PlataformaStreaming {
             this.catalogos.put(x.getId(), x);
         }
         this.carregarLancamentos();
-        this.carregarEspeciais();
     }
 
     private void carregarEspeciais(){
         try {
             Function<String, String> dividirTipo = (str -> str);
-            LinkedList<String> data = Armazenagem.ler("POO_Especialistas", dividirTipo);
             Cliente aux;
-            for(String str : data){
-                aux = this.clientes.get(str);
-                if(aux != null){
-                    aux.getEstadoCliente().tornarEspecialista();
-                }
-            }
             LinkedList<String> data2 = Armazenagem.ler("POO_Profissionais", dividirTipo);
             for(String str : data2){
                 aux = this.clientes.get(str);
@@ -344,7 +313,7 @@ public class PlataformaStreaming {
      * 
      * @throws FileNotFoundException erro ao abrir o arquivo
      */
-    public void carregarAudiencia() throws FileNotFoundException {
+    private void carregarAudiencia() throws FileNotFoundException {
         File file = new File("./codigo/projetos3_4_5/arquivos/POO_Audiencia.csv");
         Scanner entrada = new Scanner(file, "UTF-8");
         String linha;
@@ -361,9 +330,11 @@ public class PlataformaStreaming {
                     clienteAux.adicionarNaLista(catalogoAux);
                 } else {
                     clienteAux.registrarAudiencia(catalogoAux);
+                    clienteAux.tornarEspecialista();
                 }
             }
         }
+        carregarEspeciais();
         entrada.close();
     }
 
@@ -660,6 +631,18 @@ public class PlataformaStreaming {
      */
     public void tornarClienteEspecialista(){
         clienteAtual.tornarEspecialista();
+        StringBuilder prof = new StringBuilder("#Profissionais");
+        for(Cliente client : clientes.values()){
+
+            if(client.getEstadoCliente().podeAssistirLancamento()){
+                prof.append("\n");
+                prof.append(client.getLogin());
+            }
+        }
+        try {
+            Armazenagem.gravarReescrevendoArquivo("POO_profissionais", prof.toString());
+        } catch (IOException e) {
+        }
     }
 
     /**
