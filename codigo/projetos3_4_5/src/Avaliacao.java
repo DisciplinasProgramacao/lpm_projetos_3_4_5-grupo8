@@ -47,18 +47,18 @@ public class Avaliacao {
     //#endregion
     
     /**
-     * Retorna a nota que o usuário deu a mídia
+     * Método que retorna a nota que o usuário deu para uma mídia
      * 
-     * @return Nota da avaliação
+     * @return Nota da avaliação (int)
      */
     public int getNota(){
         return this.nota;
     }
     
     /**
-     * Retorna o login do usuário que realizou a avaliação
+     * Método que retorna o login do usuário que realizou a avaliação
      * 
-     * @return Login do cliente
+     * @return Login do cliente (String)
      */
     public String getLoginCliente(){
         return this.loginCliente;
@@ -67,7 +67,7 @@ public class Avaliacao {
     /**
      * Metodo que adiciona comentario em uma avaliacao
      * 
-     * @param comentario
+     * @param comentario (String)
      * 
      */
     public void adicionarComentario(String comentario){
@@ -75,9 +75,9 @@ public class Avaliacao {
     }
 
     /**
-     * Método toString que formata os dados da classe convertendo para uma string
+     * Método que formata os dados da avaliação, convertendo para uma string
      * 
-     * @return String formatada
+     * @return String formatada (String)
      * 
      */
     @Override

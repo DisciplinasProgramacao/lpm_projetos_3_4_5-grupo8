@@ -5,6 +5,16 @@ import java.text.DecimalFormat;
 
 public class Relatorio {
 
+    /**
+     * Método construtor da classe Relatorio
+     *
+     * @param <k> 
+     * @param <T>
+     * @param comparador
+     * @param sort
+     * @param list
+     * @return
+     */
     public <k,T> LinkedList<T> streamDefault(Predicate<T> comparador, Comparator<T> sort, HashMap<k,T> list) {
         return list.values().stream()
                             .filter(comparador)
@@ -27,6 +37,16 @@ public class Relatorio {
                             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+    /**
+     * Método que cria um relatório de qual cliente assistiu mais mídias e quantas mídias.
+     * 
+     * O método filtra os clientes com pelo menos uma midia na sua lista de visualizações. 
+     * Em seguida, contabiliza e classifica os clientes de acordo com o número de visualizações nas mídias. 
+     * Por fim, retorna um relatório do cliente que mais assistiu conteúdos.
+     * 
+     * @param clientesMap (HashMap<String, Cliente> )
+     * @return cliente que mais assistiu (string)
+     */
     public String criarRelatorioClienteQueMaisAssistiu(HashMap<String, Cliente> clientesMap) {
         String retorno = "";
 
@@ -42,12 +62,19 @@ public class Relatorio {
         return retorno;
     }
 
+    /**
+     * Método que cria um relatório de qual cliente tem mais avaliações, e quantas avaliações.
+     * 
+     * O método faz um stream buscando o cliente que possui o maior número de avaliações entre todos os clientes presentes no HashMap.
+     * Caso haja clientes com avaliações é retornado qual cliente mais avaliou. Caso não, retorna uma mensagem que não há clientes com avaliações.
+     * 
+     * @param clientesMap (HashMap<String, Cliente> )
+     * @return cliente que mais avaliou (string)
+     */
     public void criarRelatorioClienteComMaisAvaliacoes(HashMap<String,Cliente> clientesMap){
         Predicate<Cliente> predicate = (c) -> c.getListaDeAvaliacoes().size() > 0;
 
-        LinkedList<Cliente> clientes = 
-        streamDefault(predicate,
-                      clientesMap);
+        LinkedList<Cliente> clientes = streamDefault(predicate, clientesMap);
 
         if(!clientes.isEmpty()){
             exibirRelatorioUsuario(clientes.getLast(), clientes.getLast().getListaDeAvaliacoes().size(), "que mais avaliou");
@@ -57,7 +84,14 @@ public class Relatorio {
     }
  
 
-    
+    /**
+     * Método que cria um relatório, calculando a porcentagem dos clientes com pelo menos 15 avaliações;
+     * 
+     * O método recebe um HashMap de clientes que mapeia com a chave (cliente), usando stream e filtrando os que possuem no mínimo 15 avaliações.
+     * 
+     * @param clientesMap (HashMap<String, Cliente> )
+     * @return porcentagem de clientes com pelo menos 15 avaliações (string)
+     */
     public String criarRelatorioPorcentagemDeClienteNoMinQuinzeAvaliacoes(HashMap<String, Cliente> clientesMap){
         double porcentagemCliente;
         double clientesComAvaliacoesMinima = clientesMap.values().stream()
@@ -72,15 +106,20 @@ public class Relatorio {
         return exibirRelatorioPorcentagem(porcentagemFormatada);
     }
      
+
+    /**
+     * Método que cria um relatório de quais são as 10 mídias de melhor avaliação, com pelo menos 100 avaliações, em ordem decrescente.
+     * 
+     * O método recebe um HashMap de mídias do catálogo e usando stream, cria uma lista deas melhores mídias de acordo com a média de avaliação e a quantidade de avaliações.
+     * 
+     * @param catalogoMap (HashMap<Integer, Catalogo> )
+     */
     public void criarRelatorioMidiasComMelhoresAvaliacoes(HashMap<Integer,Catalogo> catalogoMap) {
         Predicate<Catalogo> predicate = (c) -> c.quantidadeAvaliacoes() >= 100;
         Comparator<Catalogo> comparator = (a, b) -> a.mediaAvaliacao().compareTo(b.mediaAvaliacao());
         
         // depois ordena pelas mais avaliadas
-        LinkedList<Catalogo> list = 
-        streamDefault(predicate,
-                      comparator,
-                     catalogoMap);
+        LinkedList<Catalogo> list = streamDefault(predicate, comparator,catalogoMap);
 
         if(!list.isEmpty()){
             exibirRelatorioCatalogo(list, "melhor avaliacao");
@@ -89,13 +128,17 @@ public class Relatorio {
         }
     }
 
-     
+    /**
+     * Método que cria um relatório de quais são as 10 mídias com mais visualizações, em ordem decrescente.
+     * 
+     * O método recebe um HashMap de mídias do catálogo e usando stream, cria uma lista das mídias mais vistas de acordo com a quantidade de visualizações(audiência).
+     * 
+     * @param catalogoMap (HashMap<Integer, Catalogo> )
+     */
     public void criarRelatorioMidiasComMaisVisualizacoes(HashMap<Integer,Catalogo> catalogoMap) {
         Comparator<Catalogo> comparator = (a, b) -> Integer.compare(a.getAudiencia(), b.getAudiencia());
         
-        LinkedList<Catalogo> list = 
-        streamDefault(comparator,
-                     catalogoMap);
+        LinkedList<Catalogo> list = streamDefault(comparator, catalogoMap);
 
         if(!list.isEmpty()){
             exibirRelatorioCatalogo(list, "mais visualizadas");
@@ -108,9 +151,13 @@ public class Relatorio {
 
     /******************************** RELATORIOS DE ACORDO COM O GENERO ************************************ */
     /**
-     * Método que retorna relatório por genero com 10 midias
-     * @param genero
-     * @return String
+     * Método que retorna relatório de quais são as 10 mídias com mais visualizações, em ordem decrescente, filtradas pelo gênero.
+     *
+     * O método recebe um HashMap de mídias do catálogo e usando stream, cria uma lista das mídias mais vistas de acordo com a quantidade de visualizações(audiência) e o gênero.
+     * 
+     * @param genero (String)
+     * @param catalogoMap (HashMap<Integer, Catalogo> )
+     * @return lista com 1o midias mais visualizadas pelo genero (string) 
      */
     public String relatorioPorGeneroAudiencia(String genero, HashMap<Integer,Catalogo> catalogoMap) {
         String retorno = "";
@@ -118,10 +165,7 @@ public class Relatorio {
         Predicate<Catalogo> predicate = (c) -> c.getGenero().equals(genero);
         Comparator<Catalogo> comparator = (a, b) -> Integer.compare(a.getAudiencia(), b.getAudiencia());
         
-        LinkedList<Catalogo> list = 
-        streamDefault(predicate, 
-                     comparator,
-                     catalogoMap);
+        LinkedList<Catalogo> list = streamDefault(predicate, comparator, catalogoMap);
 
         if(!list.isEmpty()){
             retorno = exibirRelatorioCatalogo(list, "mais audiencia");
@@ -131,9 +175,13 @@ public class Relatorio {
         return retorno;
     }
     /**
-     * Metodo que retorna relatorio por genero com 10 midias mais bem avaliadas
-     * @return String
-     * @param genero
+     * Método que retorna relatório de quais são as 10 mídias com as melhores avaliacoes, em ordem decrescente, filtradas pelo gênero.
+     * 
+     * O método recebe um HashMap de mídias do catálogo e usando stream, cria uma lista das mídias com melhor avaliação de acordo com a média de avaliação e o gênero.
+     * 
+     * @param genero (String)
+     * @param catalogoMap (HashMap<Integer, Catalogo> )
+     * 
      */
     public void relatorioPorGeneroAvaliacao(String genero, HashMap<Integer,Catalogo> catalogoMap) {
         Predicate<Catalogo> predicate = (c) -> c.getGenero().equals(genero);
@@ -152,6 +200,13 @@ public class Relatorio {
 
   
     /******************************** EXIBICAO DOS RELATORIOS *****************************/
+
+    /**
+     * Método que exibe o relatório de midias do Catálogo
+     * @param list (LinkedList<Catalogo>)
+     * @param titulo (String)
+     * @return String formatada com o relatório
+     */
     public String exibirRelatorioCatalogo(LinkedList<Catalogo> list, String titulo){
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -166,6 +221,13 @@ public class Relatorio {
         return stringBuilder.toString();
     }
 
+    /**
+     * Método que exibe o relatório de usuários
+     * @param cliente (Cliente)
+     * @param quantidade (Integer)
+     * @param titulo (String)
+     * @return String formatada com o relatório
+     */
     public <T> String exibirRelatorioUsuario(Cliente cliente, Integer quantidade, String titulo){
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -178,6 +240,11 @@ public class Relatorio {
         return stringBuilder.toString();
     }
 
+    /**
+     * Método que exibe o relatório de porcentagem de usuários
+     * @param porcentagem (String)
+     * @return String formatada com o relatório
+     */
     public <T> String exibirRelatorioPorcentagem( String porcentagem){
         StringBuilder stringBuilder = new StringBuilder();
 

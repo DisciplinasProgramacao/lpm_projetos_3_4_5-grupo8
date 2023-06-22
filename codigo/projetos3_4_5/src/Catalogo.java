@@ -80,63 +80,62 @@ public abstract class Catalogo {
     //#endregion
 
     /**
-     * Obtém a audiência da mídia
+     * Método que retorna a audiência de uma mídia
      * 
-     * @return audiencia do conteudo
-     * 
+     * @return audiencia da midia (int)
      */
     public int getAudiencia() {
         return this.audiencia;
     }
 
     /**
-     * Obtém string do gênero da mídia
+     * Método que retorna o gênero da mídia
      * 
-     * @return genero do conteudo
+     * @return genero da midia (string)
      */
     public String getGenero() {
         return this.genero;
     }
 
     /**
-     * Obtém o idioma da mídia
+     * Método que retorna idioma da mídia
      * 
-     * @return idioma do conteudo
+     * @return idioma (string)
      */
     public String getIdioma() {
         return this.idioma;
     }
 
     /**
-     * Obtém o nome da mídia
+     * Método que retorna o nome da mídia
      * 
-     * @return string com o nome da mídia
+     * @return nome (string) 
      */
     public String getNome() {
         return this.nome;
     }
 
     /**
-     * Obtém o id da mídia
+     * Método que retorna o id da mídia
      * 
-     * @return id do conteudo
+     * @return id (int)
      */
     public int getId() {
         return this.id;
     }
     
     /**
-     * Incrementa audiência da midia
+     * Método que incrementa a audiência de uma midia assistida
      */
     public void registrarAudiencia() {
         this.audiencia += 1;
     }
 
-    /**
-     * Adiciona a avaliação a mídia
+    /********************************************Conferir esse metodo null q o prof disse****************************
+     * Método que realiza a avaliação de uma mídia
      * 
-     * @param avaliacao a ser armazenada
-     * 
+     * @param avaliacao (Avaliacao)
+     * @return avaliação adicionada
      */
     public Avaliacao avaliarMidia(Avaliacao avaliacao) {
         String loginCliente = this.listaAvaliacoes.stream()
@@ -153,9 +152,9 @@ public abstract class Catalogo {
     }
 
     /**
-     * Metodo que retorna a media de avaliacoes de uma midia
+     * Metodo que calcula a media de avaliacoes de uma midia e retorna seu valor.
      * 
-     * @return avaliação média
+     * @return média de avaliação (BigDecimal)
      * 
      */
     public BigDecimal mediaAvaliacao() {
@@ -177,12 +176,17 @@ public abstract class Catalogo {
         return mediaAvaliacoes;
     }
 
+    /**
+     * Método que retorna a quantidade de avaliações de uma mídia
+     * @return quantidade de avaliações (int)
+     */
     public int quantidadeAvaliacoes() {
         return listaAvaliacoes.size();
     }
 
     /**
-     * Cria uma string com todas as avaliações da mídia ou com mensagem caso mídia não possua avaliações
+     * Método que mostrando todas as avaliações de uma mídia.
+     * Caso a midia nao possua avaliação é retornado uma mensagem informando que não existem avaliações para a mídia
      * 
      * @return String formatada de avaliações
      * 
@@ -204,7 +208,7 @@ public abstract class Catalogo {
     }
 
     /**
-     * Metodo que retorna uma string formatada com os dados do catálogo
+     * Metodo que formata uma string com os dados do catálogo
      * 
      * @return String formatada
      * 

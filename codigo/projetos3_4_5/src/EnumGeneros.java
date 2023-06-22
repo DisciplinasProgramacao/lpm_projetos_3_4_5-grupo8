@@ -1,4 +1,5 @@
 public enum EnumGeneros {
+    //Valores dos generos
     ACAO("Acao"),
     ANIME("Anime"),
     AVENTURA("Aventura"),
@@ -9,12 +10,18 @@ public enum EnumGeneros {
     ROMANCE("Romance"),
     SUSPENSE("Suspense");
 
+    //Atributos
     private String descricao;
 
+    //Construtor
     EnumGeneros(String descricao){
         this.descricao = descricao;
     }
 
+    /**
+     * Método que retorna a descrição de um genero
+     * @return descricao (string)
+     */
     public String getDescricao() {
         return descricao;
     }

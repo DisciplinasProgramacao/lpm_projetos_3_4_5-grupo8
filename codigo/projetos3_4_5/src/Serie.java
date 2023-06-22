@@ -42,9 +42,9 @@ public class Serie extends Catalogo {
     }
 
     /**
-     * Retorna a quantidade de episódios da série
+     * Método que retorna a quantidade de episódios da série
      * 
-     * @return inteiro com a quantidade de episodios da serie
+     * @return quantidade de episodios que a serie possui (int)
      */
     public int getEpisodios() {
         return this.quantidadeEpisodios;

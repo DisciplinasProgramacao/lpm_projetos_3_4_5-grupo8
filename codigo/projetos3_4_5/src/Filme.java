@@ -37,7 +37,7 @@ public class Filme extends Catalogo {
     //#endregion
 
     /**
-     * Retorna a duração do film
+     * Método que retorna o tempo de duração do filme
      * 
      * @return inteiro com a duracao do filme
      */
@@ -46,7 +46,7 @@ public class Filme extends Catalogo {
     }
 
     /**
-     * Metodo que registra a quantidade de pessoas que assistiram a série
+     * Metodo que registra audiencia de um filme(quantidade de pessoas que assistiram)
      */
     public void registrarAudiencia() {
         super.registrarAudiencia();

@@ -653,52 +653,29 @@ public class PlataformaStreaming {
     }
 
    
-
-
-    /************* Relatorio certo com stream ******************/
-    /* 
-     public String criarRelatorioClienteComMaisAvaliacoes(){
-        LinkedList<Cliente> clientes = this.clientes.values().stream()
-                                                              .filter(c -> c.getListaDeAvaliacoes().size() > 0)
-                                                              .collect(Collectors.toCollection(LinkedList::new));
-
-        return "Cliente que mais avaliou: " + clientes.getLast().getNomeUsuario() + ", total avaliacoes: " + clientes.getLast().getListaDeAvaliacoes().size() ; 
-    }
-
-    
-    public String criarRelatorioPorcentagemDeClienteNoMinQuinzeAvaliacoes(){
-        double porcentagemCliente;
-        double clientesComAvaliacoesMinima = this.clientes.values().stream()
-                                                              .filter(cliente -> cliente.getListaDeAvaliacoes().size() >= 2) //trocar aqui pra 15 quando arrumar o teste
-                                                              .count();
-
-        porcentagemCliente = ((clientesComAvaliacoesMinima * 100) /(double) this.clientes.size());
-        DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        String porcentagemFormatada = decimalFormat.format(porcentagemCliente);
-
-        return "Porcentagem total: "+ porcentagemFormatada + "%";
-    }*/
-
-
     /**
-     * Tornar cliente especialista
+     * Método que torna um cliente como especialista
+     *  (o cliente é capaz de incluir um comentário para as mídias assistidas. Além disso, o cliente deve ter
+     *  visto/avaliado pelo menos 5 mídias no mês passado)
      */
     public void tornarClienteEspecialista(){
         clienteAtual.tornarEspecialista();
     }
 
     /**
-     * Tornar cliente profissional
+     *  Método que torna um cliente como profissional
+     * (o cliente é capaz de incluir um comentário para as mídias assistidas. Além disso, o cliente é capaz de operar nas mídias que serão lançamentos)
      */
     public void tornarClienteProfissional(){
         clienteAtual.tornarProfissional();
     }
 
     /**
-     * Tornar cliente standart
+     * Método que torna um cliente standart (normal)
+     * (O cliente nao pode avaliar e incluir um comentário para as mídias assistidas)
      */
     public void tornarClienteStandart(){
-        clienteAtual.tornarStandart();
+        clienteAtual.criarStandart();
     }
     
 

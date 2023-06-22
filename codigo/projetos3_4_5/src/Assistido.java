@@ -25,9 +25,9 @@ public class Assistido {
     //#endregion
 
     /**
-     * Get para retornar a data em que a midia foi assistida
+     * Método que retorna a data que a midia foi assistida
      * 
-     * @return data em que a mídia foi assistida
+     * @return data (LocalDate)
      * 
      */
     public LocalDate getData() {
@@ -35,9 +35,9 @@ public class Assistido {
     }
 
     /**
-     * Get para retornar a midia assistida
+     * Método que retorna a midia assistida
      * 
-     * @return catalogo assistido
+     * @return catalogo assistido (Catalogo)
      * 
      */    
     public Catalogo getCatalogo() {
@@ -45,10 +45,10 @@ public class Assistido {
     }
 
     /**
-     * Metodo que adiciona uma avaliacao a uma midia assitida
+     * Metodo que adiciona uma avaliacao e uma midia que foi assitida
      * 
-     * @param avaliacao
-     * @return Avaliacao efetuada
+     * @param avaliacao (Avaliacao)
+     * @return Avaliacao efetuada (Avaliacao)
      * 
      */
     public Avaliacao adicionarAvaliacao(Avaliacao avaliacao){
@@ -61,7 +61,7 @@ public class Assistido {
     }
 
     /**
-     * Metodo que retorna uma midia assistida com sua data de visualizacao
+     * Metodo que formata uma string com a midia assistida e sua data de visualizacao
      * 
      * @return String com os dados formatados
      * 

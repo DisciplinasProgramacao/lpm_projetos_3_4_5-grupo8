@@ -12,23 +12,31 @@ public class Armazenagem {
     /**
      * Metodo que grava qualquer objeto no arquivo .csv
      * 
-     * @param nomeArq nome do arquivo .csv
-     * @param item    objeto a ser salvo
+     * @param nome do arquivo .csv (string)
+     * @param item do objeto a ser salvo (T)
      */
     public static <T> void gravar(String nomeArq, T item) throws IOException {
         gravarAppendDef(nomeArq, item, true);
     }
 
     /**
-     * Metodo que grava qualquer objeto no arquivo .csv nao dando append
+     * Metodo que grava qualquer objeto no arquivo .csv sem adicionar conteudo
      * 
-     * @param nomeArq nome do arquivo .csv
-     * @param item    objeto a ser salvo
+     * @param nome do arquivo .csv (string)
+     * @param item do objeto a ser salvo (T)
      */
     public static <T> void gravarReescrevendoArquivo(String nomeArq, T item) throws IOException {
         gravarAppendDef(nomeArq, item, false);
     }
 
+    /**
+     * Metodo que grava qualquer objeto no arquivo .csv adicionando conteudo no arquivo
+     * 
+     * @param nome do arquivo .csv (string)
+     * @param item do objeto a ser salvo (T)
+     * @param append se true, adiciona no final do arquivo. Caso false, reescreve o arquivo
+     * 
+     */
     private static <T> void gravarAppendDef(String nomeArq, T item, boolean append) throws IOException{
         FileWriter arq = new FileWriter("./codigo/projetos3_4_5/arquivos/" + nomeArq + ".csv", append);
         PrintWriter gravarArq = new PrintWriter(arq);
@@ -41,11 +49,11 @@ public class Armazenagem {
     }
 
     /**
-     * Metodo que le um arquivo e retorna seu conteudo em uma lista de string, no qual cada item da lista representa uma linha
+     * Metodo que lê um arquivo e retorna seu conteudo em uma lista de string, no qual cada item da lista representa uma linha
      * 
-     * @param metodo  contrutor da classe
+     * @param metodo contrutor da classe (Function<String, T>)
      * 
-     * @param nomeArq nome do arquivo .csv
+     * @param nome do arquivo .csv (string)
      */
     public static <T> LinkedList<T> ler(String nomeArq, Function<String, T> metodo) throws FileNotFoundException {
         LinkedList<T> list = new LinkedList<>();
