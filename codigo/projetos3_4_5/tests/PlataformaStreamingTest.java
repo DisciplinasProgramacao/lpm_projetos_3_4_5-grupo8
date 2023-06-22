@@ -94,7 +94,7 @@ public class PlataformaStreamingTest {
         plataforma1.adicionarCatalogo(filme2);
         plataforma1.adicionarCatalogo(filme3);
 
-        assertTrue(plataforma1.filtrarCatalogo("Drama").contains("O Poderoso Chefão 2"));
+        assertTrue(plataforma1.filtrarCatalogo("DRAMA").contains("O Poderoso Chefão 2"));
     }
 
     @Test
