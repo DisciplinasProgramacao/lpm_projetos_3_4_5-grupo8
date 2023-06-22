@@ -13,7 +13,7 @@ public class AssistidoTest {
 
     @BeforeEach
     public void prepare() {
-        filme = new Filme("O Poderoso Chefão", "02/02/2017", "Suspense", "EN", 100, false);
+        filme = new Filme("O Poderoso Chefão", "02/02/2017", "SUSPENSE", "EN", 100, false);
         midiaAssistida = new Assistido(filme, LocalDate.now());
         avaliacao = new Avaliacao("Joao Feliz", 4);
     }

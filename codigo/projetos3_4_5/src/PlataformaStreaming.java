@@ -395,7 +395,7 @@ public class PlataformaStreaming {
         Catalogo midia;
         for (int key : catalogos.keySet()) {
             midia = catalogos.get(key);
-            if (midia.getGenero().equals(filtro) || midia.getNome().equals(filtro) || midia.getIdioma().equals(filtro)) {
+            if (midia.getGenero().toUpperCase().equals(filtro) || midia.getNome().equals(filtro) || midia.getIdioma().equals(filtro)) {
                 filtrado.add(midia);
             }
         }

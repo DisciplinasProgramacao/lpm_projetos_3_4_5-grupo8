@@ -278,8 +278,20 @@ public class App {
         do {
             switch (op) {
                 case 1:
-                    System.out.println("Para filtrar digite o genero: ");
-                    String genero = teclado.nextLine();
+                    opcoesGeneros();
+                    System.out.println("Para filtrar digite o número correspondente ao genero: ");
+                    int opcaoGenero;
+                    String genero = "";
+                    try{
+                        opcaoGenero = Integer.parseInt(teclado.nextLine());
+                        genero = EnumGeneros.values()[opcaoGenero-1].toString();
+                    }catch(NumberFormatException e){
+                        System.out.println("Input invalido. " + e);
+                        return;
+                    }catch(ArrayIndexOutOfBoundsException e){
+                        System.out.println("Opcao invalida, digite um numero valido. " + e);
+                        return;
+                    }
                     System.out.println(plataforma.filtrarCatalogo(genero));
                     pausa();
                     break;
@@ -376,16 +388,38 @@ public class App {
                     break;
                 case 6:
                     System.out.println("---Relatorio 6---");
-                    System.out.println("Qual genero deseja obter o relatório?");
-                    String genero = teclado.nextLine();
+                    System.out.println("Digite o numero do genero que deseja obter o relatório?");
+                    int opcaoGenero;
+                    String genero = "";
+                    try{
+                        opcaoGenero = Integer.parseInt(teclado.nextLine());
+                        genero = EnumGeneros.values()[opcaoGenero-1].toString();
+                    }catch(NumberFormatException e){
+                        System.out.println("Input invalido. " + e);
+                        return;
+                    }catch(ArrayIndexOutOfBoundsException e){
+                        System.out.println("Opcao invalida, digite um numero valido. " + e);
+                        return;
+                    }
                     plataforma.relatorioPorGeneroAvaliacao(genero);
                     pausa();
                     break;
                 case 7:
                     System.out.println("---Relatorio 7---");
-                    System.out.println("Qual genero deseja obter o relatório?");
-                    String generoEscolhido = teclado.nextLine();
-                    plataforma.relatorioPorGeneroAudiencia(generoEscolhido);
+                    System.out.println("Digite o numero do genero que deseja obter o relatório?");
+                    int opcao;
+                    String generoFiltro = "";
+                    try{
+                        opcao = Integer.parseInt(teclado.nextLine());
+                        generoFiltro = EnumGeneros.values()[opcao-1].toString();
+                    }catch(NumberFormatException e){
+                        System.out.println("Input invalido. " + e);
+                        return;
+                    }catch(ArrayIndexOutOfBoundsException e){
+                        System.out.println("Opcao invalida, digite um numero valido. " + e);
+                        return;
+                    }
+                    plataforma.relatorioPorGeneroAudiencia(generoFiltro);
                     pausa();
                     break;
                 default:
@@ -415,8 +449,21 @@ public class App {
         String nome = teclado.nextLine();
         System.out.print("Digite a data de lançamento: ");
         String dataLancamento = teclado.nextLine();
-        System.out.print("Digite o Genero: ");
-        String genero = teclado.nextLine();
+        
+        opcoesGeneros();
+        System.out.println("Digite o número correspondente ao genero: ");
+        int opcaoGenero;
+        String genero = "";
+        try{
+            opcaoGenero = Integer.parseInt(teclado.nextLine());
+            genero = EnumGeneros.values()[opcaoGenero-1].toString();
+        }catch(NumberFormatException e){
+            System.out.println("Input invalido. " + e);
+            return;
+        }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("Opcao invalida, digite um numero valido. " + e);
+            return;
+        }
         System.out.print("Digite o Idioma: ");
         String idioma = teclado.nextLine();
         System.out.print("Digite a duracao: ");
@@ -438,6 +485,14 @@ public class App {
 
     }
 
+    private static void opcoesGeneros(){
+        System.out.println("Generos: ");
+        int contador = 0;
+        for(EnumGeneros generos : EnumGeneros.values()){
+            System.out.println("[" + ++contador + "] " + generos.getDescricao());
+        }
+    }
+    
     // Metodo para cadastrar uma serie na plataforma
     private static void cadastrarSerie() {
         System.out.println("==========================");
@@ -446,8 +501,22 @@ public class App {
         String nome = teclado.nextLine();
         System.out.print("Digite a data de lançamento: ");
         String dataLancamento = teclado.nextLine();
-        System.out.print("Digite o genero: ");
-        String genero = teclado.nextLine();
+        
+        opcoesGeneros();
+        System.out.println("Digite o número correspondente ao genero: ");
+        int opcaoGenero;
+        String genero = "";
+        try{
+            opcaoGenero = Integer.parseInt(teclado.nextLine());
+            genero = EnumGeneros.values()[opcaoGenero-1].toString();
+        }catch(NumberFormatException e){
+            System.out.println("Input invalido. " + e);
+            return;
+        }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("Opcao invalida, digite um numero valido. " + e);
+            return;
+        }
+
         System.out.print("Digite o idioma: ");
         String idioma = teclado.nextLine();
         System.out.print("Digite a quantidade de episodios: ");

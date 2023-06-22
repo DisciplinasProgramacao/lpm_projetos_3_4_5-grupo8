@@ -12,7 +12,7 @@ public class SerieTest {
 
     @BeforeEach
     public void prepare() {
-        serie = new Serie("The Blacklist", "02/02/2017", "Suspense", "EN", 10, false);
+        serie = new Serie("The Blacklist", "02/02/2017", "SUSPENSE", "EN", 10, false);
         avaliacao1 = new Avaliacao("eu", 4);
         avaliacao2 = new Avaliacao("voce", 5, "muito bom");
     }
@@ -61,7 +61,7 @@ public class SerieTest {
 
     @Test
     public void naoDeveLancarExcecaoCasoGeneroDoFilmeExistaNoEnum(){
-        assertDoesNotThrow(() -> new Filme("Fullmetal Brotherhood","02/02/2003", "Anime", "EN", 100, false));
+        assertDoesNotThrow(() -> new Filme("Fullmetal Brotherhood","02/02/2003", "ANIME", "EN", 100, false));
     }
 
 }

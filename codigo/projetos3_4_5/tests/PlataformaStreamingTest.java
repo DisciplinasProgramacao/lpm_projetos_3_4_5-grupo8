@@ -21,12 +21,12 @@ public class PlataformaStreamingTest {
         clienteLogado = new Cliente("To logado", "logado", "login");
         cliente2 = new Cliente("Ana Beatriz", "ana.beatriz", "123");
 
-        serie1 = new Serie("The Blacklist", "02/02/2017", "Suspense", "EN", 10, false);
-        serie2 = new Serie("Black mirror", "05/05/2018", "Policial", "PT", 10, false);
+        serie1 = new Serie("The Blacklist", "02/02/2017", "SUSPENSE", "EN", 10, false);
+        serie2 = new Serie("Black mirror", "05/05/2018", "POLICIAL", "PT", 10, false);
 
-        filme1 = new Filme("O Poderoso Chefão 1", "01/01/1972", "Drama", "EN", 120, false);
-        filme2 = new Filme("O Poderoso Chefão 2", "01/01/1974", "Drama", "EN", 120, false);
-        filme3 = new Filme("Minions", "30/06/2022", "Comedia", "EN", 180, false);
+        filme1 = new Filme("O Poderoso Chefão 1", "01/01/1972", "DRAMA", "EN", 120, false);
+        filme2 = new Filme("O Poderoso Chefão 2", "01/01/1974", "DRAMA", "EN", 120, false);
+        filme3 = new Filme("Minions", "30/06/2022", "COMEDIA", "EN", 180, false);
 
         plataforma1.adicionarCliente(clienteLogado);
         plataforma1.adicionarCliente(cliente2);

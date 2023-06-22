@@ -8,7 +8,7 @@ public abstract class Catalogo {
     private static int parseId;
     private String nome;
     private int id;
-    private String genero;
+    private EnumGeneros genero;
     private String idioma;
     private int audiencia;
     private LinkedList<Avaliacao> listaAvaliacoes;
@@ -49,12 +49,9 @@ public abstract class Catalogo {
      * @throws IllegalArgumentException caso genero informado seja inválido
      */
     public Catalogo(String nome, String dataLancamento, String genero, String idioma, Boolean lancamento) throws IllegalArgumentException {
-        EnumGeneros generoEncontrado = Arrays.stream(EnumGeneros.values())
-            .filter(g -> g.getDescricao().equals(genero))
-            .findAny()
-            .orElseThrow(() -> {throw new IllegalArgumentException("Genero " + genero + " nao esta dentro dos valores permitidos");});
+        String generoEncontrado = EnumGeneros.valueOf(genero).getDescricao();
 
-        init(++parseId, nome, dataLancamento, generoEncontrado.getDescricao(), idioma, lancamento);
+        init(++parseId, nome, dataLancamento, generoEncontrado, idioma, lancamento);
     }
 
     /**
@@ -67,7 +64,7 @@ public abstract class Catalogo {
      * @param idioma
      */
     public void init(int id, String nome, String dataLancamento, String genero, String idioma, boolean lancamento) {
-        this.genero = genero;
+        this.genero = EnumGeneros.valueOf(genero.toUpperCase());
         this.nome = nome;
         this.idioma = idioma;
         this.audiencia = 0;
@@ -94,7 +91,7 @@ public abstract class Catalogo {
      * @return genero da midia (string)
      */
     public String getGenero() {
-        return this.genero;
+        return this.genero.getDescricao();
     }
 
     /**

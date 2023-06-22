@@ -162,7 +162,7 @@ public class Relatorio {
     public String relatorioPorGeneroAudiencia(String genero, HashMap<Integer,Catalogo> catalogoMap) {
         String retorno = "";
 
-        Predicate<Catalogo> predicate = (c) -> c.getGenero().equals(genero);
+        Predicate<Catalogo> predicate = (c) -> c.getGenero().toUpperCase().equals(genero);
         Comparator<Catalogo> comparator = (a, b) -> Integer.compare(a.getAudiencia(), b.getAudiencia());
         
         LinkedList<Catalogo> list = streamDefault(predicate, comparator, catalogoMap);
@@ -184,7 +184,7 @@ public class Relatorio {
      * 
      */
     public void relatorioPorGeneroAvaliacao(String genero, HashMap<Integer,Catalogo> catalogoMap) {
-        Predicate<Catalogo> predicate = (c) -> c.getGenero().equals(genero);
+        Predicate<Catalogo> predicate = (c) -> c.getGenero().toUpperCase().equals(genero);
         Comparator<Catalogo> comparator = (a, b) -> a.mediaAvaliacao().compareTo(b.mediaAvaliacao());
 
         LinkedList<Catalogo> list = 
